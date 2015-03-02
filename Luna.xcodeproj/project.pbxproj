@@ -10,6 +10,10 @@
 		F74734561AA4C390006720F1 /* weathericons-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F74734551AA4C390006720F1 /* weathericons-regular-webfont.ttf */; };
 		F74734581AA4D420006720F1 /* PhasesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74734571AA4D420006720F1 /* PhasesDataSource.swift */; };
 		F747345A1AA4D8A3006720F1 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74734591AA4D8A3006720F1 /* Phase.swift */; };
+		F74916121AA5021C003F1BF4 /* PhaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916101AA5021C003F1BF4 /* PhaseTableViewCell.swift */; };
+		F74916131AA5021C003F1BF4 /* PhaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F74916111AA5021C003F1BF4 /* PhaseTableViewCell.xib */; };
+		F74916151AA50269003F1BF4 /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916141AA50269003F1BF4 /* PhaseViewModel.swift */; };
+		F74916191AA50491003F1BF4 /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */; };
 		F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576B91AA42E00007B2AE5 /* AppDelegate.swift */; };
 		F76576BC1AA42E00007B2AE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576BB1AA42E00007B2AE5 /* ViewController.swift */; };
 		F76576BF1AA42E00007B2AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F76576BD1AA42E00007B2AE5 /* Main.storyboard */; };
@@ -43,6 +47,10 @@
 		F74734551AA4C390006720F1 /* weathericons-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular-webfont.ttf"; sourceTree = "<group>"; };
 		F74734571AA4D420006720F1 /* PhasesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhasesDataSource.swift; sourceTree = "<group>"; };
 		F74734591AA4D8A3006720F1 /* Phase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
+		F74916101AA5021C003F1BF4 /* PhaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhaseTableViewCell.swift; sourceTree = "<group>"; };
+		F74916111AA5021C003F1BF4 /* PhaseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhaseTableViewCell.xib; sourceTree = "<group>"; };
+		F74916141AA50269003F1BF4 /* PhaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhaseViewModel.swift; sourceTree = "<group>"; };
+		F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WeatherIcons.swift"; sourceTree = "<group>"; };
 		F76576B41AA42E00007B2AE5 /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F76576B81AA42E00007B2AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F76576B91AA42E00007B2AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +179,8 @@
 			children = (
 				F76576EC1AA43385007B2AE5 /* LunarHeaderView.swift */,
 				F76576EE1AA433A1007B2AE5 /* LunarHeaderView.xib */,
+				F74916101AA5021C003F1BF4 /* PhaseTableViewCell.swift */,
+				F74916111AA5021C003F1BF4 /* PhaseTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -180,6 +190,7 @@
 			children = (
 				F76576F11AA435A7007B2AE5 /* LunarViewModel.swift */,
 				F74734571AA4D420006720F1 /* PhasesDataSource.swift */,
+				F74916141AA50269003F1BF4 /* PhaseViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -187,6 +198,7 @@
 		F76576F51AA437A0007B2AE5 /* Types & Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */,
 				F76576DC1AA42E34007B2AE5 /* NSData+JSON.swift */,
 				F76576DE1AA42E34007B2AE5 /* Result.swift */,
 				F76576DD1AA42E34007B2AE5 /* Reason.swift */,
@@ -279,6 +291,7 @@
 				F76576EF1AA433A1007B2AE5 /* LunarHeaderView.xib in Resources */,
 				F74734561AA4C390006720F1 /* weathericons-regular-webfont.ttf in Resources */,
 				F76576C11AA42E00007B2AE5 /* Images.xcassets in Resources */,
+				F74916131AA5021C003F1BF4 /* PhaseTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +310,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F76576E11AA42E34007B2AE5 /* NetworkController.swift in Sources */,
+				F74916121AA5021C003F1BF4 /* PhaseTableViewCell.swift in Sources */,
 				F76576F71AA437F1007B2AE5 /* Moon.swift in Sources */,
+				F74916191AA50491003F1BF4 /* String+WeatherIcons.swift in Sources */,
 				F76576BC1AA42E00007B2AE5 /* ViewController.swift in Sources */,
 				F76576F41AA43773007B2AE5 /* LunarPhaseModel.swift in Sources */,
 				F76576E21AA42E34007B2AE5 /* NSData+JSON.swift in Sources */,
@@ -307,6 +322,7 @@
 				F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */,
 				F747345A1AA4D8A3006720F1 /* Phase.swift in Sources */,
 				F74734581AA4D420006720F1 /* PhasesDataSource.swift in Sources */,
+				F74916151AA50269003F1BF4 /* PhaseViewModel.swift in Sources */,
 				F76576E41AA42E34007B2AE5 /* Result.swift in Sources */,
 				F76576E31AA42E34007B2AE5 /* Reason.swift in Sources */,
 				F76576F21AA435A7007B2AE5 /* LunarViewModel.swift in Sources */,

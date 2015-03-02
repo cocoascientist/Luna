@@ -10,11 +10,7 @@ import Foundation
 
 struct Moon {
     let phase: String
-//    let percent: Double
-//    
     let age: Int
-//    let angle: Double
-//    let illumination: Double
     
     let rise: NSDate
     let set: NSDate

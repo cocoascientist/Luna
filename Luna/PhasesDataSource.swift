@@ -14,9 +14,8 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
     
     weak var tableView: UITableView? {
         didSet {
-//            let nib = UINib(nibName: "PhaseTableViewCell", bundle: nil)
-//            self.tableView?.registerNib(nib, forCellReuseIdentifier: "Cell")
-            self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+            let nib = UINib(nibName: "PhaseTableViewCell", bundle: nil)
+            self.tableView?.registerNib(nib, forCellReuseIdentifier: "Cell")
             
             self.tableView?.dataSource = self
             self.tableView?.reloadData()
@@ -41,15 +40,19 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-        
-        let phase = self.phases[indexPath.row] as Phase
-        cell.textLabel?.text = phase.name
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PhaseTableViewCell
+        cell.viewModel = viewModelForIndexPath(indexPath)
         
         return cell
     }
     
     // MARK: - Private
+    
+    func viewModelForIndexPath(indexPath: NSIndexPath) -> PhaseViewModel {
+        let phase = self.phases[indexPath.row] as Phase
+        let viewModel = PhaseViewModel(phase: phase)
+        return viewModel
+    }
     
     func phasesDidUpdate(notification: NSNotification) -> Void {
         let result = self.model.currentPhases
