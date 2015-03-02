@@ -10,8 +10,8 @@ import Foundation
 import CoreLocation
 
 enum AerisAPI {
-    case SunMoon(CLLocation)
-//    case MoonPhases(CLLocation)
+    case Moon(CLLocation)
+    case MoonPhases(CLLocation)
 }
 
 extension AerisAPI {
@@ -29,16 +29,20 @@ extension AerisAPI {
     
     private var path: String {
         switch self {
-        case .SunMoon(let location):
+        case .Moon(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
             return "\(baseURL)/sunmoon/\(latitude),\(longitude)?client_id=\(clientId)&client_secret=\(clientSecret)"
+        case .MoonPhases(let location):
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+            return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?client_id=\(clientId)&client_secret=\(clientSecret)&limit=7"
         }
     }
     
     func request() -> NSURLRequest {
         let path = self.path
         let url = NSURL(string: path)
-        return NSURLRequest(URL: url!)
+        return NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 60.0)
     }
 }

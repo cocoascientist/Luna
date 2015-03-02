@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     
     private let model = LunarPhaseModel()
     
+    private lazy var dataSource: PhasesDataSource = {
+        return PhasesDataSource(model: self.model)
+    }()
+    
     private lazy var headerView: LunarHeaderView? = {
         let nib = NSBundle.mainBundle().loadNibNamed(LunarHeaderView.nibName, owner: self, options: nil)
         if let headerView = nib.first as? LunarHeaderView {
@@ -25,7 +29,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        self.tableView.pagingEnabled = true
+        self.tableView.rowHeight = 44.0
+        
+        //ugly
+        self.dataSource.tableView = self.tableView
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: LunarModelDidUpdateNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveError:", name: LunarModelDidReceiveErrorNotification, object: nil)

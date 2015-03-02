@@ -9,8 +9,11 @@
 import Foundation
 
 typealias CurrentMoon = Result<Moon>
+typealias CurrentPhases = Result<[Phase]>
 
 let LunarModelDidUpdateNotification = "LunarModelDidUpdateNotification"
+let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
+
 let LunarModelDidReceiveErrorNotification = "LunarModelDidReceiveErrorNotification"
 
 class LunarPhaseModel {
@@ -19,6 +22,13 @@ class LunarPhaseModel {
             NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
         }
     }
+    
+    private var phases: [Phase]? {
+        didSet {
+            NSNotificationCenter.defaultCenter().postNotificationName(PhasesDidUpdateNotification, object: nil)
+        }
+    }
+    
     private let locationTracker = LocationTracker()
     
     init() {
@@ -40,11 +50,25 @@ class LunarPhaseModel {
         return failure(.NoData)
     }
     
+    var currentPhases: CurrentPhases {
+        if let phases = self.phases {
+            return success(phases)
+        }
+        
+        return failure(.NoData)
+    }
+    
     // MARK: - Private
     
     private func updateLunarPhase(location: Location) -> Void {
-        let request = AerisAPI.SunMoon(location.physical).request()
-        let result: TaskResult = {(result) -> Void in
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let group = dispatch_group_create()
+        
+        dispatch_group_enter(group)
+        dispatch_group_enter(group)
+        
+        let moonRequest = AerisAPI.Moon(location.physical).request()
+        let moonResult: TaskResult = {(result) -> Void in
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
@@ -57,9 +81,35 @@ class LunarPhaseModel {
             case .Failure(let reason):
                 self.postErrorNotification(reason)
             }
+            
+            dispatch_group_leave(group)
         }
         
-        NetworkController.task(request, result: result).resume()
+        let phasesRequest = AerisAPI.MoonPhases(location.physical).request()
+        let phasesResult: TaskResult = {(result) -> Void in
+            let jsonResult = toJSONResult(result)
+            switch jsonResult {
+            case .Success(let json):
+                if let phases = Phase.phasesFromJSON(json.unbox) {
+                    self.phases = phases
+                }
+                else {
+                    self.postErrorNotification(.BadResponse)
+                }
+            case .Failure(let reason):
+                self.postErrorNotification(reason)
+            }
+            
+            dispatch_group_leave(group)
+        }
+        
+        NetworkController.task(moonRequest, result: moonResult).resume()
+        NetworkController.task(phasesRequest, result: phasesResult).resume()
+        
+        dispatch_group_notify(group, queue) { () -> Void in
+            println("all done")
+            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
+        }
     }
     
     private func postErrorNotification(reason: Reason) -> Void {

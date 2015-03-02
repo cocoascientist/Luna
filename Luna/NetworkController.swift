@@ -12,7 +12,7 @@ typealias TaskResult = (result: Result<NSData>) -> Void
 
 struct NetworkController {
     
-    private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate {
+    private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
         func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
             completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust))
         }

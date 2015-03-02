@@ -17,7 +17,7 @@ struct LunarViewModel {
     }
     
     var icon: String {
-        return "\u{f0a6}"
+        return moon.age.symbolForCurrentPhase()
     }
     
     var phase: String {

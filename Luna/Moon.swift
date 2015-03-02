@@ -12,15 +12,10 @@ struct Moon {
     let phase: String
 //    let percent: Double
 //    
-//    let age: Double
+    let age: Int
 //    let angle: Double
 //    let illumination: Double
     
-    let rise: NSDate
-    let set: NSDate
-}
-
-struct Sun {
     let rise: NSDate
     let set: NSDate
 }
@@ -33,13 +28,25 @@ extension Moon {
             let rise = moon["rise"] as? NSTimeInterval,
             let set = moon["set"] as? NSTimeInterval,
             let phase = moon["phase"] as? JSON,
-            let name = phase["name"] as? String {
+            let name = phase["name"] as? String,
+            let age = phase["age"] as? Int {
 
-                return Moon(phase: name,
+                return Moon(phase: name, age: age,
                     rise: NSDate(timeIntervalSince1970: rise),
                     set: NSDate(timeIntervalSince1970: set))
         }
         
         return nil
+    }
+}
+
+extension Int {
+    func symbolForCurrentPhase() -> String {
+        switch self {
+        case 12:
+            return "\u{f0a1}"
+        default:
+            return "\u{f095}"
+        }
     }
 }
