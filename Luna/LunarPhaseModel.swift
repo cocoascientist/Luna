@@ -32,7 +32,7 @@ class LunarPhaseModel {
         }
     }
     
-    var currentForecast: CurrentMoon {
+    var currentMoon: CurrentMoon {
         if let moon = self.moon {
             return success(moon)
         }
@@ -48,7 +48,12 @@ class LunarPhaseModel {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                println("parse!: \(json.unbox)")
+                if let moon = Moon.moonFromJSON(json.unbox) {
+                    self.moon = moon
+                }
+                else {
+                    self.postErrorNotification(.BadResponse)
+                }
             case .Failure(let reason):
                 self.postErrorNotification(reason)
             }

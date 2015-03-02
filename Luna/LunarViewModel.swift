@@ -10,21 +10,25 @@ import Foundation
 
 struct LunarViewModel {
     
-    private let model: LunarPhaseModel
+    private let moon: Moon
     
-    init(model: LunarPhaseModel) {
-        self.model = model
+    init(moon: Moon) {
+        self.moon = moon
+    }
+    
+    var icon: String {
+        return "\u{f0a6}"
     }
     
     var phase: String {
-        return "ZZ"
+        return moon.phase
     }
     
     var rise: NSDate {
-        return NSDate()
+        return moon.rise
     }
     
     var set: NSDate {
-        return NSDate()
+        return moon.set
     }
 }

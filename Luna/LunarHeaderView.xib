@@ -3,6 +3,11 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="weathericons-regular-webfont.ttf">
+            <string>WeatherIcons-Regular</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -10,21 +15,30 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muB-b7-rW3">
-                    <rect key="frame" x="279" y="40" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muB-b7-rW3">
+                    <rect key="frame" x="256" y="40" width="89" height="174"/>
+                    <fontDescription key="fontDescription" name="WeatherIcons-Regular" family="Weather Icons" pointSize="120"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Moon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03A-Jh-5iY">
+                    <rect key="frame" x="214" y="244" width="173" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="muB-b7-rW3" secondAttribute="centerX" id="DwD-Xe-ePj"/>
+                <constraint firstItem="03A-Jh-5iY" firstAttribute="top" secondItem="muB-b7-rW3" secondAttribute="bottom" constant="30" id="NVb-kJ-xJn"/>
                 <constraint firstItem="muB-b7-rW3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="pMh-2n-UL5"/>
+                <constraint firstAttribute="centerX" secondItem="03A-Jh-5iY" secondAttribute="centerX" id="qMu-ok-ses"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <connections>
-                <outlet property="phaseLabel" destination="muB-b7-rW3" id="YOZ-ot-OYK"/>
+                <outlet property="phaseIconLabel" destination="muB-b7-rW3" id="3Bh-go-mJv"/>
+                <outlet property="phaseNameLabel" destination="03A-Jh-5iY" id="u3h-AC-3kd"/>
             </connections>
         </view>
     </objects>
