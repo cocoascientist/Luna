@@ -16,6 +16,10 @@ class ViewController: UIViewController {
         let nib = NSBundle.mainBundle().loadNibNamed(LunarHeaderView.nibName, owner: self, options: nil)
         if let headerView = nib.first as? LunarHeaderView {
             headerView.frame = UIScreen.mainScreen().bounds
+            
+            let model = LunarPhaseModel()
+            headerView.viewModel = LunarViewModel(model: model)
+            
             return headerView
         }
         return nil

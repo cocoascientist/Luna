@@ -12,6 +12,12 @@ class LunarHeaderView: UIView {
 
     @IBOutlet var phaseLabel: UILabel!
     
+    var viewModel: LunarViewModel? {
+        didSet {
+            self.phaseLabel.text = viewModel?.phase
+        }
+    }
+    
     class var nibName: String {
         return "LunarHeaderView"
     }
@@ -22,7 +28,6 @@ class LunarHeaderView: UIView {
         self.phaseLabel.text = "X"
         
 //        let font = UIFont(name: "Weather Icons", size: 40.0)
-//        self.conditionsLabel.font = font
     }
 
 }
