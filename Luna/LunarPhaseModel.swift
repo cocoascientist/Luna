@@ -16,7 +16,9 @@ let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
 
 let LunarModelDidReceiveErrorNotification = "LunarModelDidReceiveErrorNotification"
 
-class LunarPhaseModel {
+class LunarPhaseModel: NSObject {
+    dynamic var loading: Bool = false
+    
     private var moon: Moon? {
         didSet {
             NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
@@ -31,7 +33,9 @@ class LunarPhaseModel {
     
     private let locationTracker = LocationTracker()
     
-    init() {
+    override init() {
+        super.init()
+        
         self.locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
             case .Success(let box):
@@ -61,7 +65,6 @@ class LunarPhaseModel {
     // MARK: - Private
     
     private func updateLunarPhase(location: Location) -> Void {
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         let group = dispatch_group_create()
         
         dispatch_group_enter(group)
@@ -103,11 +106,17 @@ class LunarPhaseModel {
             dispatch_group_leave(group)
         }
         
+        self.loading = true
+        
         NetworkController.task(moonRequest, result: moonResult).resume()
         NetworkController.task(phasesRequest, result: phasesResult).resume()
         
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         dispatch_group_notify(group, queue) { () -> Void in
             println("all done")
+            
+            self.loading = false
+            
             NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
         }
     }

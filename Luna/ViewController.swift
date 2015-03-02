@@ -8,6 +8,8 @@
 
 import UIKit
 
+let myContext = UnsafeMutablePointer<Void>()
+
 class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
@@ -38,6 +40,8 @@ class ViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: LunarModelDidUpdateNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveError:", name: LunarModelDidReceiveErrorNotification, object: nil)
+        
+        self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.New, context: myContext)
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,6 +51,15 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = self.model.loading
+        }
+        else {
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        }
     }
     
     // MARK: - Private
