@@ -27,14 +27,14 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynK-no-XQf">
-                    <rect key="frame" x="20" y="559" width="26" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rise" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynK-no-XQf">
+                    <rect key="frame" x="20" y="559" width="34" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rise" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKW-CK-meb">
-                    <rect key="frame" x="20" y="518" width="34" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKW-CK-meb">
+                    <rect key="frame" x="20" y="518" width="26" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -77,8 +77,8 @@
                 <outlet property="illuminationLabel" destination="FeB-tf-FoA" id="Jmq-0M-XZ5"/>
                 <outlet property="phaseIconLabel" destination="muB-b7-rW3" id="3Bh-go-mJv"/>
                 <outlet property="phaseNameLabel" destination="03A-Jh-5iY" id="u3h-AC-3kd"/>
-                <outlet property="riseLabel" destination="ZKW-CK-meb" id="hgc-T7-ifP"/>
-                <outlet property="setLabel" destination="ynK-no-XQf" id="U2F-fp-xje"/>
+                <outlet property="riseLabel" destination="ynK-no-XQf" id="OVT-1B-wwK"/>
+                <outlet property="setLabel" destination="ZKW-CK-meb" id="ZCC-wT-wvQ"/>
             </connections>
         </view>
     </objects>

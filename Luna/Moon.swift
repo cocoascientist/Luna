@@ -46,14 +46,3 @@ extension Moon {
         return nil
     }
 }
-
-extension Int {
-    func symbolForCurrentPhase() -> String {
-        switch self {
-        case 12:
-            return "\u{f0a1}"
-        default:
-            return "\u{f095}"
-        }
-    }
-}

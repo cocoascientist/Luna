@@ -17,11 +17,11 @@ struct LunarViewModel {
     }
     
     var icon: String {
-        return moon.age.symbolForCurrentPhase()
+        return moon.age.symbolForMoon()
     }
     
     var phase: String {
-        return moon.phase
+        return moon.phase.capitalizedString
     }
     
     var rise: String {
@@ -47,8 +47,8 @@ struct LunarViewModel {
     
     private var formatter: NSDateFormatter {
         let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.LongStyle
         formatter.timeStyle = NSDateFormatterStyle.LongStyle
-        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
         return formatter
     }
 }

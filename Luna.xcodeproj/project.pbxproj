@@ -14,6 +14,8 @@
 		F74916131AA5021C003F1BF4 /* PhaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F74916111AA5021C003F1BF4 /* PhaseTableViewCell.xib */; };
 		F74916151AA50269003F1BF4 /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916141AA50269003F1BF4 /* PhaseViewModel.swift */; };
 		F74916191AA50491003F1BF4 /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */; };
+		F755B4221AA62F1500260DE9 /* UIColor+HexColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755B4211AA62F1500260DE9 /* UIColor+HexColors.swift */; };
+		F755B4241AA6318800260DE9 /* Int+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755B4231AA6318800260DE9 /* Int+WeatherIcons.swift */; };
 		F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576B91AA42E00007B2AE5 /* AppDelegate.swift */; };
 		F76576BC1AA42E00007B2AE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576BB1AA42E00007B2AE5 /* ViewController.swift */; };
 		F76576BF1AA42E00007B2AE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F76576BD1AA42E00007B2AE5 /* Main.storyboard */; };
@@ -51,6 +53,8 @@
 		F74916111AA5021C003F1BF4 /* PhaseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhaseTableViewCell.xib; sourceTree = "<group>"; };
 		F74916141AA50269003F1BF4 /* PhaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhaseViewModel.swift; sourceTree = "<group>"; };
 		F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WeatherIcons.swift"; sourceTree = "<group>"; };
+		F755B4211AA62F1500260DE9 /* UIColor+HexColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexColors.swift"; sourceTree = "<group>"; };
+		F755B4231AA6318800260DE9 /* Int+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+WeatherIcons.swift"; sourceTree = "<group>"; };
 		F76576B41AA42E00007B2AE5 /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F76576B81AA42E00007B2AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F76576B91AA42E00007B2AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -198,10 +202,12 @@
 		F76576F51AA437A0007B2AE5 /* Types & Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F755B4211AA62F1500260DE9 /* UIColor+HexColors.swift */,
 				F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */,
 				F76576DC1AA42E34007B2AE5 /* NSData+JSON.swift */,
 				F76576DE1AA42E34007B2AE5 /* Result.swift */,
 				F76576DD1AA42E34007B2AE5 /* Reason.swift */,
+				F755B4231AA6318800260DE9 /* Int+WeatherIcons.swift */,
 			);
 			name = "Types & Extensions";
 			sourceTree = "<group>";
@@ -309,12 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F755B4221AA62F1500260DE9 /* UIColor+HexColors.swift in Sources */,
 				F76576E11AA42E34007B2AE5 /* NetworkController.swift in Sources */,
 				F74916121AA5021C003F1BF4 /* PhaseTableViewCell.swift in Sources */,
 				F76576F71AA437F1007B2AE5 /* Moon.swift in Sources */,
 				F74916191AA50491003F1BF4 /* String+WeatherIcons.swift in Sources */,
 				F76576BC1AA42E00007B2AE5 /* ViewController.swift in Sources */,
 				F76576F41AA43773007B2AE5 /* LunarPhaseModel.swift in Sources */,
+				F755B4241AA6318800260DE9 /* Int+WeatherIcons.swift in Sources */,
 				F76576E21AA42E34007B2AE5 /* NSData+JSON.swift in Sources */,
 				F76576E01AA42E34007B2AE5 /* LocationTracker.swift in Sources */,
 				F76576E81AA42E9B007B2AE5 /* AerisAPI.swift in Sources */,
@@ -455,6 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Luna/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -465,6 +474,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Luna/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

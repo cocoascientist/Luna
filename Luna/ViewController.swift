@@ -35,6 +35,15 @@ class ViewController: UIViewController {
         self.tableView.pagingEnabled = true
         self.tableView.rowHeight = 44.0
         
+        // gradient
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.hexColor("232526").CGColor, UIColor.hexColor("414345").CGColor]
+        self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
+        self.view.backgroundColor = UIColor.redColor()
+        self.tableView.backgroundColor = UIColor.clearColor()
+        
         //ugly
         self.dataSource.tableView = self.tableView
         
@@ -51,6 +60,10 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
