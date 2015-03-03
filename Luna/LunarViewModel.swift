@@ -24,11 +24,31 @@ struct LunarViewModel {
         return moon.phase
     }
     
-    var rise: NSDate {
-        return moon.rise
+    var rise: String {
+        return self.formatter.stringFromDate(moon.rise)
     }
     
-    var set: NSDate {
-        return moon.set
+    var set: String {
+        return self.formatter.stringFromDate(moon.set)
+    }
+    
+    var age: String {
+        switch moon.age {
+        case 1:
+            return "\(moon.age) day old"
+        default:
+            return "\(moon.age) days old"
+        }
+    }
+    
+    var illumination: String {
+        return "\(moon.illumination)% illuminated"
+    }
+    
+    private var formatter: NSDateFormatter {
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = NSDateFormatterStyle.LongStyle
+        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        return formatter
     }
 }

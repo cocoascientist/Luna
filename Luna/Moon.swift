@@ -12,24 +12,35 @@ struct Moon {
     let phase: String
     let age: Int
     
+    let illumination: Int
+    
     let rise: NSDate
     let set: NSDate
+    
+    init(_ phase: String, _ age: Int, _ illumination: Int, _ rise: NSDate, _ set: NSDate) {
+        self.phase = phase
+        self.age = age
+        self.illumination = illumination
+        self.rise = rise
+        self.set = set
+    }
 }
 
 extension Moon {
     static func moonFromJSON(json: JSON) -> Moon? {
         
         if let response = json["response"] as? [JSON],
-            let moon = response.first?["moon"] as? JSON,
-            let rise = moon["rise"] as? NSTimeInterval,
-            let set = moon["set"] as? NSTimeInterval,
-            let phase = moon["phase"] as? JSON,
-            let name = phase["name"] as? String,
-            let age = phase["age"] as? Int {
-
-                return Moon(phase: name, age: age,
-                    rise: NSDate(timeIntervalSince1970: rise),
-                    set: NSDate(timeIntervalSince1970: set))
+            moon = response.first?["moon"] as? JSON,
+            riseInterval = moon["rise"] as? NSTimeInterval,
+            setInterval = moon["set"] as? NSTimeInterval,
+            phase = moon["phase"] as? JSON,
+            phaseName = phase["name"] as? String,
+            age = phase["age"] as? Int,
+            illum = phase["illum"] as? Int {
+                
+                let rise = NSDate(timeIntervalSince1970: riseInterval)
+                let set = NSDate(timeIntervalSince1970: setInterval)
+                return Moon(phaseName, age, illum, rise, set)
         }
         
         return nil

@@ -11,13 +11,19 @@ import Foundation
 struct Phase {
     let name: String
     let date: NSDate
+    
+    init(_ name: String, _ date: NSDate) {
+        self.name = name
+        self.date = date
+    }
 }
 
 extension Phase {
     static func phaseFromJSON(json: JSON) -> Phase? {
         if let name = json["name"] as? String,
             let interval = json["timestamp"] as? NSTimeInterval {
-                return Phase(name: name, date: NSDate(timeIntervalSince1970: interval))
+                let date = NSDate(timeIntervalSince1970: interval)
+                return Phase(name, date)
         }
         
         return nil

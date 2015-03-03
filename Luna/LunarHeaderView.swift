@@ -13,15 +13,27 @@ class LunarHeaderView: UIView {
     @IBOutlet var phaseIconLabel: UILabel!
     @IBOutlet var phaseNameLabel: UILabel!
     
-    var viewModel: LunarViewModel? {
-        didSet {
-            self.phaseIconLabel.text = viewModel?.icon
-            self.phaseNameLabel.text = viewModel?.phase            
-        }
-    }
+    @IBOutlet var ageLabel: UILabel!
+    @IBOutlet var illuminationLabel: UILabel!
+    
+    @IBOutlet var riseLabel: UILabel!
+    @IBOutlet var setLabel: UILabel!
     
     class var nibName: String {
         return "LunarHeaderView"
+    }
+    
+    var viewModel: LunarViewModel? {
+        didSet {
+            self.phaseIconLabel.text = viewModel?.icon
+            self.phaseNameLabel.text = viewModel?.phase
+            
+            self.riseLabel.text = viewModel?.rise
+            self.setLabel.text = viewModel?.set
+            
+            self.ageLabel.text = viewModel?.age
+            self.illuminationLabel.text = viewModel?.illumination
+        }
     }
     
     override func awakeFromNib() {
@@ -31,6 +43,10 @@ class LunarHeaderView: UIView {
         
         self.phaseIconLabel.text = ""
         self.phaseNameLabel.text = ""
+        self.ageLabel.text = ""
+        self.illuminationLabel.text = ""
+        self.riseLabel.text = ""
+        self.setLabel.text = ""
     }
 
 }
