@@ -10,16 +10,18 @@ import Foundation
 
 struct Moon {
     let phase: String
-    let age: Int
+    let age: Double
+    let percent: Double
     
     let illumination: Int
     
     let rise: NSDate
     let set: NSDate
     
-    init(_ phase: String, _ age: Int, _ illumination: Int, _ rise: NSDate, _ set: NSDate) {
+    init(_ phase: String, _ age: Double, _ percent: Double, _ illumination: Int, _ rise: NSDate, _ set: NSDate) {
         self.phase = phase
         self.age = age
+        self.percent = percent
         self.illumination = illumination
         self.rise = rise
         self.set = set
@@ -35,12 +37,13 @@ extension Moon {
             setInterval = moon["set"] as? NSTimeInterval,
             phase = moon["phase"] as? JSON,
             phaseName = phase["name"] as? String,
-            age = phase["age"] as? Int,
+            age = phase["age"] as? Double,
+            percent = phase["phase"] as? Double,
             illum = phase["illum"] as? Int {
                 
                 let rise = NSDate(timeIntervalSince1970: riseInterval)
                 let set = NSDate(timeIntervalSince1970: setInterval)
-                return Moon(phaseName, age, illum, rise, set)
+                return Moon(phaseName, age, percent, illum, rise, set)
         }
         
         return nil

@@ -44,6 +44,8 @@ class LunarPhaseModel: NSObject {
                 self.postErrorNotification(reason)
             }
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidResume:", name: "UIApplicationDidBecomeActiveNotification", object: nil)
     }
     
     var currentMoon: CurrentMoon {
@@ -113,10 +115,7 @@ class LunarPhaseModel: NSObject {
         
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         dispatch_group_notify(group, queue) { () -> Void in
-            println("all done")
-            
             self.loading = false
-            
             NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
         }
     }
@@ -129,5 +128,12 @@ class LunarPhaseModel: NSObject {
             NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: ["Error": reason.description])
         }
         
+    }
+    
+    func applicationDidResume(notification: NSNotification) -> Void {
+        if let location = self.locationTracker.currentLocation.result() {
+            println("updating model on app resume...")
+            self.updateLunarPhase(location)
+        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Int+WeatherIcons.swift
+//  Double+WeatherIcons.swift
 //  Luna
 //
 //  Created by Andrew Shepard on 3/3/15.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Int {
+extension Double {
     func symbolForMoon() -> String {
-        switch self {
+        switch Int(self) {
         case 0:
             return "\u{f095}" // new moon
         case 1:

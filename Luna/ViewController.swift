@@ -23,7 +23,12 @@ class ViewController: UIViewController {
     private lazy var headerView: LunarHeaderView? = {
         let nib = NSBundle.mainBundle().loadNibNamed(LunarHeaderView.nibName, owner: self, options: nil)
         if let headerView = nib.first as? LunarHeaderView {
-            headerView.frame = UIScreen.mainScreen().bounds
+            if self.traitCollection.userInterfaceIdiom == .Pad {
+                headerView.frame = CGRectInset(UIScreen.mainScreen().bounds, 0.0, 200.0)
+            }
+            else {
+                headerView.frame = UIScreen.mainScreen().bounds
+            }
             return headerView
         }
         return nil
@@ -43,6 +48,7 @@ class ViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.redColor()
         self.tableView.backgroundColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.lightGrayColor()
         
         //ugly
         self.dataSource.tableView = self.tableView

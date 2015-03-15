@@ -32,6 +32,17 @@ extension Result: Printable {
     }
 }
 
+extension Result {
+    func result() -> T? {
+        switch self {
+        case .Success(let box):
+            return box.unbox
+        case .Failure:
+            return nil
+        }
+    }
+}
+
 public func success<T>(value: T) -> Result<T> {
     return .Success(Box(value))
 }

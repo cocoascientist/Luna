@@ -22,8 +22,8 @@ extension Reason: Printable {
             return "Bad response object returned"
         case .NoData:
             return "No response data"
-        case .NoSuccessStatusCode(let code):
-            return "Bad status code: \(code.statusCode)"
+        case .NoSuccessStatusCode(let statusCode):
+            return "Bad status code: \(statusCode)"
         case .Other(let error):
             return "\(error)"
         }

@@ -15,7 +15,7 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
     weak var tableView: UITableView? {
         didSet {
             let nib = UINib(nibName: "PhaseTableViewCell", bundle: nil)
-            self.tableView?.registerNib(nib, forCellReuseIdentifier: "Cell")
+            self.tableView?.registerNib(nib, forCellReuseIdentifier: "PhaseCell")
             
             self.tableView?.dataSource = self
             self.tableView?.reloadData()
@@ -40,8 +40,15 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PhaseTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PhaseCell", forIndexPath: indexPath) as! PhaseTableViewCell
         cell.viewModel = viewModelForIndexPath(indexPath)
+        
+        if indexPath.row == self.phases.count - 1 {
+            cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0.0, 0.0)
+        }
+        else {
+            cell.separatorInset = UIEdgeInsetsMake(0.0, 16.0, 0.0, 16.0)
+        }
         
         return cell
     }
