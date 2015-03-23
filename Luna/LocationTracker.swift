@@ -35,12 +35,16 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     // MARK: - CLLocationManagerDelegate
     
     public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        switch status {
-        case .AuthorizedWhenInUse:
+        #if os(iOS)
+            switch status {
+            case .AuthorizedWhenInUse:
+                locationManager.startUpdatingLocation()
+            default:
+                locationManager.requestWhenInUseAuthorization()
+            }
+        #elseif os(OSX)
             locationManager.startUpdatingLocation()
-        default:
-            locationManager.requestWhenInUseAuthorization()
-        }
+        #endif
     }
     
     public func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
