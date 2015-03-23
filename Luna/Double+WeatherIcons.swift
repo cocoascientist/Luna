@@ -10,8 +10,11 @@ import Foundation
 
 extension Double {
     func symbolForMoon() -> String {
-        switch Int(self) {
-        case 0:
+        let length = 27.3
+        let age = round(((self * 0.01) * length) * 100.0)
+        
+        switch Int(age) {
+        case 0, 27:
             return "\u{f095}" // new moon
         case 1:
             return "\u{f096}"

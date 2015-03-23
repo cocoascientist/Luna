@@ -17,7 +17,7 @@ struct LunarViewModel {
     }
     
     var icon: String {
-        return moon.age.symbolForMoon()
+        return moon.percent.symbolForMoon()
     }
     
     var phase: String {
@@ -33,11 +33,14 @@ struct LunarViewModel {
     }
     
     var age: String {
-        switch moon.age {
+        let length = 27.3
+        let age = ((moon.percent * 0.01) * length) * 100.0
+        
+        switch age {
         case 1:
-            return "\(moon.age) day old"
+            return "\(age) day old"
         default:
-            return "\(moon.age) days old"
+            return "\(age) days old"
         }
     }
     
