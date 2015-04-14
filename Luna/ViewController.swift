@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         //ugly
         self.dataSource.tableView = self.tableView
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: LunarModelDidUpdateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: MoonDidUpdateNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveError:", name: LunarModelDidReceiveErrorNotification, object: nil)
         
         self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.New, context: myContext)

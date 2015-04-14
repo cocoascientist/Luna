@@ -11,7 +11,7 @@ import Foundation
 typealias CurrentMoon = Result<Moon>
 typealias CurrentPhases = Result<[Phase]>
 
-let LunarModelDidUpdateNotification = "LunarModelDidUpdateNotification"
+let MoonDidUpdateNotification = "MoonDidUpdateNotification"
 let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
 
 let LunarModelDidReceiveErrorNotification = "LunarModelDidReceiveErrorNotification"
@@ -23,7 +23,7 @@ class LunarPhaseModel: NSObject {
     
     private var moon: Moon? {
         didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(MoonDidUpdateNotification, object: nil)
         }
     }
     
