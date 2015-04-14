@@ -18,11 +18,9 @@ class BadStatusURLProtocol: NSURLProtocol {
     }
     
     override func startLoading() {
-        let headers = ["Content-Type": "application/json"]
         let response = NSHTTPURLResponse(URL: request.URL!, statusCode: 404, HTTPVersion: "HTTP/1.1", headerFields: nil)
         
         client?.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
-//        client?.URLProtocol(self, didLoadData: data)
         client?.URLProtocolDidFinishLoading(self)
     }
     

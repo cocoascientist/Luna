@@ -20,7 +20,6 @@ class TestURLProtocol: NSURLProtocol {
     override func startLoading() {
         let client = self.client
         let request = self.request
-        
         let data = self.dataForRequest(request)
         
         let headers = ["Content-Type": "application/json"]

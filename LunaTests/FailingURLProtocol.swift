@@ -20,9 +20,8 @@ class FailingURLProtocol: NSURLProtocol {
     override func startLoading() {
         let client = self.client
         
-        let headers = ["Content-Type": "application/json"]
-        let response = NSHTTPURLResponse(URL: request.URL!, statusCode: 404, HTTPVersion: "HTTP/1.1", headerFields: headers)
         let error = NSError(domain: "org.andyshep.Luna", code: 404, userInfo: nil)
+        let response = NSHTTPURLResponse(URL: request.URL!, statusCode: 404, HTTPVersion: "HTTP/1.1", headerFields: nil)
         
         client?.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
         client?.URLProtocol(self, didFailWithError: error)
