@@ -10,7 +10,13 @@ import Foundation
 
 typealias TaskResult = (result: Result<NSData>) -> Void
 
-struct NetworkController {
+class NetworkController {
+    
+    let configuration: NSURLSessionConfiguration
+    
+    init(configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()) {
+        self.configuration = configuration
+    }
     
     private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
         func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
@@ -31,7 +37,7 @@ struct NetworkController {
     :returns: An NSURLSessionTask associated with the request
     */
     
-    static func task(request: NSURLRequest, result: TaskResult) -> NSURLSessionTask {
+    func task(request: NSURLRequest, result: TaskResult) -> NSURLSessionTask {
         
         // handle the task completion job on the main thread
         let finished: TaskResult = {(taskResult) in
@@ -41,7 +47,6 @@ struct NetworkController {
         }
         
         let sessionDelegate = SessionDelegate()
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: configuration, delegate: sessionDelegate, delegateQueue: NSOperationQueue.mainQueue())
         
         // return a basic NSURLSession for the request, with basic error handling

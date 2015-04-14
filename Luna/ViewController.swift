@@ -88,6 +88,8 @@ class ViewController: UIViewController {
         println("error notification: \(notification.userInfo)")
     }
     
+    // MARK: Update Handlers
+    
     func modelDidUpdate(notification: NSNotification) -> Void {
         self.updateLunarViewModel()
     }
