@@ -1,0 +1,49 @@
+{
+    "error": null, 
+    "response": [
+        {
+            "dateTimeISO": "2015-04-13T18:00:13-04:00", 
+            "loc": {
+                "lat": 25.7877, 
+                "long": -80.2241
+            }, 
+            "moon": {
+                "phase": {
+                    "age": 24.02, 
+                    "angle": 0.54, 
+                    "illum": 31, 
+                    "name": "waning crescent", 
+                    "phase": 0.8134
+                }, 
+                "rise": 1428908400, 
+                "riseISO": "2015-04-13T03:00:00-04:00", 
+                "set": 1428949920, 
+                "setISO": "2015-04-13T14:32:00-04:00"
+            }, 
+            "sun": {
+                "rise": 1428922750, 
+                "riseISO": "2015-04-13T06:59:10-04:00", 
+                "set": 1428968602, 
+                "setISO": "2015-04-13T19:43:22-04:00", 
+                "transit": 1428945676, 
+                "transitISO": "2015-04-13T13:21:16-04:00", 
+                "twilight": {
+                    "astronomicalBegin": 1428918003, 
+                    "astronomicalBeginISO": "2015-04-13T05:40:03-04:00", 
+                    "astronomicalEnd": 1428973349, 
+                    "astronomicalEndISO": "2015-04-13T21:02:29-04:00", 
+                    "civilBegin": 1428921346, 
+                    "civilBeginISO": "2015-04-13T06:35:46-04:00", 
+                    "civilEnd": 1428970007, 
+                    "civilEndISO": "2015-04-13T20:06:47-04:00", 
+                    "nauticalBegin": 1428919690, 
+                    "nauticalBeginISO": "2015-04-13T06:08:10-04:00", 
+                    "nauticalEnd": 1428971663, 
+                    "nauticalEndISO": "2015-04-13T20:34:23-04:00"
+                }
+            }, 
+            "timestamp": 1428962413
+        }
+    ], 
+    "success": true
+}
