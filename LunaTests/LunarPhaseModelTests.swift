@@ -10,88 +10,76 @@ import UIKit
 import XCTest
 import CoreLocation
 
+let timeout = 60.0
+
+typealias ResponseBlock = (notification: NSNotification!) -> Void
+
 class LunarPhaseModelTests: XCTestCase {
     
-    var lunarPhaseModel: LunarPhaseModel!
-    
-    let location = Location(location: CLLocation(latitude: 25.7877, longitude: -80.2241), city: "Miami", state: "FL", neighborhood: "")
+    var location: Location {
+        let coordinate = CLLocation(latitude: 25.7877, longitude: -80.2241)
+        let location = Location(location: coordinate, city: "Miami", state: "FL", neighborhood: "")
+        return location
+    }
 
     override func setUp() {
         super.setUp()
-
-        var protocolClasses = [AnyObject]()
-        protocolClasses.append(TestURLProtocol)
-        
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.protocolClasses = protocolClasses
-        
-        let networkController = NetworkController(configuration: configuration)
-        self.lunarPhaseModel = LunarPhaseModel(networkController: networkController)
     }
     
     override func tearDown() {
         super.tearDown()
     }
 
-    func testLunarModelUpdateNotificationIsPosted() {
-        let expectation = expectationWithDescription("Model update notification should be posted")
-        var token: dispatch_once_t = 0
-        
-        let responseBlock = { (notification: NSNotification!) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                dispatch_once(&token, { () -> Void in
-                    expectation.fulfill()
-                    
-                    let result = self.lunarPhaseModel.currentMoon
-                    
-                    switch result {
-                    case .Success(let box):
-                        let moon = box.unbox
-                        
-                        XCTAssertEqual(moon.phase, "waning crescent", "Lunar phase name does not match")
-                        XCTAssertEqual(moon.age, 24.02, "Lunar phase age does not match")
-                    case .Failure(let reason):
-                        XCTFail("Error unboxing Moon: \(reason.description)")
-                    }
-                })
-            })
-        }
-        
-        NSNotificationCenter.defaultCenter().addObserverForName(LunarModelDidUpdateNotification, object: nil, queue: nil, usingBlock: responseBlock)
-        
-        lunarPhaseModel.updateLunarPhase(location)
-        
-        waitForExpectationsWithTimeout(10, handler: nil)
+    func testMoonDidUpdateNotificationIsPosted() {
+        let name = MoonDidUpdateNotification
+        let lunarPhaseModel = lunarPhaseModelUsingProtocol(TestURLProtocol)
+        expectNotificationNamed(name, fromModel: lunarPhaseModel)
     }
     
-    func testPhasesUpdateNotifictionIsPosted() {
-        let expectation = expectationWithDescription("Phases update notification should be posted")
+    func testPhasesDidUpdateNotificationIsPosted() {
+        let name = PhasesDidUpdateNotification
+        let lunarPhaseModel = lunarPhaseModelUsingProtocol(TestURLProtocol)
+        expectNotificationNamed(name, fromModel: lunarPhaseModel)
+
+    }
+    
+    func testErrorNotificationIsPosted() {
+        let name = LunarModelDidReceiveErrorNotification
+        let lunarPhaseModel = lunarPhaseModelUsingProtocol(FailingURLProtocol)
+        expectNotificationNamed(name, fromModel: lunarPhaseModel)
+    }
+    
+    func testCanHandleBadResponse() {
+        let name = LunarModelDidReceiveErrorNotification
+        let lunarPhaseModel = lunarPhaseModelUsingProtocol(BadResponseURLProtocol)
+        expectNotificationNamed(name, fromModel: lunarPhaseModel)
+    }
+    
+    func testCanHandleBadStatusCode() {
+        let name = LunarModelDidReceiveErrorNotification
+        let lunarPhaseModel = lunarPhaseModelUsingProtocol(BadStatusURLProtocol)
+        expectNotificationNamed(name, fromModel: lunarPhaseModel)
+    }
+    
+    func expectNotificationNamed(name:String, fromModel model:LunarPhaseModel) -> Void {
+        let expectation = expectationWithDescription("Notification should be posted")
         var token: dispatch_once_t = 0
         
         let responseBlock = { (notification: NSNotification!) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                
-                dispatch_once(&token, { () -> Void in
-                    expectation.fulfill()
-                    
-                    let result = self.lunarPhaseModel.currentPhases
-                    
-                    switch result {
-                    case .Success(let box):
-                        let phases = box.unbox
-                        XCTAssertEqual(phases.count, 7, "Phases count does not match")
-                    case .Failure(let reason):
-                        XCTFail("Error unboxing Moon: \(reason.description)")
-                    }
-                })
+            dispatch_once(&token, { () -> Void in
+                expectation.fulfill()
             })
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(PhasesDidUpdateNotification, object: nil, queue: nil, usingBlock: responseBlock)
+        NSNotificationCenter.defaultCenter().addObserverForName(name, object: nil, queue: nil, usingBlock: responseBlock)
+        model.updateLunarPhase(location)
         
-        lunarPhaseModel.updateLunarPhase(location)
-        
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectationsWithTimeout(timeout, handler: nil)
     }
 
+    func lunarPhaseModelUsingProtocol(protocolClass: AnyObject) -> LunarPhaseModel {
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass)
+        let networkController = NetworkController(configuration: configuration)
+        return LunarPhaseModel(networkController: networkController)
+    }
 }

@@ -8,8 +8,6 @@
 
 import Foundation
 
-var requestCount = 0
-
 class TestURLProtocol: NSURLProtocol {
     override class func canInitWithRequest(request: NSURLRequest) -> Bool {
         return true

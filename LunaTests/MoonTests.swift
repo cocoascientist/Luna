@@ -22,7 +22,24 @@ class MoonTests: XCTestCase {
     }
 
     func testMoonIsCreatedFromJSON() {
-        // This is an example of a functional test case.
-        XCTFail("Not Implement")
+        let file = NSBundle(forClass: self.dynamicType).pathForResource("sunmoon", ofType: "json")
+        let data = NSData(contentsOfFile: file!)
+        
+        if let result = data?.toJSON() {
+            switch result {
+            case .Success(let json):
+                if let moon = Moon.moonFromJSON(json.unbox) {
+                    XCTAssertEqual(moon.phase, "waning crescent", "Moon phase is incorrect")
+                    XCTAssertEqual(moon.age, 24.02, "Moon age is incorrect")
+                    XCTAssertEqual(moon.illumination, 31, "Moon illumination is incorrect")
+                    XCTAssertEqual(moon.percent, 0.81340000000000001, "Moon percent is incorrect")
+                }
+            case .Failure:
+                XCTFail("Failing JSONResult was found")
+            }
+        }
+        else {
+            XCTFail("No data was found")
+        }
     }
 }
