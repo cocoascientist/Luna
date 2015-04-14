@@ -30,7 +30,7 @@ class NetworkControllerTests: XCTestCase {
 
     func testCanRequestMoonSuccessfully() {
         let expectation = expectationWithDescription("Request should be successful")
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(TestURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
         let request = AerisAPI.Moon(location.physical).request()
@@ -49,7 +49,7 @@ class NetworkControllerTests: XCTestCase {
     
     func testCanRequestPhasesSuccessfully() {
         let expectation = expectationWithDescription("Request should be successful")
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(TestURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
         let request = AerisAPI.MoonPhases(location.physical).request()

@@ -1,5 +1,5 @@
 //
-//  TestURLProtocol.swift
+//  LocalURLProtocol.swift
 //  Luna
 //
 //  Created by Andrew Shepard on 4/13/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TestURLProtocol: NSURLProtocol {
+class LocalURLProtocol: NSURLProtocol {
     override class func canInitWithRequest(request: NSURLRequest) -> Bool {
         return true
     }
@@ -34,7 +34,7 @@ class TestURLProtocol: NSURLProtocol {
         // all data return at once, nothing to do
     }
     
-    func dataForRequest(request: NSURLRequest) -> NSData {
+    private func dataForRequest(request: NSURLRequest) -> NSData {
         if let path = request.URL?.path {
             var json: String?
             if path.rangeOfString("/sunmoon/moonphases/") != nil {

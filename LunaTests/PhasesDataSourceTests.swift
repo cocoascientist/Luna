@@ -30,7 +30,7 @@ class PhasesDataSourceTests: XCTestCase {
     }
     
     var model: LunarPhaseModel {
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(TestURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         let model = LunarPhaseModel(networkController: networkController)
         return model

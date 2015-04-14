@@ -12,8 +12,6 @@ import CoreLocation
 
 let timeout = 60.0
 
-typealias ResponseBlock = (notification: NSNotification!) -> Void
-
 class LunarPhaseModelTests: XCTestCase {
     
     var location: Location {
@@ -23,27 +21,29 @@ class LunarPhaseModelTests: XCTestCase {
     }
 
     func testMoonDidUpdateNotificationIsPosted() {
-        let name = MoonDidUpdateNotification
-        let lunarPhaseModel = lunarPhaseModelUsingProtocol(TestURLProtocol)
-        expectNotificationNamed(name, fromModel: lunarPhaseModel)
+        let model = modelUsingProtocol(LocalURLProtocol)
+        model.updateLunarPhase(location)
+        
+        waitForAndExpectNotification(MoonDidUpdateNotification)
     }
     
     func testPhasesDidUpdateNotificationIsPosted() {
-        let name = PhasesDidUpdateNotification
-        let lunarPhaseModel = lunarPhaseModelUsingProtocol(TestURLProtocol)
-        expectNotificationNamed(name, fromModel: lunarPhaseModel)
-
+        let model = modelUsingProtocol(LocalURLProtocol)
+        model.updateLunarPhase(location)
+        
+        waitForAndExpectNotification(PhasesDidUpdateNotification)
     }
     
     func testErrorNotificationIsPosted() {
-        let name = LunarModelDidReceiveErrorNotification
-        let lunarPhaseModel = lunarPhaseModelUsingProtocol(FailingURLProtocol)
-        expectNotificationNamed(name, fromModel: lunarPhaseModel)
+        let model = modelUsingProtocol(FailingURLProtocol)
+        model.updateLunarPhase(location)
+        
+        waitForAndExpectNotification(LunarModelDidReceiveErrorNotification)
     }
     
     // MARK: - Private
     
-    private func expectNotificationNamed(name:String, fromModel model:LunarPhaseModel) -> Void {
+    private func waitForAndExpectNotification(name:String) -> Void {
         let expectation = expectationWithDescription("Notification should be posted")
         var token: dispatch_once_t = 0
         
@@ -54,12 +54,11 @@ class LunarPhaseModelTests: XCTestCase {
         }
         
         NSNotificationCenter.defaultCenter().addObserverForName(name, object: nil, queue: nil, usingBlock: responseBlock)
-        model.updateLunarPhase(location)
         
         waitForExpectationsWithTimeout(timeout, handler: nil)
     }
 
-    private func lunarPhaseModelUsingProtocol(protocolClass: AnyObject) -> LunarPhaseModel {
+    private func modelUsingProtocol(protocolClass: AnyObject) -> LunarPhaseModel {
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass)
         let networkController = NetworkController(configuration: configuration)
         return LunarPhaseModel(networkController: networkController)
