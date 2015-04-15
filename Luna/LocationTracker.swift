@@ -17,12 +17,20 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     private var lastResult: LocationResult = .Failure(.NoData)
     private var observers: [Observer] = []
     
+    private let locationManager: CLLocationManager
+    
     var currentLocation: LocationResult {
         return self.lastResult
     }
     
-    override init() {
+    init(locationManager:CLLocationManager = CLLocationManager()) {
+        self.locationManager = locationManager
         super.init()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
         self.locationManager.startUpdatingLocation()
     }
     
@@ -83,14 +91,6 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     }
     
     // MARK: - Private
-    
-    private lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        return locationManager
-    }()
     
     private func publishChangeWithResult(result: LocationResult) {
         if self.shouldUpdateWithResult(result) {
