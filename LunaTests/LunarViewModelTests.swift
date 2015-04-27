@@ -18,7 +18,7 @@ class LunarViewModelTests: XCTestCase {
     }
 
     func testCanFormatLunarAgeString() {
-        XCTAssertEqual(viewModel.age, "22.20582 days old", "Age does not match")
+        XCTAssertEqual(viewModel.age, "22.2 days old", "Age does not match")
     }
     
     func testCanFormatPercentCompleteString() {
