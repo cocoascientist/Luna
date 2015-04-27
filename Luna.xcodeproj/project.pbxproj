@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F704B44A1AB5C15500BBF2F7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F704B4491AB5C15500BBF2F7 /* NotificationCenter.framework */; };
-		F704B44F1AB5C15500BBF2F7 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F704B44E1AB5C15500BBF2F7 /* TodayViewController.swift */; };
-		F704B4511AB5C15500BBF2F7 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F704B4501AB5C15500BBF2F7 /* MainInterface.storyboard */; };
-		F704B4541AB5C15500BBF2F7 /* LunaWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F704B4471AB5C15500BBF2F7 /* LunaWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F7162DF11AC0C09A0083D350 /* LunarPhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7162DF01AC0C09A0083D350 /* LunarPhaseView.swift */; };
 		F7162DF31AC0C0C50083D350 /* NSDate+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7162DF21AC0C0C50083D350 /* NSDate+Lunar.swift */; };
 		F74734561AA4C390006720F1 /* weathericons-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F74734551AA4C390006720F1 /* weathericons-regular-webfont.ttf */; };
@@ -83,13 +79,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F704B4521AB5C15500BBF2F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F76576AC1AA42E00007B2AE5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F704B4461AB5C15500BBF2F7;
-			remoteInfo = LunaWidget;
-		};
 		F76576CA1AA42E00007B2AE5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F76576AC1AA42E00007B2AE5 /* Project object */;
@@ -106,7 +95,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				F704B4541AB5C15500BBF2F7 /* LunaWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,11 +102,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F704B4471AB5C15500BBF2F7 /* LunaWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LunaWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F704B4491AB5C15500BBF2F7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		F704B44D1AB5C15500BBF2F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F704B44E1AB5C15500BBF2F7 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		F704B4501AB5C15500BBF2F7 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		F7162DF01AC0C09A0083D350 /* LunarPhaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarPhaseView.swift; sourceTree = "<group>"; };
 		F7162DF21AC0C0C50083D350 /* NSDate+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Lunar.swift"; sourceTree = "<group>"; };
 		F74734551AA4C390006720F1 /* weathericons-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular-webfont.ttf"; sourceTree = "<group>"; };
@@ -170,14 +154,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F704B4441AB5C15500BBF2F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F704B44A1AB5C15500BBF2F7 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F76576B11AA42E00007B2AE5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,30 +179,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F704B44B1AB5C15500BBF2F7 /* LunaWidget */ = {
-			isa = PBXGroup;
-			children = (
-				F704B44E1AB5C15500BBF2F7 /* TodayViewController.swift */,
-				F704B4501AB5C15500BBF2F7 /* MainInterface.storyboard */,
-				F704B44C1AB5C15500BBF2F7 /* Supporting Files */,
-			);
-			path = LunaWidget;
-			sourceTree = "<group>";
-		};
-		F704B44C1AB5C15500BBF2F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F704B44D1AB5C15500BBF2F7 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		F76576AB1AA42E00007B2AE5 = {
 			isa = PBXGroup;
 			children = (
 				F76576B61AA42E00007B2AE5 /* Luna */,
 				F76576CC1AA42E00007B2AE5 /* LunaTests */,
-				F704B44B1AB5C15500BBF2F7 /* LunaWidget */,
 				F704B4481AB5C15500BBF2F7 /* Frameworks */,
 				F76576B51AA42E00007B2AE5 /* Products */,
 			);
@@ -237,7 +194,6 @@
 			children = (
 				F76576B41AA42E00007B2AE5 /* Luna.app */,
 				F76576C91AA42E00007B2AE5 /* LunaTests.xctest */,
-				F704B4471AB5C15500BBF2F7 /* LunaWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,23 +349,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F704B4461AB5C15500BBF2F7 /* LunaWidget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F704B4571AB5C15500BBF2F7 /* Build configuration list for PBXNativeTarget "LunaWidget" */;
-			buildPhases = (
-				F704B4431AB5C15500BBF2F7 /* Sources */,
-				F704B4441AB5C15500BBF2F7 /* Frameworks */,
-				F704B4451AB5C15500BBF2F7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LunaWidget;
-			productName = LunaWidget;
-			productReference = F704B4471AB5C15500BBF2F7 /* LunaWidget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		F76576B31AA42E00007B2AE5 /* Luna */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F76576D31AA42E00007B2AE5 /* Build configuration list for PBXNativeTarget "Luna" */;
@@ -422,7 +361,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F704B4531AB5C15500BBF2F7 /* PBXTargetDependency */,
 			);
 			name = Luna;
 			productName = Luna;
@@ -456,9 +394,6 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Andrew Shepard";
 				TargetAttributes = {
-					F704B4461AB5C15500BBF2F7 = {
-						CreatedOnToolsVersion = 6.3;
-					};
 					F76576B31AA42E00007B2AE5 = {
 						CreatedOnToolsVersion = 6.3;
 					};
@@ -483,20 +418,11 @@
 			targets = (
 				F76576B31AA42E00007B2AE5 /* Luna */,
 				F76576C81AA42E00007B2AE5 /* LunaTests */,
-				F704B4461AB5C15500BBF2F7 /* LunaWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F704B4451AB5C15500BBF2F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F704B4511AB5C15500BBF2F7 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F76576B21AA42E00007B2AE5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,14 +452,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F704B4431AB5C15500BBF2F7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F704B44F1AB5C15500BBF2F7 /* TodayViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F76576B01AA42E00007B2AE5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -608,11 +526,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F704B4531AB5C15500BBF2F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F704B4461AB5C15500BBF2F7 /* LunaWidget */;
-			targetProxy = F704B4521AB5C15500BBF2F7 /* PBXContainerItemProxy */;
-		};
 		F76576CB1AA42E00007B2AE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F76576B31AA42E00007B2AE5 /* Luna */;
@@ -640,31 +553,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		F704B4551AB5C15500BBF2F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LunaWidget/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F704B4561AB5C15500BBF2F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = LunaWidget/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		F76576D11AA42E00007B2AE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -809,15 +697,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F704B4571AB5C15500BBF2F7 /* Build configuration list for PBXNativeTarget "LunaWidget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F704B4551AB5C15500BBF2F7 /* Debug */,
-				F704B4561AB5C15500BBF2F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		F76576AF1AA42E00007B2AE5 /* Build configuration list for PBXProject "Luna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
