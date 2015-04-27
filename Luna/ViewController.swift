@@ -92,8 +92,19 @@ class ViewController: UIViewController {
     // MARK: - Update Handlers
 
     func didReceiveError(notification: NSNotification) -> Void {
-        // TODO: add end user error handling
-        println("error notification: \(notification.userInfo)")
+        if let message = notification.userInfo?["Error"] as? String {
+            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+            let action = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+            
+            alertController.addAction(action)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        else {
+            println("Error: Unhandled notification: \(notification.userInfo)")
+        }
     }
     
     func modelDidUpdate(notification: NSNotification) -> Void {
@@ -112,4 +123,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
