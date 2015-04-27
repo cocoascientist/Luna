@@ -16,15 +16,6 @@ class ViewController: UIViewController {
     
     var model: LunarPhaseModel!
     
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: NSBundle.mainBundle())
-//    }
-//    
-//    init(model: LunarPhaseModel) {
-//        self.model = model
-//        super.init(nibName: nil, bundle: nil)
-//    }
-    
     override func awakeFromNib() {
         self.model = LunarPhaseModel()
     }
