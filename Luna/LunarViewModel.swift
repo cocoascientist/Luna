@@ -38,9 +38,11 @@ struct LunarViewModel {
         
         switch age {
         case 1:
-            return "\(age) day old"
+            let day = String(format: "%.1f", age)
+            return "\(day) day old"
         default:
-            return "\(age) days old"
+            let days = String(format: "%.1f", age)
+            return "\(days) days old"
         }
     }
     

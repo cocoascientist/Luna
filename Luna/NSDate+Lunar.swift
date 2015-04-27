@@ -20,24 +20,12 @@ extension NSDate {
         return 29.53059
     }
     
-    func julianDate() -> Double {
+    private func julianDate() -> Double {
         return epochJulianDate() + self.timeIntervalSince1970 / 86400
     }
     
     func moonPhase() -> Double {
         var phase = (self.julianDate() + 4.867) / self.lunarSynodicPeriod()
         return (phase - floor(phase))
-    }
-    
-    func moonAge() -> Double {
-        let phase = moonPhase()
-        let period = self.lunarSynodicPeriod()
-        
-        if phase < 0.5 {
-            return floor(phase * period + period / 2) + 1
-        }
-        else {
-            return floor(phase * period - period / 2) + 1
-        }
     }
 }

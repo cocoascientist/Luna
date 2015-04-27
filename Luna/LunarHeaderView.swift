@@ -10,7 +10,6 @@ import UIKit
 
 class LunarHeaderView: UIView {
 
-    @IBOutlet var phaseIconLabel: UILabel!
     @IBOutlet var phaseNameLabel: UILabel!
     
     @IBOutlet var ageLabel: UILabel!
@@ -25,8 +24,6 @@ class LunarHeaderView: UIView {
     
     var viewModel: LunarViewModel? {
         didSet {
-//            self.phaseIconLabel.text = viewModel?.icon
-            
             self.riseLabel.text = viewModel?.rise
             self.setLabel.text = viewModel?.set
             
@@ -45,16 +42,12 @@ class LunarHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        self.phaseIconLabel.font = UIFont(name: "Weather Icons", size: 200.0)
-        
-//        self.phaseIconLabel.text = ""
         self.phaseNameLabel.text = ""
         self.ageLabel.text = ""
         self.illuminationLabel.text = ""
         self.riseLabel.text = ""
         self.setLabel.text = ""
         
-//        self.phaseIconLabel.textColor = UIColor.whiteColor()
         self.phaseNameLabel.textColor = UIColor.whiteColor()
         self.ageLabel.textColor = UIColor.whiteColor()
         self.illuminationLabel.textColor = UIColor.whiteColor()

@@ -117,7 +117,6 @@ class LunarPhaseModel: NSObject {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         dispatch_group_notify(group, queue) { () -> Void in
             self.loading = false
-//            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidUpdateNotification, object: nil)
         }
     }
     

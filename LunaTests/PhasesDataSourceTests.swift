@@ -46,13 +46,30 @@ class PhasesDataSourceTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: nil)
     }
     
-    func testHandlesPhasesUpdateNotification() {
-        let dataSource = FakeDataSource(model: model)
-        dataSource.expectation = expectationWithDescription("phasesDidUpdate should be called")
-        
-        let tableView = UITableView(frame: CGRectZero, style: .Plain)
-        dataSource.tableView = tableView
-        
-        waitForExpectationsWithTimeout(timeout, handler: nil)
-    }
+//    func testHandlesPhasesUpdateNotification() {
+//        let dataSource = FakeDataSource(model: model)
+//        dataSource.expectation = expectationWithDescription("phasesDidUpdate should be called")
+//        
+//        let tableView = UITableView(frame: CGRectZero, style: .Plain)
+//        dataSource.tableView = tableView
+//        
+//        
+//    }
+    
+//    func testCellForRowAtIndexPath() {
+//        let dataSource = FakeDataSource(model: model)
+//        dataSource.expectation = expectationWithDescription("phasesDidUpdate should be called")
+//        
+//        let tableView = UITableView(frame: CGRectMake(0, 0, 320, 480), style: .Plain)
+//        dataSource.tableView = tableView
+//        
+//        waitForExpectationsWithTimeout(timeout, handler: nil)
+//        
+//        let cell = dataSource.tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+//        
+////        let indexPath = NSIndexPath(forRow: 01, inSection: 0)
+////        let cell = tableView.dataSource?.tableView(tableView, cellForRowAtIndexPath: indexPath)
+////        
+//        XCTAssertNotNil(cell, "Cell should not be nil")
+//    }
 }

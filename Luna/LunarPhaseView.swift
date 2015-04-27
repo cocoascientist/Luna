@@ -10,6 +10,7 @@
 
 import UIKit
 
+@IBDesignable
 class LunarPhaseView: UIView {
     let date: NSDate
     

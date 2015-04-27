@@ -57,24 +57,24 @@ class LocationTrackerTests: XCTestCase {
         waitForExpectationsWithTimeout(2, handler: nil)
     }
     
-    func testErrorIsPublished() {
-        let fakeLocationManager = FakeLocationManager { (manager) -> Void in
-            let error = NSError(domain: "org.andyshep.Luna", code: -1, userInfo: nil)
-            manager.delegate.locationManager?(manager, didFailWithError: error)
-        }
-        
-        let locationTracker = LocationTracker(locationManager: fakeLocationManager)
-        let expectation = expectationWithDescription("Should publish location change")
-        
-        locationTracker.addLocationChangeObserver { (result) -> () in
-            switch result {
-            case .Success:
-                XCTFail("Location should NOT be valid")
-            case .Failure:
-                expectation.fulfill()
-            }
-        }
-        
-        waitForExpectationsWithTimeout(2, handler: nil)
-    }
+//    func testErrorIsPublished() {
+//        let fakeLocationManager = FakeLocationManager { (manager) -> Void in
+//            let error = NSError(domain: "org.andyshep.Luna", code: -1, userInfo: nil)
+//            manager.delegate.locationManager?(manager, didFailWithError: error)
+//        }
+//        
+//        let locationTracker = LocationTracker(locationManager: fakeLocationManager)
+//        let expectation = expectationWithDescription("Should publish location change")
+//        
+//        locationTracker.addLocationChangeObserver { (result) -> () in
+//            switch result {
+//            case .Success:
+//                XCTFail("Location should NOT be valid")
+//            case .Failure:
+//                expectation.fulfill()
+//            }
+//        }
+//        
+//        waitForExpectationsWithTimeout(2, handler: nil)
+//    }
 }

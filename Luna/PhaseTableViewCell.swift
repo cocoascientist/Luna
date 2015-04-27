@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhaseTableViewCell: UITableViewCell {
+public class PhaseTableViewCell: UITableViewCell {
     
     @IBOutlet var iconLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
@@ -20,7 +20,7 @@ class PhaseTableViewCell: UITableViewCell {
         }
     }
 
-    override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
 
         self.iconLabel.text = ""
@@ -35,7 +35,7 @@ class PhaseTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor.clearColor()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    public override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

@@ -14,7 +14,24 @@ class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    private let model = LunarPhaseModel()
+    var model: LunarPhaseModel!
+    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: NSBundle.mainBundle())
+//    }
+//    
+//    init(model: LunarPhaseModel) {
+//        self.model = model
+//        super.init(nibName: nil, bundle: nil)
+//    }
+    
+    override func awakeFromNib() {
+        self.model = LunarPhaseModel()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     private lazy var dataSource: PhasesDataSource = {
         return PhasesDataSource(model: self.model)
@@ -81,14 +98,12 @@ class ViewController: UIViewController {
         }
     }
     
-    // MARK: - Private
+    // MARK: - Update Handlers
 
     func didReceiveError(notification: NSNotification) -> Void {
         // TODO: add end user error handling
         println("error notification: \(notification.userInfo)")
     }
-    
-    // MARK: Update Handlers
     
     func modelDidUpdate(notification: NSNotification) -> Void {
         self.updateLunarViewModel()

@@ -36,7 +36,7 @@ extension AerisAPI {
         case .MoonPhases(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?client_id=\(clientId)&client_secret=\(clientSecret)&limit=7"
+            return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?client_id=\(clientId)&client_secret=\(clientSecret)&limit=5"
         }
     }
     
