@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         self.tableView.separatorColor = UIColor.lightGrayColor()
         
         //ugly
-        self.dataSource.tableView = self.tableView
+        self.dataSource.configureUsing(self.tableView)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: MoonDidUpdateNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveError:", name: LunarModelDidReceiveErrorNotification, object: nil)

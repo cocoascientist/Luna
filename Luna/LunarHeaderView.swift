@@ -10,6 +10,7 @@ import UIKit
 
 class LunarHeaderView: UIView {
 
+    @IBOutlet var phaseView: LunarPhaseView!
     @IBOutlet var phaseNameLabel: UILabel!
     
     @IBOutlet var ageLabel: UILabel!
@@ -36,13 +37,18 @@ class LunarHeaderView: UIView {
                 let attributes = [NSForegroundColorAttributeName: color, NSFontAttributeName: font]
                 self.phaseNameLabel.attributedText = NSAttributedString(string: phase, attributes: attributes)
             }
+            
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.phaseView.alpha = 1.0
+            })
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.phaseNameLabel.text = ""
+        self.phaseView.alpha = 0.0
+        self.phaseNameLabel.text = "Loading..."
         self.ageLabel.text = ""
         self.illuminationLabel.text = ""
         self.riseLabel.text = ""

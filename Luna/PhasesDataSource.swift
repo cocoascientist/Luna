@@ -12,7 +12,7 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
     private var phases: [Phase] = []
     private let model: LunarPhaseModel
     
-    weak var tableView: UITableView? {
+    private weak var tableView: UITableView? {
         didSet {
             let nib = UINib(nibName: "PhaseTableViewCell", bundle: nil)
             self.tableView?.registerNib(nib, forCellReuseIdentifier: "PhaseCell")
@@ -27,6 +27,10 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
         super.init()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "phasesDidUpdate:", name: PhasesDidUpdateNotification, object: nil)
+    }
+    
+    func configureUsing(tableView: UITableView) -> Void {
+        self.tableView = tableView
     }
     
     // MARK: - UITableViewDataSource

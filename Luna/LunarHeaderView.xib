@@ -69,6 +69,7 @@
                 <outlet property="ageLabel" destination="TOH-tQ-pLh" id="DQv-Gq-vVH"/>
                 <outlet property="illuminationLabel" destination="FeB-tf-FoA" id="Jmq-0M-XZ5"/>
                 <outlet property="phaseNameLabel" destination="03A-Jh-5iY" id="u3h-AC-3kd"/>
+                <outlet property="phaseView" destination="V1O-xI-vlB" id="CjY-7b-iT0"/>
                 <outlet property="riseLabel" destination="ynK-no-XQf" id="OVT-1B-wwK"/>
                 <outlet property="setLabel" destination="ZKW-CK-meb" id="ZCC-wT-wvQ"/>
             </connections>
