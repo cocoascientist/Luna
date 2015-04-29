@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 public typealias LocationResult = Result<Location>
 public typealias Observer = (location: LocationResult) -> ()
@@ -32,6 +33,10 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         
         self.locationManager.startUpdatingLocation()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleBackgroundNotification:", name: UIApplicationWillResignActiveNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleForegroundNotification:", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     // MARK: - Public
@@ -91,6 +96,14 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     }
     
     // MARK: - Private
+    
+    func handleBackgroundNotification(notification: NSNotification) {
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    func handleForegroundNotification(notification: NSNotification) {
+        self.locationManager.startUpdatingLocation()
+    }
     
     private func publishChangeWithResult(result: LocationResult) {
         if self.shouldUpdateWithResult(result) {
