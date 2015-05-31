@@ -20,7 +20,6 @@ class BadResponseURLProtocol: NSURLProtocol {
     override func startLoading() {
         let client = self.client
         let request = self.request
-        
         let response = NSURLResponse(URL: request.URL!, MIMEType: nil, expectedContentLength: 0, textEncodingName: nil)
         
         client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)

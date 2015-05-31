@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Andrew Shepard. All rights reserved.
 //
 
+// http://stackoverflow.com/a/27203691
+
 import UIKit
 
 extension UIColor {
-    
-    // http://stackoverflow.com/a/27203691
     
     class func hexColor(string: String) -> UIColor {
         let set = NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet

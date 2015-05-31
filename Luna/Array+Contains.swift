@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Andrew Shepard. All rights reserved.
 //
 
-import Foundation
-
 // http://stackoverflow.com/a/24102152
+
+import Foundation
 
 extension Array {
     func contains<T where T : Equatable>(obj: T) -> Bool {

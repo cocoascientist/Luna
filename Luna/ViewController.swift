@@ -48,7 +48,6 @@ class ViewController: UIViewController {
         self.tableView.pagingEnabled = true
         self.tableView.rowHeight = 44.0
         
-        // gradient
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [UIColor.hexColor("232526").CGColor, UIColor.hexColor("414345").CGColor]
@@ -58,7 +57,6 @@ class ViewController: UIViewController {
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.separatorColor = UIColor.lightGrayColor()
         
-        //ugly
         self.dataSource.configureUsing(self.tableView)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: MoonDidUpdateNotification, object: nil)
@@ -69,11 +67,6 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         self.tableView.tableHeaderView = self.headerView
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
