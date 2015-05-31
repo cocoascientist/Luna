@@ -33,16 +33,18 @@ extension Moon {
         
         if let response = json["response"] as? [JSON],
             moon = response.first?["moon"] as? JSON,
-            riseInterval = moon["rise"] as? NSTimeInterval,
-            setInterval = moon["set"] as? NSTimeInterval,
             phase = moon["phase"] as? JSON,
             phaseName = phase["name"] as? String,
             age = phase["age"] as? Double,
             percent = phase["phase"] as? Double,
             illum = phase["illum"] as? Int {
                 
+                let riseInterval = moon["rise"] as? NSTimeInterval ?? 0
+                let setInterval = moon["set"] as? NSTimeInterval ?? 0
+                
                 let rise = NSDate(timeIntervalSince1970: riseInterval)
                 let set = NSDate(timeIntervalSince1970: setInterval)
+                
                 return Moon(phaseName, age, percent, illum, rise, set)
         }
         
