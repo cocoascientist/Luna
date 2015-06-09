@@ -47,7 +47,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     // MARK: - CLLocationManagerDelegate
     
-    public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         #if os(iOS)
             switch status {
             case .AuthorizedWhenInUse:
@@ -60,35 +60,20 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         #endif
     }
     
-    public func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         let result = LocationResult.Failure(Reason.Other(error))
         self.publishChangeWithResult(result)
         self.lastResult = result
     }
     
-    public func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]) {
         if let currentLocation = locations.first as? CLLocation {
             if shouldUpdateWithLocation(currentLocation) {
-                CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: { (placemarks, error) -> Void in
-                    if let placemark = placemarks?.first as? CLPlacemark,
-                        let city = placemark.locality,
-                        let state = placemark.administrativeArea,
-                        let neighborhood = placemark.subLocality {
-                            
-                            if self.shouldUpdateWithLocation(currentLocation) {
-                                let location = Location(location: currentLocation, city: city, state: state, neighborhood: neighborhood)
-                                
-                                let result = LocationResult.Success(Box(location))
-                                self.publishChangeWithResult(result)
-                                self.lastResult = result
-                            }
-                    }
-                    else {
-                        let result = LocationResult.Failure(Reason.Other(error))
-                        self.publishChangeWithResult(result)
-                        self.lastResult = result
-                    }
-                })
+                let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
+                
+                let result = LocationResult.Success(Box(location))
+                self.publishChangeWithResult(result)
+                self.lastResult = result
             }
             
             // location hasn't changed significantly

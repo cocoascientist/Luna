@@ -25,7 +25,7 @@ extension NSDate {
     }
     
     func moonPhase() -> Double {
-        var phase = (self.julianDate() + 4.867) / self.lunarSynodicPeriod()
+        let phase = (self.julianDate() + 4.867) / self.lunarSynodicPeriod()
         return (phase - floor(phase))
     }
 }

@@ -13,16 +13,24 @@ typealias JSONResult = Result<JSON>
 
 extension NSData {
     func toJSON() -> JSONResult {
-        var error : NSError?
-        if let jsonObject = NSJSONSerialization.JSONObjectWithData(self, options: nil, error: &error) as? JSON {
-            return .Success(Box(jsonObject))
+        let error : NSError?
+        
+        do {
+            let json = try NSJSONSerialization.JSONObjectWithData(self, options: [])
+            
+            if let jsonObject = json as? JSON {
+                return .Success(Box(jsonObject))
+            }
+//            else if let err = error {
+//                return .Failure(.Other(err))
+//            }
+//            else {
+//                
+//            }
         }
-        else if let err = error {
-            return .Failure(.Other(err))
-        }
-        else {
-            return .Failure(.NoData)
-        }
+        catch {}
+        
+        return .Failure(.NoData)
     }
 }
 

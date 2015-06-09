@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         return UIStatusBarStyle.LightContent
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = self.model.loading
         }
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         else {
-            println("Error: Unhandled notification: \(notification.userInfo)")
+            print("Error: Unhandled notification: \(notification.userInfo)")
         }
     }
     
@@ -111,8 +111,8 @@ class ViewController: UIViewController {
         case .Success(let moon):
             let viewModel = LunarViewModel(moon: moon.unbox)
             self.headerView?.viewModel = viewModel
-        case .Failure(let reason):
-            println("error updating view model, no data")
+        case .Failure:
+            print("error updating view model, no data")
         }
     }
 }

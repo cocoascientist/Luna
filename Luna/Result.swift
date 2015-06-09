@@ -21,7 +21,7 @@ public enum Result<T> {
     case Failure(Reason)
 }
 
-extension Result: Printable {
+extension Result: CustomStringConvertible {
     public var description: String {
         switch self {
         case .Success(let box):

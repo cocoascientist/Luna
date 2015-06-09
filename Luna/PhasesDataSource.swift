@@ -71,8 +71,8 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
         case .Success(let phases):
             self.phases = phases.unbox
             self.tableView?.reloadData()
-        case .Failure(let reason):
-            println("error updating phases, no data")
+        case .Failure:
+            print("error updating phases, no data")
         }
     }
 }

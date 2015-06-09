@@ -15,7 +15,7 @@ public enum Reason {
     case Other(NSError)
 }
 
-extension Reason: Printable {
+extension Reason: CustomStringConvertible {
     public var description: String {
         switch self {
         case .BadResponse:

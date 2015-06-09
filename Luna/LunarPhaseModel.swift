@@ -132,7 +132,7 @@ class LunarPhaseModel: NSObject {
     
     func applicationDidResume(notification: NSNotification) -> Void {
         if let location = self.locationTracker.currentLocation.result() {
-            println("updating model on app resume...")
+            print("updating model on app resume...")
             self.updateLunarPhase(location)
         }
     }
