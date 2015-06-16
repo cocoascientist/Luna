@@ -6,6 +6,8 @@ You must [register for an API key](http://www.aerisweather.com/signup/) before d
 
 Read a full write up about the development of Luna at [cocoascientist.com](http://www.cocoascientist.com/luna-displaying-the-moon-phase.html).
 
+If you are working with Swift 2, check out the work-in-progress [`swift-2`](https://github.com/cocoascientist/Luna/tree/swift-2) branch.
+
 ![](http://i.imgur.com/uYmnqaT.jpg)
 
 ## Credits
