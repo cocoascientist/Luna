@@ -20,23 +20,25 @@ struct Phase {
 
 extension Phase {
     static func phaseFromJSON(json: JSON) -> Phase? {
-        if let name = json["name"] as? String,
-            let interval = json["timestamp"] as? NSTimeInterval {
-                let date = NSDate(timeIntervalSince1970: interval)
-                return Phase(name, date)
+        guard
+            let name = json["name"] as? String,
+            let interval = json["timestamp"] as? NSTimeInterval else {
+            return nil
         }
         
-        return nil
+        let date = NSDate(timeIntervalSince1970: interval)
+        return Phase(name, date)
     }
     
     static func phasesFromJSON(json: JSON) -> [Phase]? {
-        var phases: [Phase]? = nil
-        if let data = json["response"] as? [JSON] {
-            phases = []
-            for obj in data {
-                if let phase = self.phaseFromJSON(obj) {
-                    phases?.append(phase)
-                }
+        guard let data = json["response"] as? [JSON] else {
+            return []
+        }
+        
+        var phases: [Phase] = []
+        for obj in data {
+            if let phase = self.phaseFromJSON(obj) {
+                phases.append(phase)
             }
         }
         
