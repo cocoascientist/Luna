@@ -10,6 +10,7 @@ import Foundation
 
 public enum Reason {
     case BadResponse
+    case BadJSON
     case NoData
     case NoSuccessStatusCode(statusCode: Int)
     case Other(NSError)
@@ -20,6 +21,8 @@ extension Reason: CustomStringConvertible {
         switch self {
         case .BadResponse:
             return "Bad response object returned"
+        case .BadJSON:
+            return "Bad JSON object, unable to parse"
         case .NoData:
             return "No response data"
         case .NoSuccessStatusCode(let statusCode):
