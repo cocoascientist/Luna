@@ -78,8 +78,13 @@ class LunarPhaseModel: NSObject {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                if let moon = Moon.moonFromJSON(json.unbox) {
-                    self.moon = moon
+                if let moonResult: MoonResult = Moon.moonFromJSON(json.unbox) {
+                    switch moonResult {
+                    case .Success(let moon):
+                        self.moon = moon.unbox
+                    case .Failure(let reason):
+                        self.postErrorNotification(reason)
+                    }
                 }
                 else {
                     self.postErrorNotification(.BadResponse)
@@ -96,11 +101,12 @@ class LunarPhaseModel: NSObject {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                if let phases = Phase.phasesFromJSON(json.unbox) {
-                    self.phases = phases
-                }
-                else {
-                    self.postErrorNotification(.BadResponse)
+                let phasesResult = Phase.phasesFromJSON(json.unbox)
+                switch phasesResult {
+                case .Success(let phases):
+                    self.phases = phases.unbox
+                case .Failure(let reason):
+                    self.postErrorNotification(reason)
                 }
             case .Failure(let reason):
                 self.postErrorNotification(reason)
