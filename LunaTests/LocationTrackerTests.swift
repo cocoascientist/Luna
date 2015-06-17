@@ -35,8 +35,10 @@ class LocationTrackerTests: XCTestCase {
     
     func testLocationUpdateIsPublished() {
         let fakeLocationManager = FakeLocationManager { (manager) -> Void in
+            XCTAssertNotNil(manager.delegate, "Location manager delegate should not be nil")
+            
             let location = CLLocation(latitude: 25.7877, longitude: -80.2241)
-            manager.delegate.locationManager?(manager, didUpdateLocations: [location])
+            manager.delegate!.locationManager?(manager, didUpdateLocations: [location])
         }
         
         let locationTracker = LocationTracker(locationManager: fakeLocationManager)
