@@ -41,8 +41,8 @@ class LunarPhaseModel: NSObject {
         
         self.locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
-            case .Success(let box):
-                self.updateLunarPhase(box.unbox)
+            case .Success(let location):
+                self.updateLunarPhase(location)
             case .Failure(let reason):
                 self.postErrorNotification(reason)
             }
@@ -78,10 +78,10 @@ class LunarPhaseModel: NSObject {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                if let moonResult: MoonResult = Moon.moonFromJSON(json.unbox) {
+                if let moonResult: MoonResult = Moon.moonFromJSON(json) {
                     switch moonResult {
                     case .Success(let moon):
-                        self.moon = moon.unbox
+                        self.moon = moon
                     case .Failure(let reason):
                         self.postErrorNotification(reason)
                     }
@@ -101,10 +101,10 @@ class LunarPhaseModel: NSObject {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                let phasesResult = Phase.phasesFromJSON(json.unbox)
+                let phasesResult = Phase.phasesFromJSON(json)
                 switch phasesResult {
                 case .Success(let phases):
-                    self.phases = phases.unbox
+                    self.phases = phases
                 case .Failure(let reason):
                     self.postErrorNotification(reason)
                 }

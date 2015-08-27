@@ -66,12 +66,12 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         self.lastResult = result
     }
     
-    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]) {
-        if let currentLocation = locations.first as? CLLocation {
+    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.first {
             if shouldUpdateWithLocation(currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
                 
-                let result = LocationResult.Success(Box(location))
+                let result = LocationResult.Success(location)
                 self.publishChangeWithResult(result)
                 self.lastResult = result
             }
@@ -92,7 +92,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     private func publishChangeWithResult(result: LocationResult) {
         if self.shouldUpdateWithResult(result) {
-            observers.map { (observer) -> Void in
+            let _ = observers.map { (observer) -> Void in
                 observer(location: result)
             }
         }
@@ -100,8 +100,8 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     private func shouldUpdateWithLocation(location: CLLocation) -> Bool {
         switch lastResult {
-        case .Success(let box):
-            return location.distanceFromLocation(box.unbox.physical) > 100
+        case .Success(let loc):
+            return location.distanceFromLocation(loc.physical) > 100
         case .Failure:
             return true
         }
@@ -109,8 +109,8 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     private func shouldUpdateWithResult(result: LocationResult) -> Bool {
         switch lastResult {
-        case .Success(let box):
-            let location = box.unbox.physical
+        case .Success(let loc):
+            let location = loc.physical
             return self.shouldUpdateWithLocation(location)
         case .Failure:
             return true

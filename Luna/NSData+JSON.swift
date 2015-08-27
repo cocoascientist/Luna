@@ -15,8 +15,8 @@ extension NSData {
     func toJSON() -> JSONResult {
         do {
             let json = try NSJSONSerialization.JSONObjectWithData(self, options: [])
-            if let jsonObject = json as? JSON {
-                return .Success(Box(jsonObject))
+            if let json = json as? JSON {
+                return .Success(json)
             }
             else {
                 return .Failure(.NoData)
@@ -30,8 +30,8 @@ extension NSData {
 
 func toJSONResult(result: Result<NSData>) -> JSONResult {
     switch result {
-    case .Success(let box):
-        return box.unbox.toJSON()
+    case .Success(let result):
+        return result.toJSON()
     case .Failure(let reason):
         return .Failure(reason)
     }

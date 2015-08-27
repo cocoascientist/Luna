@@ -47,7 +47,7 @@ class LocationTrackerTests: XCTestCase {
         locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
             case .Success(let box):
-                let location = box.unbox
+                let location = box
                 XCTAssertEqual(location.physical.coordinate.latitude, 25.7877, "Latitude is wrong")
                 XCTAssertEqual(location.physical.coordinate.longitude, -80.2241, "Longitude is wrong")
                 expectation.fulfill()

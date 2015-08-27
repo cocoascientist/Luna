@@ -73,6 +73,6 @@ class NetworkController {
             }
         })
         
-        return task!;
+        return task;
     }
 }
