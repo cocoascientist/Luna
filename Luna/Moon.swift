@@ -52,29 +52,6 @@ extension Moon {
         let moon = Moon(phaseName, age, percent, illum, rise, set)
         return success(moon)
     }
-    
-    static func moonFromJSON(json: JSON) -> Moon? {
-        
-        guard
-            let response = json["response"] as? [JSON],
-            let moon = response.first?["moon"] as? JSON,
-            let phase = moon["phase"] as? JSON,
-            let phaseName = phase["name"] as? String,
-            let age = phase["age"] as? Double,
-            let percent = phase["phase"] as? Double,
-            let illum = phase["illum"] as? Int else {
-                
-            return nil
-        }
-        
-        let riseInterval = moon["rise"] as? NSTimeInterval ?? 0
-        let setInterval = moon["set"] as? NSTimeInterval ?? 0
-        
-        let rise = NSDate(timeIntervalSince1970: riseInterval)
-        let set = NSDate(timeIntervalSince1970: setInterval)
-        
-        return Moon(phaseName, age, percent, illum, rise, set)
-    }
 }
 
 extension Moon: Equatable {

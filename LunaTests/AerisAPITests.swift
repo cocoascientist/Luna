@@ -44,9 +44,9 @@ class AerisAPITests: XCTestCase {
     }
     
     private func queryParameters(string: String) -> [String] {
-        let pairs = split(string.characters) { $0 == "&" }.map { String($0) }
+        let pairs = string.characters.split { $0 == "&" }.map { String($0) }
         let params = pairs.map({ (string) -> String in
-            let value = split(string.characters) { $0 == "=" }.map { String($0) } as [String]
+            let value = string.characters.split { $0 == "=" }.map { String($0) } as [String]
             return value.first!
         })
         

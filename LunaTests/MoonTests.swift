@@ -18,7 +18,7 @@ class MoonTests: XCTestCase {
         if let result = data?.toJSON() {
             switch result {
             case .Success(let json):
-                if let moon = Moon.moonFromJSON(json.unbox) {
+                if case .Success(let moon) = Moon.moonFromJSON(json) {
                     XCTAssertEqual(moon.phase, "waning crescent", "Moon phase is incorrect")
                     XCTAssertEqual(moon.age, 24.02, "Moon age is incorrect")
                     XCTAssertEqual(moon.illumination, 31, "Moon illumination is incorrect")
