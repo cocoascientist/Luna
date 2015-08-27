@@ -26,7 +26,7 @@ class LunarPhaseView: UIView {
         super.init(frame: frame)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.date = NSDate()
         super.init(coder: aDecoder)
     }

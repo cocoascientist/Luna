@@ -8,6 +8,9 @@
 
 import Foundation
 
+typealias PhaseResult = Result<Phase>
+typealias PhasesResult = Result<[Phase]>
+
 struct Phase {
     let name: String
     let date: NSDate
@@ -19,28 +22,40 @@ struct Phase {
 }
 
 extension Phase {
-    static func phaseFromJSON(json: JSON) -> Phase? {
-        if let name = json["name"] as? String,
-            let interval = json["timestamp"] as? NSTimeInterval {
-                let date = NSDate(timeIntervalSince1970: interval)
-                return Phase(name, date)
+    static func phaseFromJSON(json: JSON) -> PhaseResult {
+        guard
+            let name = json["name"] as? String,
+            let interval = json["timestamp"] as? NSTimeInterval else {
+            return failure(.BadJSON)
         }
         
-        return nil
+        let date = NSDate(timeIntervalSince1970: interval)
+        let phase = Phase(name, date)
+        return success(phase)
     }
     
-    static func phasesFromJSON(json: JSON) -> [Phase]? {
-        var phases: [Phase]? = nil
-        if let data = json["response"] as? [JSON] {
-            phases = []
-            for obj in data {
-                if let phase = self.phaseFromJSON(obj) {
-                    phases?.append(phase)
-                }
-            }
+    static func phasesFromJSON(json: JSON) -> PhasesResult {
+        guard let data = json["response"] as? [JSON] else {
+            return failure(.BadJSON)
         }
         
-        return phases
+        let phases = data.map { (obj) -> PhaseResult in
+            let phase = self.phaseFromJSON(obj)
+            return phase
+        }.filter { (result) -> Bool in
+            return (result.result() != nil)
+        }.map { (result) -> Phase in
+            return result.result()!
+        }
+        
+        return success(phases)
     }
 }
 
+extension Phase: Equatable {
+    
+}
+
+func ==(lhs: Phase, rhs: Phase) -> Bool {
+    return lhs.date == rhs.date && lhs.name == rhs.name
+}

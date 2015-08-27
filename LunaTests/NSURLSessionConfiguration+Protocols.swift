@@ -9,9 +9,8 @@
 import Foundation
 
 extension NSURLSessionConfiguration {
-    class func configurationWithProtocol(protocolClass: AnyObject) -> NSURLSessionConfiguration {
-        var protocolClasses = [AnyObject]()
-        protocolClasses.append(protocolClass)
+    class func configurationWithProtocol(protocolClass: AnyClass) -> NSURLSessionConfiguration {
+        let protocolClasses: [AnyClass]? = [protocolClass]
         
         let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         configuration.protocolClasses = protocolClasses

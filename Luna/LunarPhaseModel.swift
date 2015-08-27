@@ -41,8 +41,8 @@ class LunarPhaseModel: NSObject {
         
         self.locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
-            case .Success(let box):
-                self.updateLunarPhase(box.unbox)
+            case .Success(let location):
+                self.updateLunarPhase(location)
             case .Failure(let reason):
                 self.postErrorNotification(reason)
             }
@@ -78,8 +78,13 @@ class LunarPhaseModel: NSObject {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                if let moon = Moon.moonFromJSON(json.unbox) {
-                    self.moon = moon
+                if let moonResult: MoonResult = Moon.moonFromJSON(json) {
+                    switch moonResult {
+                    case .Success(let moon):
+                        self.moon = moon
+                    case .Failure(let reason):
+                        self.postErrorNotification(reason)
+                    }
                 }
                 else {
                     self.postErrorNotification(.BadResponse)
@@ -96,11 +101,12 @@ class LunarPhaseModel: NSObject {
             let jsonResult = toJSONResult(result)
             switch jsonResult {
             case .Success(let json):
-                if let phases = Phase.phasesFromJSON(json.unbox) {
+                let phasesResult = Phase.phasesFromJSON(json)
+                switch phasesResult {
+                case .Success(let phases):
                     self.phases = phases
-                }
-                else {
-                    self.postErrorNotification(.BadResponse)
+                case .Failure(let reason):
+                    self.postErrorNotification(reason)
                 }
             case .Failure(let reason):
                 self.postErrorNotification(reason)
@@ -132,7 +138,7 @@ class LunarPhaseModel: NSObject {
     
     func applicationDidResume(notification: NSNotification) -> Void {
         if let location = self.locationTracker.currentLocation.result() {
-            println("updating model on app resume...")
+            print("updating model on app resume...")
             self.updateLunarPhase(location)
         }
     }

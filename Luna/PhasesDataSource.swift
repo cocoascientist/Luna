@@ -69,10 +69,10 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
         let result = self.model.currentPhases
         switch result {
         case .Success(let phases):
-            self.phases = phases.unbox
+            self.phases = phases
             self.tableView?.reloadData()
-        case .Failure(let reason):
-            println("error updating phases, no data")
+        case .Failure:
+            print("error updating phases, no data")
         }
     }
 }

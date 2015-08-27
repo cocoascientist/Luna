@@ -77,7 +77,7 @@ class NetworkControllerTests: XCTestCase {
             switch result {
             case .Success:
                 XCTFail("Request should fail")
-            case .Failure(let reason):
+            case .Failure:
                 expectation.fulfill()
             }
         }).resume()

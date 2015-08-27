@@ -19,11 +19,12 @@ class NetworkController {
     }
     
     private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
-        func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
-            completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust))
+        
+        @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+            completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
         }
         
-        func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest!) -> Void) {
+        @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
             completionHandler(request)
         }
     }
@@ -31,10 +32,10 @@ class NetworkController {
     /**
     Creates an NSURLSessionTask for the request
     
-    :param: request A reqeust object to return a task for
-    :param: completion
+    - parameter request: A reqeust object to return a task for
+    - parameter completion:
     
-    :returns: An NSURLSessionTask associated with the request
+    - returns: An NSURLSessionTask associated with the request
     */
     
     func task(request: NSURLRequest, result: TaskResult) -> NSURLSessionTask {
@@ -55,7 +56,7 @@ class NetworkController {
                 if let httpResponse = response as? NSHTTPURLResponse {
                     switch httpResponse.statusCode {
                     case 200...204:
-                        finished(result: success(data))
+                        finished(result: success(data!))
                     default:
                         let reason = Reason.NoSuccessStatusCode(statusCode: httpResponse.statusCode)
                         finished(result: Result.Failure(reason))
@@ -68,7 +69,7 @@ class NetworkController {
                 finished(result: Result.Failure(Reason.NoData))
             }
             else {
-                finished(result: Result.Failure(Reason.Other(err)))
+                finished(result: Result.Failure(Reason.Other(err!)))
             }
         })
         

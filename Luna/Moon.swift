@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias MoonResult = Result<Moon>
+
 struct Moon {
     let phase: String
     let age: Double
@@ -29,25 +31,59 @@ struct Moon {
 }
 
 extension Moon {
-    static func moonFromJSON(json: JSON) -> Moon? {
-        
-        if let response = json["response"] as? [JSON],
-            moon = response.first?["moon"] as? JSON,
-            phase = moon["phase"] as? JSON,
-            phaseName = phase["name"] as? String,
-            age = phase["age"] as? Double,
-            percent = phase["phase"] as? Double,
-            illum = phase["illum"] as? Int {
-                
-                let riseInterval = moon["rise"] as? NSTimeInterval ?? 0
-                let setInterval = moon["set"] as? NSTimeInterval ?? 0
-                
-                let rise = NSDate(timeIntervalSince1970: riseInterval)
-                let set = NSDate(timeIntervalSince1970: setInterval)
-                
-                return Moon(phaseName, age, percent, illum, rise, set)
+    static func moonFromJSON(json: JSON) -> MoonResult {
+        guard
+            let response = json["response"] as? [JSON],
+            let moonObj = response.first?["moon"] as? JSON,
+            let phase = moonObj["phase"] as? JSON,
+            let phaseName = phase["name"] as? String,
+            let age = phase["age"] as? Double,
+            let percent = phase["phase"] as? Double,
+            let illum = phase["illum"] as? Int else {
+                return failure(.BadJSON)
         }
         
-        return nil
+        let riseInterval = moonObj["rise"] as? NSTimeInterval ?? 0
+        let setInterval = moonObj["set"] as? NSTimeInterval ?? 0
+        
+        let rise = NSDate(timeIntervalSince1970: riseInterval)
+        let set = NSDate(timeIntervalSince1970: setInterval)
+        
+        let moon = Moon(phaseName, age, percent, illum, rise, set)
+        return success(moon)
     }
+    
+    static func moonFromJSON(json: JSON) -> Moon? {
+        
+        guard
+            let response = json["response"] as? [JSON],
+            let moon = response.first?["moon"] as? JSON,
+            let phase = moon["phase"] as? JSON,
+            let phaseName = phase["name"] as? String,
+            let age = phase["age"] as? Double,
+            let percent = phase["phase"] as? Double,
+            let illum = phase["illum"] as? Int else {
+                
+            return nil
+        }
+        
+        let riseInterval = moon["rise"] as? NSTimeInterval ?? 0
+        let setInterval = moon["set"] as? NSTimeInterval ?? 0
+        
+        let rise = NSDate(timeIntervalSince1970: riseInterval)
+        let set = NSDate(timeIntervalSince1970: setInterval)
+        
+        return Moon(phaseName, age, percent, illum, rise, set)
+    }
+}
+
+extension Moon: Equatable {
+    
+}
+
+func ==(lhs: Moon, rhs: Moon) -> Bool {
+    return lhs.phase == rhs.phase &&
+            lhs.age == rhs.age &&
+            lhs.rise == lhs.rise &&
+            lhs.set == lhs.set
 }

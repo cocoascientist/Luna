@@ -58,7 +58,7 @@ class LunarPhaseModelTests: XCTestCase {
         waitForExpectationsWithTimeout(timeout, handler: nil)
     }
 
-    private func modelUsingProtocol(protocolClass: AnyObject) -> LunarPhaseModel {
+    private func modelUsingProtocol(protocolClass: AnyClass) -> LunarPhaseModel {
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass)
         let networkController = NetworkController(configuration: configuration)
         return LunarPhaseModel(networkController: networkController)
