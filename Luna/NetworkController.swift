@@ -59,17 +59,17 @@ class NetworkController {
                         finished(result: success(data!))
                     default:
                         let reason = Reason.NoSuccessStatusCode(statusCode: httpResponse.statusCode)
-                        finished(result: Result.Failure(reason))
+                        finished(result: .Failure(reason))
                     }
                 } else {
-                    finished(result: Result.Failure(Reason.BadResponse))
+                    finished(result: .Failure(.BadResponse))
                 }
             }
             else if data == nil {
-                finished(result: Result.Failure(Reason.NoData))
+                finished(result: .Failure(.NoData))
             }
             else {
-                finished(result: Result.Failure(Reason.Other(err!)))
+                finished(result: .Failure(.Other(err!)))
             }
         })
         

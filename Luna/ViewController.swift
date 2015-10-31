@@ -30,16 +30,14 @@ class ViewController: UIViewController {
     
     private lazy var headerView: LunarHeaderView? = {
         let nib = NSBundle.mainBundle().loadNibNamed(LunarHeaderView.nibName, owner: self, options: nil)
-        if let headerView = nib.first as? LunarHeaderView {
-            if self.traitCollection.userInterfaceIdiom == .Pad {
-                headerView.frame = CGRectInset(UIScreen.mainScreen().bounds, 0.0, 200.0)
-            }
-            else {
-                headerView.frame = UIScreen.mainScreen().bounds
-            }
-            return headerView
+        guard let headerView = nib.first as? LunarHeaderView else {
+            fatalError("Could not load LunarHeaderView from nib")
         }
-        return nil
+        
+        let insetY: CGFloat = (self.traitCollection.userInterfaceIdiom == .Pad) ? 200.0 : 0.0
+        headerView.frame = CGRectInset(UIScreen.mainScreen().bounds, 0.0, insetY)
+        
+        return headerView
     }()
 
     override func viewDidLoad() {
@@ -94,6 +92,8 @@ class ViewController: UIViewController {
             alertController.addAction(action)
             
             self.presentViewController(alertController, animated: true, completion: nil)
+            
+            self.headerView?.phaseNameLabel.text = "Error"
         }
         else {
             print("Error: Unhandled notification: \(notification.userInfo)")

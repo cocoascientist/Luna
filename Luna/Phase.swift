@@ -25,7 +25,8 @@ extension Phase {
     static func phaseFromJSON(json: JSON) -> PhaseResult {
         guard
             let name = json["name"] as? String,
-            let interval = json["timestamp"] as? NSTimeInterval else {
+            let interval = json["timestamp"] as? NSTimeInterval
+        else {
             return failure(.BadJSON)
         }
         
@@ -39,13 +40,9 @@ extension Phase {
             return failure(.BadJSON)
         }
         
-        let phases = data.map { (obj) -> PhaseResult in
-            let phase = self.phaseFromJSON(obj)
+        let phases = data.flatMap { (obj) -> Phase in
+            let phase = phaseFromJSON(obj).result()!
             return phase
-        }.filter { (result) -> Bool in
-            return (result.result() != nil)
-        }.map { (result) -> Phase in
-            return result.result()!
         }
         
         return success(phases)

@@ -39,8 +39,9 @@ extension Moon {
             let phaseName = phase["name"] as? String,
             let age = phase["age"] as? Double,
             let percent = phase["phase"] as? Double,
-            let illum = phase["illum"] as? Int else {
-                return failure(.BadJSON)
+            let illum = phase["illum"] as? Int
+        else {
+            return failure(.BadJSON)
         }
         
         let riseInterval = moonObj["rise"] as? NSTimeInterval ?? 0

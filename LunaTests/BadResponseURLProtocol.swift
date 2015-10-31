@@ -18,12 +18,13 @@ class BadResponseURLProtocol: NSURLProtocol {
     }
     
     override func startLoading() {
-        let client = self.client
-        let request = self.request
-        let response = NSURLResponse(URL: request.URL!, MIMEType: nil, expectedContentLength: 0, textEncodingName: nil)
+        guard let client = self.client else { fatalError("Client is missing") }
+        guard let url = request.URL else { fatalError("URL is missing") }
         
-        client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
-        client?.URLProtocolDidFinishLoading(self)
+        let response = NSURLResponse(URL: url, MIMEType: nil, expectedContentLength: 0, textEncodingName: nil)
+        
+        client.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
+        client.URLProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() {

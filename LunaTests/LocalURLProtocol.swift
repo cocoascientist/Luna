@@ -18,16 +18,18 @@ class LocalURLProtocol: NSURLProtocol {
     }
     
     override func startLoading() {
-        let client = self.client
-        let request = self.request
+        guard let client = self.client else { fatalError("Client is missing") }
+        guard let url = request.URL else { fatalError("URL is missing") }
+        
         let data = self.dataForRequest(request)
-        
         let headers = ["Content-Type": "application/json"]
-        let response = NSHTTPURLResponse(URL: request.URL!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: headers)
+        guard let response = NSHTTPURLResponse(URL: url, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: headers) else {
+            fatalError("Response could not be created")
+        }
         
-        client?.URLProtocol(self, didReceiveResponse: response!, cacheStoragePolicy: .NotAllowed)
-        client?.URLProtocol(self, didLoadData: data)
-        client?.URLProtocolDidFinishLoading(self)
+        client.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
+        client.URLProtocol(self, didLoadData: data)
+        client.URLProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() {
