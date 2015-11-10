@@ -14,13 +14,9 @@ typealias JSONResult = Result<JSON>
 extension NSData {
     func toJSON() -> JSONResult {
         do {
-            let json = try NSJSONSerialization.JSONObjectWithData(self, options: [])
-            if let json = json as? JSON {
-                return .Success(json)
-            }
-            else {
-                return .Failure(.NoData)
-            }
+            let obj = try NSJSONSerialization.JSONObjectWithData(self, options: [])
+            guard let json = obj as? JSON else { return .Failure(.NoData) }
+            return .Success(json)
         }
         catch {
             return .Failure(.BadJSON)

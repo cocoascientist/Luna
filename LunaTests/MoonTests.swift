@@ -15,21 +15,18 @@ class MoonTests: XCTestCase {
         let file = NSBundle(forClass: self.dynamicType).pathForResource("sunmoon", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
-        if let result = data?.toJSON() {
-            switch result {
-            case .Success(let json):
-                if case .Success(let moon) = Moon.moonFromJSON(json) {
-                    XCTAssertEqual(moon.phase, "waning crescent", "Moon phase is incorrect")
-                    XCTAssertEqual(moon.age, 24.02, "Moon age is incorrect")
-                    XCTAssertEqual(moon.illumination, 31, "Moon illumination is incorrect")
-                    XCTAssertEqual(moon.percent, 0.81340000000000001, "Moon percent is incorrect")
-                }
-            case .Failure:
-                XCTFail("Failing JSONResult was found")
+        guard let result = data?.toJSON() else { return XCTFail("No data was found") }
+        
+        switch result {
+        case .Success(let json):
+            if case .Success(let moon) = Moon.moonFromJSON(json) {
+                XCTAssertEqual(moon.phase, "waning crescent", "Moon phase is incorrect")
+                XCTAssertEqual(moon.age, 24.02, "Moon age is incorrect")
+                XCTAssertEqual(moon.illumination, 31, "Moon illumination is incorrect")
+                XCTAssertEqual(moon.percent, 0.81340000000000001, "Moon percent is incorrect")
             }
-        }
-        else {
-            XCTFail("No data was found")
+        case .Failure:
+            XCTFail("Failing JSONResult was found")
         }
     }
 }

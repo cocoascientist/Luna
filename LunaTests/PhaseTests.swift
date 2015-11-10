@@ -15,18 +15,15 @@ class PhaseTests: XCTestCase {
         let file = NSBundle(forClass: self.dynamicType).pathForResource("moonphases", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
-        if let result = data?.toJSON() {
-            switch result {
-            case .Success(let json):
-                if case .Success(let phases) = Phase.phasesFromJSON(json) {
-                    XCTAssertEqual(phases.count, 7, "Phases count is incorrect")
-                }
-            case .Failure:
-                XCTFail("Failing JSONResult was found")
+        guard let result = data?.toJSON() else { return XCTFail("No data was found") }
+        
+        switch result {
+        case .Success(let json):
+            if case .Success(let phases) = Phase.phasesFromJSON(json) {
+                XCTAssertEqual(phases.count, 7, "Phases count is incorrect")
             }
-        }
-        else {
-            XCTFail("No data was found")
+        case .Failure:
+            XCTFail("Failing JSONResult was found")
         }
     }
     
@@ -34,20 +31,17 @@ class PhaseTests: XCTestCase {
         let file = NSBundle(forClass: self.dynamicType).pathForResource("moonphases", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
-        if let result = data?.toJSON() {
-            switch result {
-            case .Success(let json):
-                if let response = json["response"] as? [JSON],
-                    let phaseObj = response.first,
-                    case .Success(let phase) = Phase.phaseFromJSON(phaseObj) {
-                        XCTAssertEqual(phase.name, "new moon", "Phase name is incorrect")
-                }
-            case .Failure:
-                XCTFail("Failing JSONResult was found")
+        guard let result = data?.toJSON() else { return XCTFail("No data was found") }
+        
+        switch result {
+        case .Success(let json):
+            if let response = json["response"] as? [JSON],
+                let phaseObj = response.first,
+                case .Success(let phase) = Phase.phaseFromJSON(phaseObj) {
+                    XCTAssertEqual(phase.name, "new moon", "Phase name is incorrect")
             }
-        }
-        else {
-            XCTFail("No data was found")
+        case .Failure:
+            XCTFail("Failing JSONResult was found")
         }
     }
 }
