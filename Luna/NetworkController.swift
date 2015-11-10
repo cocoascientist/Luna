@@ -21,7 +21,7 @@ class NetworkController {
     private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
         
         @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-            completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
+            completionHandler(.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
         }
         
         @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
@@ -52,24 +52,24 @@ class NetworkController {
         
         // return a basic NSURLSession for the request, with basic error handling
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
-            if (err == nil && data != nil) {
-                if let httpResponse = response as? NSHTTPURLResponse {
-                    switch httpResponse.statusCode {
-                    case 200...204:
-                        finished(result: success(data!))
-                    default:
-                        let reason = Reason.NoSuccessStatusCode(statusCode: httpResponse.statusCode)
-                        finished(result: .Failure(reason))
-                    }
-                } else {
-                    finished(result: .Failure(.BadResponse))
+            guard let data = data else {
+                guard let err = err else {
+                    return finished(result: .Failure(.NoData))
                 }
+                
+                return finished(result: .Failure(.Other(err)))
             }
-            else if data == nil {
-                finished(result: .Failure(.NoData))
+            
+            guard let response = response as? NSHTTPURLResponse else {
+                return finished(result: .Failure(.BadResponse))
             }
-            else {
-                finished(result: .Failure(.Other(err!)))
+            
+            switch response.statusCode {
+                case 200...204:
+                    finished(result: success(data))
+                default:
+                    let reason = Reason.NoSuccessStatusCode(statusCode: response.statusCode)
+                    finished(result: .Failure(reason))
             }
         })
         
