@@ -55,6 +55,6 @@ extension AerisAPI {
     func request() -> NSURLRequest {
         let path = self.path
         let url = NSURL(string: path)
-        return NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 60.0)
+        return NSURLRequest(URL: url!, cachePolicy: .ReturnCacheDataElseLoad, timeoutInterval: 60.0)
     }
 }
