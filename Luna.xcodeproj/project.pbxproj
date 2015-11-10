@@ -77,6 +77,7 @@
 		F7A6B7021ADDC73E00B6F119 /* AerisAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */; };
 		F7BCE5751ADDD88D0061FFF5 /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */; };
 		F7BCE5761ADDD8AA0061FFF5 /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */; };
+		F7D85CCD1BF27A9700280B31 /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FBB2831BF25D9B006FA00F /* QueryParameters.swift */; };
 		F7F146E71AF0907D004716AF /* MoonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F146E61AF0907D004716AF /* MoonTests.swift */; };
 		F7FBB2841BF25D9B006FA00F /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FBB2831BF25D9B006FA00F /* QueryParameters.swift */; };
 /* End PBXBuildFile section */
@@ -520,6 +521,7 @@
 				F7A6B6E91ADD6E9700B6F119 /* PhaseTests.swift in Sources */,
 				F746F9AA1AF005A4006529BD /* LunarPhaseView.swift in Sources */,
 				F7A6B7001ADDAD9100B6F119 /* String+WeatherIcons.swift in Sources */,
+				F7D85CCD1BF27A9700280B31 /* QueryParameters.swift in Sources */,
 				F7A6B6F21ADD91C000B6F119 /* NetworkControllerTests.swift in Sources */,
 				F795BFAF1ADC7A0300DDEF87 /* NetworkController.swift in Sources */,
 				F7A6B6F61ADDA31C00B6F119 /* LunarViewModelTests.swift in Sources */,
