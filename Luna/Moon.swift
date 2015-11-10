@@ -44,8 +44,8 @@ extension Moon {
             return failure(.BadJSON)
         }
         
-        let riseInterval = moonObj["rise"] as? NSTimeInterval ?? 0
-        let setInterval = moonObj["set"] as? NSTimeInterval ?? 0
+        let riseInterval = moonObj["rise"] as? Double ?? 0
+        let setInterval = moonObj["set"] as? Double ?? 0
         
         let rise = NSDate(timeIntervalSince1970: riseInterval)
         let set = NSDate(timeIntervalSince1970: setInterval)
