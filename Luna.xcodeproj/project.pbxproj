@@ -78,6 +78,7 @@
 		F7BCE5751ADDD88D0061FFF5 /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */; };
 		F7BCE5761ADDD8AA0061FFF5 /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */; };
 		F7F146E71AF0907D004716AF /* MoonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F146E61AF0907D004716AF /* MoonTests.swift */; };
+		F7FBB2841BF25D9B006FA00F /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FBB2831BF25D9B006FA00F /* QueryParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +154,7 @@
 		F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AerisAPITests.swift; sourceTree = "<group>"; };
 		F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Contains.swift"; sourceTree = "<group>"; };
 		F7F146E61AF0907D004716AF /* MoonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonTests.swift; sourceTree = "<group>"; };
+		F7FBB2831BF25D9B006FA00F /* QueryParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +305,7 @@
 				F755B4231AA6318800260DE9 /* Double+WeatherIcons.swift */,
 				F7162DF21AC0C0C50083D350 /* NSDate+Lunar.swift */,
 				F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */,
+				F7FBB2831BF25D9B006FA00F /* QueryParameters.swift */,
 			);
 			name = "Types & Extensions";
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F755B4221AA62F1500260DE9 /* UIColor+HexColors.swift in Sources */,
+				F7FBB2841BF25D9B006FA00F /* QueryParameters.swift in Sources */,
 				F7162DF11AC0C09A0083D350 /* LunarPhaseView.swift in Sources */,
 				F74916121AA5021C003F1BF4 /* PhaseTableViewCell.swift in Sources */,
 				F77909241ADC8EBF0047FC70 /* LocalURLProtocol.swift in Sources */,

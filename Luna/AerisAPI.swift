@@ -27,16 +27,28 @@ extension AerisAPI {
         return "https://api.aerisapi.com"
     }
     
+    private var defaultQueryParams: [String: String] {
+        return ["client_id": clientId, "client_secret": clientSecret]
+    }
+    
+    private var phasesQueryParams: [String: String] {
+        var params = defaultQueryParams
+        params["limit"] = "5"
+        return params
+    }
+    
     private var path: String {
         switch self {
         case .Moon(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            return "\(baseURL)/sunmoon/\(latitude),\(longitude)?client_id=\(clientId)&client_secret=\(clientSecret)"
+            let queryString = queryWithParameters(defaultQueryParams)
+            return "\(baseURL)/sunmoon/\(latitude),\(longitude)?\(queryString)"
         case .MoonPhases(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?client_id=\(clientId)&client_secret=\(clientSecret)&limit=5"
+            let queryString = queryWithParameters(phasesQueryParams)
+            return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?\(queryString)"
         }
     }
     
