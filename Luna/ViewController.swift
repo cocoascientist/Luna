@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         return PhasesDataSource(model: self.model)
     }()
     
-    private lazy var headerView: LunarHeaderView? = {
+    private lazy var headerView: LunarHeaderView = {
         let nib = NSBundle.mainBundle().loadNibNamed(LunarHeaderView.nibName, owner: self, options: nil)
         guard let headerView = nib.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
             
         }
         
-        self.headerView?.phaseNameLabel.text = "Error"
+        self.headerView.phaseNameLabel.text = "Error"
     }
     
     func modelDidUpdate(notification: NSNotification) -> Void {
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         
         switch result {
         case .Success(let moon):
-            self.headerView?.viewModel = LunarViewModel(moon: moon)
+            self.headerView.viewModel = LunarViewModel(moon: moon)
         case .Failure:
             print("error updating view model, no data")
         }
