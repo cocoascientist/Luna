@@ -92,12 +92,13 @@ class ViewController: UIViewController {
             alertController.addAction(action)
             
             self.presentViewController(alertController, animated: true, completion: nil)
-            
-            self.headerView?.phaseNameLabel.text = "Error"
         }
         else {
             print("Error: Unhandled notification: \(notification.userInfo)")
+            
         }
+        
+        self.headerView?.phaseNameLabel.text = "Error"
     }
     
     func modelDidUpdate(notification: NSNotification) -> Void {

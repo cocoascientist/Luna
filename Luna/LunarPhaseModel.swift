@@ -51,6 +51,10 @@ class LunarPhaseModel: NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidResume:", name: "UIApplicationDidBecomeActiveNotification", object: nil)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     var currentMoon: CurrentMoon {
         if let moon = self.moon {
             return success(moon)
@@ -138,7 +142,6 @@ class LunarPhaseModel: NSObject {
     
     func applicationDidResume(notification: NSNotification) -> Void {
         if let location = self.locationTracker.currentLocation.result() {
-            print("updating model on app resume...")
             self.updateLunarPhase(location)
         }
     }
