@@ -9,7 +9,7 @@
 import Foundation
 
 typealias JSON = [String: AnyObject]
-typealias JSONResult = Result<JSON>
+typealias JSONResult = Result<JSON, NetworkError>
 
 extension NSData {
     func toJSON() -> JSONResult {
@@ -24,11 +24,11 @@ extension NSData {
     }
 }
 
-func toJSONResult(result: Result<NSData>) -> JSONResult {
+func toJSONResult(result: Result<NSData, NetworkError>) -> JSONResult {
     switch result {
     case .Success(let result):
         return result.toJSON()
-    case .Failure(let reason):
-        return .Failure(reason)
+    case .Failure(let error):
+        return .Failure(error)
     }
 }

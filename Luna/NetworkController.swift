@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias TaskResult = (result: Result<NSData>) -> Void
+typealias TaskResult = (result: Result<NSData, NetworkError>) -> Void
 
 class NetworkController {
     
@@ -28,6 +28,8 @@ class NetworkController {
             completionHandler(request)
         }
     }
+    
+    
     
     /**
     Creates an NSURLSessionTask for the request
@@ -53,12 +55,14 @@ class NetworkController {
         // return a basic NSURLSession for the request, with basic error handling
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
             guard let data = data else {
-                guard let err = err else {
+                guard let _ = err else {
                     return finished(result: .Failure(.NoData))
                 }
                 
-                return finished(result: .Failure(.Other(err)))
+                return finished(result: .Failure(.Other))
             }
+            
+            
             
             guard let response = response as? NSHTTPURLResponse else {
                 return finished(result: .Failure(.BadResponse))
@@ -68,8 +72,8 @@ class NetworkController {
                 case 200...204:
                     finished(result: success(data))
                 default:
-                    let reason = Reason.NoSuccessStatusCode(statusCode: response.statusCode)
-                    finished(result: .Failure(reason))
+                    let error = NetworkError.BadStatusCode(statusCode: response.statusCode)
+                    finished(result: .Failure(error))
             }
         })
         

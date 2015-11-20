@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
-public typealias LocationResult = Result<Location>
+public typealias LocationResult = Result<Location, NetworkError>
 public typealias Observer = (location: LocationResult) -> ()
 
 public class LocationTracker: NSObject, CLLocationManagerDelegate {
@@ -61,7 +61,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        let result = LocationResult.Failure(Reason.Other(error))
+        let result = LocationResult.Failure(NetworkError.Other)
         self.publishChangeWithResult(result)
         self.lastResult = result
     }

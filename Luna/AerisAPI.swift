@@ -9,52 +9,51 @@
 import Foundation
 import CoreLocation
 
-enum AerisAPI {
+enum AerisAPI: Request {
     case Moon(CLLocation)
     case MoonPhases(CLLocation)
-}
-
-extension AerisAPI {
-    private var clientSecret: String {
-        return "pNqJnVTj65P0IXmGwz7Vk3GJy8TO3xnTlTGYd7e2"
+    
+    var baseURL: NSURL {
+        return NSURL(string: "https://api.aerisapi.com")!
     }
     
-    private var clientId: String {
-        return "qO0MwrGSnfBKizM4B9Bt7"
+    var parameters: [String: String] {
+        switch self {
+        case .Moon:
+            return ["client_id": clientId, "client_secret": clientSecret]
+        case .MoonPhases:
+            return ["client_id": clientId, "client_secret": clientSecret, "limit": "5"]
+        }
     }
     
-    private var baseURL: String {
-        return "https://api.aerisapi.com"
-    }
-    
-    private var defaultQueryParams: [String: String] {
-        return ["client_id": clientId, "client_secret": clientSecret]
-    }
-    
-    private var phasesQueryParams: [String: String] {
-        var params = defaultQueryParams
-        params["limit"] = "5"
-        return params
-    }
-    
-    private var path: String {
+    var path: String {
         switch self {
         case .Moon(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = queryWithParameters(defaultQueryParams)
+            let queryString = queryWithParameters(parameters)
             return "\(baseURL)/sunmoon/\(latitude),\(longitude)?\(queryString)"
         case .MoonPhases(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = queryWithParameters(phasesQueryParams)
+            let queryString = queryWithParameters(parameters)
             return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?\(queryString)"
         }
     }
     
-    func request() -> NSURLRequest {
+    var request: NSURLRequest {
         let path = self.path
-        let url = NSURL(string: path)
-        return NSURLRequest(URL: url!, cachePolicy: .ReturnCacheDataElseLoad, timeoutInterval: 60.0)
+        guard let url = NSURL(string: path) else { fatalError("bad url") }
+        return NSURLRequest(URL: url, cachePolicy: .ReturnCacheDataElseLoad, timeoutInterval: 60.0)
+    }
+}
+
+extension AerisAPI {
+    private var clientSecret: String {
+        fatalError("client secret not defined")
+    }
+    
+    private var clientId: String {
+        fatalError("client id not defined")
     }
 }

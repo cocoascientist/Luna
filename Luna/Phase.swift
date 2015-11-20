@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias PhaseResult = Result<Phase>
-typealias PhasesResult = Result<[Phase]>
+typealias PhaseResult = Result<Phase, NetworkError>
+typealias PhasesResult = Result<[Phase], NetworkError>
 
 struct Phase {
     let name: String
@@ -49,9 +49,7 @@ extension Phase {
     }
 }
 
-extension Phase: Equatable {
-    
-}
+extension Phase: Equatable { }
 
 func ==(lhs: Phase, rhs: Phase) -> Bool {
     return lhs.date == rhs.date && lhs.name == rhs.name

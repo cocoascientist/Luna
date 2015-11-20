@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias CurrentMoon = Result<Moon>
-typealias CurrentPhases = Result<[Phase]>
+typealias CurrentMoon = Result<Moon, NetworkError>
+typealias CurrentPhases = Result<[Phase], NetworkError>
 
 let MoonDidUpdateNotification = "MoonDidUpdateNotification"
 let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
@@ -77,7 +77,7 @@ class LunarPhaseModel: NSObject {
         dispatch_group_enter(group)
         dispatch_group_enter(group)
         
-        let moonRequest = AerisAPI.Moon(location.physical).request()
+        let moonRequest = AerisAPI.Moon(location.physical).request
         let moonResult: TaskResult = {(result) -> Void in
             let jsonResult = toJSONResult(result)
             switch jsonResult {
@@ -91,7 +91,7 @@ class LunarPhaseModel: NSObject {
                     }
                 }
                 else {
-                    self.postErrorNotification(.BadResponse)
+                    self.postErrorNotification(NetworkError.BadResponse)
                 }
             case .Failure(let reason):
                 self.postErrorNotification(reason)
@@ -100,7 +100,7 @@ class LunarPhaseModel: NSObject {
             dispatch_group_leave(group)
         }
         
-        let phasesRequest = AerisAPI.MoonPhases(location.physical).request()
+        let phasesRequest = AerisAPI.MoonPhases(location.physical).request
         let phasesResult: TaskResult = {(result) -> Void in
             let jsonResult = toJSONResult(result)
             switch jsonResult {
@@ -130,14 +130,8 @@ class LunarPhaseModel: NSObject {
         }
     }
     
-    private func postErrorNotification(reason: Reason) -> Void {
-        switch reason {
-        case .Other(let error):
-            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: ["Error": error])
-        default:
-            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: ["Error": reason.description])
-        }
-        
+    private func postErrorNotification(error: ErrorType) -> Void {
+        NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
     }
     
     func applicationDidResume(notification: NSNotification) -> Void {

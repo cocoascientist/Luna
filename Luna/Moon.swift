@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias MoonResult = Result<Moon>
+typealias MoonResult = Result<Moon, NetworkError>
 
 struct Moon {
     let phase: String
@@ -55,13 +55,9 @@ extension Moon {
     }
 }
 
-extension Moon: Equatable {
-    
-}
+extension Moon: Equatable { }
 
 func ==(lhs: Moon, rhs: Moon) -> Bool {
-    return lhs.phase == rhs.phase &&
-            lhs.age == rhs.age &&
-            lhs.rise == lhs.rise &&
-            lhs.set == lhs.set
+    return lhs.phase == rhs.phase && lhs.age == rhs.age &&
+           lhs.rise == lhs.rise && lhs.set == lhs.set
 }
