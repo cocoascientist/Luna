@@ -8,14 +8,19 @@
 
 import Foundation
 
+public enum JSONError: ErrorType {
+    case BadJSON
+    case NoJSON
+}
+
 typealias JSON = [String: AnyObject]
-typealias JSONResult = Result<JSON, NetworkError>
+typealias JSONResult = Result<JSON, JSONError>
 
 extension NSData {
     func toJSON() -> JSONResult {
         do {
             let obj = try NSJSONSerialization.JSONObjectWithData(self, options: [])
-            guard let json = obj as? JSON else { return .Failure(.NoData) }
+            guard let json = obj as? JSON else { return .Failure(.NoJSON) }
             return .Success(json)
         }
         catch {
@@ -28,7 +33,7 @@ func toJSONResult(result: Result<NSData, NetworkError>) -> JSONResult {
     switch result {
     case .Success(let result):
         return result.toJSON()
-    case .Failure(let error):
-        return .Failure(error)
+    case .Failure:
+        return .Failure(.NoJSON)
     }
 }

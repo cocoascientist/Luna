@@ -8,8 +8,13 @@
 
 import Foundation
 
-typealias CurrentMoon = Result<Moon, NetworkError>
-typealias CurrentPhases = Result<[Phase], NetworkError>
+enum PhaseModelError: ErrorType {
+    case NoMoon
+    case NoPhases
+}
+
+typealias CurrentMoon = Result<Moon, PhaseModelError>
+typealias CurrentPhases = Result<[Phase], PhaseModelError>
 
 let MoonDidUpdateNotification = "MoonDidUpdateNotification"
 let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
@@ -60,7 +65,7 @@ class LunarPhaseModel: NSObject {
             return success(moon)
         }
         
-        return failure(.NoData)
+        return failure(.NoMoon)
     }
     
     var currentPhases: CurrentPhases {
@@ -68,7 +73,7 @@ class LunarPhaseModel: NSObject {
             return success(phases)
         }
         
-        return failure(.NoData)
+        return failure(.NoPhases)
     }
     
     func updateLunarPhase(location: Location) -> Void {
@@ -86,15 +91,15 @@ class LunarPhaseModel: NSObject {
                     switch moonResult {
                     case .Success(let moon):
                         self.moon = moon
-                    case .Failure(let reason):
-                        self.postErrorNotification(reason)
+                    case .Failure(let error):
+                        self.postErrorNotification(error)
                     }
                 }
                 else {
                     self.postErrorNotification(NetworkError.BadResponse)
                 }
-            case .Failure(let reason):
-                self.postErrorNotification(reason)
+            case .Failure(let error):
+                self.postErrorNotification(error)
             }
             
             dispatch_group_leave(group)
@@ -109,11 +114,11 @@ class LunarPhaseModel: NSObject {
                 switch phasesResult {
                 case .Success(let phases):
                     self.phases = phases
-                case .Failure(let reason):
-                    self.postErrorNotification(reason)
+                case .Failure(let error):
+                    self.postErrorNotification(error)
                 }
-            case .Failure(let reason):
-                self.postErrorNotification(reason)
+            case .Failure(let error):
+                self.postErrorNotification(error)
             }
             
             dispatch_group_leave(group)
