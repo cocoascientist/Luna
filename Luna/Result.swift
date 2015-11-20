@@ -8,18 +8,18 @@
 
 import Foundation
 
-public enum Result<T> {
+public enum Result<T, ErrorType> {
     case Success(T)
-    case Failure(Reason)
+    case Failure(ErrorType)
 }
 
-extension Result: CustomStringConvertible {
-    public var description: String {
+extension Result: CustomDebugStringConvertible {
+    public var debugDescription: String {
         switch self {
         case .Success(let value):
-            return "value: \(value)"
-        case .Failure(let string):
-            return "failure: \(string)"
+            return "success: \(String(value))"
+        case .Failure(let error):
+            return "error: \(String(error))"
         }
     }
 }
@@ -35,10 +35,10 @@ extension Result {
     }
 }
 
-public func success<T>(value: T) -> Result<T> {
+public func success<T, E>(value: T) -> Result<T, E> {
     return .Success(value)
 }
 
-public func failure<T>(reason: Reason) -> Result<T> {
-    return .Failure(reason)
+public func failure<T, E>(error: E) -> Result<T, E> {
+    return .Failure(error)
 }
