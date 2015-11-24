@@ -29,8 +29,6 @@ class NetworkController {
         }
     }
     
-    
-    
     /**
     Creates an NSURLSessionTask for the request
     
@@ -61,8 +59,6 @@ class NetworkController {
                 
                 return finished(result: .Failure(.Other))
             }
-            
-            
             
             guard let response = response as? NSHTTPURLResponse else {
                 return finished(result: .Failure(.BadResponse))
