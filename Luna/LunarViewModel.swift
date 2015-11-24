@@ -52,8 +52,7 @@ struct LunarViewModel {
     
     private var formatter: NSDateFormatter {
         let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.LongStyle
-        formatter.timeStyle = NSDateFormatterStyle.LongStyle
+        formatter.dateFormat = "MMMM d yyyy 'at' h:mm a z"
         return formatter
     }
 }

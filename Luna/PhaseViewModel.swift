@@ -26,7 +26,7 @@ struct PhaseViewModel {
     
     private var formatter: NSDateFormatter {
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "EEEE, MMMM d yyyy"
+        formatter.dateFormat = "MMMM d yyyy 'at' h:mm a z"
         return formatter
     }
 }
