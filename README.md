@@ -6,10 +6,10 @@ You must [register for an API key](http://www.aerisweather.com/signup/) before d
 
 Read a full write up about the development of Luna at [cocoascientist.com](http://www.cocoascientist.com/luna-displaying-the-moon-phase.html).
 
-![](http://i.imgur.com/uYmnqaT.jpg)
+![](http://i.imgur.com/gDtubrs.gif)
 
 ## Credits
 
-Moon icons are provided by [Weather Icons](https://github.com/erikflowers/weather-icons).
+Moon phase icons are provided by [Weather Icons](https://github.com/erikflowers/weather-icons).
 
 App icon created by [MarkieAnn Parker from the Noun Project](https://thenounproject.com/MarkieAnn/collection/moon-phases/?oq=moon&cidx=0&i=139166).
