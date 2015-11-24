@@ -18,15 +18,15 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rise" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynK-no-XQf">
-                    <rect key="frame" x="20" y="563" width="560" height="17"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="20" y="566" width="22.5" height="13.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKW-CK-meb">
-                    <rect key="frame" x="20" y="526" width="560" height="17"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="25" y="533" width="17.5" height="13.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOH-tQ-pLh">
@@ -49,6 +49,18 @@
                         <constraint firstAttribute="height" constant="175" id="orq-Uh-zt6"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Lq-n4-xJ6">
+                    <rect key="frame" x="55" y="563" width="35.5" height="17"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYs-aY-qGL">
+                    <rect key="frame" x="55" y="530" width="35.5" height="17"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -56,25 +68,45 @@
                 <constraint firstItem="TOH-tQ-pLh" firstAttribute="top" secondItem="03A-Jh-5iY" secondAttribute="bottom" constant="20" id="5ab-lO-yCA"/>
                 <constraint firstItem="ZKW-CK-meb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="8Wt-gA-406"/>
                 <constraint firstAttribute="trailing" secondItem="ZKW-CK-meb" secondAttribute="trailing" constant="20" id="8cf-TG-2O2"/>
+                <constraint firstItem="ynK-no-XQf" firstAttribute="trailing" secondItem="ZKW-CK-meb" secondAttribute="trailing" id="F37-Gg-1I6"/>
+                <constraint firstItem="ynK-no-XQf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Je2-8L-oNx"/>
+                <constraint firstItem="VYs-aY-qGL" firstAttribute="leading" secondItem="ZKW-CK-meb" secondAttribute="trailing" constant="12.5" id="LqP-W2-Qwq"/>
+                <constraint firstItem="ZKW-CK-meb" firstAttribute="bottom" secondItem="VYs-aY-qGL" secondAttribute="bottom" id="Lw5-J5-mKY"/>
+                <constraint firstItem="ynK-no-XQf" firstAttribute="baseline" secondItem="6Lq-n4-xJ6" secondAttribute="baseline" id="MVN-Dw-vuS"/>
+                <constraint firstItem="ZKW-CK-meb" firstAttribute="baseline" secondItem="VYs-aY-qGL" secondAttribute="baseline" id="MoT-wK-hWd"/>
+                <constraint firstAttribute="bottom" secondItem="ynK-no-XQf" secondAttribute="bottom" constant="20" id="QfY-XV-Ppe"/>
                 <constraint firstItem="ynK-no-XQf" firstAttribute="top" secondItem="ZKW-CK-meb" secondAttribute="bottom" constant="20" id="d5z-gk-xpj"/>
                 <constraint firstAttribute="centerX" secondItem="FeB-tf-FoA" secondAttribute="centerX" id="dng-LC-KNa"/>
                 <constraint firstAttribute="centerX" secondItem="V1O-xI-vlB" secondAttribute="centerX" id="fRa-n0-Hzn"/>
                 <constraint firstAttribute="bottom" secondItem="ynK-no-XQf" secondAttribute="bottom" constant="20" id="hww-2I-aPb"/>
                 <constraint firstItem="03A-Jh-5iY" firstAttribute="top" secondItem="V1O-xI-vlB" secondAttribute="bottom" constant="15" id="iyw-hb-5J8"/>
                 <constraint firstItem="ynK-no-XQf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="lPo-oK-Hun"/>
+                <constraint firstItem="ynK-no-XQf" firstAttribute="top" secondItem="ZKW-CK-meb" secondAttribute="bottom" constant="20" id="oq9-jB-GMT"/>
                 <constraint firstAttribute="centerX" secondItem="TOH-tQ-pLh" secondAttribute="centerX" id="qMa-gG-gnD"/>
                 <constraint firstAttribute="centerX" secondItem="03A-Jh-5iY" secondAttribute="centerX" id="qMu-ok-ses"/>
+                <constraint firstItem="6Lq-n4-xJ6" firstAttribute="leading" secondItem="ynK-no-XQf" secondAttribute="trailing" constant="12.5" id="sqH-0N-Mzp"/>
                 <constraint firstItem="V1O-xI-vlB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="ufI-Zc-aUS"/>
                 <constraint firstItem="FeB-tf-FoA" firstAttribute="top" secondItem="TOH-tQ-pLh" secondAttribute="bottom" constant="8" id="z5Q-mi-u9O"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="8Wt-gA-406"/>
+                    <exclude reference="8cf-TG-2O2"/>
+                    <exclude reference="Lw5-J5-mKY"/>
+                    <exclude reference="4PO-Xu-2r7"/>
+                    <exclude reference="d5z-gk-xpj"/>
+                    <exclude reference="hww-2I-aPb"/>
+                    <exclude reference="lPo-oK-Hun"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="ageLabel" destination="TOH-tQ-pLh" id="DQv-Gq-vVH"/>
                 <outlet property="illuminationLabel" destination="FeB-tf-FoA" id="Jmq-0M-XZ5"/>
                 <outlet property="phaseNameLabel" destination="03A-Jh-5iY" id="u3h-AC-3kd"/>
                 <outlet property="phaseView" destination="V1O-xI-vlB" id="CjY-7b-iT0"/>
-                <outlet property="riseLabel" destination="ynK-no-XQf" id="OVT-1B-wwK"/>
-                <outlet property="setLabel" destination="ZKW-CK-meb" id="ZCC-wT-wvQ"/>
+                <outlet property="riseLabel" destination="6Lq-n4-xJ6" id="xCl-M5-3cl"/>
+                <outlet property="setLabel" destination="VYs-aY-qGL" id="yBc-UD-Vud"/>
             </connections>
             <point key="canvasLocation" x="561" y="264"/>
         </view>
