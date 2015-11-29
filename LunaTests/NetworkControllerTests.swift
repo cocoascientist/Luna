@@ -33,7 +33,7 @@ class NetworkControllerTests: XCTestCase {
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
-        let request = AerisAPI.Moon(location.physical).request()
+        let request = AerisAPI.Moon(location.physical).request
         
         networkController.task(request, result: { (result) -> Void in
             switch result {
@@ -52,7 +52,7 @@ class NetworkControllerTests: XCTestCase {
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
-        let request = AerisAPI.MoonPhases(location.physical).request()
+        let request = AerisAPI.MoonPhases(location.physical).request
         
         networkController.task(request, result: { (result) -> Void in
             switch result {
@@ -71,7 +71,7 @@ class NetworkControllerTests: XCTestCase {
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(BadStatusURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
-        let request = AerisAPI.MoonPhases(location.physical).request()
+        let request = AerisAPI.MoonPhases(location.physical).request
         
         networkController.task(request, result: { (result) -> Void in
             switch result {

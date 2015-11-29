@@ -44,6 +44,7 @@
 		F77337101ADC7641005131B7 /* NSData+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576DC1AA42E34007B2AE5 /* NSData+JSON.swift */; };
 		F77337111ADC764F005131B7 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576DA1AA42E34007B2AE5 /* LocationTracker.swift */; };
 		F77337151ADC78B8005131B7 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576DB1AA42E34007B2AE5 /* NetworkController.swift */; };
+		F7754D671C0B4C400080D572 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79040E11BFEC1F9006989D1 /* Request.swift */; };
 		F77909241ADC8EBF0047FC70 /* LocalURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */; };
 		F78818A91ADC6FC2007E2DD8 /* LunarPhaseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818A81ADC6FC2007E2DD8 /* LunarPhaseModelTests.swift */; };
 		F78818AD1ADC712D007E2DD8 /* LocalURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */; };
@@ -522,6 +523,7 @@
 				F795BFB01ADC7AA800DDEF87 /* LunarPhaseModel.swift in Sources */,
 				F7A6B6F91ADDA54400B6F119 /* Double+WeatherIcons.swift in Sources */,
 				F7A6B6E91ADD6E9700B6F119 /* PhaseTests.swift in Sources */,
+				F7754D671C0B4C400080D572 /* Request.swift in Sources */,
 				F79040E41BFEC98F006989D1 /* AerisAPI.swift in Sources */,
 				F746F9AA1AF005A4006529BD /* LunarPhaseView.swift in Sources */,
 				F7A6B7001ADDAD9100B6F119 /* String+WeatherIcons.swift in Sources */,

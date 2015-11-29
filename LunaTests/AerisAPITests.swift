@@ -19,7 +19,7 @@ class AerisAPITests: XCTestCase {
     }
 
     func testCanGenerateMoonRequest() {
-        let request = AerisAPI.Moon(location.physical).request()
+        let request = AerisAPI.Moon(location.physical).request
         
         XCTAssertNotNil(request.URL, "Request URL should not be nil")
         XCTAssertEqual(request.URL!.path!, "/sunmoon/25.7877,-80.2241", "Request URL path is wrong")
@@ -31,7 +31,7 @@ class AerisAPITests: XCTestCase {
     }
     
     func testCanGeneratePhasesRequest() {
-        let request = AerisAPI.MoonPhases(location.physical).request()
+        let request = AerisAPI.MoonPhases(location.physical).request
         
         XCTAssertNotNil(request.URL, "URL should not be nil")
         XCTAssertEqual(request.URL!.path!, "/sunmoon/moonphases/25.7877,-80.2241", "Request URL path is wrong")
