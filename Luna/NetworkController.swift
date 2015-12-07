@@ -30,15 +30,15 @@ class NetworkController {
     }
     
     /**
-    Creates an NSURLSessionTask for the request
+    Creates and starts an NSURLSessionTask for the request.
     
-    - parameter request: A reqeust object to return a task for
-    - parameter completion:
+    - parameter request: A request object
+    - parameter completion: Called when the task finishes.
     
     - returns: An NSURLSessionTask associated with the request
     */
     
-    func task(request: NSURLRequest, result: TaskResult) -> NSURLSessionTask {
+    func startRequest(request: NSURLRequest, result: TaskResult) {
         
         // handle the task completion job on the main thread
         let finished: TaskResult = {(taskResult) in
@@ -73,6 +73,7 @@ class NetworkController {
             }
         })
         
-        return task;
+        task.resume()
+        session.finishTasksAndInvalidate()
     }
 }

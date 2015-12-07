@@ -51,11 +51,10 @@ class ViewController: UIViewController {
         gradient.colors = [UIColor.hexColor("232526").CGColor, UIColor.hexColor("414345").CGColor]
         self.view.layer.insertSublayer(gradient, atIndex: 0)
         
-        self.view.backgroundColor = UIColor.redColor()
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.separatorColor = UIColor.lightGrayColor()
         
-        self.dataSource.configureUsing(self.tableView)
+        self.dataSource.configureUsing(tableView)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: MoonDidUpdateNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveError:", name: LunarModelDidReceiveErrorNotification, object: nil)

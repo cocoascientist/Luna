@@ -35,14 +35,14 @@ class NetworkControllerTests: XCTestCase {
         
         let request = AerisAPI.Moon(location.physical).request
         
-        networkController.task(request, result: { (result) -> Void in
+        networkController.startRequest(request, result: { (result) -> Void in
             switch result {
             case .Success:
                 expectation.fulfill()
             case .Failure:
                 XCTFail("Request should not fail")
             }
-        }).resume()
+        })
         
         waitForExpectationsWithTimeout(timeout, handler: nil)
     }
@@ -54,14 +54,14 @@ class NetworkControllerTests: XCTestCase {
         
         let request = AerisAPI.MoonPhases(location.physical).request
         
-        networkController.task(request, result: { (result) -> Void in
+        networkController.startRequest(request, result: { (result) -> Void in
             switch result {
             case .Success:
                 expectation.fulfill()
             case .Failure:
                 XCTFail("Request should not fail")
             }
-        }).resume()
+        })
         
         waitForExpectationsWithTimeout(timeout, handler: nil)
     }
@@ -73,14 +73,14 @@ class NetworkControllerTests: XCTestCase {
         
         let request = AerisAPI.MoonPhases(location.physical).request
         
-        networkController.task(request, result: { (result) -> Void in
+        networkController.startRequest(request, result: { (result) -> Void in
             switch result {
             case .Success:
                 XCTFail("Request should fail")
             case .Failure:
                 expectation.fulfill()
             }
-        }).resume()
+        })
         
         waitForExpectationsWithTimeout(timeout, handler: nil)
     }

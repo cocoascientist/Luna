@@ -126,8 +126,8 @@ class LunarPhaseModel: NSObject {
         
         self.loading = true
         
-        self.networkController.task(moonRequest, result: moonResult).resume()
-        self.networkController.task(phasesRequest, result: phasesResult).resume()
+        networkController.startRequest(moonRequest, result: moonResult)
+        networkController.startRequest(phasesRequest, result: phasesResult)
         
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         dispatch_group_notify(group, queue) { () -> Void in
