@@ -13,9 +13,18 @@ typealias TaskResult = (result: Result<NSData, NetworkError>) -> Void
 class NetworkController {
     
     let configuration: NSURLSessionConfiguration
+    private let session: NSURLSession
     
     init(configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()) {
         self.configuration = configuration
+        
+        let delegate = SessionDelegate()
+        let queue = NSOperationQueue.mainQueue()
+        self.session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: queue)
+    }
+    
+    deinit {
+        session.finishTasksAndInvalidate()
     }
     
     private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
@@ -47,9 +56,6 @@ class NetworkController {
             })
         }
         
-        let sessionDelegate = SessionDelegate()
-        let session = NSURLSession(configuration: configuration, delegate: sessionDelegate, delegateQueue: NSOperationQueue.mainQueue())
-        
         // return a basic NSURLSession for the request, with basic error handling
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
             guard let data = data else {
@@ -74,6 +80,5 @@ class NetworkController {
         })
         
         task.resume()
-        session.finishTasksAndInvalidate()
     }
 }
