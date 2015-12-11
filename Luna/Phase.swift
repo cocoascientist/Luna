@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias PhaseResult = Result<Phase, NetworkError>
-typealias PhasesResult = Result<[Phase], NetworkError>
+typealias PhaseResult = Result<Phase, JSONError>
+typealias PhasesResult = Result<[Phase], JSONError>
 
 struct Phase {
     let name: String

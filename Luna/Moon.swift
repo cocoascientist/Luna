@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias MoonResult = Result<Moon, NetworkError>
+typealias MoonResult = Result<Moon, JSONError>
 
 struct Moon {
     let phase: String
