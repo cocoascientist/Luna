@@ -47,7 +47,8 @@ struct LunarViewModel {
     }
     
     var illumination: String {
-        return "\(moon.percent * 100)% complete"
+        let percent = String(format: "%.1f", moon.percent * 100)
+        return "\(percent)% complete"
     }
     
     private var formatter: NSDateFormatter {
