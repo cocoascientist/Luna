@@ -14,26 +14,21 @@ public enum JSONError: ErrorType {
 }
 
 typealias JSON = [String: AnyObject]
-typealias JSONResult = Result<JSON, JSONError>
+typealias JSONResult = Result<JSON>
 
 extension NSData {
     func toJSON() -> JSONResult {
         do {
             let obj = try NSJSONSerialization.JSONObjectWithData(self, options: [])
-            guard let json = obj as? JSON else { return .Failure(.NoJSON) }
+            guard let json = obj as? JSON else { return .Failure(JSONError.NoJSON) }
             return .Success(json)
         }
         catch {
-            return .Failure(.BadJSON)
+            return .Failure(JSONError.BadJSON)
         }
     }
 }
 
-func toJSONResult(result: Result<NSData, NetworkError>) -> JSONResult {
-    switch result {
-    case .Success(let result):
-        return result.toJSON()
-    case .Failure:
-        return .Failure(.NoJSON)
-    }
+func JSONResultFromData(data: NSData) -> JSONResult {
+    return data.toJSON()
 }

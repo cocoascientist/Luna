@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias PhaseResult = Result<Phase, JSONError>
-typealias PhasesResult = Result<[Phase], JSONError>
+typealias PhaseResult = Result<Phase>
+typealias PhasesResult = Result<[Phase]>
 
 struct Phase {
     let name: String
@@ -27,25 +27,30 @@ extension Phase {
             let name = json["name"] as? String,
             let interval = json["timestamp"] as? NSTimeInterval
         else {
-            return failure(.BadJSON)
+            return .Failure(JSONError.BadJSON)
         }
         
         let date = NSDate(timeIntervalSince1970: interval)
         let phase = Phase(name, date)
-        return success(phase)
+        return .Success(phase)
     }
     
     static func phasesFromJSON(json: JSON) -> PhasesResult {
         guard let data = json["response"] as? [JSON] else {
-            return failure(.BadJSON)
+            return .Failure(JSONError.BadJSON)
         }
         
-        let phases = data.flatMap { (obj) -> Phase in
-            let phase = phaseFromJSON(obj).result()!
-            return phase
+        let results = data.flatMap(Phase.phaseFromJSON)
+        let phases = results.flatMap { (phase) -> Phase? in
+            switch phase {
+            case .Success(let value):
+                return value
+            case .Failure:
+                return nil
+            }
         }
         
-        return success(phases)
+        return .Success(phases)
     }
 }
 

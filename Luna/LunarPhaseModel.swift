@@ -13,8 +13,8 @@ enum PhaseModelError: ErrorType {
     case NoPhases
 }
 
-typealias CurrentMoon = Result<Moon, PhaseModelError>
-typealias CurrentPhases = Result<[Phase], PhaseModelError>
+typealias CurrentMoon = Result<Moon>
+typealias CurrentPhases = Result<[Phase]>
 
 let MoonDidUpdateNotification = "MoonDidUpdateNotification"
 let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
@@ -25,6 +25,7 @@ class LunarPhaseModel: NSObject {
     let networkController: NetworkController
     
     dynamic var loading: Bool = false
+    dynamic var error: NSError? = nil
     
     private var moon: Moon? {
         didSet {
@@ -62,18 +63,18 @@ class LunarPhaseModel: NSObject {
     
     var currentMoon: CurrentMoon {
         if let moon = self.moon {
-            return success(moon)
+            return .Success(moon)
         }
         
-        return failure(.NoMoon)
+        return .Failure(PhaseModelError.NoMoon)
     }
     
     var currentPhases: CurrentPhases {
         if let phases = self.phases {
-            return success(phases)
+            return .Success(phases)
         }
         
-        return failure(.NoPhases)
+        return .Failure(PhaseModelError.NoPhases)
     }
     
     func updateLunarPhase(location: Location) -> Void {
@@ -84,20 +85,13 @@ class LunarPhaseModel: NSObject {
         
         let moonRequest = AerisAPI.Moon(location.physical).request
         let moonResult: TaskResult = {(result) -> Void in
-            let jsonResult = toJSONResult(result)
-            switch jsonResult {
-            case .Success(let json):
-                if let moonResult: MoonResult = Moon.moonFromJSON(json) {
-                    switch moonResult {
-                    case .Success(let moon):
-                        self.moon = moon
-                    case .Failure(let error):
-                        self.postErrorNotification(error)
-                    }
-                }
-                else {
-                    self.postErrorNotification(NetworkError.BadResponse)
-                }
+            
+            let json = result.flatMap(JSONResultFromData)
+            let moon = json.flatMap(Moon.moonFromJSON)
+            
+            switch moon {
+            case .Success(let moon):
+                self.moon = moon
             case .Failure(let error):
                 self.postErrorNotification(error)
             }
@@ -107,16 +101,13 @@ class LunarPhaseModel: NSObject {
         
         let phasesRequest = AerisAPI.MoonPhases(location.physical).request
         let phasesResult: TaskResult = {(result) -> Void in
-            let jsonResult = toJSONResult(result)
-            switch jsonResult {
-            case .Success(let json):
-                let phasesResult = Phase.phasesFromJSON(json)
-                switch phasesResult {
-                case .Success(let phases):
-                    self.phases = phases
-                case .Failure(let error):
-                    self.postErrorNotification(error)
-                }
+            
+            let json = result.flatMap(JSONResultFromData)
+            let phases = json.flatMap(Phase.phasesFromJSON)
+            
+            switch phases {
+            case .Success(let phases):
+                self.phases = phases
             case .Failure(let error):
                 self.postErrorNotification(error)
             }

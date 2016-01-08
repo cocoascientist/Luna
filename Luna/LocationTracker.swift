@@ -10,12 +10,16 @@ import Foundation
 import CoreLocation
 import UIKit
 
-public typealias LocationResult = Result<Location, NetworkError>
+public typealias LocationResult = Result<Location>
 public typealias Observer = (location: LocationResult) -> ()
+
+enum LocationError: ErrorType {
+    case NoData
+}
 
 public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
-    private var lastResult: LocationResult = .Failure(.NoData)
+    private var lastResult: LocationResult = .Failure(LocationError.NoData)
     private var observers: [Observer] = []
     
     private let locationManager: CLLocationManager

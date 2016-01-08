@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias MoonResult = Result<Moon, JSONError>
+typealias MoonResult = Result<Moon>
 
 struct Moon {
     let phase: String
@@ -41,7 +41,7 @@ extension Moon {
             let percent = phase["phase"] as? Double,
             let illum = phase["illum"] as? Int
         else {
-            return failure(.BadJSON)
+            return .Failure(JSONError.BadJSON)
         }
         
         let riseInterval = moonObj["rise"] as? Double ?? 0
@@ -51,7 +51,7 @@ extension Moon {
         let set = NSDate(timeIntervalSince1970: setInterval)
         
         let moon = Moon(phaseName, age, percent, illum, rise, set)
-        return success(moon)
+        return .Success(moon)
     }
 }
 

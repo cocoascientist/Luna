@@ -6,11 +6,51 @@
 //  Copyright (c) 2015 Andrew Shepard. All rights reserved.
 //
 
-import Foundation
+protocol ResultType {
+    typealias Value
+    
+    init(value: Value)
+    init(error: ErrorType)
+    
+    func map<U>(f: (Value) -> U) -> Result<U>
+    func flatMap<U>(f: Value -> Result<U>) -> Result<U>
+}
 
-public enum Result<T, ErrorType> {
+public enum Result<T>: ResultType {
     case Success(T)
     case Failure(ErrorType)
+    
+    init(value: T) {
+        self = .Success(value)
+    }
+    
+    init(error: ErrorType) {
+        self = .Failure(error)
+    }
+}
+
+extension Result {
+    func map<U>(f: T -> U) -> Result<U> {
+        switch self {
+        case let .Success(value):
+            return Result<U>.Success(f(value))
+        case let .Failure(error):
+            return Result<U>.Failure(error)
+        }
+    }
+    
+    func flatMap<U>(f: T -> Result<U>) -> Result<U> {
+        return Result.flatten(map(f))
+    }
+    
+    static func flatten<T>(result: Result<Result<T>>) -> Result<T> {
+        switch result {
+        case let .Success(innerResult):
+            return innerResult
+        case let .Failure(error):
+            return Result<T>.Failure(error)
+        }
+    }
 }
 
 extension Result: CustomDebugStringConvertible {
@@ -33,12 +73,4 @@ extension Result {
             return nil
         }
     }
-}
-
-public func success<T, E>(value: T) -> Result<T, E> {
-    return .Success(value)
-}
-
-public func failure<T, E>(error: E) -> Result<T, E> {
-    return .Failure(error)
 }
