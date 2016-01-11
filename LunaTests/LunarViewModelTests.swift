@@ -22,7 +22,7 @@ class LunarViewModelTests: XCTestCase {
     }
     
     func testCanFormatPercentCompleteString() {
-        XCTAssertEqual(viewModel.illumination, "81.34% complete", "Percent complete does not match")
+        XCTAssertEqual(viewModel.illumination, "81.3% complete", "Percent complete does not match")
     }
     
     func testCanFormatPhaseName() {
