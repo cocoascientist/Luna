@@ -13,9 +13,9 @@ typealias QueryParameters = [String: String]
 extension String {
     func queryParameters(string: String) -> [String] {
         let pairs = string.characters.split { $0 == "&" }.map { String($0) }
-        let params = pairs.flatMap{ (string) -> String in
+        let params = pairs.flatMap{ (string) -> String? in
             let value = string.characters.split { $0 == "=" }.map { String($0) } as [String]
-            return value.first!
+            return value.first ?? nil
         }
         return params
     }

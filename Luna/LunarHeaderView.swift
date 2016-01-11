@@ -32,7 +32,7 @@ class LunarHeaderView: UIView {
             self.illuminationLabel.text = viewModel?.illumination
             
             if let phase = viewModel?.phase {
-                let font = UIFont(name: "EuphemiaUCAS", size: 38.0)!
+                guard let font = UIFont(name: "EuphemiaUCAS", size: 38.0) else { fatalError() }
                 let color = UIColor.whiteColor()
                 let attributes = [NSForegroundColorAttributeName: color, NSFontAttributeName: font]
                 self.phaseNameLabel.attributedText = NSAttributedString(string: phase, attributes: attributes)

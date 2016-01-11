@@ -9,8 +9,8 @@
 protocol ResultType {
     typealias Value
     
-    init(value: Value)
-    init(error: ErrorType)
+    init(success value: Value)
+    init(failure error: ErrorType)
     
     func map<U>(f: (Value) -> U) -> Result<U>
     func flatMap<U>(f: Value -> Result<U>) -> Result<U>
@@ -20,11 +20,11 @@ public enum Result<T>: ResultType {
     case Success(T)
     case Failure(ErrorType)
     
-    init(value: T) {
+    init(success value: T) {
         self = .Success(value)
     }
     
-    init(error: ErrorType) {
+    init(failure error: ErrorType) {
         self = .Failure(error)
     }
 }
@@ -60,17 +60,6 @@ extension Result: CustomDebugStringConvertible {
             return "success: \(String(value))"
         case .Failure(let error):
             return "error: \(String(error))"
-        }
-    }
-}
-
-extension Result {
-    func result() -> T? {
-        switch self {
-        case .Success(let value):
-            return value
-        case .Failure:
-            return nil
         }
     }
 }
