@@ -7,7 +7,7 @@
 //
 
 protocol ResultType {
-    typealias Value
+    associatedtype Value
     
     init(success value: Value)
     init(failure error: ErrorType)

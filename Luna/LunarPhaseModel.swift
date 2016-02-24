@@ -54,7 +54,7 @@ class LunarPhaseModel: NSObject {
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidResume:", name: "UIApplicationDidBecomeActiveNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: "UIApplicationDidBecomeActiveNotification", object: nil)
     }
     
     deinit {
