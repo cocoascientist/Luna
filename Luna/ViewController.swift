@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }()
     
     private lazy var headerView: LunarHeaderView = {
-        let nib = NSBundle.mainBundle().loadNibNamed(LunarHeaderView.nibName, owner: self, options: nil)
+        let nib = NSBundle.mainBundle().loadNibNamed(String(LunarHeaderView), owner: self, options: nil)
         guard let headerView = nib.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
         }

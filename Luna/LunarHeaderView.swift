@@ -19,10 +19,6 @@ class LunarHeaderView: UIView {
     @IBOutlet var riseLabel: UILabel!
     @IBOutlet var setLabel: UILabel!
     
-    class var nibName: String {
-        return "LunarHeaderView"
-    }
-    
     var viewModel: LunarViewModel? {
         didSet {
             self.riseLabel.text = viewModel?.rise
