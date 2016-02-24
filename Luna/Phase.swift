@@ -21,23 +21,32 @@ struct Phase {
     }
 }
 
-extension Phase {
-    static func phaseFromJSON(json: JSON) -> PhaseResult {
+extension Phase: JSONConstructable {
+    init?(json: JSON) {
         guard
             let name = json["name"] as? String,
             let interval = json["timestamp"] as? NSTimeInterval
         else {
-            return .Failure(JSONError.BadJSON)
+            return nil
         }
         
-        let date = NSDate(timeIntervalSince1970: interval)
-        let phase = Phase(name, date)
-        return .Success(phase)
+        self.name = name
+        self.date = NSDate(timeIntervalSince1970: interval)
+    }
+}
+
+extension Phase {
+    static func phaseFromJSON(json: JSON) -> PhaseResult {
+        if let phase = Phase(json: json) {
+            return PhaseResult.Success(phase)
+        } else {
+            return PhaseResult.Failure(PhaseModelError.NoPhases)
+        }
     }
     
     static func phasesFromJSON(json: JSON) -> PhasesResult {
         guard let data = json["response"] as? [JSON] else {
-            return .Failure(JSONError.BadJSON)
+            return .Failure(JSONError.BadFormat)
         }
         
         let results = data.flatMap(Phase.phaseFromJSON)

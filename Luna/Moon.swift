@@ -30,8 +30,9 @@ struct Moon {
     }
 }
 
-extension Moon {
-    static func moonFromJSON(json: JSON) -> MoonResult {
+extension Moon: JSONConstructable {
+    
+    init?(json: JSON) {
         guard
             let response = json["response"] as? [JSON],
             let moonObj = response.first?["moon"] as? JSON,
@@ -40,8 +41,8 @@ extension Moon {
             let age = phase["age"] as? Double,
             let percent = phase["phase"] as? Double,
             let illum = phase["illum"] as? Int
-        else {
-            return .Failure(JSONError.BadJSON)
+            else {
+                return nil
         }
         
         let riseInterval = moonObj["rise"] as? Double ?? 0
@@ -50,8 +51,22 @@ extension Moon {
         let rise = NSDate(timeIntervalSince1970: riseInterval)
         let set = NSDate(timeIntervalSince1970: setInterval)
         
-        let moon = Moon(phaseName, age, percent, illum, rise, set)
-        return .Success(moon)
+        self.phase = phaseName
+        self.age = age
+        self.percent = percent
+        self.illumination = illum
+        self.rise = rise
+        self.set = set
+    }
+}
+
+extension Moon {
+    static func moonFromJSON(json: JSON) -> MoonResult {
+        if let moon = Moon.init(json: json) {
+            return MoonResult.Success(moon)
+        } else {
+            return MoonResult.Failure(JSONError.BadFormat)
+        }
     }
 }
 
