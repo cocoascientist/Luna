@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     var model: LunarPhaseModel!
     
+    var shouldPresentAlert: Bool = true
+    
     override func awakeFromNib() {
         self.model = LunarPhaseModel()
     }
@@ -39,6 +41,15 @@ class ViewController: UIViewController {
         
         return headerView
     }()
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        control.backgroundColor = UIColor.clearColor()
+        control.tintColor = UIColor.whiteColor()
+        
+        return control
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +64,7 @@ class ViewController: UIViewController {
         
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.separatorColor = UIColor.lightGrayColor()
+        self.tableView.addSubview(refreshControl)
         
         self.dataSource.configureUsing(tableView)
         
@@ -80,24 +92,24 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Update Handlers
+    
+    func handleRefresh(sender: AnyObject) {
+        self.model.applicationDidResume(NSNotification())
+    }
 
     func didReceiveError(notification: NSNotification) -> Void {
-        if let message = notification.userInfo?["Error"] as? String {
-            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-            let action = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                self.dismissViewControllerAnimated(true, completion: nil)
-            })
+        if let message = notification.userInfo?["message"] as? String,
+            let title = notification.userInfo?["title"] as? String {
             
-            alertController.addAction(action)
+            self.showAlert(title, message)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.headerView.phaseNameLabel.text = title
         }
         else {
             print("Error: Unhandled notification: \(notification.userInfo)")
             
+            self.headerView.phaseNameLabel.text = "Error"
         }
-        
-        self.headerView.phaseNameLabel.text = "Error"
     }
     
     func modelDidUpdate(notification: NSNotification) -> Void {
@@ -112,6 +124,24 @@ class ViewController: UIViewController {
             self.headerView.viewModel = LunarViewModel(moon: moon)
         case .Failure:
             print("error updating view model, no data")
+        }
+    }
+    
+    func showAlert(title: String, _ message: String) {
+        dispatch_async(dispatch_get_main_queue()) { 
+            if self.shouldPresentAlert {
+                self.shouldPresentAlert = false
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                let action = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.shouldPresentAlert = true
+                })
+                
+                alertController.addAction(action)
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
         }
     }
 }

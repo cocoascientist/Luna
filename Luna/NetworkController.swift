@@ -10,7 +10,7 @@ import Foundation
 
 typealias TaskResult = (result: Result<NSData>) -> Void
 
-class NetworkController {
+class NetworkController: Reachable {
     
     let configuration: NSURLSessionConfiguration
     private let session: NSURLSession
@@ -79,6 +79,11 @@ class NetworkController {
             }
         })
         
-        task.resume()
+        switch self.reachable {
+        case .Online:
+            task.resume()
+        case .Offline:
+            finished(result: .Failure(NetworkError.Offline))
+        }
     }
 }

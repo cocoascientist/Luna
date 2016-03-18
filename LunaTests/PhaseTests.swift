@@ -15,14 +15,17 @@ class PhaseTests: XCTestCase {
         let file = NSBundle(forClass: self.dynamicType).pathForResource("moonphases", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
-        guard let result = data?.toJSON() else { return XCTFail("No data was found") }
-        
-        switch result {
-        case .Success(let json):
-            if case .Success(let phases) = Phase.phasesFromJSON(json) {
+        do {
+            guard let json = try data?.toJSON() else { return XCTFail("No data was found") }
+            let result = Phase.phasesFromJSON(json)
+            switch result {
+            case .Success(let phases):
                 XCTAssertEqual(phases.count, 7, "Phases count is incorrect")
+            case .Failure:
+                XCTFail("Failing JSONResult was found")
             }
-        case .Failure:
+        }
+        catch {
             XCTFail("Failing JSONResult was found")
         }
     }
@@ -31,16 +34,19 @@ class PhaseTests: XCTestCase {
         let file = NSBundle(forClass: self.dynamicType).pathForResource("moonphases", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
-        guard let result = data?.toJSON() else { return XCTFail("No data was found") }
         
-        switch result {
-        case .Success(let json):
+        do {
+            guard let json = try data?.toJSON() else { return XCTFail("No data was found") }
             if let response = json["response"] as? [JSON],
                 let phaseObj = response.first,
                 case .Success(let phase) = Phase.phaseFromJSON(phaseObj) {
-                    XCTAssertEqual(phase.name, "new moon", "Phase name is incorrect")
+                XCTAssertEqual(phase.name, "new moon", "Phase name is incorrect")
             }
-        case .Failure:
+            else {
+                XCTFail("Failing JSONResult was found")
+            }
+        }
+        catch {
             XCTFail("Failing JSONResult was found")
         }
     }

@@ -127,7 +127,13 @@ class LunarPhaseModel: NSObject {
     }
     
     private func postErrorNotification(error: ErrorType) -> Void {
-        NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
+        if let taskError = error as? NetworkError {
+            let info = taskError.info
+            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: info)
+        }
+        else {
+            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
+        }
     }
     
     func applicationDidResume(notification: NSNotification) -> Void {
