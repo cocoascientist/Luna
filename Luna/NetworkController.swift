@@ -19,7 +19,7 @@ class NetworkController: Reachable {
         self.configuration = configuration
         
         let delegate = SessionDelegate()
-        let queue = NSOperationQueue.mainQueue()
+        let queue = NSOperationQueue.main()
         self.session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: queue)
     }
     
@@ -29,11 +29,11 @@ class NetworkController: Reachable {
     
     private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
         
-        @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-            completionHandler(.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
+        @objc private func urlSession(session: NSURLSession, didReceive challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+            completionHandler(.useCredential, NSURLCredential(for: challenge.protectionSpace.serverTrust!))
         }
         
-        @objc func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
+        @objc private func urlSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
             completionHandler(request)
         }
     }
@@ -57,7 +57,7 @@ class NetworkController: Reachable {
         }
         
         // return a basic NSURLSession for the request, with basic error handling
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
+        let task = session.dataTask(with: request, completionHandler: { (data, response, err) -> Void in
             guard let data = data else {
                 guard let _ = err else {
                     return finished(result: .Failure(NetworkError.NoData))

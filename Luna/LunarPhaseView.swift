@@ -18,7 +18,7 @@ class LunarPhaseView: UIView {
         self.date = date
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear()
     }
     
     override init(frame: CGRect) {
@@ -31,7 +31,7 @@ class LunarPhaseView: UIView {
         super.init(coder: aDecoder)
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(rect: CGRect) {
         let phase = self.date.moonPhase()
         let diameter = Double(CGRectGetWidth(rect))
         let radius = Int(diameter / 2)
@@ -46,13 +46,13 @@ class LunarPhaseView: UIView {
             let pB4 = CGPointMake(CGFloat(Xpos+Double(radius)), CGFloat(Double(radius)-Double(Ypos)))
             
             let path = UIBezierPath()
-            path.moveToPoint(pB1)
-            path.addLineToPoint(pB2)
+            path.move(to: pB1)
+            path.addLine(to: pB2)
             
-            path.moveToPoint(pB3)
-            path.addLineToPoint(pB4)
+            path.move(to: pB3)
+            path.addLine(to: pB4)
             
-            UIColor.blackColor().setStroke()
+            UIColor.black().setStroke()
             path.stroke()
             
             let Rpos = 2 * Xpos
@@ -73,13 +73,13 @@ class LunarPhaseView: UIView {
             let pW4 = CGPointMake(CGFloat(Xpos2+Double(radius)), CGFloat(Double(Ypos)+Double(radius)))
             
             let path2 = UIBezierPath()
-            path2.moveToPoint(pW1)
-            path2.addLineToPoint(pW2)
+            path2.move(to: pW1)
+            path2.addLine(to: pW2)
             
-            path2.moveToPoint(pW3)
-            path2.addLineToPoint(pW4)
+            path2.move(to: pW3)
+            path2.addLine(to: pW4)
             
-            UIColor.whiteColor().setStroke()
+            UIColor.white().setStroke()
             path2.lineWidth = 2.0
             path2.stroke()
         }

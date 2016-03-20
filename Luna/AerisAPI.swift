@@ -44,7 +44,7 @@ enum AerisAPI: Request {
     var request: NSURLRequest {
         let path = self.path
         guard let url = NSURL(string: path) else { fatalError("bad url") }
-        return NSURLRequest(URL: url, cachePolicy: .ReturnCacheDataElseLoad, timeoutInterval: 60.0)
+        return NSURLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60.0)
     }
 }
 

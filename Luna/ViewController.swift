@@ -31,22 +31,23 @@ class ViewController: UIViewController {
     }()
     
     private lazy var headerView: LunarHeaderView = {
-        let nib = NSBundle.mainBundle().loadNibNamed(String(LunarHeaderView), owner: self, options: nil)
+        let nib = NSBundle.main().loadNibNamed(String(LunarHeaderView), owner: self, options: nil)
         guard let headerView = nib.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
         }
         
-        let insetY: CGFloat = (self.traitCollection.userInterfaceIdiom == .Pad) ? 200.0 : 0.0
-        headerView.frame = CGRectInset(UIScreen.mainScreen().bounds, 0.0, insetY)
+        let insetY: CGFloat = (self.traitCollection.userInterfaceIdiom == .pad) ? 200.0 : 0.0
+        headerView.frame = CGRectInset(UIScreen.main().bounds, 0.0, insetY)
         
         return headerView
     }()
     
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
-        control.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        control.backgroundColor = UIColor.clearColor()
-        control.tintColor = UIColor.whiteColor()
+        let action = #selector(ViewController.handleRefresh(_:))
+        control.addTarget(self, action: action, for: UIControlEvents.valueChanged)
+        control.backgroundColor = UIColor.clear()
+        control.tintColor = UIColor.white()
         
         return control
     }()
@@ -54,16 +55,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.pagingEnabled = true
+        self.tableView.isPagingEnabled = true
         self.tableView.rowHeight = 44.0
         
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.hexColor("232526").CGColor, UIColor.hexColor("414345").CGColor]
-        self.view.layer.insertSublayer(gradient, atIndex: 0)
+        gradient.colors = [UIColor.hexColor("232526").cgColor, UIColor.hexColor("414345").cgColor]
+        self.view.layer.insertSublayer(gradient, at: 0)
         
-        self.tableView.backgroundColor = UIColor.clearColor()
-        self.tableView.separatorColor = UIColor.lightGrayColor()
+        self.tableView.backgroundColor = UIColor.clear()
+        self.tableView.separatorColor = UIColor.lightGray()
         self.tableView.addSubview(refreshControl)
         
         self.dataSource.configureUsing(tableView)
@@ -71,7 +72,7 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: MoonDidUpdateNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: LunarModelDidReceiveErrorNotification, object: nil)
         
-        self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.New, context: myContext)
+        self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.new, context: myContext)
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,15 +80,15 @@ class ViewController: UIViewController {
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+        return UIStatusBarStyle.lightContent
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = self.model.loading
+            UIApplication.shared().isNetworkActivityIndicatorVisible = self.model.loading
         }
         else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
@@ -132,15 +133,16 @@ class ViewController: UIViewController {
             if self.shouldPresentAlert {
                 self.shouldPresentAlert = false
                 
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                let action = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    self.shouldPresentAlert = true
-                })
-                
-                alertController.addAction(action)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
+//                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//                
+//                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+//                    self.dismissViewControllerAnimated(true, completion: nil)
+//                    self.shouldPresentAlert = true
+//                })
+//                
+//                alertController.addAction(action)
+//                
+//                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }

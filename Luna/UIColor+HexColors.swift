@@ -13,15 +13,15 @@ import UIKit
 extension UIColor {
     
     class func hexColor(string: String) -> UIColor {
-        let set = NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet
-        var colorString = string.stringByTrimmingCharactersInSet(set).uppercaseString
+        let set = NSCharacterSet.whitespaceAndNewline() as NSCharacterSet
+        var colorString = string.trimmingCharacters(in: set).uppercased()
         
         if (colorString.hasPrefix("#")) {
-            colorString = colorString.substringFromIndex(colorString.startIndex.advancedBy(1))
+            colorString = colorString.substring(from: colorString.startIndex.advanced(by: 1))
         }
         
         if (colorString.characters.count != 6) {
-            return UIColor.grayColor()
+            return UIColor.gray()
         }
         
         var rgbValue: UInt32 = 0

@@ -26,13 +26,13 @@ public class PhaseTableViewCell: UITableViewCell {
         self.iconLabel.text = ""
         self.dateLabel.text = ""
         
-        self.iconLabel.textColor = UIColor.whiteColor()
-        self.dateLabel.textColor = UIColor.whiteColor()
+        self.iconLabel.textColor = UIColor.white()
+        self.dateLabel.textColor = UIColor.white()
         
         self.iconLabel.font = UIFont(name: "Weather Icons", size: 32.0)
         
-        self.selectionStyle = UITableViewCellSelectionStyle.None
-        self.backgroundColor = UIColor.clearColor()
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.backgroundColor = UIColor.clear()
     }
 
     public override func setSelected(selected: Bool, animated: Bool) {

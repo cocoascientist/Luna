@@ -46,7 +46,6 @@
 		F77337111ADC764F005131B7 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576DA1AA42E34007B2AE5 /* LocationTracker.swift */; };
 		F77337151ADC78B8005131B7 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576DB1AA42E34007B2AE5 /* NetworkController.swift */; };
 		F7754D671C0B4C400080D572 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79040E11BFEC1F9006989D1 /* Request.swift */; };
-		F77909241ADC8EBF0047FC70 /* LocalURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */; };
 		F78818A91ADC6FC2007E2DD8 /* LunarPhaseModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818A81ADC6FC2007E2DD8 /* LunarPhaseModelTests.swift */; };
 		F78818AD1ADC712D007E2DD8 /* LocalURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */; };
 		F7887B3F1ADED9AC00EF9BA3 /* NSURLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */; };
@@ -76,6 +75,7 @@
 		F7A6B6FF1ADDAD8600B6F119 /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916141AA50269003F1BF4 /* PhaseViewModel.swift */; };
 		F7A6B7001ADDAD9100B6F119 /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74916181AA50491003F1BF4 /* String+WeatherIcons.swift */; };
 		F7A6B7021ADDC73E00B6F119 /* AerisAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */; };
+		F7B1A08D1C9F699900996E24 /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EA0E281C90C83C00AA964B /* Reachable.swift */; };
 		F7B602131BFE2ED6005C2D48 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B602121BFE2ED6005C2D48 /* NetworkError.swift */; };
 		F7BCE5751ADDD88D0061FFF5 /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */; };
 		F7BCE5761ADDD8AA0061FFF5 /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCE5741ADDD88D0061FFF5 /* Array+Contains.swift */; };
@@ -479,7 +479,6 @@
 				F7FBB2841BF25D9B006FA00F /* QueryParameters.swift in Sources */,
 				F7162DF11AC0C09A0083D350 /* LunarPhaseView.swift in Sources */,
 				F74916121AA5021C003F1BF4 /* PhaseTableViewCell.swift in Sources */,
-				F77909241ADC8EBF0047FC70 /* LocalURLProtocol.swift in Sources */,
 				F76576F71AA437F1007B2AE5 /* Moon.swift in Sources */,
 				F79040E31BFEC98F006989D1 /* AerisAPI.swift in Sources */,
 				F77337151ADC78B8005131B7 /* NetworkController.swift in Sources */,
@@ -545,6 +544,7 @@
 				F7EA0E271C90AA5800AA964B /* PhaseTests.swift in Sources */,
 				F75DC1921BFE5BD00034B2B5 /* NetworkError.swift in Sources */,
 				F7EA0E261C90A98200AA964B /* MoonTests.swift in Sources */,
+				F7B1A08D1C9F699900996E24 /* Reachable.swift in Sources */,
 				F773370E1ADC7634005131B7 /* Phase.swift in Sources */,
 				F746F9AB1AF005E6006529BD /* NSDate+Lunar.swift in Sources */,
 			);

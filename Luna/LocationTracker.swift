@@ -13,7 +13,7 @@ import UIKit
 public typealias LocationResult = Result<Location>
 public typealias Observer = (location: LocationResult) -> ()
 
-enum LocationError: ErrorType {
+enum LocationError: ErrorProtocol {
     case NoData
 }
 
@@ -28,7 +28,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         return self.lastResult
     }
     
-    init(locationManager:CLLocationManager = CLLocationManager()) {
+    init(locationManager: CLLocationManager = CLLocationManager()) {
         self.locationManager = locationManager
         super.init()
         
@@ -51,17 +51,14 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     // MARK: - CLLocationManagerDelegate
     
-    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        #if os(iOS)
-            switch status {
-            case .AuthorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-            default:
-                locationManager.requestWhenInUseAuthorization()
-            }
-        #elseif os(OSX)
+    
+    public func locationManager(manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-        #endif
+        default:
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -70,7 +67,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         self.lastResult = result
     }
     
-    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(manager: CLLocationManager, didUpdate locations: [CLLocation]) {
         if let currentLocation = locations.first {
             if shouldUpdateWithLocation(currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
@@ -105,7 +102,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     private func shouldUpdateWithLocation(location: CLLocation) -> Bool {
         switch lastResult {
         case .Success(let loc):
-            return location.distanceFromLocation(loc.physical) > 100
+            return location.distance(from: loc.physical) > 100
         case .Failure:
             return true
         }

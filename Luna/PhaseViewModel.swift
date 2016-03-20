@@ -21,7 +21,7 @@ struct PhaseViewModel {
     }
     
     var date: String {
-        return self.formatter.stringFromDate(phase.date)
+        return self.formatter.string(from: phase.date)
     }
     
     private var formatter: NSDateFormatter {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PhaseModelError: ErrorType {
+enum PhaseModelError: ErrorProtocol {
     case NoMoon
     case NoPhases
 }
@@ -126,7 +126,7 @@ class LunarPhaseModel: NSObject {
         }
     }
     
-    private func postErrorNotification(error: ErrorType) -> Void {
+    private func postErrorNotification(error: ErrorProtocol) -> Void {
         if let taskError = error as? NetworkError {
             let info = taskError.info
             NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: info)

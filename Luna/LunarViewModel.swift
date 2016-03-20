@@ -21,15 +21,15 @@ struct LunarViewModel {
     }
     
     var phase: String {
-        return moon.phase.capitalizedString
+        return moon.phase.capitalized
     }
     
     var rise: String {
-        return self.formatter.stringFromDate(moon.rise)
+        return self.formatter.string(from: moon.rise)
     }
     
     var set: String {
-        return self.formatter.stringFromDate(moon.set)
+        return self.formatter.string(from: moon.set)
     }
     
     var age: String {
