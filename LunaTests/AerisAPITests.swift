@@ -21,10 +21,10 @@ class AerisAPITests: XCTestCase {
     func testCanGenerateMoonRequest() {
         let request = AerisAPI.Moon(location.physical).request
         
-        XCTAssertNotNil(request.URL, "Request URL should not be nil")
-        XCTAssertEqual(request.URL!.path!, "/sunmoon/25.7877,-80.2241", "Request URL path is wrong")
+        XCTAssertNotNil(request.url, "Request URL should not be nil")
+        XCTAssertEqual(request.url!.path!, "/sunmoon/25.7877,-80.2241", "Request URL path is wrong")
         
-        let parameters = queryParameters(request.URL!.query!)
+        let parameters = queryParameters(request.url!.query!)
         
         XCTAssertTrue(parameters.contains("client_id"), "client_id query parameter is missing")
         XCTAssertTrue(parameters.contains("client_secret"), "client_secret query parameter is missing")
@@ -33,10 +33,10 @@ class AerisAPITests: XCTestCase {
     func testCanGeneratePhasesRequest() {
         let request = AerisAPI.MoonPhases(location.physical).request
         
-        XCTAssertNotNil(request.URL, "URL should not be nil")
-        XCTAssertEqual(request.URL!.path!, "/sunmoon/moonphases/25.7877,-80.2241", "Request URL path is wrong")
+        XCTAssertNotNil(request.url, "URL should not be nil")
+        XCTAssertEqual(request.url!.path!, "/sunmoon/moonphases/25.7877,-80.2241", "Request URL path is wrong")
         
-        let parameters = queryParameters(request.URL!.query!)
+        let parameters = queryParameters(request.url!.query!)
         
         XCTAssertTrue(parameters.contains("client_id"), "client_id query parameter is missing")
         XCTAssertTrue(parameters.contains("client_secret"), "client_secret query parameter is missing")

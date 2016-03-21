@@ -18,18 +18,8 @@ class NetworkControllerTests: XCTestCase {
         return location
     }
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testCanRequestMoonSuccessfully() {
-        let expectation = expectationWithDescription("Request should be successful")
+        let expected = expectation(withDescription: "Request should be successful")
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
@@ -38,17 +28,17 @@ class NetworkControllerTests: XCTestCase {
         networkController.startRequest(request, result: { (result) -> Void in
             switch result {
             case .Success:
-                expectation.fulfill()
+                expected.fulfill()
             case .Failure:
                 XCTFail("Request should not fail")
             }
         })
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(withTimeout: timeout, handler: nil)
     }
     
     func testCanRequestPhasesSuccessfully() {
-        let expectation = expectationWithDescription("Request should be successful")
+        let expected = expectation(withDescription: "Request should be successful")
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
@@ -57,17 +47,17 @@ class NetworkControllerTests: XCTestCase {
         networkController.startRequest(request, result: { (result) -> Void in
             switch result {
             case .Success:
-                expectation.fulfill()
+                expected.fulfill()
             case .Failure:
                 XCTFail("Request should not fail")
             }
         })
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(withTimeout: timeout, handler: nil)
     }
     
     func testCanHandleBadStatusCode() {
-        let expectation = expectationWithDescription("Request should not be successful")
+        let expected = expectation(withDescription: "Request should not be successful")
         let configuration = NSURLSessionConfiguration.configurationWithProtocol(BadStatusURLProtocol)
         let networkController = NetworkController(configuration: configuration)
         
@@ -78,10 +68,10 @@ class NetworkControllerTests: XCTestCase {
             case .Success:
                 XCTFail("Request should fail")
             case .Failure:
-                expectation.fulfill()
+                expected.fulfill()
             }
         })
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(withTimeout: timeout, handler: nil)
     }
 }

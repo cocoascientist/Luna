@@ -9,24 +9,25 @@
 import Foundation
 
 class BadStatusURLProtocol: NSURLProtocol {
-    override class func canInitWithRequest(request: NSURLRequest) -> Bool {
+
+    override class func canInit(with request: NSURLRequest) -> Bool {
         return true
     }
     
-    override class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest {
+    override class func canonicalRequest(for request: NSURLRequest) -> NSURLRequest {
         return request
     }
     
     override func startLoading() {
         guard let client = self.client else { fatalError("Client is missing") }
-        guard let url = request.URL else { fatalError("URL is missing") }
+        guard let url = request.url else { fatalError("URL is missing") }
         
-        guard let response = NSHTTPURLResponse(URL: url, statusCode: 404, HTTPVersion: "HTTP/1.1", headerFields: nil) else {
+        guard let response = NSHTTPURLResponse(url: url, statusCode: 404, httpVersion: "HTTP/1.1", headerFields: nil) else {
             fatalError("Response could not be created")
         }
         
-        client.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
-        client.URLProtocolDidFinishLoading(self)
+        client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client.urlProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() {

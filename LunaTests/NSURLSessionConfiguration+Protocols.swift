@@ -12,7 +12,7 @@ extension NSURLSessionConfiguration {
     class func configurationWithProtocol(protocolClass: AnyClass) -> NSURLSessionConfiguration {
         let protocolClasses: [AnyClass]? = [protocolClass]
         
-        let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+        let configuration = NSURLSessionConfiguration.ephemeral()
         configuration.protocolClasses = protocolClasses
         
         return configuration

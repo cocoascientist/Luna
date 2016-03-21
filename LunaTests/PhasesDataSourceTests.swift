@@ -38,12 +38,12 @@ class PhasesDataSourceTests: XCTestCase {
     
     func testReloadsTableViewWhenSet() {
         let tableView = FakeTableView()
-        tableView.expectation = expectationWithDescription("reloadData should be called")
+        tableView.expectation = expectation(withDescription: "reloadData should be called")
         
         let dataSource = PhasesDataSource(model: model)
         dataSource.configureUsing(tableView)
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(withTimeout: timeout, handler: nil)
     }
     
 //    func testHandlesPhasesUpdateNotification() {

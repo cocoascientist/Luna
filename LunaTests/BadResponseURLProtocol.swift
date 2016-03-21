@@ -9,22 +9,23 @@
 import Foundation
 
 class BadResponseURLProtocol: NSURLProtocol {
-    override class func canInitWithRequest(request: NSURLRequest) -> Bool {
+    
+    override class func canInit(with request: NSURLRequest) -> Bool {
         return true
     }
     
-    override class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest {
+    override class func canonicalRequest(for request: NSURLRequest) -> NSURLRequest {
         return request
     }
     
     override func startLoading() {
         guard let client = self.client else { fatalError("Client is missing") }
-        guard let url = request.URL else { fatalError("URL is missing") }
+        guard let url = request.url else { fatalError("URL is missing") }
         
-        let response = NSURLResponse(URL: url, MIMEType: nil, expectedContentLength: 0, textEncodingName: nil)
+        let response = NSURLResponse(url: url, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
         
-        client.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
-        client.URLProtocolDidFinishLoading(self)
+        client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client.urlProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() {

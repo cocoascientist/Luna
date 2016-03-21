@@ -44,18 +44,18 @@ class LunarPhaseModelTests: XCTestCase {
     // MARK: - Private
     
     private func waitForAndExpectNotification(name:String) -> Void {
-        let expectation = expectationWithDescription("Notification should be posted")
+        let expected = expectation(withDescription: "Notification should be posted")
         var token: dispatch_once_t = 0
         
         let responseBlock = { (notification: NSNotification!) -> Void in
             dispatch_once(&token, { () -> Void in
-                expectation.fulfill()
+                expected.fulfill()
             })
         }
         
-        NSNotificationCenter.defaultCenter().addObserverForName(name, object: nil, queue: nil, usingBlock: responseBlock)
+        NSNotificationCenter.defaultCenter().addObserver(forName: name, object: nil, queue: nil, using: responseBlock)
         
-        waitForExpectationsWithTimeout(timeout, handler: nil)
+        waitForExpectations(withTimeout: timeout, handler: nil)
     }
 
     private func modelUsingProtocol(protocolClass: AnyClass) -> LunarPhaseModel {

@@ -9,27 +9,28 @@
 import Foundation
 
 class LocalURLProtocol: NSURLProtocol {
-    override class func canInitWithRequest(request: NSURLRequest) -> Bool {
+    
+    override class func canInit(with request: NSURLRequest) -> Bool {
         return true
     }
     
-    override class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest {
+    override class func canonicalRequest(for request: NSURLRequest) -> NSURLRequest {
         return request
     }
     
     override func startLoading() {
         guard let client = self.client else { fatalError("Client is missing") }
-        guard let url = request.URL else { fatalError("URL is missing") }
+        guard let url = request.url else { fatalError("URL is missing") }
         
         let data = self.dataForRequest(request)
         let headers = ["Content-Type": "application/json"]
-        guard let response = NSHTTPURLResponse(URL: url, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: headers) else {
+        guard let response = NSHTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: headers) else {
             fatalError("Response could not be created")
         }
         
-        client.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
-        client.URLProtocol(self, didLoadData: data)
-        client.URLProtocolDidFinishLoading(self)
+        client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client.urlProtocol(self, didLoad: data)
+        client.urlProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() {
@@ -37,13 +38,13 @@ class LocalURLProtocol: NSURLProtocol {
     }
     
     private func dataForRequest(request: NSURLRequest) -> NSData {
-        if let path = request.URL?.path {
+        if let path = request.url?.path {
             var json: String?
-            if path.rangeOfString("/sunmoon/moonphases/") != nil {
-                json = NSBundle(forClass: self.dynamicType).pathForResource("moonphases", ofType: "json")
+            if path.range(of: "/sunmoon/moonphases/") != nil {
+                json = NSBundle(for: self.dynamicType).path(forResource: "moonphases", ofType: "json")
             }
-            else if path.rangeOfString("/sunmoon/") != nil {
-                json = NSBundle(forClass: self.dynamicType).pathForResource("sunmoon", ofType: "json")
+            else if path.range(of: "/sunmoon/") != nil {
+                json = NSBundle(for: self.dynamicType).path(forResource: "sunmoon", ofType: "json")
             }
             
             if json != nil {
