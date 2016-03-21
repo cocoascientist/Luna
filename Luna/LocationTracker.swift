@@ -51,7 +51,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     // MARK: - CLLocationManagerDelegate
     
-    
+    @objc(locationManager:didChangeAuthorizationStatus:)
     public func locationManager(manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse:
@@ -67,6 +67,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         self.lastResult = result
     }
     
+    @objc(locationManager:didUpdateLocations:)
     public func locationManager(manager: CLLocationManager, didUpdate locations: [CLLocation]) {
         if let currentLocation = locations.first {
             if shouldUpdateWithLocation(currentLocation) {
