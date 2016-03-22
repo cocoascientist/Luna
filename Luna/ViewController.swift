@@ -8,7 +8,7 @@
 
 import UIKit
 
-let myContext = UnsafeMutablePointer<Void>()
+let myContext = UnsafeMutablePointer<Void>(nil)
 
 class ViewController: UIViewController {
     
@@ -56,8 +56,8 @@ class ViewController: UIViewController {
         
         self.dataSource.configureUsing(tableView)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "modelDidUpdate:", name: MoonDidUpdateNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveError:", name: LunarModelDidReceiveErrorNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: MoonDidUpdateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: LunarModelDidReceiveErrorNotification, object: nil)
         
         self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.New, context: myContext)
     }

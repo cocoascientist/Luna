@@ -26,7 +26,7 @@ class PhasesDataSource: NSObject, UITableViewDataSource {
         self.model = model
         super.init()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "phasesDidUpdate:", name: PhasesDidUpdateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: PhasesDidUpdateNotification, object: nil)
     }
     
     func configureUsing(tableView: UITableView) -> Void {

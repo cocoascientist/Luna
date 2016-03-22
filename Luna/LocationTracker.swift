@@ -38,9 +38,9 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         
         self.locationManager.startUpdatingLocation()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleBackgroundNotification:", name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleForegroundNotification:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     // MARK: - Public
