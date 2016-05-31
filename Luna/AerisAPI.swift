@@ -31,12 +31,12 @@ enum AerisAPI: Request {
         case .Moon(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = queryWithParameters(parameters)
+            let queryString = queryWithParameters(parameters: parameters)
             return "\(baseURL)/sunmoon/\(latitude),\(longitude)?\(queryString)"
         case .MoonPhases(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = queryWithParameters(parameters)
+            let queryString = queryWithParameters(parameters: parameters)
             return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?\(queryString)"
         }
     }

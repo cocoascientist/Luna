@@ -35,7 +35,7 @@ public class PhaseTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor.clear()
     }
 
-    public override func setSelected(selected: Bool, animated: Bool) {
+    public override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

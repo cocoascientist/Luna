@@ -38,9 +38,9 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         
         self.locationManager.startUpdatingLocation()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.default().addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.default().addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     // MARK: - Public
@@ -52,7 +52,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     // MARK: - CLLocationManagerDelegate
     
     @objc(locationManager:didChangeAuthorizationStatus:)
-    public func locationManager(manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
+    public func locationManager(_ manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
@@ -61,20 +61,20 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    @objc(locationManager:didFailWithError:) public func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
         let result = LocationResult.Failure(NetworkError.Other)
-        self.publishChangeWithResult(result)
+        self.publishChangeWithResult(result: result)
         self.lastResult = result
     }
     
     @objc(locationManager:didUpdateLocations:)
-    public func locationManager(manager: CLLocationManager, didUpdate locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdate locations: [CLLocation]) {
         if let currentLocation = locations.first {
-            if shouldUpdateWithLocation(currentLocation) {
+            if shouldUpdateWithLocation(location: currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
                 
                 let result = LocationResult.Success(location)
-                self.publishChangeWithResult(result)
+                self.publishChangeWithResult(result: result)
                 self.lastResult = result
             }
             
@@ -84,16 +84,16 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     // MARK: - Private
     
-    func handleBackgroundNotification(notification: NSNotification) {
+    func handleBackgroundNotification(_ notification: NSNotification) {
         self.locationManager.stopUpdatingLocation()
     }
     
-    func handleForegroundNotification(notification: NSNotification) {
+    func handleForegroundNotification(_ notification: NSNotification) {
         self.locationManager.startUpdatingLocation()
     }
     
     private func publishChangeWithResult(result: LocationResult) {
-        if self.shouldUpdateWithResult(result) {
+        if self.shouldUpdateWithResult(result: result) {
             let _ = observers.map { (observer) -> Void in
                 observer(location: result)
             }
@@ -113,7 +113,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         switch lastResult {
         case .Success(let loc):
             let location = loc.physical
-            return self.shouldUpdateWithLocation(location)
+            return self.shouldUpdateWithLocation(location: location)
         case .Failure:
             return true
         }

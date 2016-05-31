@@ -21,7 +21,7 @@ extension String {
     }
     
     static func queryString(parameters: QueryParameters) -> String {
-        return queryWithParameters(parameters)
+        return queryWithParameters(parameters: parameters)
     }
 }
 

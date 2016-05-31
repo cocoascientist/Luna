@@ -12,8 +12,8 @@ protocol ResultType {
     init(success value: Value)
     init(failure error: ErrorProtocol)
     
-    func map<U>(f: (Value) -> U) -> Result<U>
-    func flatMap<U>(f: Value -> Result<U>) -> Result<U>
+    func map<U>(_ f: (Value) -> U) -> Result<U>
+    func flatMap<U>(_ f: (Value) -> Result<U>) -> Result<U>
 }
 
 public enum Result<T>: ResultType {
@@ -30,7 +30,7 @@ public enum Result<T>: ResultType {
 }
 
 extension Result {
-    func map<U>(f: T -> U) -> Result<U> {
+    func map<U>(_ f: (T) -> U) -> Result<U> {
         switch self {
         case let .Success(value):
             return Result<U>.Success(f(value))
@@ -39,11 +39,11 @@ extension Result {
         }
     }
     
-    func flatMap<U>(f: T -> Result<U>) -> Result<U> {
+    func flatMap<U>(_ f: (T) -> Result<U>) -> Result<U> {
         return Result.flatten(map(f))
     }
     
-    static func flatten<T>(result: Result<Result<T>>) -> Result<T> {
+    static func flatten<T>(_ result: Result<Result<T>>) -> Result<T> {
         switch result {
         case let .Success(innerResult):
             return innerResult

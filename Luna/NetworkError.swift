@@ -69,7 +69,7 @@ extension NetworkError: CustomDebugStringConvertible {
         }
     }
     
-    var info: [String: AnyObject] {
+    var info: [String: String] {
         return ["title": self.summary, "message": self.message]
     }
 }

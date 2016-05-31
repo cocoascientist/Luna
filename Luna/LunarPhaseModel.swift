@@ -29,13 +29,13 @@ class LunarPhaseModel: NSObject {
     
     private var moon: Moon? {
         didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName(MoonDidUpdateNotification, object: nil)
+            NSNotificationCenter.default().post(name: MoonDidUpdateNotification, object: nil)
         }
     }
     
     private var phases: [Phase]? {
         didSet {
-            NSNotificationCenter.defaultCenter().postNotificationName(PhasesDidUpdateNotification, object: nil)
+            NSNotificationCenter.default().post(name: PhasesDidUpdateNotification, object: nil)
         }
     }
     
@@ -48,17 +48,17 @@ class LunarPhaseModel: NSObject {
         self.locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
             case .Success(let location):
-                self.updateLunarPhase(location)
+                self.updateLunarPhase(location: location)
             case .Failure(let reason):
-                self.postErrorNotification(reason)
+                self.postErrorNotification(error: reason)
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: "UIApplicationDidBecomeActiveNotification", object: nil)
+        NSNotificationCenter.default().addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: "UIApplicationDidBecomeActiveNotification", object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.default().removeObserver(self)
     }
     
     var currentMoon: CurrentMoon {
@@ -78,7 +78,7 @@ class LunarPhaseModel: NSObject {
     }
     
     func updateLunarPhase(location: Location) -> Void {
-        let group = dispatch_group_create()
+        guard let group = dispatch_group_create() else { fatalError() }
         
         dispatch_group_enter(group)
         dispatch_group_enter(group)
@@ -93,7 +93,7 @@ class LunarPhaseModel: NSObject {
             case .Success(let moon):
                 self.moon = moon
             case .Failure(let error):
-                self.postErrorNotification(error)
+                self.postErrorNotification(error: error)
             }
             
             dispatch_group_leave(group)
@@ -109,7 +109,7 @@ class LunarPhaseModel: NSObject {
             case .Success(let phases):
                 self.phases = phases
             case .Failure(let error):
-                self.postErrorNotification(error)
+                self.postErrorNotification(error: error)
             }
             
             dispatch_group_leave(group)
@@ -117,10 +117,10 @@ class LunarPhaseModel: NSObject {
         
         self.loading = true
         
-        networkController.startRequest(moonRequest, result: moonResult)
-        networkController.startRequest(phasesRequest, result: phasesResult)
+        networkController.start(request: moonRequest, result: moonResult)
+        networkController.start(request: phasesRequest, result: phasesResult)
         
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        guard let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) else { fatalError() }
         dispatch_group_notify(group, queue) { () -> Void in
             self.loading = false
         }
@@ -129,17 +129,17 @@ class LunarPhaseModel: NSObject {
     private func postErrorNotification(error: ErrorProtocol) -> Void {
         if let taskError = error as? NetworkError {
             let info = taskError.info
-            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: info)
+            NSNotificationCenter.default().post(name: LunarModelDidReceiveErrorNotification, object: nil, userInfo: info)
         }
         else {
-            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
+            NSNotificationCenter.default().post(name: LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
         }
     }
     
-    func applicationDidResume(notification: NSNotification) -> Void {
+    func applicationDidResume(_ notification: NSNotification) -> Void {
         switch locationTracker.currentLocation {
         case .Success(let location):
-            updateLunarPhase(location)
+            updateLunarPhase(location: location)
         case .Failure:
             break
         }

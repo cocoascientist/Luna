@@ -15,7 +15,7 @@ class NetworkController: Reachable {
     let configuration: NSURLSessionConfiguration
     private let session: NSURLSession
     
-    init(configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()) {
+    init(configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.default()) {
         self.configuration = configuration
         
         let delegate = SessionDelegate()
@@ -29,11 +29,11 @@ class NetworkController: Reachable {
     
     private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
         
-        @objc private func urlSession(session: NSURLSession, didReceive challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-            completionHandler(.useCredential, NSURLCredential(for: challenge.protectionSpace.serverTrust!))
+        @objc(URLSession:didReceiveChallenge:completionHandler:) private func urlSession(_ session: NSURLSession, didReceive challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+            completionHandler(.useCredential, NSURLCredential(trust: challenge.protectionSpace.serverTrust!))
         }
         
-        @objc private func urlSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
+        @objc(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:) private func urlSession(_ session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
             completionHandler(request)
         }
     }
@@ -47,7 +47,7 @@ class NetworkController: Reachable {
     - returns: An NSURLSessionTask associated with the request
     */
     
-    func startRequest(request: NSURLRequest, result: TaskResult) {
+    func start(request: NSURLRequest, result: TaskResult) {
         
         // handle the task completion job on the main thread
         let finished: TaskResult = {(taskResult) in

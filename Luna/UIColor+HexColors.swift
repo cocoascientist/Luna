@@ -13,19 +13,23 @@ import UIKit
 extension UIColor {
     
     class func hexColor(string: String) -> UIColor {
-        let set = NSCharacterSet.whitespaceAndNewline() as NSCharacterSet
+        let set = NSCharacterSet.whitespacesAndNewlines() as NSCharacterSet
         var colorString = string.trimmingCharacters(in: set).uppercased()
         
-        if (colorString.hasPrefix("#")) {
-            colorString = colorString.substring(from: colorString.startIndex.advanced(by: 1))
-        }
+//        if (colorString.hasPrefix("#")) {
+//            
+//            let someting = colorString.startIndex
+//            
+//            let index = colorString.startIndex.sub
+//            colorString = colorString.substring(from: 1)
+//        }
         
         if (colorString.characters.count != 6) {
             return UIColor.gray()
         }
         
         var rgbValue: UInt32 = 0
-        NSScanner(string: colorString).scanHexInt(&rgbValue)
+        NSScanner(string: colorString).scanHexInt32(&rgbValue)
         
         return UIColor(
             red:   CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,

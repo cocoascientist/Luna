@@ -31,19 +31,19 @@ class LunarPhaseView: UIView {
         super.init(coder: aDecoder)
     }
     
-    override func draw(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let phase = self.date.moonPhase()
-        let diameter = Double(CGRectGetWidth(rect))
+        let diameter = Double(rect.width)
         let radius = Int(diameter / 2)
         
         for Ypos in 0...radius {
             let Xpos = sqrt(Double((radius * radius) - Ypos*Ypos))
             
-            let pB1 = CGPointMake(CGFloat(Double(radius)-Xpos), CGFloat(Double(Ypos)+Double(radius)))
-            let pB2 = CGPointMake(CGFloat(Xpos+Double(radius)), CGFloat(Double(Ypos)+Double(radius)))
+            let pB1 = CGPoint(x: CGFloat(Double(radius)-Xpos), y: CGFloat(Double(Ypos)+Double(radius)))
+            let pB2 = CGPoint(x: CGFloat(Xpos+Double(radius)), y: CGFloat(Double(Ypos)+Double(radius)))
             
-            let pB3 = CGPointMake(CGFloat(Double(radius)-Xpos), CGFloat(Double(radius)-Double(Ypos)))
-            let pB4 = CGPointMake(CGFloat(Xpos+Double(radius)), CGFloat(Double(radius)-Double(Ypos)))
+            let pB3 = CGPoint(x: CGFloat(Double(radius)-Xpos), y: CGFloat(Double(radius)-Double(Ypos)))
+            let pB4 = CGPoint(x: CGFloat(Xpos+Double(radius)), y: CGFloat(Double(radius)-Double(Ypos)))
             
             let path = UIBezierPath()
             path.move(to: pB1)
@@ -67,10 +67,10 @@ class LunarPhaseView: UIView {
                 Xpos2 = Double(Xpos) - (2.0 * phase * Double(Rpos)) + Double(Rpos)
             }
             
-            let pW1 = CGPointMake(CGFloat(Xpos1+Double(radius)), CGFloat(Double(radius)-Double(Ypos)))
-            let pW2 = CGPointMake(CGFloat(Xpos2+Double(radius)), CGFloat(Double(radius)-Double(Ypos)))
-            let pW3 = CGPointMake(CGFloat(Xpos1+Double(radius)), CGFloat(Double(Ypos)+Double(radius)))
-            let pW4 = CGPointMake(CGFloat(Xpos2+Double(radius)), CGFloat(Double(Ypos)+Double(radius)))
+            let pW1 = CGPoint(x: CGFloat(Xpos1+Double(radius)), y: CGFloat(Double(radius)-Double(Ypos)))
+            let pW2 = CGPoint(x: CGFloat(Xpos2+Double(radius)), y: CGFloat(Double(radius)-Double(Ypos)))
+            let pW3 = CGPoint(x: CGFloat(Xpos1+Double(radius)), y: CGFloat(Double(Ypos)+Double(radius)))
+            let pW4 = CGPoint(x: CGFloat(Xpos2+Double(radius)), y: CGFloat(Double(Ypos)+Double(radius)))
             
             let path2 = UIBezierPath()
             path2.move(to: pW1)
