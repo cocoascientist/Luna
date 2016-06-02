@@ -16,13 +16,10 @@ extension UIColor {
         let set = NSCharacterSet.whitespacesAndNewlines() as NSCharacterSet
         var colorString = string.trimmingCharacters(in: set).uppercased()
         
-//        if (colorString.hasPrefix("#")) {
-//            
-//            let someting = colorString.startIndex
-//            
-//            let index = colorString.startIndex.sub
-//            colorString = colorString.substring(from: 1)
-//        }
+        if (colorString.hasPrefix("#")) {
+            let index = colorString.index(after: colorString.startIndex)
+            colorString = colorString[index..<colorString.endIndex]
+        }
         
         if (colorString.characters.count != 6) {
             return UIColor.gray()
