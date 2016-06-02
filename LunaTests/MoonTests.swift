@@ -12,7 +12,7 @@ import XCTest
 class MoonTests: XCTestCase {
     
     func testMoonIsCreatedFromJSON() {
-        let file = NSBundle(for: self.dynamicType).path(forResource: "sunmoon", ofType: "json")
+        let file = NSBundle(for: self.dynamicType).pathForResource("sunmoon", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
         do {

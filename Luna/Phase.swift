@@ -36,7 +36,7 @@ extension Phase: JSONConstructable {
 }
 
 extension Phase {
-    static func phaseFromJSON(json: JSON) -> PhaseResult {
+    static func phaseFromJSON(_ json: JSON) -> PhaseResult {
         if let phase = Phase(json: json) {
             return PhaseResult.Success(phase)
         } else {
@@ -44,7 +44,7 @@ extension Phase {
         }
     }
     
-    static func phasesFromJSON(json: JSON) -> PhasesResult {
+    static func phasesFromJSON(_ json: JSON) -> PhasesResult {
         guard let data = json["response"] as? [JSON] else {
             return .Failure(JSONError.BadFormat)
         }

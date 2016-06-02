@@ -20,12 +20,12 @@ class NetworkControllerTests: XCTestCase {
 
     func testCanRequestMoonSuccessfully() {
         let expected = expectation(withDescription: "Request should be successful")
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         
         let request = AerisAPI.Moon(location.physical).request
         
-        networkController.startRequest(request, result: { (result) -> Void in
+        networkController.start(request: request, result: { (result) -> Void in
             switch result {
             case .Success:
                 expected.fulfill()
@@ -39,12 +39,12 @@ class NetworkControllerTests: XCTestCase {
     
     func testCanRequestPhasesSuccessfully() {
         let expected = expectation(withDescription: "Request should be successful")
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         
         let request = AerisAPI.MoonPhases(location.physical).request
         
-        networkController.startRequest(request, result: { (result) -> Void in
+        networkController.start(request: request, result: { (result) -> Void in
             switch result {
             case .Success:
                 expected.fulfill()
@@ -58,12 +58,12 @@ class NetworkControllerTests: XCTestCase {
     
     func testCanHandleBadStatusCode() {
         let expected = expectation(withDescription: "Request should not be successful")
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(BadStatusURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: BadStatusURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         
         let request = AerisAPI.MoonPhases(location.physical).request
         
-        networkController.startRequest(request, result: { (result) -> Void in
+        networkController.start(request: request, result: { (result) -> Void in
             switch result {
             case .Success:
                 XCTFail("Request should fail")

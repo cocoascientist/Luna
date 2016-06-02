@@ -12,7 +12,7 @@ import XCTest
 class PhaseTests: XCTestCase {
 
     func testPhasesAreCreatedFromJSON() {
-        let file = NSBundle(for: self.dynamicType).path(forResource: "moonphases", ofType: "json")
+        let file = NSBundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
         do {
@@ -31,7 +31,7 @@ class PhaseTests: XCTestCase {
     }
     
     func testPhaseIsCreatedFromJSON() {
-        let file = NSBundle(for: self.dynamicType).path(forResource: "moonphases", ofType: "json")
+        let file = NSBundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
         let data = NSData(contentsOfFile: file!)
         
         do {

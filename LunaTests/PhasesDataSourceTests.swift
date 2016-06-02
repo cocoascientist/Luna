@@ -23,14 +23,14 @@ class PhasesDataSourceTests: XCTestCase {
     class FakeDataSource: PhasesDataSource {
         var expectation: XCTestExpectation?
         
-        override func phasesDidUpdate(notification: NSNotification) {
+        override func phasesDidUpdate(_ notification: NSNotification) {
             expectation?.fulfill()
             super.phasesDidUpdate(notification)
         }
     }
     
     var model: LunarPhaseModel {
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(LocalURLProtocol)
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         let model = LunarPhaseModel(networkController: networkController)
         return model
@@ -41,7 +41,7 @@ class PhasesDataSourceTests: XCTestCase {
         tableView.expectation = expectation(withDescription: "reloadData should be called")
         
         let dataSource = PhasesDataSource(model: model)
-        dataSource.configureUsing(tableView)
+        dataSource.configureUsing(tableView: tableView)
         
         waitForExpectations(withTimeout: timeout, handler: nil)
     }

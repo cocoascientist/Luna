@@ -37,14 +37,14 @@ class LocalURLProtocol: NSURLProtocol {
         // all data return at once, nothing to do
     }
     
-    private func dataForRequest(request: NSURLRequest) -> NSData {
+    private func dataForRequest(_ request: NSURLRequest) -> NSData {
         if let path = request.url?.path {
             var json: String?
             if path.range(of: "/sunmoon/moonphases/") != nil {
-                json = NSBundle(for: self.dynamicType).path(forResource: "moonphases", ofType: "json")
+                json = NSBundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
             }
             else if path.range(of: "/sunmoon/") != nil {
-                json = NSBundle(for: self.dynamicType).path(forResource: "sunmoon", ofType: "json")
+                json = NSBundle(for: self.dynamicType).pathForResource("sunmoon", ofType: "json")
             }
             
             if json != nil {

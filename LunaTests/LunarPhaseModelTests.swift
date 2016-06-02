@@ -21,29 +21,29 @@ class LunarPhaseModelTests: XCTestCase {
     }
 
     func testMoonDidUpdateNotificationIsPosted() {
-        let model = modelUsingProtocol(LocalURLProtocol)
-        model.updateLunarPhase(location)
+        let model = modelUsingProtocol(LocalURLProtocol.self)
+        model.updateLunarPhase(location: location)
         
-        waitForAndExpectNotification(MoonDidUpdateNotification)
+        waitForAndExpectNotificationNamed(MoonDidUpdateNotification)
     }
     
     func testPhasesDidUpdateNotificationIsPosted() {
-        let model = modelUsingProtocol(LocalURLProtocol)
-        model.updateLunarPhase(location)
+        let model = modelUsingProtocol(LocalURLProtocol.self)
+        model.updateLunarPhase(location: location)
         
-        waitForAndExpectNotification(PhasesDidUpdateNotification)
+        waitForAndExpectNotificationNamed(PhasesDidUpdateNotification)
     }
     
     func testErrorNotificationIsPosted() {
-        let model = modelUsingProtocol(FailingURLProtocol)
-        model.updateLunarPhase(location)
+        let model = modelUsingProtocol(FailingURLProtocol.self)
+        model.updateLunarPhase(location: location)
         
-        waitForAndExpectNotification(LunarModelDidReceiveErrorNotification)
+        waitForAndExpectNotificationNamed(LunarModelDidReceiveErrorNotification)
     }
     
     // MARK: - Private
     
-    private func waitForAndExpectNotification(name:String) -> Void {
+    private func waitForAndExpectNotificationNamed(_ name:String) -> Void {
         let expected = expectation(withDescription: "Notification should be posted")
         var token: dispatch_once_t = 0
         
@@ -53,13 +53,13 @@ class LunarPhaseModelTests: XCTestCase {
             })
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(forName: name, object: nil, queue: nil, using: responseBlock)
+        NSNotificationCenter.default().addObserver(forName: name, object: nil, queue: nil, using: responseBlock)
         
         waitForExpectations(withTimeout: timeout, handler: nil)
     }
 
-    private func modelUsingProtocol(protocolClass: AnyClass) -> LunarPhaseModel {
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass)
+    private func modelUsingProtocol(_ protocolClass: AnyClass) -> LunarPhaseModel {
+        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: protocolClass)
         let networkController = NetworkController(configuration: configuration)
         return LunarPhaseModel(networkController: networkController)
     }
