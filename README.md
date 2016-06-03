@@ -8,11 +8,8 @@ Read a full write up about the development of Luna at [cocoascientist.com](http:
 
 ## Requirements
 
-* Xcode 7.3
-* Swift 2.2
-
-*For Swift 3 support, checkout the [`development`](https://github.com/cocoascientist/Luna/tree/development) branch.*
-
+* Xcode 7.3.1
+* Swift 3
 
 ## Screenshot
 
