@@ -11,6 +11,9 @@ Read a full write up about the development of Luna at [cocoascientist.com](http:
 * Xcode 7.3
 * Swift 2.2
 
+*For Swift 3 support, checkout the [`development`](https://github.com/cocoascientist/Luna/tree/development) branch.*
+
+
 ## Screenshot
 
 ![](http://i.imgur.com/gDtubrs.gif)
