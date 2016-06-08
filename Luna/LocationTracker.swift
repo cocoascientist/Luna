@@ -17,7 +17,7 @@ enum LocationError: ErrorProtocol {
     case NoData
 }
 
-public class LocationTracker: NSObject, CLLocationManagerDelegate {
+public class LocationTracker: NSObject {
     
     private var lastResult: LocationResult = .Failure(LocationError.NoData)
     private var observers: [Observer] = []
@@ -47,39 +47,6 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     
     func addLocationChangeObserver(observer: Observer) -> Void {
         observers.append(observer)
-    }
-    
-    // MARK: - CLLocationManagerDelegate
-    
-    @objc(locationManager:didChangeAuthorizationStatus:)
-    public func locationManager(_ manager: CLLocationManager, didChange status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
-        default:
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    @objc(locationManager:didFailWithError:) public func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
-        let result = LocationResult.Failure(NetworkError.Other)
-        self.publishChangeWithResult(result: result)
-        self.lastResult = result
-    }
-    
-    @objc(locationManager:didUpdateLocations:)
-    public func locationManager(_ manager: CLLocationManager, didUpdate locations: [CLLocation]) {
-        if let currentLocation = locations.first {
-            if shouldUpdateWithLocation(location: currentLocation) {
-                let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
-                
-                let result = LocationResult.Success(location)
-                self.publishChangeWithResult(result: result)
-                self.lastResult = result
-            }
-            
-            // location hasn't changed significantly
-        }
     }
     
     // MARK: - Private
@@ -119,6 +86,43 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
         }
     }
 }
+
+// MARK: - CLLocationManagerDelegate
+
+extension LocationTracker: CLLocationManagerDelegate {
+    
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            locationManager.requestWhenInUseAuthorization()
+        }
+
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
+        let result = LocationResult.Failure(NetworkError.Other)
+        self.publishChangeWithResult(result: result)
+        self.lastResult = result
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.first {
+            if shouldUpdateWithLocation(location: currentLocation) {
+                let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
+                
+                let result = LocationResult.Success(location)
+                self.publishChangeWithResult(result: result)
+                self.lastResult = result
+            }
+            
+            // location hasn't changed significantly
+        }
+    }
+}
+
+// MARK: - Location
 
 public struct Location: Equatable {
     let physical: CLLocation
