@@ -25,11 +25,11 @@ struct LunarViewModel {
     }
     
     var rise: String {
-        return self.formatter.string(from: moon.rise)
+        return self.formatter.string(from: moon.rise as Date)
     }
     
     var set: String {
-        return self.formatter.string(from: moon.set)
+        return self.formatter.string(from: moon.set as Date)
     }
     
     var age: String {
@@ -51,8 +51,8 @@ struct LunarViewModel {
         return "\(percent)% complete"
     }
     
-    private var formatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
+    private var formatter: DateFormatter {
+        let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d yyyy 'at' h:mm a z"
         return formatter
     }

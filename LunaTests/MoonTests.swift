@@ -12,8 +12,8 @@ import XCTest
 class MoonTests: XCTestCase {
     
     func testMoonIsCreatedFromJSON() {
-        let file = NSBundle(for: self.dynamicType).pathForResource("sunmoon", ofType: "json")
-        let data = NSData(contentsOfFile: file!)
+        let file = Bundle(for: self.dynamicType).pathForResource("sunmoon", ofType: "json")
+        let data = Data(contentsOfFile: file!)
         
         do {
             guard let json = try data?.toJSON() else { return XCTFail("No data was found") }

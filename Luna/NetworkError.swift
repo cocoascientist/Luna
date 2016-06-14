@@ -9,62 +9,62 @@
 import Foundation
 
 public enum NetworkError: ErrorProtocol {
-    case BadStatusCode(statusCode: Int)
-    case BadResponse
-    case BadJSON
-    case NoData
-    case Offline
-    case Other
+    case badStatusCode(statusCode: Int)
+    case badResponse
+    case badJSON
+    case noData
+    case offline
+    case other
 }
 
 extension NetworkError: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case .BadResponse:
+        case .badResponse:
             return "Bad response object returned"
-        case .BadJSON:
+        case .badJSON:
             return "Bad JSON object, unable to parse"
-        case .NoData:
+        case .noData:
             return "No response data"
-        case .Offline:
+        case .offline:
             return "Offline"
-        case .BadStatusCode(let statusCode):
+        case .badStatusCode(let statusCode):
             return "Bad status code: \(statusCode)"
-        case .Other(let error):
+        case .other(let error):
             return "\(error)"
         }
     }
     
     public var summary: String {
         switch self {
-        case .BadResponse:
+        case .badResponse:
             return "Bad Response"
-        case .BadJSON:
+        case .badJSON:
             return "Bad JSON Object"
-        case .NoData:
+        case .noData:
             return "No Response Data"
-        case .Offline:
+        case .offline:
             return "Offline"
-        case .BadStatusCode:
+        case .badStatusCode:
             return "Bad Status Code"
-        case .Other:
+        case .other:
             return "Error"
         }
     }
     
     public var message: String {
         switch self {
-        case .BadResponse:
+        case .badResponse:
             return "The server returned a bad response."
-        case .BadJSON:
+        case .badJSON:
             return "A JSON object could not be constructed from the response."
-        case .NoData:
+        case .noData:
             return "No response data was returned."
-        case .Offline:
+        case .offline:
             return "The Internet connection appears to be offline. Please check the network settings and try again"
-        case .BadStatusCode(let statusCode):
+        case .badStatusCode(let statusCode):
             return "A bad status of \(statusCode) was returned from the server. Please try again later."
-        case .Other:
+        case .other:
             return "Error"
         }
     }

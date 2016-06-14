@@ -12,7 +12,7 @@ import XCTest
 class LunarViewModelTests: XCTestCase {
     
     var viewModel: LunarViewModel {
-        let moon = Moon("waning crescent", 24.02, 0.8134, 31, NSDate(), NSDate())
+        let moon = Moon("waning crescent", 24.02, 0.8134, 31, Date(), Date())
         let viewModel = LunarViewModel(moon: moon)
         return viewModel
     }

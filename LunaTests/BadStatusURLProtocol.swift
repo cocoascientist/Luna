@@ -8,13 +8,13 @@
 
 import Foundation
 
-class BadStatusURLProtocol: NSURLProtocol {
+class BadStatusURLProtocol: URLProtocol {
 
-    override class func canInit(with request: NSURLRequest) -> Bool {
+    override class func canInit(with request: URLRequest) -> Bool {
         return true
     }
     
-    override class func canonicalRequest(for request: NSURLRequest) -> NSURLRequest {
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         return request
     }
     
@@ -22,7 +22,7 @@ class BadStatusURLProtocol: NSURLProtocol {
         guard let client = self.client else { fatalError("Client is missing") }
         guard let url = request.url else { fatalError("URL is missing") }
         
-        guard let response = NSHTTPURLResponse(url: url, statusCode: 404, httpVersion: "HTTP/1.1", headerFields: nil) else {
+        guard let response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: "HTTP/1.1", headerFields: nil) else {
             fatalError("Response could not be created")
         }
         

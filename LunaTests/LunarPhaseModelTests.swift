@@ -14,6 +14,10 @@ let timeout = 60.0
 
 class LunarPhaseModelTests: XCTestCase {
     
+    private static var __once: () = { () -> Void in
+                expected.fulfill()
+            }()
+    
     var location: Location {
         let coordinate = CLLocation(latitude: 25.7877, longitude: -80.2241)
         let location = Location(location: coordinate, city: "Miami", state: "FL", neighborhood: "")
@@ -45,21 +49,19 @@ class LunarPhaseModelTests: XCTestCase {
     
     private func waitForAndExpectNotificationNamed(_ name:String) -> Void {
         let expected = expectation(withDescription: "Notification should be posted")
-        var token: dispatch_once_t = 0
+        var token: Int = 0
         
-        let responseBlock = { (notification: NSNotification!) -> Void in
-            dispatch_once(&token, { () -> Void in
-                expected.fulfill()
-            })
+        let responseBlock = { (notification: Notification!) -> Void in
+            _ = LunarPhaseModelTests.__once
         }
         
-        NSNotificationCenter.default().addObserver(forName: name, object: nil, queue: nil, using: responseBlock)
+        NotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: name), object: nil, queue: nil, using: responseBlock)
         
         waitForExpectations(withTimeout: timeout, handler: nil)
     }
 
     private func modelUsingProtocol(_ protocolClass: AnyClass) -> LunarPhaseModel {
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: protocolClass)
+        let configuration = URLSessionConfiguration.configurationWithProtocol(protocolClass: protocolClass)
         let networkController = NetworkController(configuration: configuration)
         return LunarPhaseModel(networkController: networkController)
     }

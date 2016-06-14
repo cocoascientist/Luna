@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension NSURLSessionConfiguration {
-    class func configurationWithProtocol(protocolClass: AnyClass) -> NSURLSessionConfiguration {
+extension URLSessionConfiguration {
+    class func configurationWithProtocol(_ protocolClass: AnyClass) -> URLSessionConfiguration {
         let protocolClasses: [AnyClass]? = [protocolClass]
         
-        let configuration = NSURLSessionConfiguration.ephemeral()
+        let configuration = URLSessionConfiguration.ephemeral()
         configuration.protocolClasses = protocolClasses
         
         return configuration

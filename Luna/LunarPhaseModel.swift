@@ -9,8 +9,8 @@
 import Foundation
 
 enum PhaseModelError: ErrorProtocol {
-    case NoMoon
-    case NoPhases
+    case noMoon
+    case noPhases
 }
 
 typealias CurrentMoon = Result<Moon>
@@ -29,13 +29,13 @@ class LunarPhaseModel: NSObject {
     
     private var moon: Moon? {
         didSet {
-            NSNotificationCenter.default().post(name: MoonDidUpdateNotification, object: nil)
+            NotificationCenter.default().post(name: NSNotification.Name(rawValue: MoonDidUpdateNotification), object: nil)
         }
     }
     
     private var phases: [Phase]? {
         didSet {
-            NSNotificationCenter.default().post(name: PhasesDidUpdateNotification, object: nil)
+            NotificationCenter.default().post(name: NSNotification.Name(rawValue: PhasesDidUpdateNotification), object: nil)
         }
     }
     
@@ -47,72 +47,72 @@ class LunarPhaseModel: NSObject {
         
         self.locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
-            case .Success(let location):
-                self.updateLunarPhase(location: location)
-            case .Failure(let reason):
-                self.postErrorNotification(error: reason)
+            case .success(let location):
+                self.updateLunarPhase(location)
+            case .failure(let reason):
+                self.postErrorNotification(reason)
             }
         }
         
-        NSNotificationCenter.default().addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: "UIApplicationDidBecomeActiveNotification", object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: "UIApplicationDidBecomeActiveNotification", object: nil)
     }
     
     deinit {
-        NSNotificationCenter.default().removeObserver(self)
+        NotificationCenter.default().removeObserver(self)
     }
     
     var currentMoon: CurrentMoon {
         if let moon = self.moon {
-            return .Success(moon)
+            return .success(moon)
         }
         
-        return .Failure(PhaseModelError.NoMoon)
+        return .failure(PhaseModelError.noMoon)
     }
     
     var currentPhases: CurrentPhases {
         if let phases = self.phases {
-            return .Success(phases)
+            return .success(phases)
         }
         
-        return .Failure(PhaseModelError.NoPhases)
+        return .failure(PhaseModelError.noPhases)
     }
     
-    func updateLunarPhase(location: Location) -> Void {
-        guard let group = dispatch_group_create() else { fatalError() }
+    func updateLunarPhase(_ location: Location) -> Void {
+        let group = DispatchGroup()
         
-        dispatch_group_enter(group)
-        dispatch_group_enter(group)
+        group.enter()
+        group.enter()
         
-        let moonRequest = AerisAPI.Moon(location.physical).request
+        let moonRequest = AerisAPI.moon(location.physical).request
         let moonResult: TaskResult = {(result) -> Void in
             
             let json = result.flatMap(JSONResultFromData)
             let moon = json.flatMap(Moon.moonFromJSON)
             
             switch moon {
-            case .Success(let moon):
+            case .success(let moon):
                 self.moon = moon
-            case .Failure(let error):
-                self.postErrorNotification(error: error)
+            case .failure(let error):
+                self.postErrorNotification(error)
             }
             
-            dispatch_group_leave(group)
+            group.leave()
         }
         
-        let phasesRequest = AerisAPI.MoonPhases(location.physical).request
+        let phasesRequest = AerisAPI.moonPhases(location.physical).request
         let phasesResult: TaskResult = {(result) -> Void in
             
             let json = result.flatMap(JSONResultFromData)
             let phases = json.flatMap(Phase.phasesFromJSON)
             
             switch phases {
-            case .Success(let phases):
+            case .success(let phases):
                 self.phases = phases
-            case .Failure(let error):
-                self.postErrorNotification(error: error)
+            case .failure(let error):
+                self.postErrorNotification(error)
             }
             
-            dispatch_group_leave(group)
+            group.leave()
         }
         
         self.loading = true
@@ -120,27 +120,28 @@ class LunarPhaseModel: NSObject {
         networkController.start(request: moonRequest, result: moonResult)
         networkController.start(request: phasesRequest, result: phasesResult)
         
-        guard let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) else { fatalError() }
-        dispatch_group_notify(group, queue) { () -> Void in
+        let queue = DispatchQueue.global()
+        
+        group.notify(queue: queue) {
             self.loading = false
         }
     }
     
-    private func postErrorNotification(error: ErrorProtocol) -> Void {
+    private func postErrorNotification(_ error: ErrorProtocol) -> Void {
         if let taskError = error as? NetworkError {
             let info = taskError.info
-            NSNotificationCenter.default().post(name: LunarModelDidReceiveErrorNotification, object: nil, userInfo: info)
+            NotificationCenter.default().post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: info)
         }
         else {
-            NSNotificationCenter.default().post(name: LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
+            NotificationCenter.default().post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: nil)
         }
     }
     
     func applicationDidResume(_ notification: NSNotification) -> Void {
         switch locationTracker.currentLocation {
-        case .Success(let location):
-            updateLunarPhase(location: location)
-        case .Failure:
+        case .success(let location):
+            updateLunarPhase(location)
+        case .failure:
             break
         }
     }

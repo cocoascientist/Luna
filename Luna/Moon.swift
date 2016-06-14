@@ -17,10 +17,10 @@ struct Moon {
     
     let illumination: Int
     
-    let rise: NSDate
-    let set: NSDate
+    let rise: Date
+    let set: Date
     
-    init(_ phase: String, _ age: Double, _ percent: Double, _ illumination: Int, _ rise: NSDate, _ set: NSDate) {
+    init(_ phase: String, _ age: Double, _ percent: Double, _ illumination: Int, _ rise: Date, _ set: Date) {
         self.phase = phase
         self.age = age
         self.percent = percent
@@ -48,8 +48,8 @@ extension Moon: JSONConstructable {
         let riseInterval = moonObj["rise"] as? Double ?? 0
         let setInterval = moonObj["set"] as? Double ?? 0
         
-        let rise = NSDate(timeIntervalSince1970: riseInterval)
-        let set = NSDate(timeIntervalSince1970: setInterval)
+        let rise = Date(timeIntervalSince1970: riseInterval)
+        let set = Date(timeIntervalSince1970: setInterval)
         
         self.phase = phaseName
         self.age = age
@@ -61,11 +61,11 @@ extension Moon: JSONConstructable {
 }
 
 extension Moon {
-    static func moonFromJSON(json: JSON) -> MoonResult {
+    static func moonFromJSON(_ json: JSON) -> MoonResult {
         if let moon = Moon.init(json: json) {
-            return MoonResult.Success(moon)
+            return MoonResult.success(moon)
         } else {
-            return MoonResult.Failure(JSONError.BadFormat)
+            return MoonResult.failure(JSONError.badFormat)
         }
     }
 }

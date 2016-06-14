@@ -10,8 +10,8 @@ import Foundation
 import SystemConfiguration
 
 public enum ReachabilityType {
-    case Online
-    case Offline
+    case online
+    case offline
 }
 
 protocol Reachable {
@@ -27,12 +27,12 @@ extension Reachable {
         guard let reachable = withUnsafePointer(&address, {
             SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
         }) else {
-            return ReachabilityType.Offline
+            return ReachabilityType.offline
         }
         
         var flags: SCNetworkReachabilityFlags = []
         if !SCNetworkReachabilityGetFlags(reachable, &flags) {
-            return ReachabilityType.Offline
+            return ReachabilityType.offline
         }
         
         return ReachabilityType(reachabilityFlags: flags)
@@ -43,16 +43,16 @@ extension ReachabilityType {
     public init(reachabilityFlags flags: SCNetworkReachabilityFlags) {
         let connectionRequired = flags.contains(.connectionRequired)
         let isReachable = flags.contains(.reachable)
-        self = (!connectionRequired && isReachable) ? .Online : .Offline
+        self = (!connectionRequired && isReachable) ? .online : .offline
     }
 }
 
 extension ReachabilityType: CustomDebugStringConvertible  {
     public var debugDescription: String {
         switch self {
-            case .Online(let type):
+            case .online(let type):
                 return "Online (\(type))"
-            case .Offline:
+            case .offline:
                 return "Offline"
         }
     }

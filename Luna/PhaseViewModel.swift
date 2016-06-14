@@ -21,11 +21,11 @@ struct PhaseViewModel {
     }
     
     var date: String {
-        return self.formatter.string(from: phase.date)
+        return self.formatter.string(from: phase.date as Date)
     }
     
-    private var formatter: NSDateFormatter {
-        let formatter = NSDateFormatter()
+    private var formatter: DateFormatter {
+        let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d yyyy 'at' h:mm a z"
         return formatter
     }

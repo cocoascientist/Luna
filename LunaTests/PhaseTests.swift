@@ -12,8 +12,8 @@ import XCTest
 class PhaseTests: XCTestCase {
 
     func testPhasesAreCreatedFromJSON() {
-        let file = NSBundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
-        let data = NSData(contentsOfFile: file!)
+        let file = Bundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
+        let data = Data(contentsOfFile: file!)
         
         do {
             guard let json = try data?.toJSON() else { return XCTFail("No data was found") }
@@ -21,7 +21,7 @@ class PhaseTests: XCTestCase {
             switch result {
             case .Success(let phases):
                 XCTAssertEqual(phases.count, 7, "Phases count is incorrect")
-            case .Failure:
+            case .failure:
                 XCTFail("Failing JSONResult was found")
             }
         }
@@ -31,8 +31,8 @@ class PhaseTests: XCTestCase {
     }
     
     func testPhaseIsCreatedFromJSON() {
-        let file = NSBundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
-        let data = NSData(contentsOfFile: file!)
+        let file = Bundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
+        let data = Data(contentsOfFile: file!)
         
         do {
             guard let json = try data?.toJSON() else { return XCTFail("No data was found") }

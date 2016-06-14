@@ -31,8 +31,8 @@ class ViewController: UIViewController {
     }()
     
     private lazy var headerView: LunarHeaderView = {
-        let nib = NSBundle.main().loadNibNamed(String(LunarHeaderView), owner: self, options: nil)
-        guard let headerView = nib?.first as? LunarHeaderView else {
+        let nib = Bundle.main().loadNibNamed(String(LunarHeaderView), owner: self, options: nil)
+        guard let headerView = nib.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
         }
         
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.hexColor(string: "232526").cgColor, UIColor.hexColor(string: "414345").cgColor]
+        gradient.colors = [UIColor.hexColor("232526").cgColor, UIColor.hexColor("414345").cgColor]
         self.view.layer.insertSublayer(gradient, at: 0)
         
         self.tableView.backgroundColor = UIColor.clear()
@@ -69,8 +69,8 @@ class ViewController: UIViewController {
         
         self.dataSource.configureUsing(tableView: tableView)
         
-        NSNotificationCenter.default().addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: MoonDidUpdateNotification, object: nil)
-        NSNotificationCenter.default().addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: LunarModelDidReceiveErrorNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: MoonDidUpdateNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: LunarModelDidReceiveErrorNotification, object: nil)
         
         self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.new, context: myContext)
     }
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
             UIApplication.shared().isNetworkActivityIndicatorVisible = self.model.loading
         }
@@ -121,27 +121,28 @@ class ViewController: UIViewController {
         let result = self.model.currentMoon
         
         switch result {
-        case .Success(let moon):
+        case .success(let moon):
             self.headerView.viewModel = LunarViewModel(moon: moon)
-        case .Failure:
+        case .failure:
             print("error updating view model, no data")
         }
     }
     
     func showAlert(title: String, _ message: String) {
-        dispatch_async(dispatch_get_main_queue()) { 
+        
+        DispatchQueue.main.async { 
             if self.shouldPresentAlert {
                 self.shouldPresentAlert = false
                 
 //                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//                
+//
 //                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
 //                    self.dismissViewControllerAnimated(true, completion: nil)
 //                    self.shouldPresentAlert = true
 //                })
-//                
+//
 //                alertController.addAction(action)
-//                
+//
 //                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }

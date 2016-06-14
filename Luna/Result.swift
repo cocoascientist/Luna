@@ -17,25 +17,25 @@ protocol ResultType {
 }
 
 public enum Result<T>: ResultType {
-    case Success(T)
-    case Failure(ErrorProtocol)
+    case success(T)
+    case failure(ErrorProtocol)
     
     init(success value: T) {
-        self = .Success(value)
+        self = .success(value)
     }
     
     init(failure error: ErrorProtocol) {
-        self = .Failure(error)
+        self = .failure(error)
     }
 }
 
 extension Result {
     func map<U>(_ f: (T) -> U) -> Result<U> {
         switch self {
-        case let .Success(value):
-            return Result<U>.Success(f(value))
-        case let .Failure(error):
-            return Result<U>.Failure(error)
+        case let .success(value):
+            return Result<U>.success(f(value))
+        case let .failure(error):
+            return Result<U>.failure(error)
         }
     }
     
@@ -45,10 +45,10 @@ extension Result {
     
     static func flatten<T>(_ result: Result<Result<T>>) -> Result<T> {
         switch result {
-        case let .Success(innerResult):
+        case let .success(innerResult):
             return innerResult
-        case let .Failure(error):
-            return Result<T>.Failure(error)
+        case let .failure(error):
+            return Result<T>.failure(error)
         }
     }
 }
@@ -56,9 +56,9 @@ extension Result {
 extension Result: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case .Success(let value):
+        case .success(let value):
             return "success: \(String(value))"
-        case .Failure(let error):
+        case .failure(let error):
             return "error: \(String(error))"
         }
     }

@@ -23,7 +23,7 @@ class LocationTrackerTests: XCTestCase {
         }
         
         override func startUpdatingLocation() {
-            dispatch_after(1, dispatch_get_main_queue()) { () -> Void in
+            DispatchQueue.main.after(when: 1) { () -> Void in
                 self.locatonUpdate(manager: self)
             }
         }
@@ -51,7 +51,7 @@ class LocationTrackerTests: XCTestCase {
                 XCTAssertEqual(location.physical.coordinate.latitude, 25.7877, "Latitude is wrong")
                 XCTAssertEqual(location.physical.coordinate.longitude, -80.2241, "Longitude is wrong")
                 expected.fulfill()
-            case .Failure:
+            case .failure:
                 XCTFail("Location should be valid")
             }
         }
@@ -72,7 +72,7 @@ class LocationTrackerTests: XCTestCase {
             switch result {
             case .Success:
                 XCTFail("Location should NOT be valid")
-            case .Failure:
+            case .failure:
                 expected.fulfill()
             }
         }

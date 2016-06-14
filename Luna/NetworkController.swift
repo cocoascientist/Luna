@@ -8,32 +8,32 @@
 
 import Foundation
 
-typealias TaskResult = (result: Result<NSData>) -> Void
+typealias TaskResult = (result: Result<Data>) -> Void
 
 class NetworkController: Reachable {
     
-    let configuration: NSURLSessionConfiguration
-    private let session: NSURLSession
+    let configuration: URLSessionConfiguration
+    private let session: URLSession
     
-    init(configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.default()) {
+    init(configuration: URLSessionConfiguration = URLSessionConfiguration.default()) {
         self.configuration = configuration
         
         let delegate = SessionDelegate()
-        let queue = NSOperationQueue.main()
-        self.session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: queue)
+        let queue = OperationQueue.main()
+        self.session = URLSession(configuration: configuration, delegate: delegate, delegateQueue: queue)
     }
     
     deinit {
         session.finishTasksAndInvalidate()
     }
     
-    private class SessionDelegate: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
+    private class SessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
         
-        @objc(URLSession:didReceiveChallenge:completionHandler:) private func urlSession(_ session: NSURLSession, didReceive challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-            completionHandler(.useCredential, NSURLCredential(trust: challenge.protectionSpace.serverTrust!))
+        @objc(URLSession:didReceiveChallenge:completionHandler:) private func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+            completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
         }
         
-        @objc(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:) private func urlSession(_ session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
+        @objc(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:) private func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: (URLRequest?) -> Void) {
             completionHandler(request)
         }
     }
@@ -47,11 +47,11 @@ class NetworkController: Reachable {
     - returns: An NSURLSessionTask associated with the request
     */
     
-    func start(request: NSURLRequest, result: TaskResult) {
+    func start(request: URLRequest, result: TaskResult) {
         
         // handle the task completion job on the main thread
         let finished: TaskResult = {(taskResult) in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 result(result: taskResult)
             })
         }
@@ -60,30 +60,30 @@ class NetworkController: Reachable {
         let task = session.dataTask(with: request, completionHandler: { (data, response, err) -> Void in
             guard let data = data else {
                 guard let _ = err else {
-                    return finished(result: .Failure(NetworkError.NoData))
+                    return finished(result: .failure(NetworkError.noData))
                 }
                 
-                return finished(result: .Failure(NetworkError.Other))
+                return finished(result: .failure(NetworkError.other))
             }
             
-            guard let response = response as? NSHTTPURLResponse else {
-                return finished(result: .Failure(NetworkError.BadResponse))
+            guard let response = response as? HTTPURLResponse else {
+                return finished(result: .failure(NetworkError.badResponse))
             }
             
             switch response.statusCode {
                 case 200...204:
-                    finished(result: .Success(data))
+                    finished(result: .success(data))
                 default:
-                    let error = NetworkError.BadStatusCode(statusCode: response.statusCode)
-                    finished(result: .Failure(error))
+                    let error = NetworkError.badStatusCode(statusCode: response.statusCode)
+                    finished(result: .failure(error))
             }
         })
         
         switch self.reachable {
-        case .Online:
+        case .online:
             task.resume()
-        case .Offline:
-            finished(result: .Failure(NetworkError.Offline))
+        case .offline:
+            finished(result: .failure(NetworkError.offline))
         }
     }
 }

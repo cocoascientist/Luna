@@ -10,18 +10,18 @@ import Foundation
 
 typealias JSONResult = Result<JSON>
 
-extension NSData {
+extension Data {
     func toJSONResult() -> JSONResult {
         do {
             let json = try self.toJSON()
-            return JSONResult.Success(json)
+            return JSONResult.success(json)
         }
         catch (let error) {
-            return JSONResult.Failure(JSONError.NoJSON(error))
+            return JSONResult.failure(JSONError.other(error))
         }
     }
 }
 
-func JSONResultFromData(data: NSData) -> JSONResult {
+func JSONResultFromData(_ data: Data) -> JSONResult {
     return data.toJSONResult()
 }

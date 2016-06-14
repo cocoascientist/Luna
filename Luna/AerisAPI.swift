@@ -10,41 +10,41 @@ import Foundation
 import CoreLocation
 
 enum AerisAPI: Request {
-    case Moon(CLLocation)
-    case MoonPhases(CLLocation)
+    case moon(CLLocation)
+    case moonPhases(CLLocation)
     
-    var baseURL: NSURL {
-        return NSURL(string: "https://api.aerisapi.com")!
+    var baseURL: URL {
+        return URL(string: "https://api.aerisapi.com")!
     }
     
     var parameters: [String: String] {
         switch self {
-        case .Moon:
+        case .moon:
             return ["client_id": clientId, "client_secret": clientSecret]
-        case .MoonPhases:
+        case .moonPhases:
             return ["client_id": clientId, "client_secret": clientSecret, "limit": "5"]
         }
     }
     
     var path: String {
         switch self {
-        case .Moon(let location):
+        case .moon(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = queryWithParameters(parameters: parameters)
+            let queryString = query(with: parameters)
             return "\(baseURL)/sunmoon/\(latitude),\(longitude)?\(queryString)"
-        case .MoonPhases(let location):
+        case .moonPhases(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = queryWithParameters(parameters: parameters)
+            let queryString = query(with: parameters)
             return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?\(queryString)"
         }
     }
     
-    var request: NSURLRequest {
+    var request: URLRequest {
         let path = self.path
-        guard let url = NSURL(string: path) else { fatalError("bad url") }
-        return NSURLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60.0)
+        guard let url = URL(string: path) else { fatalError("bad url") }
+        return URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60.0)
     }
 }
 

@@ -13,9 +13,9 @@ typealias PhasesResult = Result<[Phase]>
 
 struct Phase {
     let name: String
-    let date: NSDate
+    let date: Date
     
-    init(_ name: String, _ date: NSDate) {
+    init(_ name: String, _ date: Date) {
         self.name = name
         self.date = date
     }
@@ -25,41 +25,41 @@ extension Phase: JSONConstructable {
     init?(json: JSON) {
         guard
             let name = json["name"] as? String,
-            let interval = json["timestamp"] as? NSTimeInterval
+            let interval = json["timestamp"] as? TimeInterval
         else {
             return nil
         }
         
         self.name = name
-        self.date = NSDate(timeIntervalSince1970: interval)
+        self.date = Date(timeIntervalSince1970: interval)
     }
 }
 
 extension Phase {
     static func phaseFromJSON(_ json: JSON) -> PhaseResult {
         if let phase = Phase(json: json) {
-            return PhaseResult.Success(phase)
+            return PhaseResult.success(phase)
         } else {
-            return PhaseResult.Failure(PhaseModelError.NoPhases)
+            return PhaseResult.failure(PhaseModelError.noPhases)
         }
     }
     
     static func phasesFromJSON(_ json: JSON) -> PhasesResult {
         guard let data = json["response"] as? [JSON] else {
-            return .Failure(JSONError.BadFormat)
+            return .failure(JSONError.badFormat)
         }
         
         let results = data.flatMap(Phase.phaseFromJSON)
         let phases = results.flatMap { (phase) -> Phase? in
             switch phase {
-            case .Success(let value):
+            case .success(let value):
                 return value
-            case .Failure:
+            case .failure:
                 return nil
             }
         }
         
-        return .Success(phases)
+        return .success(phases)
     }
 }
 

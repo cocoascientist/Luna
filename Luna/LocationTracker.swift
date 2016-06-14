@@ -14,12 +14,12 @@ public typealias LocationResult = Result<Location>
 public typealias Observer = (location: LocationResult) -> ()
 
 enum LocationError: ErrorProtocol {
-    case NoData
+    case noData
 }
 
 public class LocationTracker: NSObject {
     
-    private var lastResult: LocationResult = .Failure(LocationError.NoData)
+    private var lastResult: LocationResult = .failure(LocationError.noData)
     private var observers: [Observer] = []
     
     private let locationManager: CLLocationManager
@@ -38,9 +38,9 @@ public class LocationTracker: NSObject {
         
         self.locationManager.startUpdatingLocation()
         
-        NSNotificationCenter.default().addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         
-        NSNotificationCenter.default().addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     // MARK: - Public
@@ -69,19 +69,19 @@ public class LocationTracker: NSObject {
     
     private func shouldUpdateWithLocation(location: CLLocation) -> Bool {
         switch lastResult {
-        case .Success(let loc):
+        case .success(let loc):
             return location.distance(from: loc.physical) > 100
-        case .Failure:
+        case .failure:
             return true
         }
     }
     
     private func shouldUpdateWithResult(result: LocationResult) -> Bool {
         switch lastResult {
-        case .Success(let loc):
+        case .success(let loc):
             let location = loc.physical
             return self.shouldUpdateWithLocation(location: location)
-        case .Failure:
+        case .failure:
             return true
         }
     }
@@ -102,7 +102,7 @@ extension LocationTracker: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
-        let result = LocationResult.Failure(NetworkError.Other)
+        let result = LocationResult.failure(NetworkError.other)
         self.publishChangeWithResult(result: result)
         self.lastResult = result
     }
@@ -112,7 +112,7 @@ extension LocationTracker: CLLocationManagerDelegate {
             if shouldUpdateWithLocation(location: currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
                 
-                let result = LocationResult.Success(location)
+                let result = LocationResult.success(location)
                 self.publishChangeWithResult(result: result)
                 self.lastResult = result
             }

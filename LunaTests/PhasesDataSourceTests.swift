@@ -23,14 +23,14 @@ class PhasesDataSourceTests: XCTestCase {
     class FakeDataSource: PhasesDataSource {
         var expectation: XCTestExpectation?
         
-        override func phasesDidUpdate(_ notification: NSNotification) {
+        override func phasesDidUpdate(_ notification: Notification) {
             expectation?.fulfill()
             super.phasesDidUpdate(notification)
         }
     }
     
     var model: LunarPhaseModel {
-        let configuration = NSURLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
+        let configuration = URLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         let model = LunarPhaseModel(networkController: networkController)
         return model

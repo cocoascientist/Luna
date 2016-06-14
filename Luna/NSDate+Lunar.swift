@@ -10,7 +10,7 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     
     private func epochJulianDate() -> Double {
         return 2440587.5

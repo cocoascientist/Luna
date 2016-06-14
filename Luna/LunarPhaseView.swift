@@ -12,9 +12,9 @@ import UIKit
 
 @IBDesignable
 class LunarPhaseView: UIView {
-    let date: NSDate
+    let date: Date
     
-    init(frame: CGRect, date: NSDate) {
+    init(frame: CGRect, date: Date) {
         self.date = date
         super.init(frame: frame)
         
@@ -22,12 +22,12 @@ class LunarPhaseView: UIView {
     }
     
     override init(frame: CGRect) {
-        self.date = NSDate()
+        self.date = Date()
         super.init(frame: frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.date = NSDate()
+        self.date = Date()
         super.init(coder: aDecoder)
     }
     

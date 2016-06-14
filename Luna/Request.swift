@@ -11,11 +11,11 @@ import Foundation
 public typealias Parameters = [String: String]
 
 public protocol Request {
-    var baseURL: NSURL { get }
+    var baseURL: URL { get }
     var path: String { get }
     var parameters: Parameters { get }
     
-    var request: NSURLRequest { get }
+    var request: URLRequest { get }
 }
 
 extension Request {

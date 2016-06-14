@@ -28,7 +28,7 @@ class PhasesDataSource: NSObject {
         self.model = model
         super.init()
         
-        NSNotificationCenter.default().addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: PhasesDidUpdateNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: PhasesDidUpdateNotification, object: nil)
     }
     
     func configureUsing(tableView: UITableView) -> Void {
@@ -46,10 +46,10 @@ class PhasesDataSource: NSObject {
     func phasesDidUpdate(_ notification: NSNotification) -> Void {
         let result = self.model.currentPhases
         switch result {
-        case .Success(let phases):
+        case .success(let phases):
             self.phases = phases
             self.tableView?.reloadData()
-        case .Failure:
+        case .failure:
             print("error updating phases, no data")
         }
     }
@@ -60,13 +60,13 @@ extension PhasesDataSource: UITableViewDataSource {
         return self.phases.count
     }
     
-    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
+    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         if let phaseCell = cell as? PhaseTableViewCell {
             phaseCell.viewModel = viewModelForIndexPath(indexPath: indexPath)
             
-            if indexPath.row == self.phases.count - 1 {
+            if (indexPath as NSIndexPath).row == self.phases.count - 1 {
                 cell.separatorInset = UIEdgeInsetsMake(0.0, cell.bounds.size.width, 0.0, 0.0)
             }
             else {
