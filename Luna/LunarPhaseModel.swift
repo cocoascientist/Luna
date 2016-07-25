@@ -16,10 +16,9 @@ enum PhaseModelError: ErrorProtocol {
 typealias CurrentMoon = Result<Moon>
 typealias CurrentPhases = Result<[Phase]>
 
-let MoonDidUpdateNotification = "MoonDidUpdateNotification"
-let PhasesDidUpdateNotification = "PhasesDidUpdateNotification"
-
-let LunarModelDidReceiveErrorNotification = "LunarModelDidReceiveErrorNotification"
+let MoonDidUpdateNotification: String = "MoonDidUpdateNotification"
+let PhasesDidUpdateNotification: String = "PhasesDidUpdateNotification"
+let LunarModelDidReceiveErrorNotification: String = "LunarModelDidReceiveErrorNotification"
 
 class LunarPhaseModel: NSObject {
     let networkController: NetworkController
@@ -29,13 +28,13 @@ class LunarPhaseModel: NSObject {
     
     private var moon: Moon? {
         didSet {
-            NotificationCenter.default().post(name: NSNotification.Name(rawValue: MoonDidUpdateNotification), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MoonDidUpdateNotification), object: nil)
         }
     }
     
     private var phases: [Phase]? {
         didSet {
-            NotificationCenter.default().post(name: NSNotification.Name(rawValue: PhasesDidUpdateNotification), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: PhasesDidUpdateNotification), object: nil)
         }
     }
     
@@ -54,11 +53,12 @@ class LunarPhaseModel: NSObject {
             }
         }
         
-        NotificationCenter.default().addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: "UIApplicationDidBecomeActiveNotification", object: nil)
+        let name = "UIApplicationDidBecomeActiveNotification" as NSNotification.Name
+        NotificationCenter.default.addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: name, object: nil)
     }
     
     deinit {
-        NotificationCenter.default().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     var currentMoon: CurrentMoon {
@@ -130,10 +130,10 @@ class LunarPhaseModel: NSObject {
     private func postErrorNotification(_ error: ErrorProtocol) -> Void {
         if let taskError = error as? NetworkError {
             let info = taskError.info
-            NotificationCenter.default().post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: info)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: info)
         }
         else {
-            NotificationCenter.default().post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: nil)
         }
     }
     

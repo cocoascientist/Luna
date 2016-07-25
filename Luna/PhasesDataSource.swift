@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = String(PhaseTableViewCell)
+private let reuseIdentifier = String(PhaseTableViewCell.self)
 
 class PhasesDataSource: NSObject {
     private var phases: [Phase] = []
@@ -16,7 +16,7 @@ class PhasesDataSource: NSObject {
     
     private weak var tableView: UITableView? {
         didSet {
-            let nib = UINib(nibName: String(PhaseTableViewCell), bundle: nil)
+            let nib = UINib(nibName: String(PhaseTableViewCell.self), bundle: nil)
             self.tableView?.register(nib, forCellReuseIdentifier: reuseIdentifier)
             
             self.tableView?.dataSource = self
@@ -28,7 +28,7 @@ class PhasesDataSource: NSObject {
         self.model = model
         super.init()
         
-        NotificationCenter.default().addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: PhasesDidUpdateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: NSNotification.Name(rawValue: PhasesDidUpdateNotification), object: nil)
     }
     
     func configureUsing(tableView: UITableView) -> Void {

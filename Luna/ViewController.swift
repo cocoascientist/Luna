@@ -31,8 +31,8 @@ class ViewController: UIViewController {
     }()
     
     private lazy var headerView: LunarHeaderView = {
-        let nib = Bundle.main().loadNibNamed(String(LunarHeaderView), owner: self, options: nil)
-        guard let headerView = nib.first as? LunarHeaderView else {
+        let nib = Bundle.main.loadNibNamed(String(LunarHeaderView.self), owner: self, options: nil)
+        guard let headerView = nib?.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
         }
         
@@ -69,8 +69,8 @@ class ViewController: UIViewController {
         
         self.dataSource.configureUsing(tableView: tableView)
         
-        NotificationCenter.default().addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: MoonDidUpdateNotification, object: nil)
-        NotificationCenter.default().addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: LunarModelDidReceiveErrorNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: NSNotification.Name(rawValue: MoonDidUpdateNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil)
         
         self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.new, context: myContext)
     }

@@ -15,11 +15,11 @@ class NetworkController: Reachable {
     let configuration: URLSessionConfiguration
     private let session: URLSession
     
-    init(configuration: URLSessionConfiguration = URLSessionConfiguration.default()) {
+    init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
         self.configuration = configuration
         
         let delegate = SessionDelegate()
-        let queue = OperationQueue.main()
+        let queue = OperationQueue.main
         self.session = URLSession(configuration: configuration, delegate: delegate, delegateQueue: queue)
     }
     
