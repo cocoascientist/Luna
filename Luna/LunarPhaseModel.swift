@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum PhaseModelError: ErrorType {
     case NoMoon
@@ -127,7 +128,35 @@ class LunarPhaseModel: NSObject {
     }
     
     private func postErrorNotification(error: ErrorType) -> Void {
+        if let networkError = error as? NetworkError {
+            switch networkError {
+            case .Other(let error):
+                unpackAndHandle(error)
+            default:
+                unpackAndHandle(networkError)
+            }
+        } else {
+            // post generic error
+            NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
+        }
+    }
+    
+    private func unpackAndHandle(error: NetworkError) -> Void {
         NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: nil)
+    }
+    
+    private func unpackAndHandle(error: NSError?) -> Void {
+        var userInfo: [String: AnyObject] = [:]
+        
+        if let error = error {
+            userInfo["OrignalErrorKey"] = error
+            
+            if error.domain == kCLErrorDomain {
+                userInfo["Error"] = "Location Unknown"
+            }
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(LunarModelDidReceiveErrorNotification, object: nil, userInfo: userInfo)
     }
     
     func applicationDidResume(notification: NSNotification) -> Void {

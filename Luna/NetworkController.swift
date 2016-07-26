@@ -63,7 +63,7 @@ class NetworkController {
                     return finished(result: .Failure(NetworkError.NoData))
                 }
                 
-                return finished(result: .Failure(NetworkError.Other))
+                return finished(result: .Failure(NetworkError.Other(err)))
             }
             
             guard let response = response as? NSHTTPURLResponse else {

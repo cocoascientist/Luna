@@ -65,7 +65,7 @@ public class LocationTracker: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        let result = LocationResult.Failure(NetworkError.Other)
+        let result = LocationResult.Failure(NetworkError.Other(error))
         self.publishChangeWithResult(result)
         self.lastResult = result
     }
