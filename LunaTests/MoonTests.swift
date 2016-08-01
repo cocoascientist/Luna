@@ -12,11 +12,11 @@ import XCTest
 class MoonTests: XCTestCase {
     
     func testMoonIsCreatedFromJSON() {
-        let file = Bundle(for: self.dynamicType).pathForResource("sunmoon", ofType: "json")
-        let data = Data(contentsOfFile: file!)
+        let file = Bundle(for: self.dynamicType).url(forResource: "sunmoon", withExtension: "json")
         
         do {
-            guard let json = try data?.toJSON() else { return XCTFail("No data was found") }
+            let data = try Data(contentsOf: file!)
+            let json = try data.toJSON()
             guard let moon = Moon(json: json) else { return XCTFail("Could not create moon") }
             
             XCTAssertEqual(moon.phase, "waning crescent", "Moon phase is incorrect")

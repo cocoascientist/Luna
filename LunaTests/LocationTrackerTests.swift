@@ -23,8 +23,9 @@ class LocationTrackerTests: XCTestCase {
         }
         
         override func startUpdatingLocation() {
-            DispatchQueue.main.after(when: 1) { () -> Void in
-                self.locatonUpdate(manager: self)
+            let delayTime = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
+                self?.locatonUpdate(manager: self!)
             }
         }
         
@@ -42,11 +43,11 @@ class LocationTrackerTests: XCTestCase {
         }
         
         let locationTracker = LocationTracker(locationManager: fakeLocationManager)
-        let expected = expectation(withDescription: "Should publish location change")
+        let expected = expectation(description: "Should publish location change")
         
         locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
-            case .Success(let loc):
+            case .success(let loc):
                 let location = loc
                 XCTAssertEqual(location.physical.coordinate.latitude, 25.7877, "Latitude is wrong")
                 XCTAssertEqual(location.physical.coordinate.longitude, -80.2241, "Longitude is wrong")
@@ -56,7 +57,7 @@ class LocationTrackerTests: XCTestCase {
             }
         }
         
-        waitForExpectations(withTimeout: 2, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
     }
     
     func testErrorIsPublished() {
@@ -66,17 +67,17 @@ class LocationTrackerTests: XCTestCase {
         }
         
         let locationTracker = LocationTracker(locationManager: fakeLocationManager)
-        let expected = expectation(withDescription: "Should fail to publish location change")
+        let expected = expectation(description: "Should fail to publish location change")
         
         locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
-            case .Success:
+            case .success:
                 XCTFail("Location should NOT be valid")
             case .failure:
                 expected.fulfill()
             }
         }
         
-        waitForExpectations(withTimeout: 2, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
     }
 }

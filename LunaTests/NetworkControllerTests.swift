@@ -19,15 +19,15 @@ class NetworkControllerTests: XCTestCase {
     }
 
     func testCanRequestMoonSuccessfully() {
-        let expected = expectation(withDescription: "Request should be successful")
-        let configuration = URLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
+        let expected = expectation(description: "Request should be successful")
+        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         
-        let request = AerisAPI.Moon(location.physical).request
+        let request = AerisAPI.moon(location.physical).request
         
         networkController.start(request: request, result: { (result) -> Void in
             switch result {
-            case .Success:
+            case .success:
                 expected.fulfill()
             case .failure:
                 XCTFail("Request should not fail")
@@ -39,39 +39,39 @@ class NetworkControllerTests: XCTestCase {
     
     func testCanRequestPhasesSuccessfully() {
         let expected = expectation(description: "Request should be successful")
-        let configuration = URLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
+        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         
-        let request = AerisAPI.MoonPhases(location.physical).request
+        let request = AerisAPI.moonPhases(location.physical).request
         
         networkController.start(request: request, result: { (result) -> Void in
             switch result {
-            case .Success:
+            case .success:
                 expected.fulfill()
             case .failure:
                 XCTFail("Request should not fail")
             }
         })
         
-        waitForExpectations(withTimeout: timeout, handler: nil)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testCanHandleBadStatusCode() {
-        let expected = expectation(withDescription: "Request should not be successful")
-        let configuration = URLSessionConfiguration.configurationWithProtocol(protocolClass: BadStatusURLProtocol.self)
+        let expected = expectation(description: "Request should not be successful")
+        let configuration = URLSessionConfiguration.configurationWithProtocol(BadStatusURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         
-        let request = AerisAPI.MoonPhases(location.physical).request
+        let request = AerisAPI.moonPhases(location.physical).request
         
         networkController.start(request: request, result: { (result) -> Void in
             switch result {
-            case .Success:
+            case .success:
                 XCTFail("Request should fail")
             case .failure:
                 expected.fulfill()
             }
         })
         
-        waitForExpectations(withTimeout: timeout, handler: nil)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
 }

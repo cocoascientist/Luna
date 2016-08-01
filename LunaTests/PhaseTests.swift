@@ -12,14 +12,14 @@ import XCTest
 class PhaseTests: XCTestCase {
 
     func testPhasesAreCreatedFromJSON() {
-        let file = Bundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
-        let data = Data(contentsOfFile: file!)
+        let file = Bundle(for: self.dynamicType).url(forResource: "moonphases", withExtension: "json")
+        let data = try! Data(contentsOf: file!)
         
         do {
-            guard let json = try data?.toJSON() else { return XCTFail("No data was found") }
+            let json = try data.toJSON()
             let result = Phase.phasesFromJSON(json)
             switch result {
-            case .Success(let phases):
+            case .success(let phases):
                 XCTAssertEqual(phases.count, 7, "Phases count is incorrect")
             case .failure:
                 XCTFail("Failing JSONResult was found")
@@ -31,14 +31,14 @@ class PhaseTests: XCTestCase {
     }
     
     func testPhaseIsCreatedFromJSON() {
-        let file = Bundle(for: self.dynamicType).pathForResource("moonphases", ofType: "json")
-        let data = Data(contentsOfFile: file!)
+        let file = Bundle(for: self.dynamicType).url(forResource: "moonphases", withExtension: "json")
+        let data = try! Data(contentsOf: file!)
         
         do {
-            guard let json = try data?.toJSON() else { return XCTFail("No data was found") }
+            let json = try data.toJSON()
             if let response = json["response"] as? [JSON],
                 let phaseObj = response.first,
-                case .Success(let phase) = Phase.phaseFromJSON(phaseObj) {
+                case .success(let phase) = Phase.phaseFromJSON(phaseObj) {
                 XCTAssertEqual(phase.name, "new moon", "Phase name is incorrect")
             }
             else {

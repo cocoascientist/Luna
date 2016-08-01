@@ -43,7 +43,7 @@ class PhasesDataSource: NSObject {
         return viewModel
     }
     
-    func phasesDidUpdate(_ notification: NSNotification) -> Void {
+    internal func phasesDidUpdate(_ notification: NSNotification) -> Void {
         let result = self.model.currentPhases
         switch result {
         case .success(let phases):

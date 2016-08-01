@@ -48,7 +48,7 @@ class LunarPhaseModel: NSObject {
         self.locationTracker.addLocationChangeObserver { (result) -> () in
             switch result {
             case .success(let location):
-                self.updateLunarPhase(location)
+                self.updateLunarPhase(using: location)
             case .failure(let error):
                 self.postErrorNotification(error: error)
             }
@@ -78,7 +78,7 @@ class LunarPhaseModel: NSObject {
         return .failure(PhaseModelError.noPhases)
     }
     
-    func updateLunarPhase(_ location: Location) -> Void {
+    func updateLunarPhase(using location: Location) -> Void {
         let group = DispatchGroup()
         
         group.enter()
@@ -166,7 +166,7 @@ class LunarPhaseModel: NSObject {
     func applicationDidResume(notification: NSNotification) -> Void {
         switch locationTracker.currentLocation {
         case .success(let location):
-            updateLunarPhase(location)
+            updateLunarPhase(using: location)
         case .failure:
             break
         }
