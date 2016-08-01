@@ -14,7 +14,7 @@ public enum NetworkError: ErrorProtocol {
     case badJSON
     case noData
     case offline
-    case other
+    case other(NSError?)
 }
 
 extension NetworkError: CustomDebugStringConvertible {

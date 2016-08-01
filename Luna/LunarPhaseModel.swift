@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 enum PhaseModelError: ErrorProtocol {
     case noMoon
@@ -48,13 +49,13 @@ class LunarPhaseModel: NSObject {
             switch result {
             case .success(let location):
                 self.updateLunarPhase(location)
-            case .failure(let reason):
-                self.postErrorNotification(reason)
+            case .failure(let error):
+                self.postErrorNotification(error: error)
             }
         }
         
         let name = "UIApplicationDidBecomeActiveNotification" as NSNotification.Name
-        NotificationCenter.default.addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(_:)), name: name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(notification:)), name: name, object: nil)
     }
     
     deinit {
@@ -93,7 +94,7 @@ class LunarPhaseModel: NSObject {
             case .success(let moon):
                 self.moon = moon
             case .failure(let error):
-                self.postErrorNotification(error)
+                self.postErrorNotification(error: error)
             }
             
             group.leave()
@@ -109,7 +110,7 @@ class LunarPhaseModel: NSObject {
             case .success(let phases):
                 self.phases = phases
             case .failure(let error):
-                self.postErrorNotification(error)
+                self.postErrorNotification(error: error)
             }
             
             group.leave()
@@ -127,17 +128,42 @@ class LunarPhaseModel: NSObject {
         }
     }
     
-    private func postErrorNotification(_ error: ErrorProtocol) -> Void {
-        if let taskError = error as? NetworkError {
-            let info = taskError.info
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: info)
-        }
-        else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil, userInfo: nil)
+    private func postErrorNotification(error: ErrorProtocol) -> Void {
+        if let networkError = error as? NetworkError {
+            switch networkError {
+            case .other(let error):
+                unpackAndHandle(error: error)
+            default:
+                unpackAndHandle(error: networkError)
+            }
+        } else {
+            // post generic error
+            let name = "LunarModelDidReceiveErrorNotification" as NSNotification.Name
+            NotificationCenter.default.post(name: name, object: nil)
         }
     }
     
-    func applicationDidResume(_ notification: NSNotification) -> Void {
+    private func unpackAndHandle(error: NetworkError) -> Void {
+        let name = "LunarModelDidReceiveErrorNotification" as NSNotification.Name
+        NotificationCenter.default.post(name: name, object: nil)
+    }
+    
+    private func unpackAndHandle(error: NSError?) -> Void {
+        var userInfo: [String: AnyObject] = [:]
+        
+        if let error = error {
+            userInfo["OrignalErrorKey"] = error
+            
+            if error.domain == kCLErrorDomain {
+                userInfo["Error"] = "Location Unknown"
+            }
+        }
+        
+        let name = "LunarModelDidReceiveErrorNotification" as NSNotification.Name
+        NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
+    }
+    
+    func applicationDidResume(notification: NSNotification) -> Void {
         switch locationTracker.currentLocation {
         case .success(let location):
             updateLunarPhase(location)

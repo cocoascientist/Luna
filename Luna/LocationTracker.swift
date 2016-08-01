@@ -102,7 +102,7 @@ extension LocationTracker: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
-        let result = LocationResult.failure(NetworkError.other)
+        let result = LocationResult.failure(NetworkError.other(error))
         self.publishChangeWithResult(result: result)
         self.lastResult = result
     }

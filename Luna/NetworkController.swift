@@ -63,7 +63,7 @@ class NetworkController: Reachable {
                     return finished(result: .failure(NetworkError.noData))
                 }
                 
-                return finished(result: .failure(NetworkError.other))
+                return finished(result: .failure(NetworkError.other(err)))
             }
             
             guard let response = response as? HTTPURLResponse else {
