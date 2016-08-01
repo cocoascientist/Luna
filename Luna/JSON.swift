@@ -18,9 +18,9 @@ protocol JSONConstructable {
     init?(json: JSON)
 }
 
-enum JSONError: ErrorProtocol {
+enum JSONError: Error {
     case badFormat
-    case other(ErrorProtocol)
+    case other(Error)
 }
 
 extension Data: JSONRepresentable {

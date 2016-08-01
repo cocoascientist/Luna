@@ -22,7 +22,7 @@ extension UIColor {
         }
         
         if (colorString.characters.count != 6) {
-            return UIColor.gray()
+            return UIColor.gray
         }
         
         var rgbValue: UInt32 = 0

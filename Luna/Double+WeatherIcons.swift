@@ -11,7 +11,7 @@ import Foundation
 extension Double {
     func symbolForMoon() -> String {
         let length = 27.3
-        let age = round(((self * 0.01) * length) * 100.0)
+        let age = floor(((self * 0.01) * length) * 100.0)
         
         switch Int(age) {
         case 0, 27:

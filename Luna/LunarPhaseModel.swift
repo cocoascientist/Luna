@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-enum PhaseModelError: ErrorProtocol {
+enum PhaseModelError: Error {
     case noMoon
     case noPhases
 }
@@ -128,7 +128,7 @@ class LunarPhaseModel: NSObject {
         }
     }
     
-    private func postErrorNotification(error: ErrorProtocol) -> Void {
+    private func postErrorNotification(error: Error) -> Void {
         if let networkError = error as? NetworkError {
             switch networkError {
             case .other(let error):

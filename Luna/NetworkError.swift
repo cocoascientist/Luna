@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum NetworkError: ErrorProtocol {
+public enum NetworkError: Error {
     case badStatusCode(statusCode: Int)
     case badResponse
     case badJSON

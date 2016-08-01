@@ -34,11 +34,11 @@ class NetworkControllerTests: XCTestCase {
             }
         })
         
-        waitForExpectations(withTimeout: timeout, handler: nil)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testCanRequestPhasesSuccessfully() {
-        let expected = expectation(withDescription: "Request should be successful")
+        let expected = expectation(description: "Request should be successful")
         let configuration = URLSessionConfiguration.configurationWithProtocol(protocolClass: LocalURLProtocol.self)
         let networkController = NetworkController(configuration: configuration)
         

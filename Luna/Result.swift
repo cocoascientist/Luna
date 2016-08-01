@@ -10,7 +10,7 @@ protocol ResultType {
     associatedtype Value
     
     init(success value: Value)
-    init(failure error: ErrorProtocol)
+    init(failure error: Error)
     
     func map<U>(_ f: (Value) -> U) -> Result<U>
     func flatMap<U>(_ f: (Value) -> Result<U>) -> Result<U>
@@ -18,13 +18,13 @@ protocol ResultType {
 
 public enum Result<T>: ResultType {
     case success(T)
-    case failure(ErrorProtocol)
+    case failure(Error)
     
     init(success value: T) {
         self = .success(value)
     }
     
-    init(failure error: ErrorProtocol) {
+    init(failure error: Error) {
         self = .failure(error)
     }
 }

@@ -18,7 +18,7 @@ class LunarPhaseView: UIView {
         self.date = date
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.clear()
+        self.backgroundColor = UIColor.clear
     }
     
     override init(frame: CGRect) {
@@ -52,7 +52,7 @@ class LunarPhaseView: UIView {
             path.move(to: pB3)
             path.addLine(to: pB4)
             
-            UIColor.black().setStroke()
+            UIColor.black.setStroke()
             path.stroke()
             
             let Rpos = 2 * Xpos
@@ -79,7 +79,7 @@ class LunarPhaseView: UIView {
             path2.move(to: pW3)
             path2.addLine(to: pW4)
             
-            UIColor.white().setStroke()
+            UIColor.white.setStroke()
             path2.lineWidth = 2.0
             path2.stroke()
         }

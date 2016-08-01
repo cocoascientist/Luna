@@ -29,9 +29,9 @@ class LunarHeaderView: UIView {
             
             if let phase = viewModel?.phase {
                 guard let font = UIFont(name: "EuphemiaUCAS", size: 38.0) else { fatalError() }
-                let color = UIColor.white()
+                let color = UIColor.white
                 let attributes = [NSForegroundColorAttributeName: color, NSFontAttributeName: font]
-                self.phaseNameLabel.attributedText = AttributedString(string: phase, attributes: attributes)
+                self.phaseNameLabel.attributedText = NSAttributedString(string: phase, attributes: attributes)
             }
             
             UIView.animate(withDuration: 0.5) { 
@@ -50,13 +50,13 @@ class LunarHeaderView: UIView {
         self.riseLabel.text = ""
         self.setLabel.text = ""
         
-        self.phaseNameLabel.textColor = UIColor.white()
-        self.ageLabel.textColor = UIColor.white()
-        self.illuminationLabel.textColor = UIColor.white()
-        self.riseLabel.textColor = UIColor.white()
-        self.setLabel.textColor = UIColor.white()
+        self.phaseNameLabel.textColor = UIColor.white
+        self.ageLabel.textColor = UIColor.white
+        self.illuminationLabel.textColor = UIColor.white
+        self.riseLabel.textColor = UIColor.white
+        self.setLabel.textColor = UIColor.white
         
-        self.backgroundColor = UIColor.clear()
+        self.backgroundColor = UIColor.clear
     }
 
 }

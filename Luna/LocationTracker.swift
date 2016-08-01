@@ -13,7 +13,7 @@ import UIKit
 public typealias LocationResult = Result<Location>
 public typealias Observer = (location: LocationResult) -> ()
 
-enum LocationError: ErrorProtocol {
+enum LocationError: Error {
     case noData
 }
 
@@ -101,7 +101,7 @@ extension LocationTracker: CLLocationManagerDelegate {
 
     }
     
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: NSError) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         let result = LocationResult.failure(NetworkError.other(error))
         self.publishChangeWithResult(result: result)
         self.lastResult = result

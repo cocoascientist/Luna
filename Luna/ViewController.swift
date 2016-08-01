@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         }
         
         let insetY: CGFloat = (self.traitCollection.userInterfaceIdiom == .pad) ? 200.0 : 0.0
-        headerView.frame = UIScreen.main().bounds.insetBy(dx: 0.0, dy: insetY)
+        headerView.frame = UIScreen.main.bounds.insetBy(dx: 0.0, dy: insetY)
         
         return headerView
     }()
@@ -46,8 +46,8 @@ class ViewController: UIViewController {
         let control = UIRefreshControl()
         let action = #selector(ViewController.handleRefresh(_:))
         control.addTarget(self, action: action, for: UIControlEvents.valueChanged)
-        control.backgroundColor = UIColor.clear()
-        control.tintColor = UIColor.white()
+        control.backgroundColor = UIColor.clear
+        control.tintColor = UIColor.white
         
         return control
     }()
@@ -63,8 +63,8 @@ class ViewController: UIViewController {
         gradient.colors = [UIColor.hexColor("232526").cgColor, UIColor.hexColor("414345").cgColor]
         self.view.layer.insertSublayer(gradient, at: 0)
         
-        self.tableView.backgroundColor = UIColor.clear()
-        self.tableView.separatorColor = UIColor.lightGray()
+        self.tableView.backgroundColor = UIColor.clear
+        self.tableView.separatorColor = UIColor.lightGray
         self.tableView.addSubview(refreshControl)
         
         self.dataSource.configureUsing(tableView: tableView)
@@ -79,13 +79,13 @@ class ViewController: UIViewController {
         self.tableView.tableHeaderView = self.headerView
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
-            UIApplication.shared().isNetworkActivityIndicatorVisible = self.model.loading
+            UIApplication.shared.isNetworkActivityIndicatorVisible = self.model.loading
         }
         else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
     // MARK: - Update Handlers
     
     func handleRefresh(_ sender: AnyObject) {
-        self.model.applicationDidResume(NSNotification())
+        self.model.applicationDidResume(notification: NSNotification())
     }
 
     func didReceiveError(_ notification: NSNotification) -> Void {
