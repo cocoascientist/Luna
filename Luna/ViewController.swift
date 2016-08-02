@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         self.tableView.separatorColor = UIColor.lightGray
         self.tableView.addSubview(refreshControl)
         
-        self.dataSource.configureUsing(tableView: tableView)
+        self.dataSource.configure(using: tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: NSNotification.Name(rawValue: MoonDidUpdateNotification), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil)
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         else {
             print("Error: Unhandled notification: \(notification.userInfo)")
             
-            self.headerView.phaseNameLabel.text = "Error"
+            self.headerView.phaseNameLabel.text = NSLocalizedString("Error", comment: "Error")
         }
     }
     

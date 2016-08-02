@@ -59,15 +59,15 @@ public class LocationTracker: NSObject {
         self.locationManager.startUpdatingLocation()
     }
     
-    private func publishChangeWithResult(result: LocationResult) {
-        if self.shouldUpdateWithResult(result: result) {
+    private func publishChange(with result: LocationResult) {
+        if self.shouldUpdate(with: result) {
             let _ = observers.map { (observer) -> Void in
                 observer(location: result)
             }
         }
     }
     
-    private func shouldUpdateWithLocation(location: CLLocation) -> Bool {
+    private func shouldUpdate(with location: CLLocation) -> Bool {
         switch lastResult {
         case .success(let loc):
             return location.distance(from: loc.physical) > 100
@@ -76,11 +76,11 @@ public class LocationTracker: NSObject {
         }
     }
     
-    private func shouldUpdateWithResult(result: LocationResult) -> Bool {
+    private func shouldUpdate(with result: LocationResult) -> Bool {
         switch lastResult {
         case .success(let loc):
             let location = loc.physical
-            return self.shouldUpdateWithLocation(location: location)
+            return self.shouldUpdate(with: location)
         case .failure:
             return true
         }
@@ -103,17 +103,17 @@ extension LocationTracker: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         let result = LocationResult.failure(NetworkError.other(error))
-        self.publishChangeWithResult(result: result)
+        self.publishChange(with: result)
         self.lastResult = result
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.first {
-            if shouldUpdateWithLocation(location: currentLocation) {
+            if shouldUpdate(with: currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
                 
                 let result = LocationResult.success(location)
-                self.publishChangeWithResult(result: result)
+                self.publishChange(with: result)
                 self.lastResult = result
             }
             

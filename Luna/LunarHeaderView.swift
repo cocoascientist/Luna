@@ -44,7 +44,7 @@ class LunarHeaderView: UIView {
         super.awakeFromNib()
         
         self.phaseView.alpha = 0.0
-        self.phaseNameLabel.text = "Loading..."
+        self.phaseNameLabel.text = NSLocalizedString("Loading...", comment: "Loading...")
         self.ageLabel.text = ""
         self.illuminationLabel.text = ""
         self.riseLabel.text = ""

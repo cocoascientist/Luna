@@ -31,13 +31,13 @@ class PhasesDataSource: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: NSNotification.Name(rawValue: PhasesDidUpdateNotification), object: nil)
     }
     
-    func configureUsing(tableView: UITableView) -> Void {
+    func configure(using tableView: UITableView) -> Void {
         self.tableView = tableView
     }
     
     // MARK: - Private
     
-    func viewModelForIndexPath(indexPath: NSIndexPath) -> PhaseViewModel {
+    func viewModel(for indexPath: NSIndexPath) -> PhaseViewModel {
         let phase = self.phases[indexPath.row] as Phase
         let viewModel = PhaseViewModel(phase: phase)
         return viewModel
@@ -64,7 +64,7 @@ extension PhasesDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         if let phaseCell = cell as? PhaseTableViewCell {
-            phaseCell.viewModel = viewModelForIndexPath(indexPath: indexPath)
+            phaseCell.viewModel = viewModel(for: indexPath)
             
             if (indexPath as NSIndexPath).row == self.phases.count - 1 {
                 cell.separatorInset = UIEdgeInsetsMake(0.0, cell.bounds.size.width, 0.0, 0.0)
