@@ -32,7 +32,7 @@ class LunarPhaseView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        let phase = self.date.moonPhase()
+        let phase = self.date.moonPhase
         let diameter = Double(rect.width)
         let radius = Int(diameter / 2)
         

@@ -17,7 +17,7 @@ struct PhaseViewModel {
     }
     
     var icon: String {
-        return phase.name.symbolForMoon()
+        return phase.name.symbolForMoon
     }
     
     var date: String {

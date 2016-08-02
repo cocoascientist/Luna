@@ -29,11 +29,11 @@ class NetworkController: Reachable {
     
     private class SessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
         
-        @objc(URLSession:didReceiveChallenge:completionHandler:) private func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        private func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
             completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
         }
         
-        @objc(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:) private func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: (URLRequest?) -> Void) {
+        private func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: (URLRequest?) -> Void) {
             completionHandler(request)
         }
     }

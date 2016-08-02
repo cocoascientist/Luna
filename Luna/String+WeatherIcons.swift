@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
     
-    func symbolForMoon() -> String {
+    var symbolForMoon: String {
         switch self {
             
         // Aeris Weather API

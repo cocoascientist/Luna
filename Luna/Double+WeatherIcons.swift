@@ -9,7 +9,7 @@
 import Foundation
 
 extension Double {
-    func symbolForMoon() -> String {
+    var symbolForMoon: String {
         let length = 27.3
         let age = floor(((self * 0.01) * length) * 100.0)
         

@@ -17,7 +17,7 @@ struct LunarViewModel {
     }
     
     var icon: String {
-        return moon.percent.symbolForMoon()
+        return moon.percent.symbolForMoon
     }
     
     var phase: String {
@@ -25,11 +25,11 @@ struct LunarViewModel {
     }
     
     var rise: String {
-        return self.formatter.string(from: moon.rise as Date)
+        return self.formatter.string(from: moon.rise)
     }
     
     var set: String {
-        return self.formatter.string(from: moon.set as Date)
+        return self.formatter.string(from: moon.set)
     }
     
     var age: String {

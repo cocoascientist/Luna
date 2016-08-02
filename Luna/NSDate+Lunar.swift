@@ -12,20 +12,20 @@ import Foundation
 
 extension Date {
     
-    private func epochJulianDate() -> Double {
+    private var epochJulianDate: Double {
         return 2440587.5
     }
     
-    private func lunarSynodicPeriod() -> Double {
+    private var lunarSynodicPeriod: Double {
         return 29.53059
     }
     
-    private func julianDate() -> Double {
-        return epochJulianDate() + self.timeIntervalSince1970 / 86400
+    private var julianDate: Double {
+        return epochJulianDate + timeIntervalSince1970 / 86400
     }
     
-    func moonPhase() -> Double {
-        let phase = (self.julianDate() + 4.867) / self.lunarSynodicPeriod()
+    var moonPhase: Double {
+        let phase = (julianDate + 4.867) / lunarSynodicPeriod
         return (phase - floor(phase))
     }
 }
