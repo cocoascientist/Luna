@@ -8,7 +8,7 @@
 
 import UIKit
 
-let myContext = UnsafeMutablePointer<Void>(nil)
+let myContext = UnsafeMutableRawPointer(bitPattern: 0)
 
 class ViewController: UIViewController {
     
@@ -26,12 +26,12 @@ class ViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    private lazy var dataSource: PhasesDataSource = {
+    fileprivate lazy var dataSource: PhasesDataSource = {
         return PhasesDataSource(model: self.model)
     }()
     
-    private lazy var headerView: LunarHeaderView = {
-        let nib = Bundle.main.loadNibNamed(String(LunarHeaderView.self), owner: self, options: nil)
+    fileprivate lazy var headerView: LunarHeaderView = {
+        let nib = Bundle.main.loadNibNamed("LunarHeaderView", owner: self, options: nil)
         guard let headerView = nib?.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
         }
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         return headerView
     }()
     
-    private lazy var refreshControl: UIRefreshControl = {
+    fileprivate lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         let action = #selector(ViewController.handleRefresh(_:))
         control.addTarget(self, action: action, for: UIControlEvents.valueChanged)
@@ -69,8 +69,8 @@ class ViewController: UIViewController {
         
         self.dataSource.configure(using: tableView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: NSNotification.Name(rawValue: MoonDidUpdateNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: NSNotification.Name(rawValue: LunarModelDidReceiveErrorNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: NSNotification.Name(rawValue: "MoonDidUpdateNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: NSNotification.Name(rawValue: "LunarModelDidReceiveErrorNotification"), object: nil)
         
         self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.new, context: myContext)
     }
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
             UIApplication.shared.isNetworkActivityIndicatorVisible = self.model.loading
         }
@@ -95,25 +95,24 @@ class ViewController: UIViewController {
     // MARK: - Update Handlers
     
     func handleRefresh(_ sender: AnyObject) {
-        self.model.applicationDidResume(notification: NSNotification())
+//        self.model.applicationDidResume(notification: Notification())
     }
 
-    func didReceiveError(_ notification: NSNotification) -> Void {
+    func didReceiveError(_ notification: Notification) -> Void {
         if let message = notification.userInfo?["message"] as? String,
             let title = notification.userInfo?["title"] as? String {
             
-            self.showAlert(title: title, message)
+            self.showAlert(title, message)
             
             self.headerView.phaseNameLabel.text = title
         }
         else {
-            print("Error: Unhandled notification: \(notification.userInfo)")
-            
+            print("Error: Unhandled notification: \(notification)")
             self.headerView.phaseNameLabel.text = NSLocalizedString("Error", comment: "Error")
         }
     }
     
-    func modelDidUpdate(_ notification: NSNotification) -> Void {
+    func modelDidUpdate(_ notification: Notification) -> Void {
         self.updateLunarViewModel()
     }
     
@@ -128,7 +127,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func showAlert(title: String, _ message: String) {
+    func showAlert(_ title: String, _ message: String) {
         
         DispatchQueue.main.async { 
             if self.shouldPresentAlert {

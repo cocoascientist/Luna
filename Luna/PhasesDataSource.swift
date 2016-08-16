@@ -8,15 +8,15 @@
 
 import UIKit
 
-private let reuseIdentifier = String(PhaseTableViewCell.self)
+private let reuseIdentifier = String(describing: PhaseTableViewCell.self)
 
 class PhasesDataSource: NSObject {
-    private var phases: [Phase] = []
-    private let model: LunarPhaseModel
+    fileprivate var phases: [Phase] = []
+    fileprivate let model: LunarPhaseModel
     
-    private weak var tableView: UITableView? {
+    fileprivate weak var tableView: UITableView? {
         didSet {
-            let nib = UINib(nibName: String(PhaseTableViewCell.self), bundle: nil)
+            let nib = UINib(nibName: String(describing: PhaseTableViewCell.self), bundle: nil)
             self.tableView?.register(nib, forCellReuseIdentifier: reuseIdentifier)
             
             self.tableView?.dataSource = self
@@ -28,7 +28,8 @@ class PhasesDataSource: NSObject {
         self.model = model
         super.init()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(_:)), name: NSNotification.Name(rawValue: PhasesDidUpdateNotification), object: nil)
+        let name = NSNotification.Name(rawValue: "PhasesDidUpdateNotification")
+        NotificationCenter.default.addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(with:)), name: name, object: nil)
     }
     
     func configure(using tableView: UITableView) -> Void {
@@ -37,13 +38,13 @@ class PhasesDataSource: NSObject {
     
     // MARK: - Private
     
-    func viewModel(for indexPath: NSIndexPath) -> PhaseViewModel {
-        let phase = self.phases[indexPath.row] as Phase
+    func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
+        let phase = self.phases[indexPath.row]
         let viewModel = PhaseViewModel(phase: phase)
         return viewModel
     }
     
-    internal func phasesDidUpdate(_ notification: NSNotification) -> Void {
+    internal func phasesDidUpdate(with notification: Notification) -> Void {
         let result = self.model.currentPhases
         switch result {
         case .success(let phases):
@@ -60,16 +61,15 @@ extension PhasesDataSource: UITableViewDataSource {
         return self.phases.count
     }
     
-    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         if let phaseCell = cell as? PhaseTableViewCell {
             phaseCell.viewModel = viewModel(for: indexPath)
             
-            if (indexPath as NSIndexPath).row == self.phases.count - 1 {
+            if indexPath.row == self.phases.count - 1 {
                 cell.separatorInset = UIEdgeInsetsMake(0.0, cell.bounds.size.width, 0.0, 0.0)
-            }
-            else {
+            } else {
                 cell.separatorInset = UIEdgeInsetsMake(0.0, 16.0, 0.0, 16.0)
             }
         }

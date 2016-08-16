@@ -9,10 +9,12 @@
 import UIKit
 import XCTest
 
+@testable import Luna
+
 class PhaseTests: XCTestCase {
 
     func testPhasesAreCreatedFromJSON() {
-        let file = Bundle(for: self.dynamicType).url(forResource: "moonphases", withExtension: "json")
+        let file = Bundle(for: type(of: self)).url(forResource: "moonphases", withExtension: "json")
         let data = try! Data(contentsOf: file!)
         
         do {
@@ -31,7 +33,7 @@ class PhaseTests: XCTestCase {
     }
     
     func testPhaseIsCreatedFromJSON() {
-        let file = Bundle(for: self.dynamicType).url(forResource: "moonphases", withExtension: "json")
+        let file = Bundle(for: type(of: self)).url(forResource: "moonphases", withExtension: "json")
         let data = try! Data(contentsOf: file!)
         
         do {

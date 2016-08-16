@@ -57,9 +57,9 @@ extension Result: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .success(let value):
-            return "success: \(String(value))"
+            return "success: \(String(describing: value))"
         case .failure(let error):
-            return "error: \(String(error))"
+            return "error: \(String(describing: error))"
         }
     }
 }

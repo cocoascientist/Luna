@@ -10,7 +10,9 @@ import UIKit
 import CoreLocation
 import XCTest
 
-typealias LocationUpdate = (manager: CLLocationManager) -> Void
+@testable import Luna
+
+typealias LocationUpdate = (_ manager: CLLocationManager) -> Void
 
 class LocationTrackerTests: XCTestCase {
     
@@ -25,7 +27,7 @@ class LocationTrackerTests: XCTestCase {
         override func startUpdatingLocation() {
             let delayTime = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: delayTime) { [weak self] in
-                self?.locatonUpdate(manager: self!)
+                self?.locatonUpdate(self!)
             }
         }
         

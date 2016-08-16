@@ -63,9 +63,9 @@ extension Moon: JSONConstructable {
 extension Moon {
     static func moonFromJSON(_ json: JSON) -> MoonResult {
         if let moon = Moon.init(json: json) {
-            return MoonResult.success(moon)
+            return .success(moon)
         } else {
-            return MoonResult.failure(JSONError.badFormat)
+            return .failure(JSONError.badFormat)
         }
     }
 }

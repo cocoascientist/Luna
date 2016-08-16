@@ -8,23 +8,23 @@
 
 import Foundation
 
-typealias JSON = [String: AnyObject]
+public typealias JSON = [String: AnyObject]
 
-protocol JSONRepresentable {
+public protocol JSONRepresentable {
     func toJSON() throws -> JSON
 }
 
-protocol JSONConstructable {
+public protocol JSONConstructable {
     init?(json: JSON)
 }
 
-enum JSONError: Error {
+public enum JSONError: Error {
     case badFormat
     case other(Error)
 }
 
 extension Data: JSONRepresentable {
-    func toJSON() throws -> JSON {
+    public func toJSON() throws -> JSON {
         do {
             let obj = try JSONSerialization.jsonObject(with: self, options: [])
             guard let json = obj as? JSON else { throw JSONError.badFormat }

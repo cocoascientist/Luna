@@ -12,15 +12,15 @@ import Foundation
 
 extension Date {
     
-    private var epochJulianDate: Double {
+    fileprivate var epochJulianDate: Double {
         return 2440587.5
     }
     
-    private var lunarSynodicPeriod: Double {
+    fileprivate var lunarSynodicPeriod: Double {
         return 29.53059
     }
     
-    private var julianDate: Double {
+    fileprivate var julianDate: Double {
         return epochJulianDate + timeIntervalSince1970 / 86400
     }
     

@@ -14,7 +14,7 @@ extension String {
     func queryParameters(from string: String) -> [String] {
         let pairs = string.characters.split { $0 == "&" }.map { String($0) }
         let params = pairs.flatMap{ (string) -> String? in
-            let value = string.characters.split { $0 == "=" }.map { String($0) } as [String]
+            let value = string.characters.split { $0 == "=" }.map { String($0) }
             return value.first ?? nil
         }
         return params

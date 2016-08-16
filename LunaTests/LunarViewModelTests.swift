@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+@testable import Luna
+
 class LunarViewModelTests: XCTestCase {
     
     var viewModel: LunarViewModel {

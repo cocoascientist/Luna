@@ -10,6 +10,8 @@ import UIKit
 import XCTest
 import CoreLocation
 
+@testable import Luna
+
 let timeout = 60.0
 
 class LunarPhaseModelTests: XCTestCase {
@@ -24,26 +26,26 @@ class LunarPhaseModelTests: XCTestCase {
         let model = modelUsingProtocol(LocalURLProtocol.self)
         model.updateLunarPhase(using: location)
         
-        waitForAndExpectNotificationNamed(MoonDidUpdateNotification)
+        waitForAndExpectNotification(named: "MoonDidUpdateNotification")
     }
     
     func testPhasesDidUpdateNotificationIsPosted() {
         let model = modelUsingProtocol(LocalURLProtocol.self)
         model.updateLunarPhase(using: location)
         
-        waitForAndExpectNotificationNamed(PhasesDidUpdateNotification)
+        waitForAndExpectNotification(named: "PhasesDidUpdateNotification")
     }
     
     func testErrorNotificationIsPosted() {
         let model = modelUsingProtocol(FailingURLProtocol.self)
         model.updateLunarPhase(using: location)
         
-        waitForAndExpectNotificationNamed(LunarModelDidReceiveErrorNotification)
+        waitForAndExpectNotification(named: "LunarModelDidReceiveErrorNotification")
     }
     
     // MARK: - Private
     
-    private func waitForAndExpectNotificationNamed(_ name:String) -> Void {
+    fileprivate func waitForAndExpectNotification(named name: String) -> Void {
         let expected = expectation(description: "Notification should be posted")
         var token: Int = 0
         

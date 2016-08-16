@@ -21,21 +21,23 @@ protocol Reachable {
 extension Reachable {
     var reachable: ReachabilityType {
         var address = sockaddr_in()
-        address.sin_len = UInt8(sizeofValue(address))
+        address.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
         address.sin_family = sa_family_t(AF_INET)
         
-        guard let reachable = withUnsafePointer(&address, {
-            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
-        }) else {
-            return ReachabilityType.offline
-        }
+        var reachability: ReachabilityType = ReachabilityType.offline
         
-        var flags: SCNetworkReachabilityFlags = []
-        if !SCNetworkReachabilityGetFlags(reachable, &flags) {
-            return ReachabilityType.offline
-        }
+        let _ = withUnsafePointer(to: &address, { ptr in
+            ptr.withMemoryRebound(to: sockaddr.self, capacity: 1, { (addr) -> Void in
+                guard let reachable = SCNetworkReachabilityCreateWithAddress(nil, addr) else { return }
         
-        return ReachabilityType(reachabilityFlags: flags)
+                var flags: SCNetworkReachabilityFlags = []
+                if !SCNetworkReachabilityGetFlags(reachable, &flags) { return }
+                
+                reachability = ReachabilityType(reachabilityFlags: flags)
+            })
+        })
+        
+        return reachability
     }
 }
 

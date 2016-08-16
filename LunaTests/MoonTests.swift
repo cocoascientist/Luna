@@ -9,10 +9,12 @@
 import UIKit
 import XCTest
 
+@testable import Luna
+
 class MoonTests: XCTestCase {
     
     func testMoonIsCreatedFromJSON() {
-        let file = Bundle(for: self.dynamicType).url(forResource: "sunmoon", withExtension: "json")
+        let file = Bundle(for: type(of: self)).url(forResource: "sunmoon", withExtension: "json")
         
         do {
             let data = try Data(contentsOf: file!)

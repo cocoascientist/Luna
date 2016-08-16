@@ -10,6 +10,8 @@ import UIKit
 import XCTest
 import CoreLocation
 
+@testable import Luna
+
 class NetworkControllerTests: XCTestCase {
     
     var location: Location {
@@ -25,7 +27,7 @@ class NetworkControllerTests: XCTestCase {
         
         let request = AerisAPI.moon(location.physical).request
         
-        networkController.start(request: request, result: { (result) -> Void in
+        networkController.start(request, result: { (result) -> Void in
             switch result {
             case .success:
                 expected.fulfill()
@@ -44,7 +46,7 @@ class NetworkControllerTests: XCTestCase {
         
         let request = AerisAPI.moonPhases(location.physical).request
         
-        networkController.start(request: request, result: { (result) -> Void in
+        networkController.start(request, result: { (result) -> Void in
             switch result {
             case .success:
                 expected.fulfill()
@@ -63,7 +65,7 @@ class NetworkControllerTests: XCTestCase {
         
         let request = AerisAPI.moonPhases(location.physical).request
         
-        networkController.start(request: request, result: { (result) -> Void in
+        networkController.start(request, result: { (result) -> Void in
             switch result {
             case .success:
                 XCTFail("Request should fail")

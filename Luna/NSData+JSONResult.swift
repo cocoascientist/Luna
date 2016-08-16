@@ -15,8 +15,7 @@ extension Data {
         do {
             let json = try self.toJSON()
             return JSONResult.success(json)
-        }
-        catch (let error) {
+        } catch (let error) {
             return JSONResult.failure(JSONError.other(error))
         }
     }

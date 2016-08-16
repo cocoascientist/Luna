@@ -37,14 +37,14 @@ class LocalURLProtocol: URLProtocol {
         // all data return at once, nothing to do
     }
     
-    private func dataForRequest(_ request: URLRequest) -> Data {
+    fileprivate func dataForRequest(_ request: URLRequest) -> Data {
         if let path = request.url?.path {
             var json: String?
             if path.range(of: "/sunmoon/moonphases/") != nil {
-                json = Bundle(for: self.dynamicType).path(forResource: "moonphases", ofType: "json")
+                json = Bundle(for: type(of: self)).path(forResource: "moonphases", ofType: "json")
             }
             else if path.range(of: "/sunmoon/") != nil {
-                json = Bundle(for: self.dynamicType).path(forResource: "sunmoon", ofType: "json")
+                json = Bundle(for: type(of: self)).path(forResource: "sunmoon", ofType: "json")
             }
             
             if json != nil {

@@ -10,7 +10,7 @@ import Foundation
 
 struct LunarViewModel {
     
-    private let moon: Moon
+    fileprivate let moon: Moon
     
     init(moon: Moon) {
         self.moon = moon
@@ -51,7 +51,7 @@ struct LunarViewModel {
         return "\(percent)% complete"
     }
     
-    private var formatter: DateFormatter {
+    fileprivate var formatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d yyyy 'at' h:mm a z"
         return formatter

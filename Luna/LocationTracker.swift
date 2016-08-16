@@ -11,18 +11,18 @@ import CoreLocation
 import UIKit
 
 public typealias LocationResult = Result<Location>
-public typealias Observer = (location: LocationResult) -> ()
+public typealias Observer = (_ location: LocationResult) -> ()
 
 enum LocationError: Error {
     case noData
 }
 
-public class LocationTracker: NSObject {
+public final class LocationTracker: NSObject {
     
-    private var lastResult: LocationResult = .failure(LocationError.noData)
-    private var observers: [Observer] = []
+    fileprivate var lastResult: LocationResult = .failure(LocationError.noData)
+    fileprivate var observers: [Observer] = []
     
-    private let locationManager: CLLocationManager
+    fileprivate let locationManager: CLLocationManager
     
     var currentLocation: LocationResult {
         return self.lastResult
@@ -59,15 +59,15 @@ public class LocationTracker: NSObject {
         self.locationManager.startUpdatingLocation()
     }
     
-    private func publishChange(with result: LocationResult) {
+    fileprivate func publishChange(with result: LocationResult) {
         if self.shouldUpdate(with: result) {
             let _ = observers.map { (observer) -> Void in
-                observer(location: result)
+                observer(result)
             }
         }
     }
     
-    private func shouldUpdate(with location: CLLocation) -> Bool {
+    fileprivate func shouldUpdate(with location: CLLocation) -> Bool {
         switch lastResult {
         case .success(let loc):
             return location.distance(from: loc.physical) > 100
@@ -94,11 +94,10 @@ extension LocationTracker: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
+            manager.startUpdatingLocation()
         default:
-            locationManager.requestWhenInUseAuthorization()
+            manager.requestWhenInUseAuthorization()
         }
-
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -106,7 +105,7 @@ extension LocationTracker: CLLocationManagerDelegate {
         self.publishChange(with: result)
         self.lastResult = result
     }
-    
+
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.first {
             if shouldUpdate(with: currentLocation) {

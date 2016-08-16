@@ -14,11 +14,6 @@ typealias PhasesResult = Result<[Phase]>
 struct Phase {
     let name: String
     let date: Date
-    
-    init(_ name: String, _ date: Date) {
-        self.name = name
-        self.date = date
-    }
 }
 
 extension Phase: JSONConstructable {
@@ -38,9 +33,9 @@ extension Phase: JSONConstructable {
 extension Phase {
     static func phaseFromJSON(_ json: JSON) -> PhaseResult {
         if let phase = Phase(json: json) {
-            return PhaseResult.success(phase)
+            return .success(phase)
         } else {
-            return PhaseResult.failure(PhaseModelError.noPhases)
+            return .failure(PhaseModelError.noPhases)
         }
     }
     

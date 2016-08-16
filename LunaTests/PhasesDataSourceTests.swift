@@ -9,6 +9,8 @@
 import UIKit
 import XCTest
 
+@testable import Luna
+
 class PhasesDataSourceTests: XCTestCase {
     
     class FakeTableView: UITableView {
@@ -23,9 +25,9 @@ class PhasesDataSourceTests: XCTestCase {
     class FakeDataSource: PhasesDataSource {
         var expectation: XCTestExpectation?
         
-        override func phasesDidUpdate(_ notification: NSNotification) {
+        override func phasesDidUpdate(with notification: Notification) {
             expectation?.fulfill()
-            super.phasesDidUpdate(notification)
+            super.phasesDidUpdate(with: notification)
         }
     }
     
