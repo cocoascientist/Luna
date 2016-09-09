@@ -47,7 +47,7 @@ class NetworkController: Reachable {
     - returns: An NSURLSessionTask associated with the request
     */
     
-    func start(_ request: URLRequest, result: TaskResult) {
+    func start(_ request: URLRequest, result: @escaping TaskResult) {
         
         let finished: TaskResult = {(taskResult) in
             DispatchQueue.main.async(execute: { () -> Void in

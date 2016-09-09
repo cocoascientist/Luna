@@ -19,7 +19,7 @@ class LocationTrackerTests: XCTestCase {
     class FakeLocationManager: CLLocationManager {
         let locatonUpdate: LocationUpdate
         
-        init(update: LocationUpdate) {
+        init(update: @escaping LocationUpdate) {
             self.locatonUpdate = update
             super.init()
         }

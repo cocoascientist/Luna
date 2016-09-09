@@ -45,7 +45,7 @@ public final class LocationTracker: NSObject {
     
     // MARK: - Public
     
-    func addLocationChangeObserver(observer: Observer) -> Void {
+    func addLocationChangeObserver(observer: @escaping Observer) -> Void {
         observers.append(observer)
     }
     
