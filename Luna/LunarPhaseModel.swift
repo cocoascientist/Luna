@@ -90,7 +90,7 @@ public class LunarPhaseModel: NSObject {
         let moonResult: TaskResult = {(result) -> Void in
             
             let json = result.flatMap(JSONResultFromData)
-            let moon = json.flatMap(Moon.moonFromJSON)
+            let moon = json.flatMap(Moon.moon)
             
             switch moon {
             case .success(let moon):
@@ -106,7 +106,7 @@ public class LunarPhaseModel: NSObject {
         let phasesResult: TaskResult = {(result) -> Void in
             
             let json = result.flatMap(JSONResultFromData)
-            let phases = json.flatMap(Phase.phasesFromJSON)
+            let phases = json.flatMap(Phase.phases)
             
             switch phases {
             case .success(let phases):

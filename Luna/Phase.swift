@@ -31,7 +31,7 @@ extension Phase: JSONConstructable {
 }
 
 extension Phase {
-    static func phaseFromJSON(_ json: JSON) -> PhaseResult {
+    static func phase(from json: JSON) -> PhaseResult {
         if let phase = Phase(json: json) {
             return .success(phase)
         } else {
@@ -39,12 +39,12 @@ extension Phase {
         }
     }
     
-    static func phasesFromJSON(_ json: JSON) -> PhasesResult {
+    static func phases(from json: JSON) -> PhasesResult {
         guard let data = json["response"] as? [JSON] else {
             return .failure(JSONError.badFormat)
         }
         
-        let results = data.flatMap(Phase.phaseFromJSON)
+        let results = data.flatMap(Phase.phase)
         let phases = results.flatMap { (phase) -> Phase? in
             switch phase {
             case .success(let value):

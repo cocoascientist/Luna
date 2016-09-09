@@ -19,7 +19,7 @@ class PhaseTests: XCTestCase {
         
         do {
             let json = try data.toJSON()
-            let result = Phase.phasesFromJSON(json)
+            let result = Phase.phases(from: json)
             switch result {
             case .success(let phases):
                 XCTAssertEqual(phases.count, 7, "Phases count is incorrect")
@@ -40,7 +40,7 @@ class PhaseTests: XCTestCase {
             let json = try data.toJSON()
             if let response = json["response"] as? [JSON],
                 let phaseObj = response.first,
-                case .success(let phase) = Phase.phaseFromJSON(phaseObj) {
+                case .success(let phase) = Phase.phase(from: phaseObj) {
                 XCTAssertEqual(phase.name, "new moon", "Phase name is incorrect")
             }
             else {
