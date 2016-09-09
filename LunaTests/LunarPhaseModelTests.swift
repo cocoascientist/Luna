@@ -26,21 +26,21 @@ class LunarPhaseModelTests: XCTestCase {
         let model = modelUsingProtocol(LocalURLProtocol.self)
         model.updateLunarPhase(using: location)
         
-        waitForAndExpectNotification(named: "MoonDidUpdateNotification")
+        waitForAndExpectNotification(named: Notification.Name.didUpdateMoon.rawValue)
     }
     
     func testPhasesDidUpdateNotificationIsPosted() {
         let model = modelUsingProtocol(LocalURLProtocol.self)
         model.updateLunarPhase(using: location)
         
-        waitForAndExpectNotification(named: "PhasesDidUpdateNotification")
+        waitForAndExpectNotification(named: Notification.Name.didUpdatePhases.rawValue)
     }
     
     func testErrorNotificationIsPosted() {
         let model = modelUsingProtocol(FailingURLProtocol.self)
         model.updateLunarPhase(using: location)
         
-        waitForAndExpectNotification(named: "LunarModelDidReceiveErrorNotification")
+        waitForAndExpectNotification(named: Notification.Name.didReceiveLunarModelError.rawValue)
     }
     
     // MARK: - Private
@@ -53,7 +53,7 @@ class LunarPhaseModelTests: XCTestCase {
             //
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: name), object: nil, queue: nil, using: responseBlock)
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: name), object: nil, queue: nil, using: responseBlock)
         
         waitForExpectations(timeout: timeout, handler: nil)
     }

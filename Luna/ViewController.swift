@@ -69,10 +69,10 @@ class ViewController: UIViewController {
         
         self.dataSource.configure(using: tableView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: NSNotification.Name(rawValue: "MoonDidUpdateNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: NSNotification.Name(rawValue: "LunarModelDidReceiveErrorNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: .didUpdateMoon, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: .didReceiveLunarModelError, object: nil)
         
-        self.model.addObserver(self, forKeyPath: "loading", options: NSKeyValueObservingOptions.new, context: myContext)
+        self.model.addObserver(self, forKeyPath: "loading", options: .new, context: _context)
     }
     
     override func viewDidLayoutSubviews() {

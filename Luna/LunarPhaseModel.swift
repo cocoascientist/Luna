@@ -17,19 +17,25 @@ enum PhaseModelError: Error {
 typealias CurrentMoon = Result<Moon>
 typealias CurrentPhases = Result<[Phase]>
 
+extension Notification.Name {
+    static let didUpdateMoon = Notification.Name("didUpdateMoon")
+    static let didUpdatePhases = Notification.Name("didUpdatePhases")
+    static let didReceiveLunarModelError = Notification.Name("didReceiveLunarModelError")
+}
+
 public class LunarPhaseModel: NSObject {
     dynamic var loading: Bool = false
     dynamic var error: NSError? = nil
     
     fileprivate var moon: Moon? {
         didSet {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MoonDidUpdateNotification"), object: nil)
+            NotificationCenter.default.post(name: .didUpdateMoon, object: nil)
         }
     }
     
-    private var phases: [Phase]? {
+    fileprivate var phases: [Phase]? {
         didSet {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PhasesDidUpdateNotification"), object: nil)
+            NotificationCenter.default.post(name: .didUpdatePhases, object: nil)
         }
     }
     
@@ -49,8 +55,9 @@ public class LunarPhaseModel: NSObject {
             }
         }
         
-        let name =  NSNotification.Name(rawValue: "UIApplicationDidBecomeActiveNotification")
-        NotificationCenter.default.addObserver(self, selector: #selector(LunarPhaseModel.applicationDidResume(notification:)), name: name, object: nil)
+        let name = Notification.Name.UIApplicationDidBecomeActive
+        let selector = #selector(LunarPhaseModel.applicationDidResume(notification:))
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
     deinit {
@@ -132,13 +139,13 @@ public class LunarPhaseModel: NSObject {
                 unpackAndHandle(error: networkError)
             }
         } else {
-            let name =  NSNotification.Name(rawValue: "LunarModelDidReceiveErrorNotification")
+            let name =  Notification.Name.didReceiveLunarModelError
             NotificationCenter.default.post(name: name, object: nil)
         }
     }
     
     private func unpackAndHandle(error: NetworkError) -> Void {
-        let name = NSNotification.Name(rawValue: "LunarModelDidReceiveErrorNotification")
+        let name =  Notification.Name.didReceiveLunarModelError
         NotificationCenter.default.post(name: name, object: nil)
     }
     
@@ -152,7 +159,7 @@ public class LunarPhaseModel: NSObject {
 //                userInfo["Error"] = "Location Unknown"
 //            }
         }
-        let name = NSNotification.Name(rawValue: "LunarModelDidReceiveErrorNotification")
+        let name =  Notification.Name.didReceiveLunarModelError
         NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
     }
     

@@ -28,8 +28,9 @@ class PhasesDataSource: NSObject {
         self.model = model
         super.init()
         
-        let name = NSNotification.Name(rawValue: "PhasesDidUpdateNotification")
-        NotificationCenter.default.addObserver(self, selector: #selector(PhasesDataSource.phasesDidUpdate(with:)), name: name, object: nil)
+        let name = Notification.Name.didUpdatePhases
+        let selector = #selector(PhasesDataSource.phasesDidUpdate(with:))
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
     func configure(using tableView: UITableView) -> Void {
