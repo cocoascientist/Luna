@@ -61,9 +61,9 @@ public final class LocationTracker: NSObject {
     
     fileprivate func publishChange(with result: LocationResult) {
         if self.shouldUpdate(with: result) {
-            let _ = observers.map { (observer) -> Void in
+            observers.forEach({ (observer) -> Void in
                 observer(result)
-            }
+            })
         }
     }
     
