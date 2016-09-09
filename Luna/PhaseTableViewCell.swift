@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class PhaseTableViewCell: UITableViewCell {
+class PhaseTableViewCell: UITableViewCell {
     
     @IBOutlet var iconLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!

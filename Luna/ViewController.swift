@@ -8,15 +8,15 @@
 
 import UIKit
 
-let myContext = UnsafeMutableRawPointer(bitPattern: 0)
+fileprivate let _context = UnsafeMutableRawPointer(bitPattern: 0)
 
 class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    var model: LunarPhaseModel!
+    fileprivate var model: LunarPhaseModel!
     
-    var shouldPresentAlert: Bool = true
+    fileprivate var shouldPresentAlert: Bool = true
     
     override func awakeFromNib() {
         self.model = LunarPhaseModel()
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         
         self.tableView.backgroundColor = UIColor.clear
         self.tableView.separatorColor = UIColor.lightGray
-        self.tableView.addSubview(refreshControl)
+//        self.tableView.addSubview(refreshControl)
         
         self.dataSource.configure(using: tableView)
         
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == myContext {
+        if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == _context {
             UIApplication.shared.isNetworkActivityIndicatorVisible = self.model.loading
         }
         else {
@@ -94,11 +94,11 @@ class ViewController: UIViewController {
     
     // MARK: - Update Handlers
     
-    func handleRefresh(_ sender: AnyObject) {
-//        self.model.applicationDidResume(notification: Notification())
+    internal func handleRefresh(_ sender: AnyObject) {
+        // TODO: implement
     }
 
-    func didReceiveError(_ notification: Notification) -> Void {
+    internal func didReceiveError(_ notification: Notification) -> Void {
         if let message = notification.userInfo?["message"] as? String,
             let title = notification.userInfo?["title"] as? String {
             
@@ -112,11 +112,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func modelDidUpdate(_ notification: Notification) -> Void {
+    internal func modelDidUpdate(_ notification: Notification) -> Void {
         self.updateLunarViewModel()
     }
     
-    func updateLunarViewModel() -> Void {
+    fileprivate func updateLunarViewModel() -> Void {
         let result = self.model.currentMoon
         
         switch result {
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func showAlert(_ title: String, _ message: String) {
+    fileprivate func showAlert(_ title: String, _ message: String) {
         
         DispatchQueue.main.async { 
             if self.shouldPresentAlert {

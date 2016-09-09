@@ -12,7 +12,7 @@ typealias TaskResult = (_ result: Result<Data>) -> Void
 
 class NetworkController: Reachable {
     
-    let configuration: URLSessionConfiguration
+    fileprivate let configuration: URLSessionConfiguration
     fileprivate let session: URLSession
     
     init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
@@ -29,11 +29,11 @@ class NetworkController: Reachable {
     
     fileprivate class SessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
         
-        @nonobjc func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        fileprivate func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
             completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
         }
         
-        @nonobjc fileprivate func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: (URLRequest?) -> Void) {
+        fileprivate func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
             completionHandler(request)
         }
     }
