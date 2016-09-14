@@ -49,11 +49,11 @@ enum AerisAPI: Request {
 }
 
 extension AerisAPI {
-    private var clientSecret: String {
+    fileprivate var clientSecret: String {
         fatalError("client secret not defined")
     }
     
-    private var clientId: String {
+    fileprivate var clientId: String {
         fatalError("client id not defined")
     }
 }
