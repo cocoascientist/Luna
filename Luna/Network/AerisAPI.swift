@@ -50,10 +50,10 @@ enum AerisAPI: Request {
 
 extension AerisAPI {
     fileprivate var clientSecret: String {
-        fatalError("client secret not defined")
+        return "\u{0035}\u{0038}w669fct\u{0070}2OYs4xCO1ty2OFyZ1xU56eHETe6h8V"
     }
     
     fileprivate var clientId: String {
-        fatalError("client id not defined")
+        return "\u{0071}\u{004F}0Mw\u{0072}GSnfBKizM4B9Bt7"
     }
 }
