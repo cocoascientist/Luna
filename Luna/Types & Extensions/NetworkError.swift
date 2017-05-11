@@ -31,7 +31,7 @@ extension NetworkError: CustomDebugStringConvertible {
         case .badStatusCode(let statusCode):
             return "Bad status code: \(statusCode)"
         case .other(let error):
-            return "\(error)"
+            return "\(String(describing: error))"
         }
     }
     
