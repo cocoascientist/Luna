@@ -10,7 +10,7 @@ import Foundation
 
 typealias TaskResult = (_ result: Result<Data>) -> Void
 
-class NetworkController: Reachable {
+final class NetworkController: Reachable {
     
     fileprivate let configuration: URLSessionConfiguration
     fileprivate let session: URLSession

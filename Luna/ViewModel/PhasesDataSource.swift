@@ -33,27 +33,8 @@ class PhasesDataSource: NSObject {
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
-    func configure(using tableView: UITableView) -> Void {
+    public func configure(using tableView: UITableView) -> Void {
         self.tableView = tableView
-    }
-    
-    // MARK: - Private
-    
-    func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
-        let phase = self.phases[indexPath.row]
-        let viewModel = PhaseViewModel(phase: phase)
-        return viewModel
-    }
-    
-    internal func phasesDidUpdate(with notification: Notification) -> Void {
-        let result = self.model.currentPhases
-        switch result {
-        case .success(let phases):
-            self.phases = phases
-            self.tableView?.reloadData()
-        case .failure:
-            print("error updating phases, no data")
-        }
     }
 }
 
@@ -76,5 +57,26 @@ extension PhasesDataSource: UITableViewDataSource {
         }
         
         return cell
+    }
+}
+
+extension PhasesDataSource {
+    // MARK: - Private
+    
+    fileprivate func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
+        let phase = self.phases[indexPath.row]
+        let viewModel = PhaseViewModel(phase: phase)
+        return viewModel
+    }
+    
+    internal func phasesDidUpdate(with notification: Notification) -> Void {
+        let result = self.model.currentPhases
+        switch result {
+        case .success(let phases):
+            self.phases = phases
+            self.tableView?.reloadData()
+        case .failure:
+            print("error updating phases, no data")
+        }
     }
 }

@@ -10,14 +10,14 @@ import Foundation
 import CoreLocation
 import UIKit
 
-public typealias LocationResult = Result<Location>
-public typealias Observer = (_ location: LocationResult) -> ()
+typealias LocationResult = Result<Location>
+typealias Observer = (_ location: LocationResult) -> ()
 
 enum LocationError: Error {
     case noData
 }
 
-public final class LocationTracker: NSObject {
+final class LocationTracker: NSObject {
     
     fileprivate var lastResult: LocationResult = .failure(LocationError.noData)
     fileprivate var observers: [Observer] = []

@@ -11,7 +11,7 @@
 import UIKit
 
 @IBDesignable
-class LunarPhaseView: UIView {
+final class LunarPhaseView: UIView {
     let date: Date
     
     init(frame: CGRect, date: Date) {

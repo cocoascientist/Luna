@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LunarHeaderView: UIView {
+final class LunarHeaderView: UIView {
 
     @IBOutlet var phaseView: LunarPhaseView!
     @IBOutlet var phaseNameLabel: UILabel!

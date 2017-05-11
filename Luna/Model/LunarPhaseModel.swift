@@ -23,7 +23,7 @@ extension Notification.Name {
     static let didReceiveLunarModelError = Notification.Name("didReceiveLunarModelError")
 }
 
-public class LunarPhaseModel: NSObject {
+final class LunarPhaseModel: NSObject {
     dynamic var loading: Bool = false
     dynamic var error: NSError? = nil
     

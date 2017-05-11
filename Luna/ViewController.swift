@@ -10,7 +10,7 @@ import UIKit
 
 fileprivate let _context = UnsafeMutableRawPointer(bitPattern: 0)
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     

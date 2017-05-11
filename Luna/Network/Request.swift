@@ -8,9 +8,9 @@
 
 import Foundation
 
-public typealias Parameters = [String: String]
+typealias Parameters = [String: String]
 
-public protocol Request {
+protocol Request {
     var baseURL: URL { get }
     var path: String { get }
     var parameters: Parameters { get }
