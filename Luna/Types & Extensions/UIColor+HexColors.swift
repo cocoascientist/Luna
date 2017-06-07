@@ -18,7 +18,7 @@ extension UIColor {
         
         if (colorString.hasPrefix("#")) {
             let index = colorString.index(after: colorString.startIndex)
-            colorString = colorString[index..<colorString.endIndex]
+            colorString = String(colorString[index..<colorString.endIndex])
         }
         
         assert(colorString.characters.count == 6, "expected hexidecimal color string")
