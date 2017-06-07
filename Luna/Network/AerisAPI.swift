@@ -44,7 +44,7 @@ enum AerisAPI: Request {
     var request: URLRequest {
         let path = self.path
         guard let url = URL(string: path) else { fatalError("bad url") }
-        return URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60.0)
+        return URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60.0)
     }
 }
 
