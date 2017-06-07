@@ -89,8 +89,7 @@ final class LunarPhaseModel: NSObject {
         let moonRequest = AerisAPI.moon(location.physical).request
         let moonResult: TaskResult = {(result) -> Void in
             
-            let json = result.flatMap(JSONResultFromData)
-            let moon = json.flatMap(Moon.moon)
+            let moon = result.flatMap(MoonResultFromData)
             
             switch moon {
             case .success(let moon):
@@ -105,8 +104,7 @@ final class LunarPhaseModel: NSObject {
         let phasesRequest = AerisAPI.moonPhases(location.physical).request
         let phasesResult: TaskResult = {(result) -> Void in
             
-            let json = result.flatMap(JSONResultFromData)
-            let phases = json.flatMap(Phase.phases)
+            let phases = result.flatMap(PhasesResultFromData)
             
             switch phases {
             case .success(let phases):

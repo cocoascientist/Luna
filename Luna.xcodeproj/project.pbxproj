@@ -50,9 +50,7 @@
 		F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43381DADD88B008BE9AB /* Moon.swift */; };
 		F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43391DADD88B008BE9AB /* Phase.swift */; };
 		F7FA43471DADD8B4008BE9AB /* Double+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */; };
-		F7FA43481DADD8B4008BE9AB /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA433E1DADD8B4008BE9AB /* JSON.swift */; };
 		F7FA43491DADD8B4008BE9AB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */; };
-		F7FA434A1DADD8B4008BE9AB /* NSData+JSONResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43401DADD8B4008BE9AB /* NSData+JSONResult.swift */; };
 		F7FA434B1DADD8B4008BE9AB /* NSDate+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43411DADD8B4008BE9AB /* NSDate+Lunar.swift */; };
 		F7FA434D1DADD8B4008BE9AB /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43431DADD8B4008BE9AB /* QueryParameters.swift */; };
 		F7FA434E1DADD8B4008BE9AB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43441DADD8B4008BE9AB /* Result.swift */; };
@@ -128,9 +126,7 @@
 		F7FA43381DADD88B008BE9AB /* Moon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Moon.swift; path = Model/Moon.swift; sourceTree = "<group>"; };
 		F7FA43391DADD88B008BE9AB /* Phase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Phase.swift; path = Model/Phase.swift; sourceTree = "<group>"; };
 		F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+WeatherIcons.swift"; path = "Types & Extensions/Double+WeatherIcons.swift"; sourceTree = "<group>"; };
-		F7FA433E1DADD8B4008BE9AB /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = "Types & Extensions/JSON.swift"; sourceTree = "<group>"; };
 		F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = "Types & Extensions/NetworkError.swift"; sourceTree = "<group>"; };
-		F7FA43401DADD8B4008BE9AB /* NSData+JSONResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSData+JSONResult.swift"; path = "Types & Extensions/NSData+JSONResult.swift"; sourceTree = "<group>"; };
 		F7FA43411DADD8B4008BE9AB /* NSDate+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Lunar.swift"; path = "Types & Extensions/NSDate+Lunar.swift"; sourceTree = "<group>"; };
 		F7FA43431DADD8B4008BE9AB /* QueryParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameters.swift; path = "Types & Extensions/QueryParameters.swift"; sourceTree = "<group>"; };
 		F7FA43441DADD8B4008BE9AB /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = "Types & Extensions/Result.swift"; sourceTree = "<group>"; };
@@ -281,9 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */,
-				F7FA433E1DADD8B4008BE9AB /* JSON.swift */,
 				F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */,
-				F7FA43401DADD8B4008BE9AB /* NSData+JSONResult.swift */,
 				F7FA43411DADD8B4008BE9AB /* NSDate+Lunar.swift */,
 				F7FA43431DADD8B4008BE9AB /* QueryParameters.swift */,
 				F7FA43441DADD8B4008BE9AB /* Result.swift */,
@@ -447,7 +441,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7FA43361DADD883008BE9AB /* Request.swift in Sources */,
-				F7FA434A1DADD8B4008BE9AB /* NSData+JSONResult.swift in Sources */,
 				F7FA434D1DADD8B4008BE9AB /* QueryParameters.swift in Sources */,
 				F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */,
 				F7FA434B1DADD8B4008BE9AB /* NSDate+Lunar.swift in Sources */,
@@ -458,7 +451,6 @@
 				F7FA43241DADD823008BE9AB /* LunarPhaseView.swift in Sources */,
 				F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */,
 				F7FA43341DADD883008BE9AB /* NetworkController.swift in Sources */,
-				F7FA43481DADD8B4008BE9AB /* JSON.swift in Sources */,
 				F7FA43491DADD8B4008BE9AB /* NetworkError.swift in Sources */,
 				F7FA43351DADD883008BE9AB /* Reachable.swift in Sources */,
 				F76576BC1AA42E00007B2AE5 /* ViewController.swift in Sources */,
