@@ -61,8 +61,7 @@ final class LunarPhaseView: UIView {
             if (phase < 0.5) {
                 Xpos1 = Xpos * -1
                 Xpos2 = Double(Rpos) - (2.0 * phase * Double(Rpos)) - Double(Xpos)
-            }
-            else {
+            } else {
                 Xpos1 = Xpos
                 Xpos2 = Double(Xpos) - (2.0 * phase * Double(Rpos)) + Double(Rpos)
             }
