@@ -24,8 +24,8 @@ extension Notification.Name {
 }
 
 final class LunarPhaseModel: NSObject {
-    dynamic var loading: Bool = false
-    dynamic var error: NSError? = nil
+    @objc dynamic var loading: Bool = false
+    @objc dynamic var error: NSError? = nil
     
     fileprivate var moon: Moon? {
         didSet {
@@ -161,7 +161,7 @@ final class LunarPhaseModel: NSObject {
         NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
     }
     
-    func applicationDidResume(notification: NSNotification) -> Void {
+    @objc func applicationDidResume(notification: NSNotification) -> Void {
         switch locationTracker.currentLocation {
         case .success(let location):
             updateLunarPhase(using: location)

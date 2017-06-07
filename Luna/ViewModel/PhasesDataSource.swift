@@ -69,7 +69,7 @@ extension PhasesDataSource {
         return viewModel
     }
     
-    internal func phasesDidUpdate(with notification: Notification) -> Void {
+    @objc internal func phasesDidUpdate(with notification: Notification) -> Void {
         let result = self.model.currentPhases
         switch result {
         case .success(let phases):

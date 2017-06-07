@@ -51,11 +51,11 @@ final class LocationTracker: NSObject {
     
     // MARK: - Private
     
-    func handleBackgroundNotification(_ notification: NSNotification) {
+    @objc func handleBackgroundNotification(_ notification: NSNotification) {
         self.locationManager.stopUpdatingLocation()
     }
     
-    func handleForegroundNotification(_ notification: NSNotification) {
+    @objc func handleForegroundNotification(_ notification: NSNotification) {
         self.locationManager.startUpdatingLocation()
     }
     

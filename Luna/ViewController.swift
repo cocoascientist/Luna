@@ -94,11 +94,11 @@ final class ViewController: UIViewController {
     
     // MARK: - Update Handlers
     
-    internal func handleRefresh(_ sender: AnyObject) {
+    @objc internal func handleRefresh(_ sender: AnyObject) {
         // TODO: implement
     }
 
-    internal func didReceiveError(_ notification: Notification) -> Void {
+    @objc internal func didReceiveError(_ notification: Notification) -> Void {
         if let message = notification.userInfo?["message"] as? String,
             let title = notification.userInfo?["title"] as? String {
             
@@ -112,7 +112,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    internal func modelDidUpdate(_ notification: Notification) -> Void {
+    @objc internal func modelDidUpdate(_ notification: Notification) -> Void {
         self.updateLunarViewModel()
     }
     
