@@ -52,7 +52,10 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
 
         self.tableView.isPagingEnabled = true
-        self.tableView.rowHeight = 44.0
+        
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInsetAdjustmentBehavior = .never
+        }
         
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
