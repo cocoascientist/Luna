@@ -68,7 +68,11 @@ final class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: .didUpdateMoon, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: .didReceiveLunarModelError, object: nil)
         
-        self.model.addObserver(self, forKeyPath: "loading", options: .new, context: _context)
+        loadingObservation = self.model.observe(\.loading) { (observed, change) in
+            DispatchQueue.main.async { [unowned self] in
+                UIApplication.shared.isNetworkActivityIndicatorVisible = self.model.loading
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -77,15 +81,6 @@ final class ViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if self.model == object as? LunarPhaseModel && keyPath == "loading" && context == _context {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = self.model.loading
-        }
-        else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
     }
     
     // MARK: - Update Handlers
