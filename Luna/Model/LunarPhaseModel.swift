@@ -25,7 +25,6 @@ extension Notification.Name {
 
 final class LunarPhaseModel: NSObject {
     @objc dynamic var loading: Bool = false
-    @objc dynamic var error: NSError? = nil
     
     private var moon: Moon? {
         didSet {
@@ -80,7 +79,7 @@ final class LunarPhaseModel: NSObject {
         return .failure(PhaseModelError.noPhases)
     }
     
-    func updateLunarPhase(using location: Location) -> Void {
+    internal func updateLunarPhase(using location: Location) -> Void {
         let group = DispatchGroup()
         
         group.enter()
@@ -144,7 +143,7 @@ final class LunarPhaseModel: NSObject {
     
     private func unpackAndHandle(error: NetworkError) -> Void {
         let name =  Notification.Name.didReceiveLunarModelError
-        NotificationCenter.default.post(name: name, object: nil)
+        NotificationCenter.default.post(name: name, object: error)
     }
     
     private func unpackAndHandle(error: Error?) -> Void {
@@ -152,13 +151,9 @@ final class LunarPhaseModel: NSObject {
         
         if let error = error {
             userInfo["OrignalErrorKey"] = error
-            
-//            if error.domain == kCLErrorDomain {
-//                userInfo["Error"] = "Location Unknown"
-//            }
         }
         let name =  Notification.Name.didReceiveLunarModelError
-        NotificationCenter.default.post(name: name, object: nil, userInfo: userInfo)
+        NotificationCenter.default.post(name: name, object: error, userInfo: userInfo)
     }
     
     @objc func applicationDidResume(notification: NSNotification) -> Void {

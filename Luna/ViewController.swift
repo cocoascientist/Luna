@@ -64,7 +64,6 @@ final class ViewController: UIViewController {
         
         self.tableView.backgroundColor = UIColor.clear
         self.tableView.separatorColor = UIColor.lightGray
-//        self.tableView.addSubview(refreshControl)
         
         self.dataSource.configure(using: tableView)
         
@@ -93,12 +92,19 @@ final class ViewController: UIViewController {
     }
 
     @objc internal func didReceiveError(_ notification: Notification) -> Void {
-        if let message = notification.userInfo?["message"] as? String,
+        if let error = notification.object as? NetworkError {
+            let message = error.debugDescription
+            let summary = error.summary
+            
+            showAlert(summary, message)
+        }
+        else if let error = notification.object as? Error {
+            showAlert("Error", error.localizedDescription)
+        }    
+        else if let message = notification.userInfo?["message"] as? String,
             let title = notification.userInfo?["title"] as? String {
-            
             self.showAlert(title, message)
-            
-            self.headerView.phaseNameLabel.text = title
+//            self.headerView.phaseNameLabel.text = title
         }
         else {
             print("Error: Unhandled notification: \(notification)")
@@ -110,7 +116,7 @@ final class ViewController: UIViewController {
         self.updateLunarViewModel()
     }
     
-    fileprivate func updateLunarViewModel() -> Void {
+    private func updateLunarViewModel() -> Void {
         let result = self.model.currentMoon
         
         switch result {
@@ -121,22 +127,21 @@ final class ViewController: UIViewController {
         }
     }
     
-    fileprivate func showAlert(_ title: String, _ message: String) {
-        
+    private func showAlert(_ title: String, _ message: String) {
         DispatchQueue.main.async { 
             if self.shouldPresentAlert {
                 self.shouldPresentAlert = false
                 
-//                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//
-//                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
-//                    self.dismissViewControllerAnimated(true, completion: nil)
-//                    self.shouldPresentAlert = true
-//                })
-//
-//                alertController.addAction(action)
-//
-//                self.presentViewController(alertController, animated: true, completion: nil)
+                let handler: (UIAlertAction) -> Void = { [weak self] action in
+                    self?.dismiss(animated: true, completion: nil)
+                    self?.shouldPresentAlert = true
+                }
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: handler)
+                
+                alertController.addAction(action)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
