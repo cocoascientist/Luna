@@ -25,11 +25,13 @@ struct LunarViewModel {
     }
     
     var rise: String {
-        return self.formatter.string(from: moon.rise)
+        guard let rise = moon.rise else { return "---" }
+        return self.formatter.string(from: rise)
     }
     
     var set: String {
-        return self.formatter.string(from: moon.set)
+        guard let set = moon.set else { return  "---" }
+        return self.formatter.string(from: set)
     }
     
     var age: String {
