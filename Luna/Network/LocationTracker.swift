@@ -20,9 +20,9 @@ enum LocationError: Error {
 final class LocationTracker: NSObject {
     
     fileprivate var lastResult: LocationResult = .failure(LocationError.noData)
-    fileprivate var observers: [Observer] = []
+    private var observers: [Observer] = []
     
-    fileprivate let locationManager: CLLocationManager
+    private let locationManager: CLLocationManager
     
     var currentLocation: LocationResult {
         return self.lastResult
@@ -76,7 +76,7 @@ final class LocationTracker: NSObject {
         }
     }
     
-    private func shouldUpdate(with result: LocationResult) -> Bool {
+    fileprivate func shouldUpdate(with result: LocationResult) -> Bool {
         switch lastResult {
         case .success(let loc):
             let location = loc.physical

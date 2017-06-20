@@ -8,15 +8,14 @@
 
 import UIKit
 
-fileprivate let _context = UnsafeMutableRawPointer(bitPattern: 0)
-
 final class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    fileprivate var model: LunarPhaseModel!
+    private var model: LunarPhaseModel!
     
-    fileprivate var shouldPresentAlert: Bool = true
+    private var shouldPresentAlert: Bool = true
+    private var loadingObservation: NSKeyValueObservation? = nil
     
     override func awakeFromNib() {
         self.model = LunarPhaseModel()
@@ -26,23 +25,20 @@ final class ViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    fileprivate lazy var dataSource: PhasesDataSource = {
+    private lazy var dataSource: PhasesDataSource = {
         return PhasesDataSource(model: self.model)
     }()
     
-    fileprivate lazy var headerView: LunarHeaderView = {
+    private lazy var headerView: LunarHeaderView = {
         let nib = Bundle.main.loadNibNamed("LunarHeaderView", owner: self, options: nil)
         guard let headerView = nib?.first as? LunarHeaderView else {
             fatalError("Could not load LunarHeaderView from nib")
         }
         
-        let insetY: CGFloat = (self.traitCollection.userInterfaceIdiom == .pad) ? 200.0 : 0.0
-        headerView.frame = UIScreen.main.bounds.insetBy(dx: 0.0, dy: insetY)
-        
         return headerView
     }()
     
-    fileprivate lazy var refreshControl: UIRefreshControl = {
+    private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         let action = #selector(ViewController.handleRefresh(_:))
         control.addTarget(self, action: action, for: UIControlEvents.valueChanged)

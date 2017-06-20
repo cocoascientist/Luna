@@ -27,20 +27,20 @@ final class LunarPhaseModel: NSObject {
     @objc dynamic var loading: Bool = false
     @objc dynamic var error: NSError? = nil
     
-    fileprivate var moon: Moon? {
+    private var moon: Moon? {
         didSet {
             NotificationCenter.default.post(name: .didUpdateMoon, object: nil)
         }
     }
     
-    fileprivate var phases: [Phase]? {
+    private var phases: [Phase]? {
         didSet {
             NotificationCenter.default.post(name: .didUpdatePhases, object: nil)
         }
     }
     
-    fileprivate let networkController: NetworkController
-    fileprivate let locationTracker = LocationTracker()
+    private let networkController: NetworkController
+    private let locationTracker = LocationTracker()
     
     init(networkController: NetworkController = NetworkController()) {
         self.networkController = networkController
@@ -128,7 +128,7 @@ final class LunarPhaseModel: NSObject {
         }
     }
     
-    fileprivate func postErrorNotification(_ error: Error) -> Void {
+    private func postErrorNotification(_ error: Error) -> Void {
         if let networkError = error as? NetworkError {
             switch networkError {
             case .other(let error):

@@ -10,7 +10,7 @@ import Foundation
 
 struct PhaseViewModel {
     
-    fileprivate let phase: Phase
+    private let phase: Phase
     
     init(phase: Phase) {
         self.phase = phase
@@ -24,7 +24,7 @@ struct PhaseViewModel {
         return self.formatter.string(from: phase.date)
     }
     
-    fileprivate var formatter: DateFormatter {
+    private var formatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d yyyy 'at' h:mm a z"
         return formatter

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = String(describing: PhaseTableViewCell.self)
+fileprivate let reuseIdentifier = String(describing: PhaseTableViewCell.self)
 
 class PhasesDataSource: NSObject {
     fileprivate var phases: [Phase] = []

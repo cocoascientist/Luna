@@ -20,7 +20,7 @@ final class PhaseTableViewCell: UITableViewCell {
         }
     }
 
-    open override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
 
         self.iconLabel.text = ""
@@ -33,12 +33,5 @@ final class PhaseTableViewCell: UITableViewCell {
         
         self.selectionStyle = UITableViewCellSelectionStyle.none
         self.backgroundColor = UIColor.clear
-    }
-
-    open override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+    }    
 }

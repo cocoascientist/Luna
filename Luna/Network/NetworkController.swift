@@ -12,8 +12,8 @@ typealias TaskResult = (_ result: Result<Data>) -> Void
 
 final class NetworkController: Reachable {
     
-    fileprivate let configuration: URLSessionConfiguration
-    fileprivate let session: URLSession
+    private let configuration: URLSessionConfiguration
+    private let session: URLSession
     
     init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
         self.configuration = configuration
