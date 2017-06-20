@@ -17,8 +17,8 @@ struct Moon: Codable {
     
     let illumination: Int
     
-    let rise: Date
-    let set: Date
+    let rise: Date?
+    let set: Date?
     
     private enum CodingKeys: String, CodingKey {
         case error
@@ -60,8 +60,8 @@ struct Moon: Codable {
         let moonContainer = try response.nestedContainer(keyedBy: MoonKeys.self, forKey: .moon)
         let phaseContainer = try moonContainer.nestedContainer(keyedBy: PhaseKeys.self, forKey: .phase)
         
-        let rise = try moonContainer.decode(TimeInterval.self, forKey: .rise)
-        let set = try moonContainer.decode(TimeInterval.self, forKey: .set)
+        let rise = try? moonContainer.decode(TimeInterval.self, forKey: .rise)
+        let set = try? moonContainer.decode(TimeInterval.self, forKey: .set)
         let age = try phaseContainer.decode(Double.self, forKey: .age)
         let name = try phaseContainer.decode(String.self, forKey: .name)
         let illumination = try phaseContainer.decode(Int.self, forKey: .illumination)
@@ -71,8 +71,18 @@ struct Moon: Codable {
         self.age = age
         self.percent = percent
         self.illumination = illumination
-        self.rise = Date(timeIntervalSince1970: rise)
-        self.set = Date(timeIntervalSince1970: set)
+        
+        if rise != nil {
+            self.rise = Date(timeIntervalSince1970: rise!)
+        } else {
+            self.rise = nil
+        }
+        
+        if set != nil {
+            self.set = Date(timeIntervalSince1970: set!)
+        } else {
+            self.set = nil
+        }
     }
 }
 

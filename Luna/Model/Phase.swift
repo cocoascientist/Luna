@@ -53,7 +53,7 @@ private struct PhaseWrapper: Codable {
     }
 }
 
-struct Phase {
+struct Phase: Codable {
     let name: String
     let date: Date
     
