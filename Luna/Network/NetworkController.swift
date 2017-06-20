@@ -15,8 +15,11 @@ final class NetworkController: Reachable {
     private let configuration: URLSessionConfiguration
     private let session: URLSession
     
-    init(configuration: URLSessionConfiguration = URLSessionConfiguration.default) {
+    init(configuration: URLSessionConfiguration = .default) {
         self.configuration = configuration
+        if #available(iOS 11.0, *) {
+            configuration.waitsForConnectivity = true
+        }
         
         let delegate = SessionDelegate()
         let queue = OperationQueue.main
@@ -35,6 +38,10 @@ final class NetworkController: Reachable {
         
         fileprivate func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
             completionHandler(request)
+        }
+        
+        func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {
+            print("waiting for connectivity...")
         }
     }
     
