@@ -50,7 +50,10 @@ class LunarPhaseModelTests: XCTestCase {
         var token: Int = 0
         
         let responseBlock = { (notification: Notification!) -> Void in
-            //
+            if token == 0 {
+                token += 1
+                expected.fulfill()
+            }
         }
         
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: name), object: nil, queue: nil, using: responseBlock)
