@@ -61,8 +61,6 @@ extension PhasesDataSource: UITableViewDataSource {
 }
 
 extension PhasesDataSource {
-    // MARK: - Private
-    
     fileprivate func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
         let phase = self.phases[indexPath.row]
         let viewModel = PhaseViewModel(phase: phase)
