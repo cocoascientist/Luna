@@ -9,13 +9,22 @@
 import Foundation
 import CoreLocation
 
-enum PhaseModelError: Error {
+enum PhaseModelError: LocalizedError {
     case noMoon
     case noPhases
+    
+    var localizedDescription: String {
+        switch self {
+        case .noMoon: return NSLocalizedString("Error finding current moon phase", comment: "")
+        case .noPhases: return NSLocalizedString("Error finding upcoming moon phases", comment: "")
+        }
+    }
 }
 
 typealias CurrentMoon = Result<Moon>
 typealias CurrentPhases = Result<[Phase]>
+
+typealias UpdateCompletion = () -> ()
 
 extension Notification.Name {
     static let didUpdateMoon = Notification.Name("didUpdateMoon")
@@ -53,10 +62,6 @@ final class LunarPhaseModel: NSObject {
                 self.postErrorNotification(error)
             }
         }
-        
-        let name = Notification.Name.UIApplicationDidBecomeActive
-        let selector = #selector(LunarPhaseModel.applicationDidResume(notification:))
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
     deinit {
@@ -79,7 +84,19 @@ final class LunarPhaseModel: NSObject {
         return .failure(PhaseModelError.noPhases)
     }
     
-    internal func updateLunarPhase(using location: Location) -> Void {
+    func refresh(completion: UpdateCompletion? = nil) {
+        let result = locationTracker.currentLocation
+        switch result {
+        case .success(let location):
+            updateLunarPhase(using: location, completion: completion)
+        case .failure(let error):
+            // TODO: error
+            print("no location, could not refresh: \(error)")
+            completion?()
+        }
+    }
+    
+    internal func updateLunarPhase(using location: Location, completion: UpdateCompletion? = nil) -> Void {
         let group = DispatchGroup()
         
         group.enter()
@@ -124,44 +141,11 @@ final class LunarPhaseModel: NSObject {
         
         group.notify(queue: queue) {
             self.loading = false
+            completion?()
         }
     }
     
     private func postErrorNotification(_ error: Error) -> Void {
-        if let networkError = error as? NetworkError {
-            switch networkError {
-            case .other(let error):
-                unpackAndHandle(error: error)
-            default:
-                unpackAndHandle(error: networkError)
-            }
-        } else {
-            let name =  Notification.Name.didReceiveLunarModelError
-            NotificationCenter.default.post(name: name, object: nil)
-        }
-    }
-    
-    private func unpackAndHandle(error: NetworkError) -> Void {
-        let name =  Notification.Name.didReceiveLunarModelError
-        NotificationCenter.default.post(name: name, object: error)
-    }
-    
-    private func unpackAndHandle(error: Error?) -> Void {
-        var userInfo: [AnyHashable: Any] = [:]
-        
-        if let error = error {
-            userInfo["OrignalErrorKey"] = error
-        }
-        let name =  Notification.Name.didReceiveLunarModelError
-        NotificationCenter.default.post(name: name, object: error, userInfo: userInfo)
-    }
-    
-    @objc func applicationDidResume(notification: NSNotification) -> Void {
-        switch locationTracker.currentLocation {
-        case .success(let location):
-            updateLunarPhase(using: location)
-        case .failure:
-            break
-        }
+        NotificationCenter.default.post(name: .didReceiveLunarModelError, object: error)
     }
 }

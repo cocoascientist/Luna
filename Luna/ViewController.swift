@@ -92,23 +92,13 @@ final class ViewController: UIViewController {
     }
 
     @objc internal func didReceiveError(_ notification: Notification) -> Void {
-        if let error = notification.object as? NetworkError {
-            let message = error.debugDescription
-            let summary = error.summary
-            
-            showAlert(summary, message)
-        }
-        else if let error = notification.object as? Error {
-            showAlert("Error", error.localizedDescription)
-        }    
-        else if let message = notification.userInfo?["message"] as? String,
-            let title = notification.userInfo?["title"] as? String {
-            self.showAlert(title, message)
-//            self.headerView.phaseNameLabel.text = title
-        }
-        else {
-            print("Error: Unhandled notification: \(notification)")
-            self.headerView.phaseNameLabel.text = NSLocalizedString("Error", comment: "Error")
+        let error = notification.object
+        
+        switch error {
+        case let localizedError as LocalizedError:
+            showAlert("Error", localizedError.localizedDescription)
+        default:
+            showAlert("Error", error.debugDescription)
         }
     }
     
