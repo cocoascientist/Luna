@@ -64,31 +64,44 @@ final class ViewController: UIViewController {
         
         self.tableView.backgroundColor = UIColor.clear
         self.tableView.separatorColor = UIColor.lightGray
+        self.tableView.refreshControl = refreshControl
         
         self.dataSource.configure(using: tableView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.modelDidUpdate(_:)), name: .didUpdateMoon, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.didReceiveError(_:)), name: .didReceiveLunarModelError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(modelDidUpdate(_:)), name: .didUpdateMoon, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveError(_:)), name: .didReceiveLunarModelError, object: nil)
         
         loadingObservation = self.model.observe(\.loading) { (observed, change) in
-            DispatchQueue.main.async { [unowned self] in
-                UIApplication.shared.isNetworkActivityIndicatorVisible = self.model.loading
-            }
+            let visible = self.model.loading
+            let deadline: DispatchTime = visible ? .now() : .now() + .seconds(1)
+            
+            DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = visible
+            })
         }
     }
     
     override func viewDidLayoutSubviews() {
         self.tableView.tableHeaderView = self.headerView
+        self.tableView.tableHeaderView?.frame = self.view.bounds
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Update Handlers
     
     @objc internal func handleRefresh(_ sender: AnyObject) {
-        // TODO: implement
+        model.refresh { [weak self] in
+            DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
+            }
+        }
     }
 
     @objc internal func didReceiveError(_ notification: Notification) -> Void {
@@ -107,9 +120,7 @@ final class ViewController: UIViewController {
     }
     
     private func updateLunarViewModel() -> Void {
-        let result = self.model.currentMoon
-        
-        switch result {
+        switch model.currentMoon {
         case .success(let moon):
             self.headerView.viewModel = LunarViewModel(moon: moon)
         case .failure:
