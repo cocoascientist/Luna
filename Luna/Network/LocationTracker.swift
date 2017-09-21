@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreLocation
-import UIKit
 
 typealias LocationResult = Result<Location>
 typealias Observer = (_ location: LocationResult) -> ()
@@ -51,11 +50,11 @@ final class LocationTracker: NSObject {
     
     // MARK: - Private
     
-    @objc func handleBackgroundNotification(_ notification: NSNotification) {
+    @objc internal func handleBackgroundNotification(_ notification: NSNotification) {
         self.locationManager.stopUpdatingLocation()
     }
     
-    @objc func handleForegroundNotification(_ notification: NSNotification) {
+    @objc internal func handleForegroundNotification(_ notification: NSNotification) {
         self.locationManager.startUpdatingLocation()
     }
     
