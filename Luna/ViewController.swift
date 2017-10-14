@@ -83,7 +83,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         self.tableView.tableHeaderView = self.headerView
-        self.tableView.tableHeaderView?.frame = self.view.bounds
+        self.tableView.tableHeaderView?.frame = view.layoutMarginsGuide.layoutFrame
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
