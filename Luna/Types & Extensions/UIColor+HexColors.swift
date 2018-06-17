@@ -21,7 +21,7 @@ extension UIColor {
             colorString = String(colorString[index..<colorString.endIndex])
         }
         
-        assert(colorString.characters.count == 6, "expected hexidecimal color string")
+        assert(colorString.count == 6, "expected hexidecimal color string")
         
         var rgbValue: UInt32 = 0
         Scanner(string: colorString).scanHexInt32(&rgbValue)

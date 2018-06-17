@@ -46,9 +46,9 @@ class AerisAPITests: XCTestCase {
     }
     
     fileprivate func queryParameters(_ string: String) -> [String] {
-        let pairs = string.characters.split { $0 == "&" }.map { String($0) }
+        let pairs = string.split { $0 == "&" }.map { String($0) }
         let params = pairs.map({ (string) -> String in
-            let value = string.characters.split { $0 == "=" }.map { String($0) }
+            let value = string.split { $0 == "=" }.map { String($0) }
             return value.first!
         })
         
