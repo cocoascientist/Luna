@@ -50,9 +50,9 @@ extension PhasesDataSource: UITableViewDataSource {
             phaseCell.viewModel = viewModel(for: indexPath)
             
             if indexPath.row == self.phases.count - 1 {
-                cell.separatorInset = UIEdgeInsetsMake(0.0, cell.bounds.size.width, 0.0, 0.0)
+                cell.separatorInset = UIEdgeInsets(top: 0.0, left: cell.bounds.size.width, bottom: 0.0, right: 0.0)
             } else {
-                cell.separatorInset = UIEdgeInsetsMake(0.0, 16.0, 0.0, 16.0)
+                cell.separatorInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
             }
         }
         

@@ -41,7 +41,7 @@ final class ViewController: UIViewController {
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
         let action = #selector(ViewController.handleRefresh(_:))
-        control.addTarget(self, action: action, for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: action, for: UIControl.Event.valueChanged)
         control.backgroundColor = UIColor.clear
         control.tintColor = UIColor.white
         
