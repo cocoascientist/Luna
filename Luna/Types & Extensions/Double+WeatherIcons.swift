@@ -14,7 +14,7 @@ extension Double {
         let age = floor(((self * 0.01) * length) * 100.0)
         
         switch Int(age) {
-        case 0, 27:
+        case 0, 28:
             return "\u{f095}" // new moon
         case 1:
             return "\u{f096}"
@@ -68,7 +68,7 @@ extension Double {
             return "\u{f0ae}"
         case 26:
             return "\u{f0af}"
-        case 26:
+        case 27:
             return "\u{f0b0}"
         default:
             return "X"
