@@ -43,7 +43,6 @@
 		F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432D1DADD883008BE9AB /* AerisAPI.swift */; };
 		F7FA43331DADD883008BE9AB /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432E1DADD883008BE9AB /* LocationTracker.swift */; };
 		F7FA43341DADD883008BE9AB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432F1DADD883008BE9AB /* NetworkController.swift */; };
-		F7FA43351DADD883008BE9AB /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43301DADD883008BE9AB /* Reachable.swift */; };
 		F7FA43361DADD883008BE9AB /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43311DADD883008BE9AB /* Request.swift */; };
 		F7FA433A1DADD88B008BE9AB /* LunarPhaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43371DADD88B008BE9AB /* LunarPhaseModel.swift */; };
 		F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43381DADD88B008BE9AB /* Moon.swift */; };
@@ -119,7 +118,6 @@
 		F7FA432D1DADD883008BE9AB /* AerisAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AerisAPI.swift; path = Network/AerisAPI.swift; sourceTree = "<group>"; };
 		F7FA432E1DADD883008BE9AB /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationTracker.swift; path = Network/LocationTracker.swift; sourceTree = "<group>"; };
 		F7FA432F1DADD883008BE9AB /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = Network/NetworkController.swift; sourceTree = "<group>"; };
-		F7FA43301DADD883008BE9AB /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachable.swift; path = Network/Reachable.swift; sourceTree = "<group>"; };
 		F7FA43311DADD883008BE9AB /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Network/Request.swift; sourceTree = "<group>"; };
 		F7FA43371DADD88B008BE9AB /* LunarPhaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarPhaseModel.swift; path = Model/LunarPhaseModel.swift; sourceTree = "<group>"; };
 		F7FA43381DADD88B008BE9AB /* Moon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Moon.swift; path = Model/Moon.swift; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 				F7FA432D1DADD883008BE9AB /* AerisAPI.swift */,
 				F7FA432E1DADD883008BE9AB /* LocationTracker.swift */,
 				F7FA432F1DADD883008BE9AB /* NetworkController.swift */,
-				F7FA43301DADD883008BE9AB /* Reachable.swift */,
 				F7FA43311DADD883008BE9AB /* Request.swift */,
 			);
 			name = Network;

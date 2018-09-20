@@ -10,16 +10,17 @@ import Foundation
 
 typealias TaskResult = (_ result: Result<Data>) -> Void
 
-final class NetworkController: Reachable {
+final class NetworkController {
     
     private let configuration: URLSessionConfiguration
     private let session: URLSession
     
+    /// Initializes a new instance of a `NetworkController`.
+    ///
+    /// - Parameter configuration: A `URLSessionConfiguration` to use when making requests.
     init(configuration: URLSessionConfiguration = .default) {
         self.configuration = configuration
-        if #available(iOS 11.0, *) {
-            configuration.waitsForConnectivity = true
-        }
+        configuration.waitsForConnectivity = true
         
         let delegate = SessionDelegate()
         let queue = OperationQueue.main
@@ -45,15 +46,11 @@ final class NetworkController: Reachable {
         }
     }
     
-    /**
-    Creates and starts an NSURLSessionTask for the request.
-    
-    - parameter request: A request object
-    - parameter completion: Called when the task finishes.
-    
-    - returns: An NSURLSessionTask associated with the request
-    */
-    
+    /// Creates and starts an NSURLSessionTask for the request.
+    ///
+    /// - Parameters:
+    ///   - request: A request object
+    ///   - result: Called when the task finishes.
     func start(_ request: URLRequest, result: @escaping TaskResult) {
         
         let finished: TaskResult = {(taskResult) in
@@ -84,11 +81,6 @@ final class NetworkController: Reachable {
             }
         })
         
-        switch self.reachable {
-        case .online:
-            task.resume()
-        case .offline:
-            finished(.failure(NetworkError.offline))
-        }
+        task.resume()
     }
 }
