@@ -7,7 +7,7 @@ Read a full write up about the development of Luna at [cocoascientist.com](http:
 ## Requirements
 
 * Xcode 10
-* Swift 4
+* Swift 4.2
 
 ## Screenshot
 
