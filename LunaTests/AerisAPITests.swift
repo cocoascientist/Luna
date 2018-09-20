@@ -45,7 +45,7 @@ class AerisAPITests: XCTestCase {
         XCTAssertTrue(parameters.contains("limit"), "limit query parameter is missing")
     }
     
-    fileprivate func queryParameters(_ string: String) -> [String] {
+    private func queryParameters(_ string: String) -> [String] {
         let pairs = string.split { $0 == "&" }.map { String($0) }
         let params = pairs.map({ (string) -> String in
             let value = string.split { $0 == "=" }.map { String($0) }

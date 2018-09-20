@@ -8,13 +8,13 @@
 
 import UIKit
 
-fileprivate let reuseIdentifier = String(describing: PhaseTableViewCell.self)
+private let reuseIdentifier = String(describing: PhaseTableViewCell.self)
 
 class PhasesDataSource: NSObject {
-    fileprivate var phases: [Phase] = []
-    fileprivate let model: LunarPhaseModel
+    private var phases: [Phase] = []
+    private let model: LunarPhaseModel
     
-    fileprivate weak var tableView: UITableView? {
+    private weak var tableView: UITableView? {
         didSet {
             let nib = UINib(nibName: String(describing: PhaseTableViewCell.self), bundle: nil)
             self.tableView?.register(nib, forCellReuseIdentifier: reuseIdentifier)
@@ -61,7 +61,7 @@ extension PhasesDataSource: UITableViewDataSource {
 }
 
 extension PhasesDataSource {
-    fileprivate func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
+    private func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
         let phase = self.phases[indexPath.row]
         let viewModel = PhaseViewModel(phase: phase)
         return viewModel

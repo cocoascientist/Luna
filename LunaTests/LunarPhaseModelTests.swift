@@ -45,7 +45,7 @@ class LunarPhaseModelTests: XCTestCase {
     
     // MARK: - Private
     
-    fileprivate func waitForAndExpectNotification(named name: String) -> Void {
+    private func waitForAndExpectNotification(named name: String) -> Void {
         let expected = expectation(description: "Notification should be posted")
         var token: Int = 0
         
