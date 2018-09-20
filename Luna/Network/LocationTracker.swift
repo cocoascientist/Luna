@@ -123,7 +123,7 @@ extension LocationTracker: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - Location
+// MARK: - Equatable
 
 public struct Location: Equatable {
     let physical: CLLocation
