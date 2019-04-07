@@ -1,5 +1,5 @@
 //
-//  NSDate+Lunar.swift
+//  Date+Lunar.swift
 //  Luna
 //
 //  Created by Andrew Shepard on 3/23/15.
@@ -11,20 +11,13 @@
 import Foundation
 
 extension Date {
-    
-    private var epochJulianDate: Double {
-        return 2440587.5
-    }
-    
-    private var lunarSynodicPeriod: Double {
-        return 29.53059
-    }
-    
     private var julianDate: Double {
+        let epochJulianDate = 2440587.5
         return epochJulianDate + timeIntervalSince1970 / 86400
     }
     
     var moonPhase: Double {
+        let lunarSynodicPeriod = 29.53059
         let phase = (julianDate + 4.867) / lunarSynodicPeriod
         return (phase - floor(phase))
     }

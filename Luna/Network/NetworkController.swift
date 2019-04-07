@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias TaskResult = (_ result: Result<Data>) -> Void
+typealias TaskResult = (_ result: Result<Data, Error>) -> Void
 
 final class NetworkController {
     

@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-enum AerisAPI: Request {
+enum AerisAPI: Requestable {
     case moon(CLLocation)
     case moonPhases(CLLocation)
     
@@ -31,12 +31,12 @@ enum AerisAPI: Request {
         case .moon(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = query(with: parameters)
+            let queryString = parameters.queryString
             return "\(baseURL)/sunmoon/\(latitude),\(longitude)?\(queryString)"
         case .moonPhases(let location):
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            let queryString = query(with: parameters)
+            let queryString = parameters.queryString
             return "\(baseURL)/sunmoon/moonphases/\(latitude),\(longitude)?\(queryString)"
         }
     }
@@ -48,12 +48,12 @@ enum AerisAPI: Request {
     }
 }
 
-extension AerisAPI {
-    fileprivate var clientSecret: String {
-        return "58w669fctp2OYs4xCO1ty2OFyZ1xU56eHETe6h8V"
+private extension AerisAPI {
+    private var clientSecret: String {
+        return "0Fwa3rF6tIxwwUatBeHTncGkAZQ9FK88NhIOl8xB"
     }
     
-    fileprivate var clientId: String {
-        return "qO0MwrGSnfBKizM4B9Bt7"
+    private var clientId: String {
+        return "zFFXOpPPz6XfaUz20tWEQ"
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias MoonResult = Result<Moon>
+typealias MoonResult = Result<Moon, Error>
 
 struct Moon: Codable {
     let phase: String

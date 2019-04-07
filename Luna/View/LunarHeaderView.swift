@@ -10,18 +10,24 @@ import UIKit
 
 final class LunarHeaderView: UIView {
 
-    @IBOutlet var phaseView: LunarPhaseView!
-    @IBOutlet var phaseNameLabel: UILabel!
+    @IBOutlet weak var phaseView: LunarPhaseView!
+    @IBOutlet weak var phaseNameLabel: UILabel!
     
-    @IBOutlet var ageLabel: UILabel!
-    @IBOutlet var illuminationLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var illuminationLabel: UILabel!
     
-    @IBOutlet var riseLabel: UILabel!
-    @IBOutlet var setLabel: UILabel!
+    @IBOutlet weak var riseTitleLabel: UILabel!
+    @IBOutlet weak var riseLabel: UILabel!
+    
+    @IBOutlet weak var setTitleLabel: UILabel!
+    @IBOutlet weak var setLabel: UILabel!
     
     var viewModel: LunarViewModel? {
         didSet {
+            self.riseTitleLabel.isHidden = false
             self.riseLabel.text = viewModel?.rise
+            
+            self.setTitleLabel.isHidden = false
             self.setLabel.text = viewModel?.set
             
             self.ageLabel.text = viewModel?.age
@@ -49,6 +55,8 @@ final class LunarHeaderView: UIView {
         self.illuminationLabel.text = ""
         self.riseLabel.text = ""
         self.setLabel.text = ""
+        self.riseTitleLabel.isHidden = true
+        self.setTitleLabel.isHidden = true
         
         self.phaseNameLabel.textColor = UIColor.white
         self.ageLabel.textColor = UIColor.white
@@ -58,5 +66,4 @@ final class LunarHeaderView: UIView {
         
         self.backgroundColor = UIColor.clear
     }
-
 }

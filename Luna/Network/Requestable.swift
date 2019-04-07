@@ -1,5 +1,5 @@
 //
-//  Request.swift
+//  Requestable.swift
 //  Luna
 //
 //  Created by Andrew Shepard on 11/19/15.
@@ -10,15 +10,10 @@ import Foundation
 
 typealias Parameters = [String: String]
 
-protocol Request {
+protocol Requestable {
     var baseURL: URL { get }
     var path: String { get }
     var parameters: Parameters { get }
     
     var request: URLRequest { get }
-}
-
-extension Request {
-    var path: String { return "" }
-    var parameters: Parameters { return [:] }
 }

@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias PhaseResult = Result<Phase>
-typealias PhasesResult = Result<[Phase]>
+typealias PhaseResult = Result<Phase, Error>
+typealias PhasesResult = Result<[Phase], Error>
 
 private struct PhaseWrapper: Codable {
     let phases: [Phase]

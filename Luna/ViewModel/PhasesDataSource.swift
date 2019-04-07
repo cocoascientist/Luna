@@ -49,11 +49,9 @@ extension PhasesDataSource: UITableViewDataSource {
         if let phaseCell = cell as? PhaseTableViewCell {
             phaseCell.viewModel = viewModel(for: indexPath)
             
-            if indexPath.row == self.phases.count - 1 {
-                cell.separatorInset = UIEdgeInsets(top: 0.0, left: cell.bounds.size.width, bottom: 0.0, right: 0.0)
-            } else {
-                cell.separatorInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
-            }
+            let leftInset = (indexPath.row == phases.count - 1) ?
+                cell.bounds.size.width : 16.0
+            cell.separatorInset = UIEdgeInsets(top: 0.0, left: leftInset, bottom: 0.0, right: 0.0)
         }
         
         return cell
@@ -62,19 +60,16 @@ extension PhasesDataSource: UITableViewDataSource {
 
 extension PhasesDataSource {
     private func viewModel(for indexPath: IndexPath) -> PhaseViewModel {
-        let phase = self.phases[indexPath.row]
-        let viewModel = PhaseViewModel(phase: phase)
-        return viewModel
+        return PhaseViewModel(phase: phases[indexPath.row])
     }
     
     @objc internal func phasesDidUpdate(with notification: Notification) -> Void {
-        let result = self.model.currentPhases
-        switch result {
+        switch model.currentPhases {
         case .success(let phases):
             self.phases = phases
-            self.tableView?.reloadData()
-        case .failure:
-            print("error updating phases, no data")
+            tableView?.reloadData()
+        case .failure(let error):
+            print("error updating phases: \(error)")
         }
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
-typealias LocationResult = Result<Location>
+typealias LocationResult = Result<Location, Error>
 typealias Observer = (_ location: LocationResult) -> ()
 
 enum LocationError: Error {
@@ -37,8 +37,6 @@ final class LocationTracker: NSObject {
         locationManager.requestWhenInUseAuthorization()
         
         self.locationManager.startUpdatingLocation()
-        
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         

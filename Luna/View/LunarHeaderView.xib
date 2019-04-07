@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,13 +55,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Lq-n4-xJ6">
-                    <rect key="frame" x="56.5" y="629" width="37.5" height="18"/>
+                    <rect key="frame" x="56.5" y="629.5" width="37.5" height="18"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYs-aY-qGL">
-                    <rect key="frame" x="56.5" y="594.5" width="37.5" height="18"/>
+                    <rect key="frame" x="56.5" y="595" width="37.5" height="18"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -111,8 +111,10 @@
                 <outlet property="illuminationLabel" destination="FeB-tf-FoA" id="Jmq-0M-XZ5"/>
                 <outlet property="phaseNameLabel" destination="03A-Jh-5iY" id="u3h-AC-3kd"/>
                 <outlet property="phaseView" destination="V1O-xI-vlB" id="CjY-7b-iT0"/>
-                <outlet property="riseLabel" destination="6Lq-n4-xJ6" id="xCl-M5-3cl"/>
-                <outlet property="setLabel" destination="VYs-aY-qGL" id="yBc-UD-Vud"/>
+                <outlet property="riseLabel" destination="6Lq-n4-xJ6" id="gW4-68-jy2"/>
+                <outlet property="riseTitleLabel" destination="ynK-no-XQf" id="hHQ-jc-6Un"/>
+                <outlet property="setLabel" destination="VYs-aY-qGL" id="BOw-ry-ifC"/>
+                <outlet property="setTitleLabel" destination="ZKW-CK-meb" id="1k4-3V-Ecl"/>
             </connections>
             <point key="canvasLocation" x="561" y="264"/>
         </view>

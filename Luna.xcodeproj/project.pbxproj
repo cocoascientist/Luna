@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F70B5296221B808C007C7340 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70B5295221B808C007C7340 /* Formatters.swift */; };
 		F74734561AA4C390006720F1 /* weathericons-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F74734551AA4C390006720F1 /* weathericons-regular-webfont.ttf */; };
 		F74FDA971AEE9A5900B5FE17 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74FDA961AEE9A5900B5FE17 /* ViewControllerTests.swift */; };
 		F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576B91AA42E00007B2AE5 /* AppDelegate.swift */; };
@@ -43,15 +44,14 @@
 		F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432D1DADD883008BE9AB /* AerisAPI.swift */; };
 		F7FA43331DADD883008BE9AB /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432E1DADD883008BE9AB /* LocationTracker.swift */; };
 		F7FA43341DADD883008BE9AB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432F1DADD883008BE9AB /* NetworkController.swift */; };
-		F7FA43361DADD883008BE9AB /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43311DADD883008BE9AB /* Request.swift */; };
+		F7FA43361DADD883008BE9AB /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43311DADD883008BE9AB /* Requestable.swift */; };
 		F7FA433A1DADD88B008BE9AB /* LunarPhaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43371DADD88B008BE9AB /* LunarPhaseModel.swift */; };
 		F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43381DADD88B008BE9AB /* Moon.swift */; };
 		F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43391DADD88B008BE9AB /* Phase.swift */; };
 		F7FA43471DADD8B4008BE9AB /* Double+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */; };
 		F7FA43491DADD8B4008BE9AB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */; };
-		F7FA434B1DADD8B4008BE9AB /* NSDate+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43411DADD8B4008BE9AB /* NSDate+Lunar.swift */; };
-		F7FA434D1DADD8B4008BE9AB /* QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43431DADD8B4008BE9AB /* QueryParameters.swift */; };
-		F7FA434E1DADD8B4008BE9AB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43441DADD8B4008BE9AB /* Result.swift */; };
+		F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */; };
+		F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */; };
 		F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */; };
 		F7FA43501DADD8B4008BE9AB /* UIColor+HexColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43461DADD8B4008BE9AB /* UIColor+HexColors.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		F704B4491AB5C15500BBF2F7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		F70B5295221B808C007C7340 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Formatters.swift; path = "Types & Extensions/Formatters.swift"; sourceTree = "<group>"; };
 		F74734551AA4C390006720F1 /* weathericons-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular-webfont.ttf"; sourceTree = "<group>"; };
 		F74FDA961AEE9A5900B5FE17 /* ViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		F76576B41AA42E00007B2AE5 /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,15 +119,14 @@
 		F7FA432D1DADD883008BE9AB /* AerisAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AerisAPI.swift; path = Network/AerisAPI.swift; sourceTree = "<group>"; };
 		F7FA432E1DADD883008BE9AB /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationTracker.swift; path = Network/LocationTracker.swift; sourceTree = "<group>"; };
 		F7FA432F1DADD883008BE9AB /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = Network/NetworkController.swift; sourceTree = "<group>"; };
-		F7FA43311DADD883008BE9AB /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Network/Request.swift; sourceTree = "<group>"; };
+		F7FA43311DADD883008BE9AB /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requestable.swift; path = Network/Requestable.swift; sourceTree = "<group>"; };
 		F7FA43371DADD88B008BE9AB /* LunarPhaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarPhaseModel.swift; path = Model/LunarPhaseModel.swift; sourceTree = "<group>"; };
 		F7FA43381DADD88B008BE9AB /* Moon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Moon.swift; path = Model/Moon.swift; sourceTree = "<group>"; };
 		F7FA43391DADD88B008BE9AB /* Phase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Phase.swift; path = Model/Phase.swift; sourceTree = "<group>"; };
 		F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+WeatherIcons.swift"; path = "Types & Extensions/Double+WeatherIcons.swift"; sourceTree = "<group>"; };
 		F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = "Types & Extensions/NetworkError.swift"; sourceTree = "<group>"; };
-		F7FA43411DADD8B4008BE9AB /* NSDate+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Lunar.swift"; path = "Types & Extensions/NSDate+Lunar.swift"; sourceTree = "<group>"; };
-		F7FA43431DADD8B4008BE9AB /* QueryParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryParameters.swift; path = "Types & Extensions/QueryParameters.swift"; sourceTree = "<group>"; };
-		F7FA43441DADD8B4008BE9AB /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = "Types & Extensions/Result.swift"; sourceTree = "<group>"; };
+		F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Lunar.swift"; path = "Types & Extensions/Date+Lunar.swift"; sourceTree = "<group>"; };
+		F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Query.swift"; path = "Types & Extensions/Dictionary+Query.swift"; sourceTree = "<group>"; };
 		F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+WeatherIcons.swift"; path = "Types & Extensions/String+WeatherIcons.swift"; sourceTree = "<group>"; };
 		F7FA43461DADD8B4008BE9AB /* UIColor+HexColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+HexColors.swift"; path = "Types & Extensions/UIColor+HexColors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,7 +242,7 @@
 				F7FA432D1DADD883008BE9AB /* AerisAPI.swift */,
 				F7FA432E1DADD883008BE9AB /* LocationTracker.swift */,
 				F7FA432F1DADD883008BE9AB /* NetworkController.swift */,
-				F7FA43311DADD883008BE9AB /* Request.swift */,
+				F7FA43311DADD883008BE9AB /* Requestable.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -263,8 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				F7FA43271DADD858008BE9AB /* LunarViewModel.swift */,
-				F7FA43281DADD858008BE9AB /* PhasesDataSource.swift */,
 				F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */,
+				F7FA43281DADD858008BE9AB /* PhasesDataSource.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -274,11 +274,11 @@
 			children = (
 				F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */,
 				F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */,
-				F7FA43411DADD8B4008BE9AB /* NSDate+Lunar.swift */,
-				F7FA43431DADD8B4008BE9AB /* QueryParameters.swift */,
-				F7FA43441DADD8B4008BE9AB /* Result.swift */,
+				F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */,
+				F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */,
 				F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */,
 				F7FA43461DADD8B4008BE9AB /* UIColor+HexColors.swift */,
+				F70B5295221B808C007C7340 /* Formatters.swift */,
 			);
 			name = "Types & Extensions";
 			sourceTree = "<group>";
@@ -370,12 +370,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Andrew Shepard";
 				TargetAttributes = {
 					F76576B31AA42E00007B2AE5 = {
 						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -388,7 +388,7 @@
 					};
 					F76576C81AA42E00007B2AE5 = {
 						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
 						TestTargetID = F76576B31AA42E00007B2AE5;
 					};
@@ -396,7 +396,7 @@
 			};
 			buildConfigurationList = F76576AF1AA42E00007B2AE5 /* Build configuration list for PBXProject "Luna" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -446,15 +446,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7FA43361DADD883008BE9AB /* Request.swift in Sources */,
-				F7FA434D1DADD8B4008BE9AB /* QueryParameters.swift in Sources */,
+				F7FA43361DADD883008BE9AB /* Requestable.swift in Sources */,
+				F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */,
 				F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */,
-				F7FA434B1DADD8B4008BE9AB /* NSDate+Lunar.swift in Sources */,
+				F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */,
 				F7FA433A1DADD88B008BE9AB /* LunarPhaseModel.swift in Sources */,
-				F7FA434E1DADD8B4008BE9AB /* Result.swift in Sources */,
 				F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */,
 				F7FA43471DADD8B4008BE9AB /* Double+WeatherIcons.swift in Sources */,
 				F7FA43241DADD823008BE9AB /* LunarPhaseView.swift in Sources */,
+				F70B5296221B808C007C7340 /* Formatters.swift in Sources */,
 				F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */,
 				F7FA43341DADD883008BE9AB /* NetworkController.swift in Sources */,
 				F7FA43491DADD8B4008BE9AB /* NetworkError.swift in Sources */,
@@ -526,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -572,11 +573,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500";
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -585,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -623,11 +625,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500";
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -649,6 +651,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -669,6 +672,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -686,8 +690,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoascientist.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
 			};
 			name = Debug;
@@ -705,8 +708,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
 			};
 			name = Release;

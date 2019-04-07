@@ -21,8 +21,8 @@ enum PhaseModelError: LocalizedError {
     }
 }
 
-typealias CurrentMoon = Result<Moon>
-typealias CurrentPhases = Result<[Phase]>
+typealias CurrentMoon = Result<Moon, Error>
+typealias CurrentPhases = Result<[Phase], Error>
 
 typealias UpdateCompletion = () -> ()
 
@@ -104,10 +104,8 @@ final class LunarPhaseModel: NSObject {
         
         let moonRequest = AerisAPI.moon(location.physical).request
         let moonResult: TaskResult = {(result) -> Void in
-            
-            let moon = result.flatMap(MoonResultFromData)
-            
-            switch moon {
+            let moonResult = result.flatMap(MoonResultFromData)
+            switch moonResult {
             case .success(let moon):
                 self.moon = moon
             case .failure(let error):
@@ -120,14 +118,28 @@ final class LunarPhaseModel: NSObject {
         let phasesRequest = AerisAPI.moonPhases(location.physical).request
         let phasesResult: TaskResult = {(result) -> Void in
             
-            let phases = result.flatMap(PhasesResultFromData)
-            
-            switch phases {
-            case .success(let phases):
-                self.phases = phases
+            switch result {
+            case .success(let value):
+                let phaseResult = PhasesResultFromData(value)
+                
+                switch phaseResult {
+                case .success(let phases):
+                    self.phases = phases
+                case .failure(let error):
+                    self.postErrorNotification(error)
+                }
             case .failure(let error):
                 self.postErrorNotification(error)
             }
+            
+//            let phases = result.flatMap(PhasesResultFromData)
+//
+//            switch phases {
+//            case .success(let phases):
+//                self.phases = phases
+//            case .failure(let error):
+//                self.postErrorNotification(error)
+//            }
             
             group.leave()
         }

@@ -10,7 +10,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     private var model: LunarPhaseModel!
     
@@ -18,6 +18,7 @@ final class ViewController: UIViewController {
     private var loadingObservation: NSKeyValueObservation? = nil
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.model = LunarPhaseModel()
     }
     
@@ -53,9 +54,7 @@ final class ViewController: UIViewController {
 
         self.tableView.isPagingEnabled = true
         
-        if #available(iOS 11.0, *) {
-            self.tableView.contentInsetAdjustmentBehavior = .never
-        }
+        self.tableView.contentInsetAdjustmentBehavior = .never
         
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
@@ -64,6 +63,8 @@ final class ViewController: UIViewController {
         
         self.tableView.backgroundColor = UIColor.clear
         self.tableView.separatorColor = UIColor.lightGray
+        
+        self.tableView.separatorStyle = .none
         self.tableView.refreshControl = refreshControl
         
         self.dataSource.configure(using: tableView)
@@ -82,6 +83,7 @@ final class ViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         self.tableView.tableHeaderView = self.headerView
         self.tableView.tableHeaderView?.frame = view.layoutMarginsGuide.layoutFrame
     }
@@ -134,7 +136,7 @@ final class ViewController: UIViewController {
                 self.shouldPresentAlert = false
                 
                 let handler: (UIAlertAction) -> Void = { [weak self] action in
-                    self?.dismiss(animated: true, completion: nil)
+                    self?.dismiss(animated: true)
                     self?.shouldPresentAlert = true
                 }
                 
@@ -142,7 +144,7 @@ final class ViewController: UIViewController {
                 let action = UIAlertAction(title: "OK", style: .default, handler: handler)
                 
                 alertController.addAction(action)
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true)
             }
         }
     }
