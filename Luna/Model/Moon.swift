@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import SwiftUI
 
-typealias MoonResult = Result<Moon, Error>
-
-struct Moon: Codable {
+struct Moon: Codable, Identifiable {
+    var id: UUID = UUID()
+    
     let phase: String
     let age: Double
     let percent: Double
@@ -72,28 +73,17 @@ struct Moon: Codable {
         self.percent = percent
         self.illumination = illumination
         
-        if rise != nil {
-            self.rise = Date(timeIntervalSince1970: rise!)
+        if let rise = rise {
+            self.rise = Date(timeIntervalSince1970: rise)
         } else {
             self.rise = nil
         }
         
-        if set != nil {
-            self.set = Date(timeIntervalSince1970: set!)
+        if let set = set {
+            self.set = Date(timeIntervalSince1970: set)
         } else {
             self.set = nil
         }
-    }
-}
-
-func MoonResultFromData(_ data: Data) -> MoonResult {
-    let decoder = JSONDecoder()
-    
-    do {
-        let moon = try decoder.decode(Moon.self, from: data)
-        return MoonResult.success(moon)
-    } catch (let error) {
-        return MoonResult.failure(error)
     }
 }
 

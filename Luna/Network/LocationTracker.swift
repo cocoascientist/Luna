@@ -6,12 +6,10 @@
 //  Copyright (c) 2015 Andrew Shepard. All rights reserved.
 //
 
-import Foundation
+import Combine
 import CoreLocation
 import UIKit
-
-typealias LocationResult = Result<Location, Error>
-typealias Observer = (_ location: LocationResult) -> ()
+import SwiftUI
 
 enum LocationError: Error {
     case noData
@@ -19,52 +17,40 @@ enum LocationError: Error {
 
 final class LocationTracker: NSObject {
     
-    private var lastResult: LocationResult = .failure(LocationError.noData)
-    private var observers: [Observer] = []
+    typealias LocationResult = Result<Location, Error>
     
+    private var lastResult: LocationResult = .failure(LocationError.noData)
     private let locationManager: CLLocationManager
     
-    var currentLocation: LocationResult {
-        return self.lastResult
+    var locationUpdateEvent: AnyPublisher<Result<Location, Error>, Never> {
+        return _locationUpdateEvent.eraseToAnyPublisher()
     }
+    private let _locationUpdateEvent = PassthroughSubject<Result<Location, Error>, Never>()
     
     init(locationManager: CLLocationManager = CLLocationManager()) {
         self.locationManager = locationManager
+        
         super.init()
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        self.locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplication.willResignActiveNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    // MARK: - Public
-    
-    func addLocationChangeObserver(observer: @escaping Observer) -> Void {
-        observers.append(observer)
-    }
-    
     // MARK: - Private
     
     @objc internal func handleBackgroundNotification(_ notification: NSNotification) {
-        self.locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     @objc internal func handleForegroundNotification(_ notification: NSNotification) {
-        self.locationManager.startUpdatingLocation()
-    }
-    
-    private func publishChange(with result: LocationResult) {
-        if self.shouldUpdate(with: result) {
-            observers.forEach({ (observer) -> Void in
-                observer(result)
-            })
-        }
+        locationManager.startUpdatingLocation()
     }
     
     private func shouldUpdate(with location: CLLocation) -> Bool {
@@ -78,9 +64,8 @@ final class LocationTracker: NSObject {
     
     private func shouldUpdate(with result: LocationResult) -> Bool {
         switch lastResult {
-        case .success(let loc):
-            let location = loc.physical
-            return self.shouldUpdate(with: location)
+        case .success(let location):
+            return shouldUpdate(with: location.physical)
         case .failure:
             return true
         }
@@ -101,19 +86,16 @@ extension LocationTracker: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        let result = LocationResult.failure(NetworkError.other(error))
-        self.publishChange(with: result)
-        self.lastResult = result
+        lastResult = LocationResult.failure(NetworkError.other(error))
+        _locationUpdateEvent.send(lastResult)
     }
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.first {
             if shouldUpdate(with: currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
-                
-                let result = LocationResult.success(location)
-                self.publishChange(with: result)
-                self.lastResult = result
+                lastResult = LocationResult.success(location)
+                _locationUpdateEvent.send(lastResult)
             }
             
             // location hasn't changed significantly
@@ -123,7 +105,9 @@ extension LocationTracker: CLLocationManagerDelegate {
 
 // MARK: - Equatable
 
-public struct Location: Equatable {
+public struct Location: Equatable, Identifiable {
+    public let id: UUID = UUID()
+    
     let physical: CLLocation
     let city: String
     let state: String

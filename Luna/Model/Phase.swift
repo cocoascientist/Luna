@@ -7,9 +7,7 @@
 //
 
 import Foundation
-
-typealias PhaseResult = Result<Phase, Error>
-typealias PhasesResult = Result<[Phase], Error>
+import SwiftUI
 
 private struct PhaseWrapper: Codable {
     let phases: [Phase]
@@ -53,7 +51,8 @@ private struct PhaseWrapper: Codable {
     }
 }
 
-struct Phase: Codable {
+struct Phase: Codable, Identifiable {
+    let id: UUID = UUID()
     let name: String
     let date: Date
     
@@ -63,19 +62,15 @@ struct Phase: Codable {
     }
 }
 
-func PhasesResultFromData(_ data: Data) -> PhasesResult {
-    let decoder = JSONDecoder()
-    
-    do {
-        let wrapper = try decoder.decode(PhaseWrapper.self, from: data)
-        return PhasesResult.success(wrapper.phases)
-    } catch (let error) {
-        return PhasesResult.failure(error)
-    }
-}
-
 extension Phase: Equatable { }
 
 func ==(lhs: Phase, rhs: Phase) -> Bool {
     return lhs.date == rhs.date && lhs.name == rhs.name
+}
+
+func decodePhases(from data: Data) throws -> [Phase] {
+    let decoder = JSONDecoder()
+    
+    let wrapper = try decoder.decode(PhaseWrapper.self, from: data)
+    return wrapper.phases
 }

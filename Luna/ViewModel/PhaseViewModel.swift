@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Andrew Shepard. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+import Combine
 
 struct PhaseViewModel {
     
@@ -22,5 +23,12 @@ struct PhaseViewModel {
     
     var date: String {
         return DateFormatter.fullDate.string(from: phase.date)
+    }
+}
+
+extension PhaseViewModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(phase.id)
+        hasher.combine(phase.name)
     }
 }
