@@ -39,8 +39,10 @@ struct DispatchQueueScheduler: Scheduler {
                   tolerance: Int,
                   options: Never?,
                   _ action: @escaping () -> Void) {
-        queue.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(tolerance),
-                         execute: action)
+        queue.asyncAfter(
+            deadline: .now() + DispatchTimeInterval.milliseconds(tolerance),
+            execute: action
+        )
     }
     
     func schedule(after date: DispatchTime,
@@ -49,8 +51,10 @@ struct DispatchQueueScheduler: Scheduler {
                   options: Never?,
                   _ action: @escaping () -> Void) -> Cancellable {
         let workItem = DispatchWorkItem(block: action)
-        queue.asyncAfter(deadline: .now() + DispatchTimeInterval.milliseconds(interval),
-                         execute: workItem)
+        queue.asyncAfter(
+            deadline: .now() + DispatchTimeInterval.milliseconds(interval),
+            execute: workItem
+        )
         return AnyCancellable { workItem.cancel() }
     }
 }

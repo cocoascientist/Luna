@@ -20,9 +20,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         // Use a UIHostingController as window root view controller
+        
+        // Create a dummy URL Session
+//        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
+//        let session = URLSession.init(configuration: configuration)
+//        let viewModel = ContentViewModel(session: session)
+        
+        let viewModel = ContentViewModel()
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(
-            rootView: ContentView(viewModel: ContentViewModel(scheduler: DispatchQueueScheduler.main))
+            rootView: ContentView(viewModel: viewModel)
         )
         self.window = window
         window.makeKeyAndVisible()

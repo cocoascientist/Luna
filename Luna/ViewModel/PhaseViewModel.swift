@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Andrew Shepard. All rights reserved.
 //
 
-import SwiftUI
-import Combine
+import Foundation
 
 struct PhaseViewModel {
     

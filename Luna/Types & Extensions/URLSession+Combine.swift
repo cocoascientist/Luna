@@ -10,31 +10,22 @@ import Foundation
 import Combine
 
 extension URLSession {
-    func data(with request: URLRequest) -> Publishers.Future<Data, Error> {
-        return Publishers.Future<Data, Error> { subscriber in
-            let task = self.dataTask(with: request, completionHandler: { (data, response, err) -> Void in
-                guard let data = data else {
-                    guard let _ = err else {
-                        return subscriber(.failure(NetworkError.noData))
-                    }
-                    
-                    return subscriber(.failure(NetworkError.other(err)))
-                }
-                
+    func data(with request: URLRequest) -> AnyPublisher<Data, Error> {
+        return dataTaskPublisher(for: request)
+            .mapError { NetworkError.other($0) }
+            .flatMap { (data, response) -> AnyPublisher<Data, Error> in
                 guard let response = response as? HTTPURLResponse else {
-                    return subscriber(.failure(NetworkError.badResponse))
+                    return .fail(NetworkError.badResponse)
                 }
                 
                 switch response.statusCode {
                 case 200...204:
-                    subscriber(.success(data))
+                    return .just(data)
                 default:
                     let error = NetworkError.badStatusCode(statusCode: response.statusCode)
-                    subscriber(.failure(error))
+                    return .fail(error)
                 }
-            })
-            
-            task.resume()
-        }
+            }
+            .eraseToAnyPublisher()
     }
 }

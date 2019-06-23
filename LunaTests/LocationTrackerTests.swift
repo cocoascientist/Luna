@@ -36,50 +36,50 @@ class LocationTrackerTests: XCTestCase {
         }
     }
     
-    func testLocationUpdateIsPublished() {
-        let fakeLocationManager = FakeLocationManager { (manager) -> Void in
-            XCTAssertNotNil(manager.delegate, "Location manager delegate should not be nil")
-            
-            let location = CLLocation(latitude: 25.7877, longitude: -80.2241)
-            manager.delegate?.locationManager?(manager, didUpdateLocations: [location])
-        }
-        
-        let locationTracker = LocationTracker(locationManager: fakeLocationManager)
-        let expected = expectation(description: "Should publish location change")
-        
-        locationTracker.addLocationChangeObserver { (result) -> () in
-            switch result {
-            case .success(let loc):
-                let location = loc
-                XCTAssertEqual(location.physical.coordinate.latitude, 25.7877, "Latitude is wrong")
-                XCTAssertEqual(location.physical.coordinate.longitude, -80.2241, "Longitude is wrong")
-                expected.fulfill()
-            case .failure:
-                XCTFail("Location should be valid")
-            }
-        }
-        
-        waitForExpectations(timeout: 2, handler: nil)
-    }
-    
-    func testErrorIsPublished() {
-        let fakeLocationManager = FakeLocationManager { (manager) -> Void in
-            let error = NSError(domain: "org.andyshep.Luna", code: -1, userInfo: nil)
-            manager.delegate!.locationManager?(manager, didFailWithError: error)
-        }
-        
-        let locationTracker = LocationTracker(locationManager: fakeLocationManager)
-        let expected = expectation(description: "Should fail to publish location change")
-        
-        locationTracker.addLocationChangeObserver { (result) -> () in
-            switch result {
-            case .success:
-                XCTFail("Location should NOT be valid")
-            case .failure:
-                expected.fulfill()
-            }
-        }
-        
-        waitForExpectations(timeout: 2, handler: nil)
-    }
+//    func testLocationUpdateIsPublished() {
+//        let fakeLocationManager = FakeLocationManager { (manager) -> Void in
+//            XCTAssertNotNil(manager.delegate, "Location manager delegate should not be nil")
+//            
+//            let location = CLLocation(latitude: 25.7877, longitude: -80.2241)
+//            manager.delegate?.locationManager?(manager, didUpdateLocations: [location])
+//        }
+//        
+//        let locationTracker = LocationTracker(locationManager: fakeLocationManager)
+//        let expected = expectation(description: "Should publish location change")
+//        
+//        locationTracker.addLocationChangeObserver { (result) -> () in
+//            switch result {
+//            case .success(let loc):
+//                let location = loc
+//                XCTAssertEqual(location.physical.coordinate.latitude, 25.7877, "Latitude is wrong")
+//                XCTAssertEqual(location.physical.coordinate.longitude, -80.2241, "Longitude is wrong")
+//                expected.fulfill()
+//            case .failure:
+//                XCTFail("Location should be valid")
+//            }
+//        }
+//        
+//        waitForExpectations(timeout: 2, handler: nil)
+//    }
+//    
+//    func testErrorIsPublished() {
+//        let fakeLocationManager = FakeLocationManager { (manager) -> Void in
+//            let error = NSError(domain: "org.andyshep.Luna", code: -1, userInfo: nil)
+//            manager.delegate!.locationManager?(manager, didFailWithError: error)
+//        }
+//
+//        let locationTracker = LocationTracker(locationManager: fakeLocationManager)
+//        let expected = expectation(description: "Should fail to publish location change")
+//
+//        locationTracker.addLocationChangeObserver { (result) -> () in
+//            switch result {
+//            case .success:
+//                XCTFail("Location should NOT be valid")
+//            case .failure:
+//                expected.fulfill()
+//            }
+//        }
+//
+//        waitForExpectations(timeout: 2, handler: nil)
+//    }
 }

@@ -6,39 +6,37 @@
 //  Copyright © 2019 Andrew Shepard. All rights reserved.
 //
 
-import Foundation
 import Combine
 import SwiftUI
 
-enum LunaError: Error {
-    case malformedMoonResponse
-}
-
 class ContentViewModel {
     
-    var lunarViewModel: LunarViewModel? = nil
-    var phaseViewModels: [PhaseViewModel] = []
+    var lunarViewModel: LunarViewModel? = nil {
+        didSet { _lunarViewModelDidChange.send(()) }
+    }
+    var phaseViewModels: [PhaseViewModel] = [] {
+        didSet { _phaseViewModelDidChange.send(()) }
+    }
     
-    private let lunarViewModelPublisher: AnyPublisher<LunarViewModel?, Never>
-    private let phaseViewModelsPublisher: AnyPublisher<[PhaseViewModel], Never>
+    private var lunarChangeSubscriber: AnyCancellable?
+    private var phaseChangeSubscriber: AnyCancellable?
     
     private let locationTracker = LocationTracker()
     
-    init(scheduler: DispatchQueueScheduler, session: URLSession = URLSession.shared) {
+    private let _lunarViewModelDidChange = PassthroughSubject<Void, Never>()
+    private let _phaseViewModelDidChange = PassthroughSubject<Void, Never>()
+    
+    init(scheduler: DispatchQueueScheduler = DispatchQueueScheduler.main,
+         session: URLSession = URLSession.shared) {
         
-        let locationUpdateEvent = locationTracker.locationUpdateEvent
-            .share()
-        
-        lunarViewModelPublisher = locationUpdateEvent
+        lunarChangeSubscriber = locationTracker.locationUpdateEvent
             .compactMap { (result) -> URLRequest? in
                 guard case .success(let location) = result else { return nil }
                 return AerisAPI.moon(location.physical).request
             }
-            .flatMap { (request) in
+            .flatMap { request in
                 return session.data(with: request)
-                    .catch { error in
-                        return Publishers.Just(Data())
-                    }
+                    .catch { _ in Publishers.Just(Data()) }
             }
             .decode(type: Moon?.self, decoder: JSONDecoder())
             .compactMap{ (moon) -> LunarViewModel? in
@@ -49,9 +47,9 @@ class ContentViewModel {
             }
             .catch { _ in Publishers.Just(nil) }
             .receive(on: scheduler)
-            .eraseToAnyPublisher()
+            .assign(to: \.lunarViewModel, on: self)
         
-        phaseViewModelsPublisher = locationUpdateEvent
+        phaseChangeSubscriber = locationTracker.locationUpdateEvent
             .compactMap { (result) -> URLRequest? in
                 guard case .success(let location) = result else { return nil }
                 return AerisAPI.moonPhases(location.physical).request
@@ -63,36 +61,31 @@ class ContentViewModel {
             .tryMap { (data) -> [Phase] in
                 return try decodePhases(from: data)
             }
-            .catch { error in
-                Publishers.Just([])
-            }
+            .catch { _ in Publishers.Just([]) }
             .compactMap{ (phases) -> [PhaseViewModel] in
                 return phases.map { PhaseViewModel(phase: $0) }
             }
-            .catch { _ in
-                Publishers.Just([])
-            }
+            .catch { _ in Publishers.Just([]) }
             .receive(on: scheduler)
-            .eraseToAnyPublisher()
-        
-        _ = phaseViewModelsPublisher
             .assign(to: \.phaseViewModels, on: self)
-        
-        _ = lunarViewModelPublisher
-            .assign(to: \.lunarViewModel, on: self)
+    }
+    
+    deinit {
+        lunarChangeSubscriber?.cancel()
+        phaseChangeSubscriber?.cancel()
     }
 }
 
 extension ContentViewModel: BindableObject {
     var didChange: AnyPublisher<Void, Never> {
-        return Publishers
-            .Merge(
-                lunarViewModelPublisher
-                    .flatMap { _ in Publishers.Just(()) },
-                phaseViewModelsPublisher
-                    .flatMap { _ in Publishers.Just(()) }
-            )
-            .flatMap { _ in Publishers.Just(()) }
-            .eraseToAnyPublisher()
+        return Publishers.CombineLatest(
+            _lunarViewModelDidChange
+                .eraseToAnyPublisher(),
+            _phaseViewModelDidChange
+                .eraseToAnyPublisher()
+        ) { _, _ in
+            //
+        }
+        .eraseToAnyPublisher()
     }
 }

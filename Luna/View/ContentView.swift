@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ContentView : View {
     @ObjectBinding var viewModel: ContentViewModel
@@ -24,40 +25,35 @@ struct ContentView : View {
             }
             .padding(.zero)
         }
-        .background(Color(red: 35/255, green: 37/255, blue: 38/255))
+//        .background(Color(red: 35/255, green: 37/255, blue: 38/255))
+        .background(LinearGradient.lunarGradient, cornerRadius: 0)
         .edgesIgnoringSafeArea(.all)
     }
 }
 
-struct HeaderView: View {
-    var viewModel: LunarViewModel?
-    var geometry: GeometryProxy
-    
-    var body: some View {
-        VStack {
-            CircleView()
-            LunarView(viewModel: viewModel)
-        }
-        .frame(
-            width: geometry.size.width,
-            height: geometry.size.height,
-            alignment: .center
+extension LinearGradient {
+    static var lunarGradient: LinearGradient {
+        let spectrum = Gradient(colors: [
+                Color(red: 35/255, green: 37/255, blue: 38/255),
+                Color(red: 65/255, green: 67/255, blue: 69/255)
+            ]
         )
+        
+        let gradient = LinearGradient(gradient: spectrum, startPoint: .top, endPoint: .bottom)
+        return gradient
     }
 }
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
+    var session: URLSession {
+        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
+        let session = URLSession(configuration: configuration)
+        return session
+    }
+    
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ContentViewModel(session: session))
     }
 }
 #endif
-
-extension CGSize {
-    var middle: CGPoint {
-        let midX = floor(width / 2)
-        let midY = floor(height / 2)
-        return CGPoint(x: midX, y: midY)
-    }
-}

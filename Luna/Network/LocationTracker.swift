@@ -17,10 +17,11 @@ enum LocationError: Error {
 
 final class LocationTracker: NSObject {
     
-    typealias LocationResult = Result<Location, Error>
-    
-    private var lastResult: LocationResult = .failure(LocationError.noData)
+    private var lastLocation: Result<Location, Error> = .failure(LocationError.noData)
     private let locationManager: CLLocationManager
+    
+    private var willResignActiveSubscription: Cancellable?
+    private var didBecomeActiveSubscription: Cancellable?
     
     var locationUpdateEvent: AnyPublisher<Result<Location, Error>, Never> {
         return _locationUpdateEvent.eraseToAnyPublisher()
@@ -36,36 +37,34 @@ final class LocationTracker: NSObject {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        locationManager.startUpdatingLocation()
+        willResignActiveSubscription = NotificationCenter.default
+            .publisher(for: UIApplication.willResignActiveNotification)
+            .map { _ in () }
+            .sink(receiveValue: { [weak self] _ in
+                self?.locationManager.stopUpdatingLocation()
+            })
         
-        NotificationCenter.default.addObserver(self, selector: #selector(LocationTracker.handleBackgroundNotification(_:)), name: UIApplication.willResignActiveNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(LocationTracker.handleForegroundNotification(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        didBecomeActiveSubscription = NotificationCenter.default
+            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .map { _ in () }
+            .sink(receiveValue: { [weak self] _ in
+                self?.locationManager.startUpdatingLocation()
+            })
     }
     
-    // MARK: - Private
-    
-    @objc internal func handleBackgroundNotification(_ notification: NSNotification) {
+    deinit {
+        willResignActiveSubscription?.cancel()
+        didBecomeActiveSubscription?.cancel()
+        
         locationManager.stopUpdatingLocation()
     }
     
-    @objc internal func handleForegroundNotification(_ notification: NSNotification) {
-        locationManager.startUpdatingLocation()
-    }
-    
+    // MARK: - Private
+
     private func shouldUpdate(with location: CLLocation) -> Bool {
-        switch lastResult {
+        switch lastLocation {
         case .success(let loc):
             return location.distance(from: loc.physical) > 100
-        case .failure:
-            return true
-        }
-    }
-    
-    private func shouldUpdate(with result: LocationResult) -> Bool {
-        switch lastResult {
-        case .success(let location):
-            return shouldUpdate(with: location.physical)
         case .failure:
             return true
         }
@@ -86,16 +85,16 @@ extension LocationTracker: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        lastResult = LocationResult.failure(NetworkError.other(error))
-        _locationUpdateEvent.send(lastResult)
+        lastLocation = .failure(NetworkError.other(error))
+        _locationUpdateEvent.send(lastLocation)
     }
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.first {
             if shouldUpdate(with: currentLocation) {
                 let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
-                lastResult = LocationResult.success(location)
-                _locationUpdateEvent.send(lastResult)
+                lastLocation = .success(location)
+                _locationUpdateEvent.send(lastLocation)
             }
             
             // location hasn't changed significantly

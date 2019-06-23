@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-struct LunarView: View {
+struct LunarInfoView: View {
     var viewModel: LunarViewModel?
     
     var body: some View {
