@@ -36,7 +36,7 @@ class ContentViewModel {
             }
             .flatMap { request in
                 return session.data(with: request)
-                    .catch { _ in Publishers.Just(Data()) }
+                    .catch { _ in Just(Data()) }
             }
             .decode(type: Moon?.self, decoder: JSONDecoder())
             .compactMap{ (moon) -> LunarViewModel? in
@@ -45,7 +45,7 @@ class ContentViewModel {
                 }
                 return LunarViewModel(moon: moon)
             }
-            .catch { _ in Publishers.Just(nil) }
+            .catch { _ in Just(nil) }
             .receive(on: scheduler)
             .assign(to: \.lunarViewModel, on: self)
         
@@ -56,16 +56,16 @@ class ContentViewModel {
             }
             .flatMap { (request) in
                 return session.data(with: request)
-                    .catch { _ in Publishers.Just(Data()) }
+                    .catch { _ in Just(Data()) }
             }
             .tryMap { (data) -> [Phase] in
                 return try decodePhases(from: data)
             }
-            .catch { _ in Publishers.Just([]) }
+            .catch { _ in Just([]) }
             .compactMap{ (phases) -> [PhaseViewModel] in
                 return phases.map { PhaseViewModel(phase: $0) }
             }
-            .catch { _ in Publishers.Just([]) }
+            .catch { _ in Just([]) }
             .receive(on: scheduler)
             .assign(to: \.phaseViewModels, on: self)
     }
@@ -79,12 +79,11 @@ class ContentViewModel {
 extension ContentViewModel: BindableObject {
     var didChange: AnyPublisher<Void, Never> {
         return Publishers.CombineLatest(
-            _lunarViewModelDidChange
-                .eraseToAnyPublisher(),
-            _phaseViewModelDidChange
-                .eraseToAnyPublisher()
-        ) { _, _ in
-            //
+            _lunarViewModelDidChange.eraseToAnyPublisher(),
+            _phaseViewModelDidChange.eraseToAnyPublisher()
+        )
+        .flatMapLatest { _ in
+            return Just(())
         }
         .eraseToAnyPublisher()
     }
