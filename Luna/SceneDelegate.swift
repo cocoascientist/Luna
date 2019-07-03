@@ -22,18 +22,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller
         
         // Create a dummy URL Session
-//        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
-//        let session = URLSession.init(configuration: configuration)
-//        let viewModel = ContentViewModel(session: session)
+        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
+        let session = URLSession.init(configuration: configuration)
+        let viewModel = ContentViewModel(session: session)
         
-        let viewModel = ContentViewModel()
+//        let viewModel = ContentViewModel()
         
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIHostingController(
-            rootView: ContentView(viewModel: viewModel)
-        )
-        self.window = window
-        window.makeKeyAndVisible()
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            window.rootViewController = UIHostingController(
+                rootView: ContentView(viewModel: viewModel)
+            )
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
