@@ -1,12 +1,12 @@
 # Luna
 
-An iPhone app that displays current phase of the Moon, using the [Aeris Weather API](http://www.aerisweather.com/develop/). The app is written in Swift with an MVVM architecture.
+An iOS app that displays current phase of the Moon, using the [Aeris Weather API](http://www.aerisweather.com/develop/). The app is written using SwiftUI and Combine and follows an MVVM architecture.
 
 Read a full write up about the development of Luna at [cocoascientist.com](http://www.cocoascientist.com/luna-displaying-the-moon-phase.html).
 
 ## Requirements
 
-* Xcode 10.2
+* Xcode 11
 * Swift 5
 
 ## Screenshot
