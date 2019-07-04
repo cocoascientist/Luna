@@ -26,10 +26,6 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location will be used only to find the Moon phase.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>weathericons-regular-webfont.ttf</string>
-	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
