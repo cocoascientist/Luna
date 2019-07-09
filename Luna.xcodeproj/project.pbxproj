@@ -13,7 +13,6 @@
 		F743B18622B64CAB003A72E8 /* DispatchQueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18422B64CAB003A72E8 /* DispatchQueueScheduler.swift */; };
 		F743B18822B64CC3003A72E8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18722B64CC3003A72E8 /* ContentViewModel.swift */; };
 		F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18922B64D0D003A72E8 /* ContentView.swift */; };
-		F74FDA971AEE9A5900B5FE17 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74FDA961AEE9A5900B5FE17 /* ViewControllerTests.swift */; };
 		F75FBEBA22ADDC350049C47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEB922ADDC350049C47A /* SceneDelegate.swift */; };
 		F75FBEBE22B083010049C47A /* URLSession+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEBD22B083010049C47A /* URLSession+Combine.swift */; };
 		F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576B91AA42E00007B2AE5 /* AppDelegate.swift */; };
@@ -79,7 +78,6 @@
 		F743B18422B64CAB003A72E8 /* DispatchQueueScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DispatchQueueScheduler.swift; path = "Types & Extensions/DispatchQueueScheduler.swift"; sourceTree = "<group>"; };
 		F743B18722B64CC3003A72E8 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewModel.swift; path = ViewModel/ContentViewModel.swift; sourceTree = "<group>"; };
 		F743B18922B64D0D003A72E8 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = View/ContentView.swift; sourceTree = "<group>"; };
-		F74FDA961AEE9A5900B5FE17 /* ViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		F75FBEB922ADDC350049C47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F75FBEBD22B083010049C47A /* URLSession+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URLSession+Combine.swift"; path = "Types & Extensions/URLSession+Combine.swift"; sourceTree = "<group>"; };
 		F76576B41AA42E00007B2AE5 /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +99,6 @@
 		F7A6B6F11ADD91C000B6F119 /* NetworkControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkControllerTests.swift; sourceTree = "<group>"; };
 		F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Protocols.swift"; sourceTree = "<group>"; };
 		F7A6B6F51ADDA31C00B6F119 /* LunarViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarViewModelTests.swift; sourceTree = "<group>"; };
-		F7A6B6FB1ADDABCF00B6F119 /* PhasesDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhasesDataSourceTests.swift; sourceTree = "<group>"; };
 		F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AerisAPITests.swift; sourceTree = "<group>"; };
 		F7EB852622CD797B00324854 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = View/HeaderView.swift; sourceTree = "<group>"; };
 		F7EB852822CD798C00324854 /* Publisher+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Publisher+Combine.swift"; path = "Types & Extensions/Publisher+Combine.swift"; sourceTree = "<group>"; };
@@ -195,7 +192,6 @@
 		F76576CC1AA42E00007B2AE5 /* LunaTests */ = {
 			isa = PBXGroup;
 			children = (
-				F74FDA961AEE9A5900B5FE17 /* ViewControllerTests.swift */,
 				F7BCE5721ADDD3FE0061FFF5 /* ViewModel */,
 				F7BCE5711ADDD3EC0061FFF5 /* Model */,
 				F7BCE5731ADDD40D0061FFF5 /* Network */,
@@ -299,7 +295,6 @@
 			isa = PBXGroup;
 			children = (
 				F7A6B6F51ADDA31C00B6F119 /* LunarViewModelTests.swift */,
-				F7A6B6FB1ADDABCF00B6F119 /* PhasesDataSourceTests.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -468,7 +463,6 @@
 				F78818AD1ADC712D007E2DD8 /* LocalURLProtocol.swift in Sources */,
 				F7A6B6EB1ADD734A00B6F119 /* FailingURLProtocol.swift in Sources */,
 				F7A6B6EF1ADD824500B6F119 /* BadStatusURLProtocol.swift in Sources */,
-				F74FDA971AEE9A5900B5FE17 /* ViewControllerTests.swift in Sources */,
 				F7A6B6F41ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift in Sources */,
 				F7A6B6ED1ADD7D5300B6F119 /* BadResponseURLProtocol.swift in Sources */,
 			);

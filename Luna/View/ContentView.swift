@@ -23,9 +23,8 @@ struct ContentView : View {
                     viewModels: self.viewModel.phaseViewModels
                 )
             }
-            .padding(.zero)
+            .padding([.bottom], 40.0)
         }
-//        .background(Color(red: 35/255, green: 37/255, blue: 38/255))
         .background(LinearGradient.lunarGradient, cornerRadius: 0)
         .edgesIgnoringSafeArea(.all)
     }

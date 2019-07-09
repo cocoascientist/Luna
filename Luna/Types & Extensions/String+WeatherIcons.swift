@@ -16,13 +16,13 @@ extension String {
         // Aeris Weather API
         
         case "new moon":
-            return "\u{f095}"
+            return "circle.fill"
         case "first quarter":
-            return "\u{f09c}"
+            return "circle.lefthalf.fill"
         case "full moon":
-            return "\u{f0a3}"
+            return "circle"
         case "last quarter":
-            return "\u{f0aa}"
+            return "circle.righthalf.fill"
             
         default:
             return "X"

@@ -12,7 +12,7 @@ struct PhasesView: View {
     var viewModels: [PhaseViewModel] = []
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8.0) {
             ForEach(viewModels.identified(by: \.self)) { viewModel in
                 PhaseView(viewModel: viewModel)
             }
@@ -25,8 +25,7 @@ struct PhaseView: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Text(viewModel?.icon ?? "phase")
-                .font(.custom("Weather Icons", size: 32.0))
+            Image(systemName: viewModel?.icon ?? "")
                 .foregroundColor(Color.white)
             Text(viewModel?.date ?? "date")
                 .font(.body)
