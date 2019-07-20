@@ -18,10 +18,13 @@ class ContentViewModel {
         didSet { _phaseViewModelDidChange.send(()) }
     }
     
+    private var locationChangeSubscriber: AnySubscriber<Result<Location, Error>, Never>?
     private var lunarChangeSubscriber: AnyCancellable?
     private var phaseChangeSubscriber: AnyCancellable?
     
     private let locationTracker = LocationTracker()
+    
+    private let _contentViewModelWillChange = PassthroughSubject<Void, Never>()
     
     private let _lunarViewModelDidChange = PassthroughSubject<Void, Never>()
     private let _phaseViewModelDidChange = PassthroughSubject<Void, Never>()
@@ -77,7 +80,9 @@ class ContentViewModel {
 }
 
 extension ContentViewModel: BindableObject {
-    var didChange: AnyPublisher<Void, Never> {
+    typealias PublisherType = AnyPublisher<Void, Never>
+    
+    var willChange: AnyPublisher<Void, Never> {
         return Publishers.CombineLatest(
             _lunarViewModelDidChange.eraseToAnyPublisher(),
             _phaseViewModelDidChange.eraseToAnyPublisher()

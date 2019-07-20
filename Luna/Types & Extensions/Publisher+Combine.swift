@@ -11,8 +11,7 @@ import Combine
 
 extension Publisher {
     static func empty() -> AnyPublisher<Output, Failure> {
-        return Publishers.Empty()
-            .eraseToAnyPublisher()
+        return Empty().eraseToAnyPublisher()
     }
     
     static func just(_ output: Output) -> AnyPublisher<Output, Failure> {
@@ -22,8 +21,7 @@ extension Publisher {
     }
     
     static func fail(_ error: Failure) -> AnyPublisher<Output, Failure> {
-        return Publishers.Fail(error: error)
-            .eraseToAnyPublisher()
+        return Fail(error: error).eraseToAnyPublisher()
     }
 }
 
