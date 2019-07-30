@@ -13,7 +13,7 @@ struct PhasesView: View {
     
     var body: some View {
         VStack(spacing: 8.0) {
-            ForEach(viewModels.identified(by: \.self)) { viewModel in
+            ForEach(viewModels, id: \.self) { viewModel in
                 PhaseView(viewModel: viewModel)
             }
         }
