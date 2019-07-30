@@ -9,8 +9,8 @@
 import SwiftUI
 import Foundation
 
-struct ContentView : View {
-    @ObjectBinding var viewModel: ContentViewModel
+struct ContentView: View {
+    @ObservedObject var viewModel: ContentViewModel
     
     var body: some View {
         GeometryReader { geometry in

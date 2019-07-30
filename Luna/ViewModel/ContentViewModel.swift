@@ -79,7 +79,7 @@ class ContentViewModel {
     }
 }
 
-extension ContentViewModel: BindableObject {
+extension ContentViewModel: ObservableObject {
     typealias PublisherType = AnyPublisher<Void, Never>
     
     var willChange: AnyPublisher<Void, Never> {
