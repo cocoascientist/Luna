@@ -29,7 +29,9 @@ class ContentViewModel {
     private let _lunarViewModelDidChange = PassthroughSubject<Void, Never>()
     private let _phaseViewModelDidChange = PassthroughSubject<Void, Never>()
     
-    init(scheduler: DispatchQueueScheduler = DispatchQueueScheduler.main,
+    private var cancelables: [AnyCancellable] = []
+    
+    init(scheduler: DispatchQueue = DispatchQueue.main,
          session: URLSession = URLSession.shared) {
         
         lunarChangeSubscriber = locationTracker.locationUpdateEvent

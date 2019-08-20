@@ -28,6 +28,8 @@ final class LocationTracker: NSObject {
     }
     private let _locationUpdateEvent = PassthroughSubject<Result<Location, Error>, Never>()
     
+    private var cancelables: [AnyCancellable] = []
+    
     init(locationManager: CLLocationManager = CLLocationManager()) {
         self.locationManager = locationManager
         
@@ -37,25 +39,25 @@ final class LocationTracker: NSObject {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        willResignActiveSubscription = NotificationCenter.default
+        NotificationCenter.default
             .publisher(for: UIApplication.willResignActiveNotification)
             .map { _ in () }
             .sink(receiveValue: { [weak self] _ in
                 self?.locationManager.stopUpdatingLocation()
             })
+            .store(in: &cancelables)
         
-        didBecomeActiveSubscription = NotificationCenter.default
+        NotificationCenter.default
             .publisher(for: UIApplication.didBecomeActiveNotification)
             .map { _ in () }
             .sink(receiveValue: { [weak self] _ in
                 self?.locationManager.startUpdatingLocation()
             })
+            .store(in: &cancelables)
     }
     
     deinit {
-        willResignActiveSubscription?.cancel()
-        didBecomeActiveSubscription?.cancel()
-        
+        cancelables.forEach { $0.cancel() }
         locationManager.stopUpdatingLocation()
     }
     

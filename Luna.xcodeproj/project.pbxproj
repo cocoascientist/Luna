@@ -10,7 +10,6 @@
 		F70B5296221B808C007C7340 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70B5295221B808C007C7340 /* Formatters.swift */; };
 		F73EDB1C22B306F600260925 /* LunarPhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDB1B22B306F600260925 /* LunarPhaseView.swift */; };
 		F73EDB1E22B3075C00260925 /* PhasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDB1D22B3075C00260925 /* PhasesView.swift */; };
-		F743B18622B64CAB003A72E8 /* DispatchQueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18422B64CAB003A72E8 /* DispatchQueueScheduler.swift */; };
 		F743B18822B64CC3003A72E8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18722B64CC3003A72E8 /* ContentViewModel.swift */; };
 		F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18922B64D0D003A72E8 /* ContentView.swift */; };
 		F75FBEBA22ADDC350049C47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEB922ADDC350049C47A /* SceneDelegate.swift */; };
@@ -75,7 +74,6 @@
 		F70B5295221B808C007C7340 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Formatters.swift; path = "Types & Extensions/Formatters.swift"; sourceTree = "<group>"; };
 		F73EDB1B22B306F600260925 /* LunarPhaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarPhaseView.swift; path = View/LunarPhaseView.swift; sourceTree = "<group>"; };
 		F73EDB1D22B3075C00260925 /* PhasesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhasesView.swift; path = View/PhasesView.swift; sourceTree = "<group>"; };
-		F743B18422B64CAB003A72E8 /* DispatchQueueScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DispatchQueueScheduler.swift; path = "Types & Extensions/DispatchQueueScheduler.swift"; sourceTree = "<group>"; };
 		F743B18722B64CC3003A72E8 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewModel.swift; path = ViewModel/ContentViewModel.swift; sourceTree = "<group>"; };
 		F743B18922B64D0D003A72E8 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = View/ContentView.swift; sourceTree = "<group>"; };
 		F75FBEB922ADDC350049C47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 				F7EB852922CD798C00324854 /* CGSize+Geometry.swift */,
 				F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */,
 				F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */,
-				F743B18422B64CAB003A72E8 /* DispatchQueueScheduler.swift */,
 				F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */,
 				F70B5295221B808C007C7340 /* Formatters.swift */,
 				F7FA433F1DADD8B4008BE9AB /* NetworkError.swift */,
@@ -442,7 +439,6 @@
 				F7FA432C1DADD858008BE9AB /* PhaseViewModel.swift in Sources */,
 				F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */,
 				F7EB852B22CD798C00324854 /* CGSize+Geometry.swift in Sources */,
-				F743B18622B64CAB003A72E8 /* DispatchQueueScheduler.swift in Sources */,
 				F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */,
 				F7FA43221DADD823008BE9AB /* LunarInfoView.swift in Sources */,
 				F7EB852722CD797C00324854 /* HeaderView.swift in Sources */,
