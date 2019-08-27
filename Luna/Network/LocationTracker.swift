@@ -15,16 +15,40 @@ enum LocationError: Error {
     case noData
 }
 
-final class LocationTracker: NSObject {
+final class LocationTracker {
     
     private var lastLocation: Result<Location, Error> = .failure(LocationError.noData)
     private let locationManager: CLLocationManager
+    private let geocoder: CLGeocoder = CLGeocoder()
     
     private var willResignActiveSubscription: Cancellable?
     private var didBecomeActiveSubscription: Cancellable?
     
     var locationUpdateEvent: AnyPublisher<Result<Location, Error>, Never> {
-        return _locationUpdateEvent.eraseToAnyPublisher()
+        return locationManager
+            .publisher()
+            .compactMap { (result) -> CLLocation? in
+                switch result {
+                case .success(let locations):
+                    return locations.first
+                case .failure:
+                    return nil
+                }
+            }
+            .flatMap { (location) -> AnyPublisher<Result<Location, Error>, Never> in
+                return self.geocoder
+                    .reverseGeocodingPublisher(for: location)
+                    .map { (result) in
+                        switch result {
+                        case .success(let placemarks):
+                            return placemarks.location(physical: location)
+                        case .failure(let error):
+                            return .failure(error)
+                        }
+                    }
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
     private let _locationUpdateEvent = PassthroughSubject<Result<Location, Error>, Never>()
     
@@ -32,12 +56,6 @@ final class LocationTracker: NSObject {
     
     init(locationManager: CLLocationManager = CLLocationManager()) {
         self.locationManager = locationManager
-        
-        super.init()
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
         
         NotificationCenter.default
             .publisher(for: UIApplication.willResignActiveNotification)
@@ -60,68 +78,35 @@ final class LocationTracker: NSObject {
         cancelables.forEach { $0.cancel() }
         locationManager.stopUpdatingLocation()
     }
-    
-    // MARK: - Private
-
-    private func shouldUpdate(with location: CLLocation) -> Bool {
-        switch lastLocation {
-        case .success(let loc):
-            return location.distance(from: loc.physical) > 100
-        case .failure:
-            return true
-        }
-    }
 }
 
-// MARK: - CLLocationManagerDelegate
-
-extension LocationTracker: CLLocationManagerDelegate {
-    
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse:
-            manager.startUpdatingLocation()
-        default:
-            manager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        lastLocation = .failure(NetworkError.other(error))
-        _locationUpdateEvent.send(lastLocation)
-    }
-
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let currentLocation = locations.first {
-            if shouldUpdate(with: currentLocation) {
-                let location = Location(location: currentLocation, city: "", state: "", neighborhood: "")
-                lastLocation = .success(location)
-                _locationUpdateEvent.send(lastLocation)
-            }
-            
-            // location hasn't changed significantly
-        }
-    }
-}
-
-// MARK: - Equatable
-
-public struct Location: Equatable, Identifiable {
-    public let id: UUID = UUID()
+struct Location: Equatable, Identifiable {
+    let id: UUID = UUID()
     
     let physical: CLLocation
     let city: String
     let state: String
-    let neighborhood: String
     
-    init(location physical: CLLocation, city: String, state: String, neighborhood: String) {
+    init(location physical: CLLocation, city: String, state: String) {
         self.physical = physical
         self.city = city
         self.state = state
-        self.neighborhood = neighborhood
     }
 }
 
-public func ==(lhs: Location, rhs: Location) -> Bool {
+func ==(lhs: Location, rhs: Location) -> Bool {
     return lhs.physical == rhs.physical
+}
+
+private extension Array where Element: CLPlacemark {
+    func location(physical: CLLocation) -> Result<Location, Error> {
+        guard
+            let placemark = self.first,
+            let city = placemark.locality,
+            let state = placemark.administrativeArea
+        else { return .failure(LocationError.noData) }
+        
+        let location = Location(location: physical, city: city, state: state)
+        return .success(location)
+    }
 }

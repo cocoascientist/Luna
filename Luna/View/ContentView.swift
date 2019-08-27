@@ -14,19 +14,70 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView {
-                HeaderView(
-                    viewModel: self.viewModel.lunarViewModel,
-                    geometry: geometry
-                )
-                PhasesView(
-                    viewModels: self.viewModel.phaseViewModels
-                )
-            }
-            .padding([.bottom], 40.0)
+            return LunarView(
+                viewModel: self.viewModel,
+                geometry: geometry
+            )
         }
-        .background(LinearGradient.lunarGradient, cornerRadius: 0)
+//        .statusBar(hidden: true)
         .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct LunarView: View {
+    var viewModel: ContentViewModel
+    var geometry: GeometryProxy
+    
+    @GestureState var dragState = DragState.inactive
+    @State var offset = CGSize.zero
+    
+    var body: some View {
+        let drag = DragGesture()
+            .onChanged { value in
+                if value.translation.height > 0 {
+                    self.offset = .zero
+                } else {
+                    self.offset = value.translation
+                }
+            }
+        
+        return VStack {
+            HeaderView(
+                viewModel: self.viewModel.lunarViewModel,
+                geometry: geometry
+            )
+            PhasesView(
+                viewModels: self.viewModel.phaseViewModels
+            )
+        }
+        .offset(x: 0, y: offset.height)
+        .padding([.bottom], 40.0)
+        .background(LinearGradient.lunarGradient)
+        .gesture(drag)
+        .animation(.spring())
+    }
+}
+
+enum DragState {
+    case inactive
+    case dragging(translation: CGSize)
+    
+    var translation: CGSize {
+        switch self {
+        case .inactive:
+            return .zero
+        case .dragging(let translation):
+            return translation
+        }
+    }
+    
+    var isDragging: Bool {
+        switch self {
+        case .inactive:
+            return false
+        case .dragging:
+            return true
+        }
     }
 }
 

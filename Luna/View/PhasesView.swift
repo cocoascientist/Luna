@@ -26,13 +26,15 @@ struct PhaseView: View {
     var body: some View {
         HStack(alignment: .center) {
             Image(systemName: viewModel?.icon ?? "")
+                .font(.title)
                 .foregroundColor(Color.white)
-            Text(viewModel?.date ?? "date")
+                .padding([.top, .bottom], 8)
+            Text(viewModel?.date ?? "")
                 .font(.body)
                 .foregroundColor(Color.white)
-                .padding([.leading], 40)
+                .padding([.leading], 16)
             Spacer()
         }
-        .padding([.leading, .trailing], 16)
+        .padding([.leading, .trailing], 30)
     }
 }
