@@ -24,14 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create a dummy URL Session
         let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
         let session = URLSession.init(configuration: configuration)
-        let viewModel = ContentViewModel(session: session)
-        
-//        let viewModel = ContentViewModel()
+        let provider = ContentProvider(session: session)
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(
-                rootView: ContentView(viewModel: viewModel)
+            window.rootViewController = DarkHostingController(
+                rootView: ContentView(provider: provider)
             )
             self.window = window
             window.makeKeyAndVisible()
@@ -67,4 +65,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     
+}
+
+// https://stackoverflow.com/a/57642382
+
+private class DarkHostingController<Content>: UIHostingController<Content> where Content: View {
+    @objc override dynamic open var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 }

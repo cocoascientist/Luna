@@ -10,51 +10,89 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var provider: ContentProvider
     
     var body: some View {
         GeometryReader { geometry in
-            return LunarView(
-                viewModel: self.viewModel,
-                geometry: geometry
-            )
+            return DynamicView()
+                .frame(
+                    width: geometry.size.width,
+                    height: geometry.size.height,
+                    alignment: .center
+                )
+                .environmentObject(self.provider)
         }
-//        .statusBar(hidden: true)
+        .background(LinearGradient.lunarGradient)
         .edgesIgnoringSafeArea(.all)
     }
 }
 
+struct DynamicView: View {
+    @EnvironmentObject var provider: ContentProvider
+    
+    var body: some View {
+        switch self.provider.viewModel {
+        case .loading:
+            return AnyView(
+                LoadingView()
+            )
+        case .current(let viewModel):
+            return AnyView(
+                LunarView(viewModel: viewModel)
+            )
+        case .error(let error):
+            return AnyView(
+                ErrorView(error: error)
+            )
+        }
+    }
+}
+
+struct LoadingView: View {
+    var body: some View {
+        return Text("Loading...")
+            .font(.largeTitle)
+            .foregroundColor(Color.white)
+    }
+}
+
+struct ErrorView: View {
+    let error: Error
+    
+    var body: some View {
+        return Text("Error: \(error.localizedDescription)")
+            .font(.largeTitle)
+            .foregroundColor(Color.white)
+    }
+}
+
 struct LunarView: View {
-    var viewModel: ContentViewModel
-    var geometry: GeometryProxy
+    let viewModel: ContentViewModel
     
     @GestureState var dragState = DragState.inactive
     @State var offset = CGSize.zero
     
     var body: some View {
-        let drag = DragGesture()
-            .onChanged { value in
-                if value.translation.height > 0 {
-                    self.offset = .zero
-                } else {
-                    self.offset = value.translation
-                }
-            }
+//        let drag = DragGesture()
+//            .onChanged { value in
+//                if value.translation.height > 0 {
+//                    self.offset = .zero
+//                } else {
+//                    self.offset = value.translation
+//                }
+//            }
         
         return VStack {
-            HeaderView(
-                viewModel: self.viewModel.lunarViewModel,
-                geometry: geometry
-            )
-            PhasesView(
-                viewModels: self.viewModel.phaseViewModels
-            )
+            LunarPhaseView()
+                .frame(width: 175, height: 175)
+                .padding([.bottom], 16)
+                .padding([.leading, .trailing], 90)
+            LunarInfoView(viewModel: self.viewModel.lunarViewModel)
         }
-        .offset(x: 0, y: offset.height)
-        .padding([.bottom], 40.0)
-        .background(LinearGradient.lunarGradient)
-        .gesture(drag)
-        .animation(.spring())
+//        .offset(x: 0, y: self.offset.height)
+//        .padding([.bottom], 40.0)
+//        .gesture(drag)
+//        .animation(.spring())
     }
 }
 

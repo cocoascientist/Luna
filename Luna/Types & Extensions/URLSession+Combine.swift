@@ -10,19 +10,28 @@ import Foundation
 import Combine
 
 extension URLSession {
+    internal enum URLSessionError: Error {
+        case badStatusCode(statusCode: Int)
+        case badResponse
+        case badJSON
+        case noData
+        case offline
+        case other(Error?)
+    }
+    
     func data(with request: URLRequest) -> AnyPublisher<Data, Error> {
         return dataTaskPublisher(for: request)
-            .mapError { NetworkError.other($0) }
+            .mapError { URLSessionError.other($0) }
             .flatMap { (data, response) -> AnyPublisher<Data, Error> in
                 guard let response = response as? HTTPURLResponse else {
-                    return .fail(NetworkError.badResponse)
+                    return .fail(URLSessionError.badResponse)
                 }
                 
                 switch response.statusCode {
                 case 200...204:
                     return .just(data)
                 default:
-                    let error = NetworkError.badStatusCode(statusCode: response.statusCode)
+                    let error = URLSessionError.badStatusCode(statusCode: response.statusCode)
                     return .fail(error)
                 }
             }
@@ -30,16 +39,7 @@ extension URLSession {
     }
 }
 
-enum NetworkError: Error {
-    case badStatusCode(statusCode: Int)
-    case badResponse
-    case badJSON
-    case noData
-    case offline
-    case other(Error?)
-}
-
-extension NetworkError: LocalizedError {
+extension URLSession.URLSessionError: LocalizedError {
     var localizedDescription: String {
         switch self {
         case .badResponse:

@@ -10,7 +10,6 @@
 		F70B5296221B808C007C7340 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70B5295221B808C007C7340 /* Formatters.swift */; };
 		F73EDB1C22B306F600260925 /* LunarPhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDB1B22B306F600260925 /* LunarPhaseView.swift */; };
 		F73EDB1E22B3075C00260925 /* PhasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDB1D22B3075C00260925 /* PhasesView.swift */; };
-		F743B18822B64CC3003A72E8 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18722B64CC3003A72E8 /* ContentViewModel.swift */; };
 		F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18922B64D0D003A72E8 /* ContentView.swift */; };
 		F75FBEBA22ADDC350049C47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEB922ADDC350049C47A /* SceneDelegate.swift */; };
 		F75FBEBE22B083010049C47A /* URLSession+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEBD22B083010049C47A /* URLSession+Combine.swift */; };
@@ -28,7 +27,6 @@
 		F7A6B6ED1ADD7D5300B6F119 /* BadResponseURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EC1ADD7D5300B6F119 /* BadResponseURLProtocol.swift */; };
 		F7A6B6EF1ADD824500B6F119 /* BadStatusURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EE1ADD824500B6F119 /* BadStatusURLProtocol.swift */; };
 		F7A6B6F41ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */; };
-		F7EB852722CD797C00324854 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852622CD797B00324854 /* HeaderView.swift */; };
 		F7EB852A22CD798C00324854 /* Publisher+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852822CD798C00324854 /* Publisher+Combine.swift */; };
 		F7EB852B22CD798C00324854 /* CGSize+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852922CD798C00324854 /* CGSize+Geometry.swift */; };
 		F7F989EE2310844B00AC8C9E /* CLLocationManager+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F989ED2310844B00AC8C9E /* CLLocationManager+Combine.swift */; };
@@ -45,6 +43,7 @@
 		F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */; };
 		F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */; };
 		F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */; };
+		F7FEF971232BB8C500F03063 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FEF970232BB8C500F03063 /* ContentProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +74,6 @@
 		F70B5295221B808C007C7340 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Formatters.swift; path = "Types & Extensions/Formatters.swift"; sourceTree = "<group>"; };
 		F73EDB1B22B306F600260925 /* LunarPhaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarPhaseView.swift; path = View/LunarPhaseView.swift; sourceTree = "<group>"; };
 		F73EDB1D22B3075C00260925 /* PhasesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhasesView.swift; path = View/PhasesView.swift; sourceTree = "<group>"; };
-		F743B18722B64CC3003A72E8 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentViewModel.swift; path = ViewModel/ContentViewModel.swift; sourceTree = "<group>"; };
 		F743B18922B64D0D003A72E8 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = View/ContentView.swift; sourceTree = "<group>"; };
 		F75FBEB922ADDC350049C47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F75FBEBD22B083010049C47A /* URLSession+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URLSession+Combine.swift"; path = "Types & Extensions/URLSession+Combine.swift"; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 		F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Protocols.swift"; sourceTree = "<group>"; };
 		F7A6B6F51ADDA31C00B6F119 /* LunarViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarViewModelTests.swift; sourceTree = "<group>"; };
 		F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AerisAPITests.swift; sourceTree = "<group>"; };
-		F7EB852622CD797B00324854 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = View/HeaderView.swift; sourceTree = "<group>"; };
 		F7EB852822CD798C00324854 /* Publisher+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Publisher+Combine.swift"; path = "Types & Extensions/Publisher+Combine.swift"; sourceTree = "<group>"; };
 		F7EB852922CD798C00324854 /* CGSize+Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Geometry.swift"; path = "Types & Extensions/CGSize+Geometry.swift"; sourceTree = "<group>"; };
 		F7F146E61AF0907D004716AF /* MoonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonTests.swift; sourceTree = "<group>"; };
@@ -117,6 +114,7 @@
 		F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Lunar.swift"; path = "Types & Extensions/Date+Lunar.swift"; sourceTree = "<group>"; };
 		F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Query.swift"; path = "Types & Extensions/Dictionary+Query.swift"; sourceTree = "<group>"; };
 		F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+WeatherIcons.swift"; path = "Types & Extensions/String+WeatherIcons.swift"; sourceTree = "<group>"; };
+		F7FEF970232BB8C500F03063 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				F743B18922B64D0D003A72E8 /* ContentView.swift */,
-				F7EB852622CD797B00324854 /* HeaderView.swift */,
 				F7FA431D1DADD823008BE9AB /* LunarInfoView.swift */,
 				F73EDB1B22B306F600260925 /* LunarPhaseView.swift */,
 				F73EDB1D22B3075C00260925 /* PhasesView.swift */,
@@ -245,7 +242,7 @@
 		F76576F01AA434B4007B2AE5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				F743B18722B64CC3003A72E8 /* ContentViewModel.swift */,
+				F7FEF970232BB8C500F03063 /* ContentProvider.swift */,
 				F7FA43271DADD858008BE9AB /* LunarViewModel.swift */,
 				F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */,
 			);
@@ -428,10 +425,10 @@
 			files = (
 				F7FA43361DADD883008BE9AB /* Requestable.swift in Sources */,
 				F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */,
+				F7FEF971232BB8C500F03063 /* ContentProvider.swift in Sources */,
 				F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */,
 				F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */,
 				F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */,
-				F743B18822B64CC3003A72E8 /* ContentViewModel.swift in Sources */,
 				F75FBEBE22B083010049C47A /* URLSession+Combine.swift in Sources */,
 				F73EDB1C22B306F600260925 /* LunarPhaseView.swift in Sources */,
 				F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */,
@@ -445,7 +442,6 @@
 				F7F989EE2310844B00AC8C9E /* CLLocationManager+Combine.swift in Sources */,
 				F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */,
 				F7FA43221DADD823008BE9AB /* LunarInfoView.swift in Sources */,
-				F7EB852722CD797C00324854 /* HeaderView.swift in Sources */,
 				F78D200122B4E6CC00CBFC0D /* LocalURLProtocol.swift in Sources */,
 				F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */,
 				F7FA43331DADD883008BE9AB /* LocationTracker.swift in Sources */,
