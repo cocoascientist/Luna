@@ -21,32 +21,28 @@ final class LocationTracker {
     private let locationManager: CLLocationManager
     private let geocoder: CLGeocoder = CLGeocoder()
     
-    private var willResignActiveSubscription: Cancellable?
-    private var didBecomeActiveSubscription: Cancellable?
+    private let locationSubject: CurrentValueSubject<Result<CLLocation, Error>, Never>
     
     var locationUpdateEvent: AnyPublisher<Result<Location, Error>, Never> {
-        return locationManager
-            .publisher()
-            .compactMap { (result) -> CLLocation? in
+        return locationSubject
+            .flatMap { (result) -> AnyPublisher<Result<Location, Error>, Never> in
                 switch result {
-                case .success(let locations):
-                    return locations.first
-                case .failure:
-                    return nil
-                }
-            }
-            .flatMap { (location) -> AnyPublisher<Result<Location, Error>, Never> in
-                return self.geocoder
-                    .reverseGeocodingPublisher(for: location)
-                    .map { (result) in
-                        switch result {
-                        case .success(let placemarks):
-                            return placemarks.location(physical: location)
-                        case .failure(let error):
-                            return .failure(error)
+                case .success(let location):
+                    return self.geocoder
+                        .reverseGeocodingPublisher(for: location)
+                        .map { (result) in
+                            switch result {
+                            case .success(let placemarks):
+                                return placemarks.location(physical: location)
+                            case .failure(let error):
+                                return .failure(error)
+                            }
                         }
-                    }
-                    .eraseToAnyPublisher()
+                        .eraseToAnyPublisher()
+                case .failure(let error):
+                    return Just(Result<Location, Error>.failure(error))
+                        .eraseToAnyPublisher()
+                }
             }
             .eraseToAnyPublisher()
     }
@@ -56,7 +52,18 @@ final class LocationTracker {
     
     init(locationManager: CLLocationManager = CLLocationManager()) {
         self.locationManager = locationManager
+        self.locationSubject = CurrentValueSubject(.failure(LocationError.noData))
         
+        watchForApplicationLifecycleChanges()
+        watchForLocationChanges()
+    }
+    
+    deinit {
+        cancelables.forEach { $0.cancel() }
+        locationManager.stopUpdatingLocation()
+    }
+    
+    private func watchForApplicationLifecycleChanges() {
         NotificationCenter.default
             .publisher(for: UIApplication.willResignActiveNotification)
             .map { _ in () }
@@ -74,9 +81,40 @@ final class LocationTracker {
             .store(in: &cancelables)
     }
     
-    deinit {
-        cancelables.forEach { $0.cancel() }
-        locationManager.stopUpdatingLocation()
+    private func watchForLocationChanges() {
+        let locationPublisher = locationManager
+            .publisher()
+            .share()
+        
+        // grab the first location and respond to it
+        locationPublisher
+            .prefix(1)
+            .sink { [weak self] (result) in
+                self?.updateLocationSubject(with: result)
+            }
+            .store(in: &cancelables)
+        
+        // then grab a new location every 60 seconds
+        locationPublisher
+            .dropFirst()
+            .throttle(for: 60.0, scheduler: DispatchQueue.main, latest: true)
+            .sink { [weak self] (result) in
+                self?.updateLocationSubject(with: result)
+            }
+            .store(in: &cancelables)
+    }
+    
+    private func updateLocationSubject(with result: Result<[CLLocation], Error>) {
+        switch result {
+        case .success(let locations):
+            if let location = locations.first {
+                locationSubject.send(.success(location))
+            } else {
+                locationSubject.send(.failure(LocationError.noData))
+            }
+        case .failure(let error):
+            locationSubject.send(.failure(error))
+        }
     }
 }
 

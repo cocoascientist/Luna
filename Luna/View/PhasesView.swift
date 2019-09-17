@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct PhasesView: View {
-    var viewModels: [PhaseViewModel] = []
+    let viewModels: [PhaseViewModel]
     
     var body: some View {
         VStack(spacing: 8.0) {
-            ForEach(viewModels, id: \.self) { viewModel in
+            ForEach(self.viewModels, id: \.self) { viewModel in
                 PhaseView(viewModel: viewModel)
             }
         }
@@ -21,20 +21,20 @@ struct PhasesView: View {
 }
 
 struct PhaseView: View {
-    var viewModel: PhaseViewModel?
+    let viewModel: PhaseViewModel
     
     var body: some View {
         HStack(alignment: .center) {
-            Image(systemName: viewModel?.icon ?? "")
+            Image(systemName: viewModel.icon)
                 .font(.title)
                 .foregroundColor(Color.white)
                 .padding([.top, .bottom], 8)
-            Text(viewModel?.date ?? "")
+            Text(viewModel.date)
                 .font(.body)
                 .foregroundColor(Color.white)
                 .padding([.leading], 16)
             Spacer()
         }
-        .padding([.leading, .trailing], 30)
+        .padding([.leading, .trailing], 32)
     }
 }

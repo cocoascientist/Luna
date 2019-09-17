@@ -13,21 +13,14 @@ struct ContentView: View {
     @ObservedObject var provider: ContentProvider
     
     var body: some View {
-        GeometryReader { geometry in
-            return DynamicView()
-                .frame(
-                    width: geometry.size.width,
-                    height: geometry.size.height,
-                    alignment: .center
-                )
-                .environmentObject(self.provider)
-        }
-        .background(LinearGradient.lunarGradient)
-        .edgesIgnoringSafeArea(.all)
+        StatusView()
+            .background(LinearGradient.lunarGradient)
+            .edgesIgnoringSafeArea(.all)
+            .environmentObject(self.provider)
     }
 }
 
-struct DynamicView: View {
+struct StatusView: View {
     @EnvironmentObject var provider: ContentProvider
     
     var body: some View {
@@ -50,9 +43,12 @@ struct DynamicView: View {
 
 struct LoadingView: View {
     var body: some View {
-        return Text("Loading...")
-            .font(.largeTitle)
-            .foregroundColor(Color.white)
+        GeometryReader { geometry in
+            return Text("Loading...")
+                .font(.largeTitle)
+                .foregroundColor(Color.white)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+        }
     }
 }
 
@@ -60,61 +56,42 @@ struct ErrorView: View {
     let error: Error
     
     var body: some View {
-        return Text("Error: \(error.localizedDescription)")
-            .font(.largeTitle)
-            .foregroundColor(Color.white)
+        GeometryReader { geometry in
+            return Text("Error: \(self.error.localizedDescription)")
+                .font(.largeTitle)
+                .foregroundColor(Color.white)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+        }
     }
 }
 
 struct LunarView: View {
     let viewModel: ContentViewModel
     
-    @GestureState var dragState = DragState.inactive
-    @State var offset = CGSize.zero
+    @State private var offset = CGSize.zero
     
     var body: some View {
-//        let drag = DragGesture()
-//            .onChanged { value in
-//                if value.translation.height > 0 {
-//                    self.offset = .zero
-//                } else {
-//                    self.offset = value.translation
-//                }
-//            }
-        
-        return VStack {
-            LunarPhaseView()
-                .frame(width: 175, height: 175)
-                .padding([.bottom], 16)
-                .padding([.leading, .trailing], 90)
-            LunarInfoView(viewModel: self.viewModel.lunarViewModel)
-        }
-//        .offset(x: 0, y: self.offset.height)
-//        .padding([.bottom], 40.0)
-//        .gesture(drag)
-//        .animation(.spring())
-    }
-}
-
-enum DragState {
-    case inactive
-    case dragging(translation: CGSize)
-    
-    var translation: CGSize {
-        switch self {
-        case .inactive:
-            return .zero
-        case .dragging(let translation):
-            return translation
-        }
-    }
-    
-    var isDragging: Bool {
-        switch self {
-        case .inactive:
-            return false
-        case .dragging:
-            return true
+        return GeometryReader { geometry in
+            ScrollView {
+                VStack(alignment: .leading) {
+                    VStack {
+                        LunarPhaseView()
+                            .frame(width: 175, height: 175)
+                            .padding([.bottom], 16)
+                            .padding([.leading, .trailing], 90)
+                        LunarInfoView(viewModel: self.viewModel.lunarViewModel)
+                    }
+                    .frame(
+                        width: geometry.size.width,
+                        height: geometry.size.height - 100,
+                        alignment: .center
+                    )
+                    LunarRiseSetTimeView(viewModel: self.viewModel.lunarViewModel)
+                        .padding([.leading, .trailing, .bottom], 32.0)
+                    PhasesView(viewModels: self.viewModel.phaseViewModel)
+                        .padding([.bottom], 32.0)
+                }
+            }
         }
     }
 }

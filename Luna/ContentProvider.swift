@@ -89,4 +89,8 @@ final class ContentProvider: ObservableObject {
         .assign(to: \.viewModel, on: self)
         .store(in: &cancelables)
     }
+    
+    deinit {
+        cancelables.forEach { $0.cancel() }
+    }
 }
