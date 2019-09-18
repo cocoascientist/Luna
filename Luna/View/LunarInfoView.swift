@@ -31,7 +31,7 @@ struct LunarRiseSetTimeView: View {
     let viewModel: LunarViewModel
     
     var body: some View {
-        VStack(alignment: .trailing, spacing: 8.0) {
+        VStack(alignment: .leadingOfRiseSetTextValue, spacing: 12.0) {
             HStack(alignment: .firstTextBaseline, spacing: 16.0) {
                 Text("Set")
                     .font(.caption)
@@ -39,6 +39,7 @@ struct LunarRiseSetTimeView: View {
                 Text(viewModel.set)
                     .font(.body)
                     .foregroundColor(Color.white)
+                    .alignmentGuide(.leadingOfRiseSetTextValue) { d in d[.leading] }
             }
             HStack(alignment: .firstTextBaseline, spacing: 16.0) {
                 Text("Rise")
@@ -47,7 +48,18 @@ struct LunarRiseSetTimeView: View {
                 Text(viewModel.rise)
                     .font(.body)
                     .foregroundColor(Color.white)
+                    .alignmentGuide(.leadingOfRiseSetTextValue) { d in d[.leading] }
             }
         }
     }
+}
+
+fileprivate extension HorizontalAlignment {
+    private enum LeadingOfRiseSetTextValue: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            return context[.leading]
+        }
+    }
+    
+    static let leadingOfRiseSetTextValue = HorizontalAlignment(LeadingOfRiseSetTextValue.self)
 }
