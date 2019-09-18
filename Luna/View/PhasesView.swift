@@ -13,8 +13,14 @@ struct PhasesView: View {
     
     var body: some View {
         VStack(spacing: 8.0) {
-            ForEach(self.viewModels, id: \.self) { viewModel in
-                PhaseView(viewModel: viewModel)
+            ForEach(0..<self.viewModels.count) { index in
+                PhaseView(viewModel: self.viewModels[index])
+                if index < (self.viewModels.count - 1) {
+                    Divider()
+                        .background(Color.white)
+                        .padding([.top, .bottom], 4.0)
+                        .padding([.leading, .trailing], 20.0)
+                }
             }
         }
     }
