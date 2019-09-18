@@ -27,10 +27,11 @@
 		F7A6B6ED1ADD7D5300B6F119 /* BadResponseURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EC1ADD7D5300B6F119 /* BadResponseURLProtocol.swift */; };
 		F7A6B6EF1ADD824500B6F119 /* BadStatusURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EE1ADD824500B6F119 /* BadStatusURLProtocol.swift */; };
 		F7A6B6F41ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */; };
+		F7B3466A233241A80000C54E /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B34669233241A80000C54E /* ContentProvider.swift */; };
+		F7B3466D233241B20000C54E /* CLGeocoder+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3466B233241B20000C54E /* CLGeocoder+Combine.swift */; };
+		F7B3466E233241B20000C54E /* CLLocationManager+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3466C233241B20000C54E /* CLLocationManager+Combine.swift */; };
 		F7EB852A22CD798C00324854 /* Publisher+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852822CD798C00324854 /* Publisher+Combine.swift */; };
 		F7EB852B22CD798C00324854 /* CGSize+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852922CD798C00324854 /* CGSize+Geometry.swift */; };
-		F7F989EE2310844B00AC8C9E /* CLLocationManager+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F989ED2310844B00AC8C9E /* CLLocationManager+Combine.swift */; };
-		F7F989F02310874500AC8C9E /* CLGeocoder+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F989EF2310874500AC8C9E /* CLGeocoder+Combine.swift */; };
 		F7FA43221DADD823008BE9AB /* LunarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA431D1DADD823008BE9AB /* LunarInfoView.swift */; };
 		F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43271DADD858008BE9AB /* LunarViewModel.swift */; };
 		F7FA432C1DADD858008BE9AB /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */; };
@@ -43,7 +44,6 @@
 		F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */; };
 		F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */; };
 		F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */; };
-		F7FEF971232BB8C500F03063 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FEF970232BB8C500F03063 /* ContentProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,11 +97,12 @@
 		F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Protocols.swift"; sourceTree = "<group>"; };
 		F7A6B6F51ADDA31C00B6F119 /* LunarViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarViewModelTests.swift; sourceTree = "<group>"; };
 		F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AerisAPITests.swift; sourceTree = "<group>"; };
+		F7B34669233241A80000C54E /* ContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentProvider.swift; path = ViewModel/ContentProvider.swift; sourceTree = "<group>"; };
+		F7B3466B233241B20000C54E /* CLGeocoder+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLGeocoder+Combine.swift"; path = "Types & Extensions/CLGeocoder+Combine.swift"; sourceTree = "<group>"; };
+		F7B3466C233241B20000C54E /* CLLocationManager+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Combine.swift"; path = "Types & Extensions/CLLocationManager+Combine.swift"; sourceTree = "<group>"; };
 		F7EB852822CD798C00324854 /* Publisher+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Publisher+Combine.swift"; path = "Types & Extensions/Publisher+Combine.swift"; sourceTree = "<group>"; };
 		F7EB852922CD798C00324854 /* CGSize+Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Geometry.swift"; path = "Types & Extensions/CGSize+Geometry.swift"; sourceTree = "<group>"; };
 		F7F146E61AF0907D004716AF /* MoonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonTests.swift; sourceTree = "<group>"; };
-		F7F989ED2310844B00AC8C9E /* CLLocationManager+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Combine.swift"; sourceTree = "<group>"; };
-		F7F989EF2310874500AC8C9E /* CLGeocoder+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLGeocoder+Combine.swift"; sourceTree = "<group>"; };
 		F7FA431D1DADD823008BE9AB /* LunarInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarInfoView.swift; path = View/LunarInfoView.swift; sourceTree = "<group>"; };
 		F7FA43271DADD858008BE9AB /* LunarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarViewModel.swift; path = ViewModel/LunarViewModel.swift; sourceTree = "<group>"; };
 		F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhaseViewModel.swift; path = ViewModel/PhaseViewModel.swift; sourceTree = "<group>"; };
@@ -114,7 +115,6 @@
 		F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Lunar.swift"; path = "Types & Extensions/Date+Lunar.swift"; sourceTree = "<group>"; };
 		F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Query.swift"; path = "Types & Extensions/Dictionary+Query.swift"; sourceTree = "<group>"; };
 		F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+WeatherIcons.swift"; path = "Types & Extensions/String+WeatherIcons.swift"; sourceTree = "<group>"; };
-		F7FEF970232BB8C500F03063 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +242,7 @@
 		F76576F01AA434B4007B2AE5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				F7FEF970232BB8C500F03063 /* ContentProvider.swift */,
+				F7B34669233241A80000C54E /* ContentProvider.swift */,
 				F7FA43271DADD858008BE9AB /* LunarViewModel.swift */,
 				F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */,
 			);
@@ -252,6 +252,8 @@
 		F76576F51AA437A0007B2AE5 /* Types & Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F7B3466B233241B20000C54E /* CLGeocoder+Combine.swift */,
+				F7B3466C233241B20000C54E /* CLLocationManager+Combine.swift */,
 				F7EB852922CD798C00324854 /* CGSize+Geometry.swift */,
 				F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */,
 				F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */,
@@ -260,8 +262,6 @@
 				F7EB852822CD798C00324854 /* Publisher+Combine.swift */,
 				F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */,
 				F75FBEBD22B083010049C47A /* URLSession+Combine.swift */,
-				F7F989ED2310844B00AC8C9E /* CLLocationManager+Combine.swift */,
-				F7F989EF2310874500AC8C9E /* CLGeocoder+Combine.swift */,
 			);
 			name = "Types & Extensions";
 			sourceTree = "<group>";
@@ -425,21 +425,20 @@
 			files = (
 				F7FA43361DADD883008BE9AB /* Requestable.swift in Sources */,
 				F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */,
-				F7FEF971232BB8C500F03063 /* ContentProvider.swift in Sources */,
 				F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */,
 				F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */,
 				F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */,
 				F75FBEBE22B083010049C47A /* URLSession+Combine.swift in Sources */,
+				F7B3466A233241A80000C54E /* ContentProvider.swift in Sources */,
 				F73EDB1C22B306F600260925 /* LunarPhaseView.swift in Sources */,
+				F7B3466D233241B20000C54E /* CLGeocoder+Combine.swift in Sources */,
 				F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */,
 				F7FA43471DADD8B4008BE9AB /* Double+WeatherIcons.swift in Sources */,
 				F70B5296221B808C007C7340 /* Formatters.swift in Sources */,
 				F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */,
 				F7FA432C1DADD858008BE9AB /* PhaseViewModel.swift in Sources */,
-				F7F989F02310874500AC8C9E /* CLGeocoder+Combine.swift in Sources */,
 				F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */,
 				F7EB852B22CD798C00324854 /* CGSize+Geometry.swift in Sources */,
-				F7F989EE2310844B00AC8C9E /* CLLocationManager+Combine.swift in Sources */,
 				F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */,
 				F7FA43221DADD823008BE9AB /* LunarInfoView.swift in Sources */,
 				F78D200122B4E6CC00CBFC0D /* LocalURLProtocol.swift in Sources */,
@@ -449,6 +448,7 @@
 				F73EDB1E22B3075C00260925 /* PhasesView.swift in Sources */,
 				F7887B3F1ADED9AC00EF9BA3 /* NSURLSessionConfiguration+Protocols.swift in Sources */,
 				F75FBEBA22ADDC350049C47A /* SceneDelegate.swift in Sources */,
+				F7B3466E233241B20000C54E /* CLLocationManager+Combine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
