@@ -56,6 +56,10 @@ final class LocationTracker {
         
         watchForApplicationLifecycleChanges()
         watchForLocationChanges()
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.distanceFilter = CLLocationDistance(3000.0)
+        locationManager.requestWhenInUseAuthorization()
     }
     
     deinit {
