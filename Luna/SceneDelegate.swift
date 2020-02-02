@@ -19,12 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        // Use a UIHostingController as window root view controller
-        
         // Create a dummy URL Session
-        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
-        let session = URLSession.init(configuration: configuration)
-        let provider = ContentProvider(session: session)
+//        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
+//        let session = URLSession.init(configuration: configuration)
+//        let provider = ContentProvider(session: session)
+        
+        let provider = ContentProvider(session: URLSession.shared)
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
