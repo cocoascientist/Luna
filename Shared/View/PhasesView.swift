@@ -14,7 +14,8 @@ struct PhasesView: View {
     var body: some View {
         VStack(spacing: 8.0) {
             ForEach(0..<self.viewModels.count) { index in
-                PhaseView(viewModel: self.viewModels[index])
+                let viewModel = self.viewModels[index]
+                PhaseView(date: viewModel.date, icon: viewModel.icon)
                 if index < (self.viewModels.count - 1) {
                     Divider()
                         .background(Color.white)
@@ -27,20 +28,38 @@ struct PhasesView: View {
 }
 
 struct PhaseView: View {
-    let viewModel: PhaseViewModel
+    let date: String
+    let icon: String
     
     var body: some View {
         HStack(alignment: .center) {
-            Image(systemName: viewModel.icon)
+            Image(systemName: icon)
                 .font(.title)
                 .foregroundColor(Color.white)
                 .padding([.top, .bottom], 8)
-            Text(viewModel.date)
+            Text(date)
                 .font(.body)
                 .foregroundColor(Color.white)
                 .padding([.leading], 16)
             Spacer()
         }
         .padding([.leading, .trailing], 32)
+    }
+}
+
+struct PhasesView_Previews: PreviewProvider {
+    static var previews: some View {
+        return PhasesView(
+            viewModels: PhaseViewModel.makeMockViewModels()
+        )
+        .background(Color.black)
+        .previewLayout(.sizeThatFits)
+    }
+}
+
+fileprivate extension PhaseViewModel {
+    static func makeMockViewModels() -> [PhaseViewModel] {
+        Loader.loadPhasesFromJSON()
+            .map { PhaseViewModel(phase: $0) }
     }
 }

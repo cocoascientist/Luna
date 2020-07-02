@@ -52,7 +52,7 @@ private struct PhaseWrapper: Codable {
 }
 
 struct Phase: Codable, Identifiable {
-    let id: UUID = UUID()
+    var id: UUID = UUID()
     let name: String
     let date: Date
     
@@ -62,15 +62,17 @@ struct Phase: Codable, Identifiable {
     }
 }
 
+extension Phase {
+    static func decodePhases(from data: Data) throws -> [Phase] {
+        let decoder = JSONDecoder()
+        
+        let wrapper = try decoder.decode(PhaseWrapper.self, from: data)
+        return wrapper.phases
+    }
+}
+
 extension Phase: Equatable { }
 
 func ==(lhs: Phase, rhs: Phase) -> Bool {
     return lhs.date == rhs.date && lhs.name == rhs.name
-}
-
-func decodePhases(from data: Data) throws -> [Phase] {
-    let decoder = JSONDecoder()
-    
-    let wrapper = try decoder.decode(PhaseWrapper.self, from: data)
-    return wrapper.phases
 }

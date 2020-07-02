@@ -15,7 +15,11 @@ enum LocationError: Error {
     case noData
 }
 
-final class LocationTracker {
+protocol LocationTracking {
+    var locationUpdateEvent: AnyPublisher<Result<Location, Error>, Never> { get }
+}
+
+final class LocationTracker: LocationTracking {
     
     private var lastLocation: Result<Location, Error> = .failure(LocationError.noData)
     private let locationManager: CLLocationManager

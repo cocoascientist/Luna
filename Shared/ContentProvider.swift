@@ -8,25 +8,25 @@
 
 import Foundation
 import Combine
-
-enum ContentState {
-    case loading
-    case current(viewModel: ContentViewModel)
-    case error(error: Error)
-}
-
-struct ContentViewModel {
-    let lunarViewModel: LunarViewModel
-    let phaseViewModel: [PhaseViewModel]
-}
+import SwiftUI
 
 final class ContentProvider: ObservableObject {
     
-    @Published var viewModel: ContentState = .loading
+    enum State {
+        case loading
+        case current(lunarViewModel: LunarViewModel, phaseViewModels: [PhaseViewModel])
+        case error(error: Error)
+    }
+    
+    enum ContentError: Error {
+        case noData
+    }
+    
+    @Published var state: ContentProvider.State = .loading
     
     private var cancelables: [AnyCancellable] = []
     
-    init(locationTracker: LocationTracker = LocationTracker(),
+    init(locationTracker: LocationTracking = LocationTracker(),
          scheduler: DispatchQueue = DispatchQueue.main,
          session: URLSession) {
         
@@ -62,7 +62,7 @@ final class ContentProvider: ObservableObject {
                     .catch { _ in Just(Data()) }
             }
             .tryMap { (data) -> [Phase] in
-                return try decodePhases(from: data)
+                return try Phase.decodePhases(from: data)
             }
             .catch { _ in Just([]) }
             .compactMap{ (phases) -> [PhaseViewModel] in
@@ -75,18 +75,17 @@ final class ContentProvider: ObservableObject {
             lunarChangeEvent,
             phasesChangeEvent
         )
-        .compactMap { (lunarViewModel, phasesViewModel) -> ContentViewModel? in
-            guard let lunarViewModel = lunarViewModel else { return nil }
-            return ContentViewModel(
+        .map { (lunarViewModel, phaseViewModels) -> State in
+            guard let lunarViewModel = lunarViewModel else {
+                return .error(error: ContentError.noData)
+            }
+            return .current(
                 lunarViewModel: lunarViewModel,
-                phaseViewModel: phasesViewModel
+                phaseViewModels: phaseViewModels
             )
         }
-        .map { (viewModel) -> ContentState in
-            return .current(viewModel: viewModel)
-        }
         .receive(on: scheduler)
-        .assign(to: \.viewModel, on: self)
+        .assign(to: \.state, on: self)
         .store(in: &cancelables)
     }
     

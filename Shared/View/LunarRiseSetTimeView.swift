@@ -1,34 +1,15 @@
 //
-//  LunarView.swift
+//  LunarRiseSetTimeView.swift
 //  Luna
 //
-//  Created by Andrew Shepard on 3/1/15.
-//  Copyright (c) 2015 Andrew Shepard. All rights reserved.
+//  Created by Andrew Shepard on 7/6/20.
 //
 
 import SwiftUI
-import Combine
-
-struct LunarInfoView: View {
-    let viewModel: LunarViewModel
-    
-    var body: some View {
-        VStack(spacing: 8.0) {
-            Text(viewModel.phase)
-                .font(Font.custom("EuphemiaUCAS", size: 38.0))
-                .foregroundColor(Color.white)
-            Text(viewModel.age)
-                .font(.body)
-                .foregroundColor(Color.white)
-            Text(viewModel.illumination)
-                .font(.body)
-                .foregroundColor(Color.white)
-        }
-    }
-}
 
 struct LunarRiseSetTimeView: View {
-    let viewModel: LunarViewModel
+    let set: String
+    let rise: String
     
     var body: some View {
         VStack(alignment: .leadingOfRiseSetTextValue, spacing: 12.0) {
@@ -36,7 +17,7 @@ struct LunarRiseSetTimeView: View {
                 Text("Set")
                     .font(.caption)
                     .foregroundColor(Color.gray)
-                Text(viewModel.set)
+                Text(set)
                     .font(.body)
                     .foregroundColor(Color.white)
                     .alignmentGuide(.leadingOfRiseSetTextValue) { d in d[.leading] }
@@ -45,7 +26,7 @@ struct LunarRiseSetTimeView: View {
                 Text("Rise")
                     .font(.caption)
                     .foregroundColor(Color.gray)
-                Text(viewModel.rise)
+                Text(rise)
                     .font(.body)
                     .foregroundColor(Color.white)
                     .alignmentGuide(.leadingOfRiseSetTextValue) { d in d[.leading] }
@@ -62,4 +43,15 @@ fileprivate extension HorizontalAlignment {
     }
     
     static let leadingOfRiseSetTextValue = HorizontalAlignment(LeadingOfRiseSetTextValue.self)
+}
+
+struct LunarRiseSetTimeView_Previews: PreviewProvider {
+    static var previews: some View {
+        LunarRiseSetTimeView(
+            set: "November 24 2015 at 5:39 AM PST",
+            rise: "November 24 2015 at 4:05 PM PST"
+        )
+        .background(Color.black)
+        .previewLayout(.sizeThatFits)
+    }
 }

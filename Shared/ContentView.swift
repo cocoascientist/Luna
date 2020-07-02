@@ -1,42 +1,47 @@
 //
 //  ContentView.swift
-//  Luna
+//  Shared
 //
-//  Created by Andrew Shepard on 6/9/19.
-//  Copyright © 2019 Andrew Shepard. All rights reserved.
+//  Created by Andrew Shepard on 6/23/20.
 //
 
 import SwiftUI
-import Foundation
+import CoreLocation
 
 struct ContentView: View {
-    @ObservedObject var provider: ContentProvider
+    
+    var state: ContentProvider.State
     
     var body: some View {
-        StatusView()
+        StatusView(state: state)
             .background(LinearGradient.lunarGradient)
             .edgesIgnoringSafeArea(.all)
-            .environmentObject(self.provider)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        return Group {
+            ContentView(state: .loading)
+            ContentView(state: .current(lunarViewModel: LunarViewModel.makeMockViewModel(), phaseViewModels: PhaseViewModel.makeMockViewModels())
+            )
+            ContentView(state: .error(error: MockError.mock))
+        }
     }
 }
 
 struct StatusView: View {
-    @EnvironmentObject var provider: ContentProvider
+    var state: ContentProvider.State
     
     var body: some View {
-        switch self.provider.viewModel {
-        case .loading:
-            return AnyView(
-                LoadingView()
-            )
-        case .current(let viewModel):
-            return AnyView(
-                LunarView(viewModel: viewModel)
-            )
-        case .error(let error):
-            return AnyView(
+        Group {
+            if case .current(let lunarViewModel, let phaseViewModels) = state {
+                LunarView(lunarViewModel: lunarViewModel, phaseViewModels: phaseViewModels)
+            } else if case .error(let error) = state {
                 ErrorView(error: error)
-            )
+            } else {
+                LoadingView()
+            }
         }
     }
 }
@@ -66,9 +71,10 @@ struct ErrorView: View {
 }
 
 struct LunarView: View {
-    let viewModel: ContentViewModel
+    let lunarViewModel: LunarViewModel
+    let phaseViewModels: [PhaseViewModel]
     
-    @State private var offset = CGSize.zero
+//    @State private var offset = CGSize.zero
     
     var body: some View {
         return GeometryReader { geometry in
@@ -79,16 +85,20 @@ struct LunarView: View {
                             .frame(width: 175, height: 175)
                             .padding([.bottom], 16)
                             .padding([.leading, .trailing], 90)
-                        LunarInfoView(viewModel: self.viewModel.lunarViewModel)
+                        LunarInfoView(
+                            phase: lunarViewModel.phase,
+                            age: lunarViewModel.age,
+                            illumination: lunarViewModel.illumination
+                        )
                     }
                     .frame(
                         width: geometry.size.width,
                         height: geometry.size.height - 100,
                         alignment: .center
                     )
-                    LunarRiseSetTimeView(viewModel: self.viewModel.lunarViewModel)
+                    LunarRiseSetTimeView(set: lunarViewModel.set, rise: lunarViewModel.rise)
                         .padding([.leading, .trailing, .bottom], 32.0)
-                    PhasesView(viewModels: self.viewModel.phaseViewModel)
+                    PhasesView(viewModels: self.phaseViewModels)
                         .padding([.bottom], 32.0)
                 }
             }
@@ -109,16 +119,17 @@ extension LinearGradient {
     }
 }
 
-#if DEBUG
-struct ContentView_Previews : PreviewProvider {
-    var session: URLSession {
-        let configuration = URLSessionConfiguration.configurationWithProtocol(LocalURLProtocol.self)
-        let session = URLSession(configuration: configuration)
-        return session
-    }
-    
-    static var previews: some View {
-        ContentView(viewModel: ContentViewModel(session: session))
+fileprivate extension PhaseViewModel {
+    static func makeMockViewModels() -> [PhaseViewModel] {
+        Loader.loadPhasesFromJSON()
+            .map { PhaseViewModel(phase: $0) }
     }
 }
-#endif
+
+fileprivate extension LunarViewModel {
+    static func makeMockViewModel() -> LunarViewModel {
+        return LunarViewModel(
+            moon: Loader.loadMoonFromJSON()
+        )
+    }
+}

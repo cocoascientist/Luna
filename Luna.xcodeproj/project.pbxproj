@@ -3,129 +3,158 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F70B5296221B808C007C7340 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70B5295221B808C007C7340 /* Formatters.swift */; };
-		F73EDB1C22B306F600260925 /* LunarPhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDB1B22B306F600260925 /* LunarPhaseView.swift */; };
-		F73EDB1E22B3075C00260925 /* PhasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73EDB1D22B3075C00260925 /* PhasesView.swift */; };
-		F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743B18922B64D0D003A72E8 /* ContentView.swift */; };
-		F75FBEBA22ADDC350049C47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEB922ADDC350049C47A /* SceneDelegate.swift */; };
-		F75FBEBE22B083010049C47A /* URLSession+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75FBEBD22B083010049C47A /* URLSession+Combine.swift */; };
-		F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76576B91AA42E00007B2AE5 /* AppDelegate.swift */; };
-		F76576C11AA42E00007B2AE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F76576C01AA42E00007B2AE5 /* Images.xcassets */; };
-		F76576C41AA42E00007B2AE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76576C21AA42E00007B2AE5 /* LaunchScreen.xib */; };
-		F77337081ADC74AE005131B7 /* moonphases.json in Resources */ = {isa = PBXBuildFile; fileRef = F77337061ADC74AE005131B7 /* moonphases.json */; };
-		F77337091ADC74AE005131B7 /* sunmoon.json in Resources */ = {isa = PBXBuildFile; fileRef = F77337071ADC74AE005131B7 /* sunmoon.json */; };
-		F78818AD1ADC712D007E2DD8 /* LocalURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */; };
-		F7887B3F1ADED9AC00EF9BA3 /* NSURLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */; };
-		F7887B401ADEDA2B00EF9BA3 /* sunmoon.json in Resources */ = {isa = PBXBuildFile; fileRef = F77337071ADC74AE005131B7 /* sunmoon.json */; };
-		F7887B411ADEDA2D00EF9BA3 /* moonphases.json in Resources */ = {isa = PBXBuildFile; fileRef = F77337061ADC74AE005131B7 /* moonphases.json */; };
-		F78D200122B4E6CC00CBFC0D /* LocalURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */; };
-		F7A6B6EB1ADD734A00B6F119 /* FailingURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EA1ADD734A00B6F119 /* FailingURLProtocol.swift */; };
-		F7A6B6ED1ADD7D5300B6F119 /* BadResponseURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EC1ADD7D5300B6F119 /* BadResponseURLProtocol.swift */; };
-		F7A6B6EF1ADD824500B6F119 /* BadStatusURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6EE1ADD824500B6F119 /* BadStatusURLProtocol.swift */; };
-		F7A6B6F41ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */; };
-		F7B3466A233241A80000C54E /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B34669233241A80000C54E /* ContentProvider.swift */; };
-		F7B3466D233241B20000C54E /* CLGeocoder+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3466B233241B20000C54E /* CLGeocoder+Combine.swift */; };
-		F7B3466E233241B20000C54E /* CLLocationManager+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B3466C233241B20000C54E /* CLLocationManager+Combine.swift */; };
-		F7EB852A22CD798C00324854 /* Publisher+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852822CD798C00324854 /* Publisher+Combine.swift */; };
-		F7EB852B22CD798C00324854 /* CGSize+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB852922CD798C00324854 /* CGSize+Geometry.swift */; };
-		F7FA43221DADD823008BE9AB /* LunarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA431D1DADD823008BE9AB /* LunarInfoView.swift */; };
-		F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43271DADD858008BE9AB /* LunarViewModel.swift */; };
-		F7FA432C1DADD858008BE9AB /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */; };
-		F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432D1DADD883008BE9AB /* AerisAPI.swift */; };
-		F7FA43331DADD883008BE9AB /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA432E1DADD883008BE9AB /* LocationTracker.swift */; };
-		F7FA43361DADD883008BE9AB /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43311DADD883008BE9AB /* Requestable.swift */; };
-		F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43381DADD88B008BE9AB /* Moon.swift */; };
-		F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43391DADD88B008BE9AB /* Phase.swift */; };
-		F7FA43471DADD8B4008BE9AB /* Double+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */; };
-		F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */; };
-		F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */; };
-		F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */; };
+		F728759F24AE9C4400543960 /* Publisher+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728758E24AE9C4400543960 /* Publisher+Combine.swift */; };
+		F72875A024AE9C4400543960 /* Publisher+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728758E24AE9C4400543960 /* Publisher+Combine.swift */; };
+		F72875A124AE9C4400543960 /* URLSession+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728758F24AE9C4400543960 /* URLSession+Combine.swift */; };
+		F72875A224AE9C4400543960 /* URLSession+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728758F24AE9C4400543960 /* URLSession+Combine.swift */; };
+		F72875A324AE9C4400543960 /* CLGeocoder+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759024AE9C4400543960 /* CLGeocoder+Combine.swift */; };
+		F72875A424AE9C4400543960 /* CLGeocoder+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759024AE9C4400543960 /* CLGeocoder+Combine.swift */; };
+		F72875A524AE9C4400543960 /* CLLocationManager+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759124AE9C4400543960 /* CLLocationManager+Combine.swift */; };
+		F72875A624AE9C4400543960 /* CLLocationManager+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759124AE9C4400543960 /* CLLocationManager+Combine.swift */; };
+		F72875A724AE9C4400543960 /* Dictionary+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759224AE9C4400543960 /* Dictionary+Query.swift */; };
+		F72875A824AE9C4400543960 /* Dictionary+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759224AE9C4400543960 /* Dictionary+Query.swift */; };
+		F72875A924AE9C4400543960 /* CGSize+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759324AE9C4400543960 /* CGSize+Geometry.swift */; };
+		F72875AA24AE9C4400543960 /* CGSize+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759324AE9C4400543960 /* CGSize+Geometry.swift */; };
+		F72875AB24AE9C4400543960 /* Double+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759424AE9C4400543960 /* Double+WeatherIcons.swift */; };
+		F72875AC24AE9C4400543960 /* Double+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759424AE9C4400543960 /* Double+WeatherIcons.swift */; };
+		F72875AD24AE9C4400543960 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759524AE9C4400543960 /* Formatters.swift */; };
+		F72875AE24AE9C4400543960 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759524AE9C4400543960 /* Formatters.swift */; };
+		F72875AF24AE9C4400543960 /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759624AE9C4400543960 /* String+WeatherIcons.swift */; };
+		F72875B024AE9C4400543960 /* String+WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759624AE9C4400543960 /* String+WeatherIcons.swift */; };
+		F72875B124AE9C4400543960 /* Date+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759724AE9C4400543960 /* Date+Lunar.swift */; };
+		F72875B224AE9C4400543960 /* Date+Lunar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759724AE9C4400543960 /* Date+Lunar.swift */; };
+		F72875B324AE9C4400543960 /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759924AE9C4400543960 /* Moon.swift */; };
+		F72875B424AE9C4400543960 /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759924AE9C4400543960 /* Moon.swift */; };
+		F72875B524AE9C4400543960 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759A24AE9C4400543960 /* Phase.swift */; };
+		F72875B624AE9C4400543960 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759A24AE9C4400543960 /* Phase.swift */; };
+		F72875B724AE9C4400543960 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759C24AE9C4400543960 /* Requestable.swift */; };
+		F72875B824AE9C4400543960 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759C24AE9C4400543960 /* Requestable.swift */; };
+		F72875B924AE9C4400543960 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759D24AE9C4400543960 /* LocationTracker.swift */; };
+		F72875BA24AE9C4400543960 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759D24AE9C4400543960 /* LocationTracker.swift */; };
+		F72875BB24AE9C4400543960 /* AerisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759E24AE9C4400543960 /* AerisAPI.swift */; };
+		F72875BC24AE9C4400543960 /* AerisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728759E24AE9C4400543960 /* AerisAPI.swift */; };
+		F72875C424AE9CD000543960 /* LunarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875BE24AE9CD000543960 /* LunarInfoView.swift */; };
+		F72875C524AE9CD000543960 /* LunarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875BE24AE9CD000543960 /* LunarInfoView.swift */; };
+		F72875C624AE9CD000543960 /* PhasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875BF24AE9CD000543960 /* PhasesView.swift */; };
+		F72875C724AE9CD000543960 /* PhasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875BF24AE9CD000543960 /* PhasesView.swift */; };
+		F72875C824AE9CD000543960 /* LunarPhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875C024AE9CD000543960 /* LunarPhaseView.swift */; };
+		F72875C924AE9CD000543960 /* LunarPhaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875C024AE9CD000543960 /* LunarPhaseView.swift */; };
+		F72875CA24AE9CD000543960 /* LunarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875C224AE9CD000543960 /* LunarViewModel.swift */; };
+		F72875CB24AE9CD000543960 /* LunarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875C224AE9CD000543960 /* LunarViewModel.swift */; };
+		F72875CC24AE9CD000543960 /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875C324AE9CD000543960 /* PhaseViewModel.swift */; };
+		F72875CD24AE9CD000543960 /* PhaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875C324AE9CD000543960 /* PhaseViewModel.swift */; };
+		F72875CF24B3EDD200543960 /* LunarRiseSetTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875CE24B3EDD200543960 /* LunarRiseSetTimeView.swift */; };
+		F72875D024B3EDD200543960 /* LunarRiseSetTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875CE24B3EDD200543960 /* LunarRiseSetTimeView.swift */; };
+		F72875D524B3F5D900543960 /* sunmoon.json in Resources */ = {isa = PBXBuildFile; fileRef = F72875D324B3F5D900543960 /* sunmoon.json */; };
+		F72875D624B3F5D900543960 /* sunmoon.json in Resources */ = {isa = PBXBuildFile; fileRef = F72875D324B3F5D900543960 /* sunmoon.json */; };
+		F72875D724B3F5D900543960 /* moonphases.json in Resources */ = {isa = PBXBuildFile; fileRef = F72875D424B3F5D900543960 /* moonphases.json */; };
+		F72875D824B3F5D900543960 /* moonphases.json in Resources */ = {isa = PBXBuildFile; fileRef = F72875D424B3F5D900543960 /* moonphases.json */; };
+		F72875DA24B3F5E500543960 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875D924B3F5E500543960 /* Loader.swift */; };
+		F72875DB24B3F5E500543960 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72875D924B3F5E500543960 /* Loader.swift */; };
+		F76AE73724AC1302009F38A1 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76AE73624AC1302009F38A1 /* ContentProvider.swift */; };
+		F76AE73824AC1302009F38A1 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76AE73624AC1302009F38A1 /* ContentProvider.swift */; };
+		F76AE73A24AC1DE5009F38A1 /* MockLocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76AE73924AC1DE5009F38A1 /* MockLocationTracker.swift */; };
+		F76AE73B24AC1DE5009F38A1 /* MockLocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76AE73924AC1DE5009F38A1 /* MockLocationTracker.swift */; };
+		F76AE74024AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76AE73F24AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift */; };
+		F76AE74124AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76AE73F24AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift */; };
+		F7DD5E2024A2E2C9006F469E /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD5E1F24A2E2C9006F469E /* Tests_iOS.swift */; };
+		F7DD5E2B24A2E2C9006F469E /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD5E2A24A2E2C9006F469E /* Tests_macOS.swift */; };
+		F7DD5E2D24A2E2C9006F469E /* LunaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD5E0424A2E2C8006F469E /* LunaApp.swift */; };
+		F7DD5E2E24A2E2C9006F469E /* LunaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD5E0424A2E2C8006F469E /* LunaApp.swift */; };
+		F7DD5E2F24A2E2C9006F469E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD5E0524A2E2C8006F469E /* ContentView.swift */; };
+		F7DD5E3024A2E2C9006F469E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DD5E0524A2E2C8006F469E /* ContentView.swift */; };
+		F7DD5E3124A2E2C9006F469E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7DD5E0624A2E2C9006F469E /* Assets.xcassets */; };
+		F7DD5E3224A2E2C9006F469E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7DD5E0624A2E2C9006F469E /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F76576CA1AA42E00007B2AE5 /* PBXContainerItemProxy */ = {
+		F7DD5E1C24A2E2C9006F469E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F76576AC1AA42E00007B2AE5 /* Project object */;
+			containerPortal = F7DD5DFF24A2E2C8006F469E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F76576B31AA42E00007B2AE5;
-			remoteInfo = Luna;
+			remoteGlobalIDString = F7DD5E0A24A2E2C9006F469E;
+			remoteInfo = iOS;
+		};
+		F7DD5E2724A2E2C9006F469E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7DD5DFF24A2E2C8006F469E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7DD5E1224A2E2C9006F469E;
+			remoteInfo = macOS;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		F704B4581AB5C15500BBF2F7 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		F704B4491AB5C15500BBF2F7 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		F70B5295221B808C007C7340 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Formatters.swift; path = "Types & Extensions/Formatters.swift"; sourceTree = "<group>"; };
-		F73EDB1B22B306F600260925 /* LunarPhaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarPhaseView.swift; path = View/LunarPhaseView.swift; sourceTree = "<group>"; };
-		F73EDB1D22B3075C00260925 /* PhasesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhasesView.swift; path = View/PhasesView.swift; sourceTree = "<group>"; };
-		F743B18922B64D0D003A72E8 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = View/ContentView.swift; sourceTree = "<group>"; };
-		F75FBEB922ADDC350049C47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F75FBEBD22B083010049C47A /* URLSession+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URLSession+Combine.swift"; path = "Types & Extensions/URLSession+Combine.swift"; sourceTree = "<group>"; };
-		F76576B41AA42E00007B2AE5 /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F76576B81AA42E00007B2AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F76576B91AA42E00007B2AE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F76576C01AA42E00007B2AE5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F76576C31AA42E00007B2AE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F76576C91AA42E00007B2AE5 /* LunaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F76576CE1AA42E00007B2AE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F77337061ADC74AE005131B7 /* moonphases.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = moonphases.json; sourceTree = "<group>"; };
-		F77337071ADC74AE005131B7 /* sunmoon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunmoon.json; sourceTree = "<group>"; };
-		F78818A81ADC6FC2007E2DD8 /* LunarPhaseModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarPhaseModelTests.swift; sourceTree = "<group>"; };
-		F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalURLProtocol.swift; sourceTree = "<group>"; };
-		F7887B421ADEDC5C00EF9BA3 /* LocationTrackerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTrackerTests.swift; sourceTree = "<group>"; };
-		F7A6B6E81ADD6E9700B6F119 /* PhaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhaseTests.swift; sourceTree = "<group>"; };
-		F7A6B6EA1ADD734A00B6F119 /* FailingURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingURLProtocol.swift; sourceTree = "<group>"; };
-		F7A6B6EC1ADD7D5300B6F119 /* BadResponseURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadResponseURLProtocol.swift; sourceTree = "<group>"; };
-		F7A6B6EE1ADD824500B6F119 /* BadStatusURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadStatusURLProtocol.swift; sourceTree = "<group>"; };
-		F7A6B6F11ADD91C000B6F119 /* NetworkControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkControllerTests.swift; sourceTree = "<group>"; };
-		F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURLSessionConfiguration+Protocols.swift"; sourceTree = "<group>"; };
-		F7A6B6F51ADDA31C00B6F119 /* LunarViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarViewModelTests.swift; sourceTree = "<group>"; };
-		F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AerisAPITests.swift; sourceTree = "<group>"; };
-		F7B34669233241A80000C54E /* ContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentProvider.swift; path = ViewModel/ContentProvider.swift; sourceTree = "<group>"; };
-		F7B3466B233241B20000C54E /* CLGeocoder+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLGeocoder+Combine.swift"; path = "Types & Extensions/CLGeocoder+Combine.swift"; sourceTree = "<group>"; };
-		F7B3466C233241B20000C54E /* CLLocationManager+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Combine.swift"; path = "Types & Extensions/CLLocationManager+Combine.swift"; sourceTree = "<group>"; };
-		F7EB852822CD798C00324854 /* Publisher+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Publisher+Combine.swift"; path = "Types & Extensions/Publisher+Combine.swift"; sourceTree = "<group>"; };
-		F7EB852922CD798C00324854 /* CGSize+Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGSize+Geometry.swift"; path = "Types & Extensions/CGSize+Geometry.swift"; sourceTree = "<group>"; };
-		F7F146E61AF0907D004716AF /* MoonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonTests.swift; sourceTree = "<group>"; };
-		F7FA431D1DADD823008BE9AB /* LunarInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarInfoView.swift; path = View/LunarInfoView.swift; sourceTree = "<group>"; };
-		F7FA43271DADD858008BE9AB /* LunarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LunarViewModel.swift; path = ViewModel/LunarViewModel.swift; sourceTree = "<group>"; };
-		F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhaseViewModel.swift; path = ViewModel/PhaseViewModel.swift; sourceTree = "<group>"; };
-		F7FA432D1DADD883008BE9AB /* AerisAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AerisAPI.swift; path = Network/AerisAPI.swift; sourceTree = "<group>"; };
-		F7FA432E1DADD883008BE9AB /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationTracker.swift; path = Network/LocationTracker.swift; sourceTree = "<group>"; };
-		F7FA43311DADD883008BE9AB /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requestable.swift; path = Network/Requestable.swift; sourceTree = "<group>"; };
-		F7FA43381DADD88B008BE9AB /* Moon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Moon.swift; path = Model/Moon.swift; sourceTree = "<group>"; };
-		F7FA43391DADD88B008BE9AB /* Phase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Phase.swift; path = Model/Phase.swift; sourceTree = "<group>"; };
-		F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Double+WeatherIcons.swift"; path = "Types & Extensions/Double+WeatherIcons.swift"; sourceTree = "<group>"; };
-		F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Date+Lunar.swift"; path = "Types & Extensions/Date+Lunar.swift"; sourceTree = "<group>"; };
-		F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Query.swift"; path = "Types & Extensions/Dictionary+Query.swift"; sourceTree = "<group>"; };
-		F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+WeatherIcons.swift"; path = "Types & Extensions/String+WeatherIcons.swift"; sourceTree = "<group>"; };
+		F728758E24AE9C4400543960 /* Publisher+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Combine.swift"; sourceTree = "<group>"; };
+		F728758F24AE9C4400543960 /* URLSession+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Combine.swift"; sourceTree = "<group>"; };
+		F728759024AE9C4400543960 /* CLGeocoder+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLGeocoder+Combine.swift"; sourceTree = "<group>"; };
+		F728759124AE9C4400543960 /* CLLocationManager+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+Combine.swift"; sourceTree = "<group>"; };
+		F728759224AE9C4400543960 /* Dictionary+Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Query.swift"; sourceTree = "<group>"; };
+		F728759324AE9C4400543960 /* CGSize+Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Geometry.swift"; sourceTree = "<group>"; };
+		F728759424AE9C4400543960 /* Double+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+WeatherIcons.swift"; sourceTree = "<group>"; };
+		F728759524AE9C4400543960 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		F728759624AE9C4400543960 /* String+WeatherIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WeatherIcons.swift"; sourceTree = "<group>"; };
+		F728759724AE9C4400543960 /* Date+Lunar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Lunar.swift"; sourceTree = "<group>"; };
+		F728759924AE9C4400543960 /* Moon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moon.swift; sourceTree = "<group>"; };
+		F728759A24AE9C4400543960 /* Phase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
+		F728759C24AE9C4400543960 /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		F728759D24AE9C4400543960 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
+		F728759E24AE9C4400543960 /* AerisAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AerisAPI.swift; sourceTree = "<group>"; };
+		F72875BE24AE9CD000543960 /* LunarInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarInfoView.swift; sourceTree = "<group>"; };
+		F72875BF24AE9CD000543960 /* PhasesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhasesView.swift; sourceTree = "<group>"; };
+		F72875C024AE9CD000543960 /* LunarPhaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarPhaseView.swift; sourceTree = "<group>"; };
+		F72875C224AE9CD000543960 /* LunarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LunarViewModel.swift; sourceTree = "<group>"; };
+		F72875C324AE9CD000543960 /* PhaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhaseViewModel.swift; sourceTree = "<group>"; };
+		F72875CE24B3EDD200543960 /* LunarRiseSetTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunarRiseSetTimeView.swift; sourceTree = "<group>"; };
+		F72875D324B3F5D900543960 /* sunmoon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunmoon.json; sourceTree = "<group>"; };
+		F72875D424B3F5D900543960 /* moonphases.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = moonphases.json; sourceTree = "<group>"; };
+		F72875D924B3F5E500543960 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		F76AE73624AC1302009F38A1 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
+		F76AE73924AC1DE5009F38A1 /* MockLocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationTracker.swift; sourceTree = "<group>"; };
+		F76AE73F24AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionConfiguration+Protocols.swift"; sourceTree = "<group>"; };
+		F7DD5E0424A2E2C8006F469E /* LunaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunaApp.swift; sourceTree = "<group>"; };
+		F7DD5E0524A2E2C8006F469E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F7DD5E0624A2E2C9006F469E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F7DD5E0B24A2E2C9006F469E /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7DD5E0E24A2E2C9006F469E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7DD5E1324A2E2C9006F469E /* Luna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Luna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7DD5E1524A2E2C9006F469E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7DD5E1624A2E2C9006F469E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		F7DD5E1B24A2E2C9006F469E /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7DD5E1F24A2E2C9006F469E /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		F7DD5E2124A2E2C9006F469E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7DD5E2624A2E2C9006F469E /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7DD5E2A24A2E2C9006F469E /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		F7DD5E2C24A2E2C9006F469E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F76576B11AA42E00007B2AE5 /* Frameworks */ = {
+		F7DD5E0824A2E2C9006F469E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F76576C61AA42E00007B2AE5 /* Frameworks */ = {
+		F7DD5E1024A2E2C9006F469E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7DD5E1824A2E2C9006F469E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7DD5E2324A2E2C9006F469E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,372 +164,432 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F704B4481AB5C15500BBF2F7 /* Frameworks */ = {
+		F728758D24AE9C4400543960 /* Types & Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F704B4491AB5C15500BBF2F7 /* NotificationCenter.framework */,
+				F728758E24AE9C4400543960 /* Publisher+Combine.swift */,
+				F728759224AE9C4400543960 /* Dictionary+Query.swift */,
+				F728759324AE9C4400543960 /* CGSize+Geometry.swift */,
+				F728759424AE9C4400543960 /* Double+WeatherIcons.swift */,
+				F728759524AE9C4400543960 /* Formatters.swift */,
+				F728759624AE9C4400543960 /* String+WeatherIcons.swift */,
+				F728759724AE9C4400543960 /* Date+Lunar.swift */,
+				F76AE73F24AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift */,
 			);
-			name = Frameworks;
+			path = "Types & Extensions";
 			sourceTree = "<group>";
 		};
-		F76576AB1AA42E00007B2AE5 = {
+		F728759824AE9C4400543960 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F76576B61AA42E00007B2AE5 /* Luna */,
-				F76576CC1AA42E00007B2AE5 /* LunaTests */,
-				F704B4481AB5C15500BBF2F7 /* Frameworks */,
-				F76576B51AA42E00007B2AE5 /* Products */,
+				F728759924AE9C4400543960 /* Moon.swift */,
+				F728759A24AE9C4400543960 /* Phase.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F728759B24AE9C4400543960 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F728758F24AE9C4400543960 /* URLSession+Combine.swift */,
+				F728759C24AE9C4400543960 /* Requestable.swift */,
+				F728759E24AE9C4400543960 /* AerisAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F72875BD24AE9CD000543960 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F72875BE24AE9CD000543960 /* LunarInfoView.swift */,
+				F72875BF24AE9CD000543960 /* PhasesView.swift */,
+				F72875C024AE9CD000543960 /* LunarPhaseView.swift */,
+				F72875CE24B3EDD200543960 /* LunarRiseSetTimeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F72875C124AE9CD000543960 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F72875C224AE9CD000543960 /* LunarViewModel.swift */,
+				F72875C324AE9CD000543960 /* PhaseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F72875D224B3F5D900543960 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F72875D324B3F5D900543960 /* sunmoon.json */,
+				F72875D424B3F5D900543960 /* moonphases.json */,
+				F72875D924B3F5E500543960 /* Loader.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F754BAA024B9C3A6000C850F /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				F728759D24AE9C4400543960 /* LocationTracker.swift */,
+				F728759124AE9C4400543960 /* CLLocationManager+Combine.swift */,
+				F728759024AE9C4400543960 /* CLGeocoder+Combine.swift */,
+				F76AE73924AC1DE5009F38A1 /* MockLocationTracker.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		F7DD5DFE24A2E2C8006F469E = {
+			isa = PBXGroup;
+			children = (
+				F7DD5E0324A2E2C8006F469E /* Shared */,
+				F7DD5E0D24A2E2C9006F469E /* iOS */,
+				F7DD5E1424A2E2C9006F469E /* macOS */,
+				F7DD5E1E24A2E2C9006F469E /* Tests iOS */,
+				F7DD5E2924A2E2C9006F469E /* Tests macOS */,
+				F7DD5E0C24A2E2C9006F469E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F76576B51AA42E00007B2AE5 /* Products */ = {
+		F7DD5E0324A2E2C8006F469E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				F76576B41AA42E00007B2AE5 /* Luna.app */,
-				F76576C91AA42E00007B2AE5 /* LunaTests.xctest */,
+				F7DD5E0424A2E2C8006F469E /* LunaApp.swift */,
+				F7DD5E0524A2E2C8006F469E /* ContentView.swift */,
+				F76AE73624AC1302009F38A1 /* ContentProvider.swift */,
+				F72875BD24AE9CD000543960 /* View */,
+				F72875C124AE9CD000543960 /* ViewModel */,
+				F728759824AE9C4400543960 /* Model */,
+				F728759B24AE9C4400543960 /* Network */,
+				F754BAA024B9C3A6000C850F /* Location */,
+				F728758D24AE9C4400543960 /* Types & Extensions */,
+				F72875D224B3F5D900543960 /* Resources */,
+				F7DD5E0624A2E2C9006F469E /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F7DD5E0C24A2E2C9006F469E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7DD5E0B24A2E2C9006F469E /* Luna.app */,
+				F7DD5E1324A2E2C9006F469E /* Luna.app */,
+				F7DD5E1B24A2E2C9006F469E /* Tests iOS.xctest */,
+				F7DD5E2624A2E2C9006F469E /* Tests macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F76576B61AA42E00007B2AE5 /* Luna */ = {
+		F7DD5E0D24A2E2C9006F469E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F76576B91AA42E00007B2AE5 /* AppDelegate.swift */,
-				F75FBEB922ADDC350049C47A /* SceneDelegate.swift */,
-				F76576E91AA43347007B2AE5 /* View */,
-				F76576F01AA434B4007B2AE5 /* ViewModel */,
-				F76576E51AA42E60007B2AE5 /* Model */,
-				F76576E61AA42E69007B2AE5 /* Network */,
-				F76576F51AA437A0007B2AE5 /* Types & Extensions */,
-				F76576C01AA42E00007B2AE5 /* Images.xcassets */,
-				F76576C21AA42E00007B2AE5 /* LaunchScreen.xib */,
-				F76576B71AA42E00007B2AE5 /* Supporting Files */,
+				F7DD5E0E24A2E2C9006F469E /* Info.plist */,
 			);
-			path = Luna;
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		F76576B71AA42E00007B2AE5 /* Supporting Files */ = {
+		F7DD5E1424A2E2C9006F469E /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				F76576B81AA42E00007B2AE5 /* Info.plist */,
+				F7DD5E1524A2E2C9006F469E /* Info.plist */,
+				F7DD5E1624A2E2C9006F469E /* macOS.entitlements */,
 			);
-			name = "Supporting Files";
+			path = macOS;
 			sourceTree = "<group>";
 		};
-		F76576CC1AA42E00007B2AE5 /* LunaTests */ = {
+		F7DD5E1E24A2E2C9006F469E /* Tests iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F7BCE5721ADDD3FE0061FFF5 /* ViewModel */,
-				F7BCE5711ADDD3EC0061FFF5 /* Model */,
-				F7BCE5731ADDD40D0061FFF5 /* Network */,
-				F7A6B6F01ADD919400B6F119 /* URL Protocols */,
-				F76576CD1AA42E00007B2AE5 /* Supporting Files */,
+				F7DD5E1F24A2E2C9006F469E /* Tests_iOS.swift */,
+				F7DD5E2124A2E2C9006F469E /* Info.plist */,
 			);
-			path = LunaTests;
+			path = "Tests iOS";
 			sourceTree = "<group>";
 		};
-		F76576CD1AA42E00007B2AE5 /* Supporting Files */ = {
+		F7DD5E2924A2E2C9006F469E /* Tests macOS */ = {
 			isa = PBXGroup;
 			children = (
-				F77337061ADC74AE005131B7 /* moonphases.json */,
-				F77337071ADC74AE005131B7 /* sunmoon.json */,
-				F76576CE1AA42E00007B2AE5 /* Info.plist */,
+				F7DD5E2A24A2E2C9006F469E /* Tests_macOS.swift */,
+				F7DD5E2C24A2E2C9006F469E /* Info.plist */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F76576E51AA42E60007B2AE5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F7FA43381DADD88B008BE9AB /* Moon.swift */,
-				F7FA43391DADD88B008BE9AB /* Phase.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		F76576E61AA42E69007B2AE5 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				F7FA432D1DADD883008BE9AB /* AerisAPI.swift */,
-				F7FA432E1DADD883008BE9AB /* LocationTracker.swift */,
-				F7FA43311DADD883008BE9AB /* Requestable.swift */,
-			);
-			name = Network;
-			sourceTree = "<group>";
-		};
-		F76576E91AA43347007B2AE5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F743B18922B64D0D003A72E8 /* ContentView.swift */,
-				F7FA431D1DADD823008BE9AB /* LunarInfoView.swift */,
-				F73EDB1B22B306F600260925 /* LunarPhaseView.swift */,
-				F73EDB1D22B3075C00260925 /* PhasesView.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		F76576F01AA434B4007B2AE5 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				F7B34669233241A80000C54E /* ContentProvider.swift */,
-				F7FA43271DADD858008BE9AB /* LunarViewModel.swift */,
-				F7FA43291DADD858008BE9AB /* PhaseViewModel.swift */,
-			);
-			name = ViewModel;
-			sourceTree = "<group>";
-		};
-		F76576F51AA437A0007B2AE5 /* Types & Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				F7B3466B233241B20000C54E /* CLGeocoder+Combine.swift */,
-				F7B3466C233241B20000C54E /* CLLocationManager+Combine.swift */,
-				F7EB852922CD798C00324854 /* CGSize+Geometry.swift */,
-				F7FA43411DADD8B4008BE9AB /* Date+Lunar.swift */,
-				F7FA43431DADD8B4008BE9AB /* Dictionary+Query.swift */,
-				F7FA433D1DADD8B4008BE9AB /* Double+WeatherIcons.swift */,
-				F70B5295221B808C007C7340 /* Formatters.swift */,
-				F7EB852822CD798C00324854 /* Publisher+Combine.swift */,
-				F7FA43451DADD8B4008BE9AB /* String+WeatherIcons.swift */,
-				F75FBEBD22B083010049C47A /* URLSession+Combine.swift */,
-			);
-			name = "Types & Extensions";
-			sourceTree = "<group>";
-		};
-		F7A6B6F01ADD919400B6F119 /* URL Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				F7A6B6F31ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift */,
-				F7A6B6EA1ADD734A00B6F119 /* FailingURLProtocol.swift */,
-				F78818AC1ADC712D007E2DD8 /* LocalURLProtocol.swift */,
-				F7A6B6EC1ADD7D5300B6F119 /* BadResponseURLProtocol.swift */,
-				F7A6B6EE1ADD824500B6F119 /* BadStatusURLProtocol.swift */,
-			);
-			name = "URL Protocols";
-			sourceTree = "<group>";
-		};
-		F7BCE5711ADDD3EC0061FFF5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F78818A81ADC6FC2007E2DD8 /* LunarPhaseModelTests.swift */,
-				F7F146E61AF0907D004716AF /* MoonTests.swift */,
-				F7A6B6E81ADD6E9700B6F119 /* PhaseTests.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		F7BCE5721ADDD3FE0061FFF5 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				F7A6B6F51ADDA31C00B6F119 /* LunarViewModelTests.swift */,
-			);
-			name = ViewModel;
-			sourceTree = "<group>";
-		};
-		F7BCE5731ADDD40D0061FFF5 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				F7A6B6F11ADD91C000B6F119 /* NetworkControllerTests.swift */,
-				F7A6B7011ADDC73E00B6F119 /* AerisAPITests.swift */,
-				F7887B421ADEDC5C00EF9BA3 /* LocationTrackerTests.swift */,
-			);
-			name = Network;
+			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F76576B31AA42E00007B2AE5 /* Luna */ = {
+		F7DD5E0A24A2E2C9006F469E /* iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F76576D31AA42E00007B2AE5 /* Build configuration list for PBXNativeTarget "Luna" */;
+			buildConfigurationList = F7DD5E3524A2E2C9006F469E /* Build configuration list for PBXNativeTarget "iOS" */;
 			buildPhases = (
-				F76576B01AA42E00007B2AE5 /* Sources */,
-				F76576B11AA42E00007B2AE5 /* Frameworks */,
-				F76576B21AA42E00007B2AE5 /* Resources */,
-				F704B4581AB5C15500BBF2F7 /* Embed App Extensions */,
+				F7DD5E0724A2E2C9006F469E /* Sources */,
+				F7DD5E0824A2E2C9006F469E /* Frameworks */,
+				F7DD5E0924A2E2C9006F469E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Luna;
-			productName = Luna;
-			productReference = F76576B41AA42E00007B2AE5 /* Luna.app */;
+			name = iOS;
+			productName = iOS;
+			productReference = F7DD5E0B24A2E2C9006F469E /* Luna.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F76576C81AA42E00007B2AE5 /* LunaTests */ = {
+		F7DD5E1224A2E2C9006F469E /* macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F76576D61AA42E00007B2AE5 /* Build configuration list for PBXNativeTarget "LunaTests" */;
+			buildConfigurationList = F7DD5E3824A2E2C9006F469E /* Build configuration list for PBXNativeTarget "macOS" */;
 			buildPhases = (
-				F76576C51AA42E00007B2AE5 /* Sources */,
-				F76576C61AA42E00007B2AE5 /* Frameworks */,
-				F76576C71AA42E00007B2AE5 /* Resources */,
+				F7DD5E0F24A2E2C9006F469E /* Sources */,
+				F7DD5E1024A2E2C9006F469E /* Frameworks */,
+				F7DD5E1124A2E2C9006F469E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F76576CB1AA42E00007B2AE5 /* PBXTargetDependency */,
 			);
-			name = LunaTests;
-			productName = LunaTests;
-			productReference = F76576C91AA42E00007B2AE5 /* LunaTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = macOS;
+			productName = macOS;
+			productReference = F7DD5E1324A2E2C9006F469E /* Luna.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F7DD5E1A24A2E2C9006F469E /* Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7DD5E3B24A2E2C9006F469E /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildPhases = (
+				F7DD5E1724A2E2C9006F469E /* Sources */,
+				F7DD5E1824A2E2C9006F469E /* Frameworks */,
+				F7DD5E1924A2E2C9006F469E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7DD5E1D24A2E2C9006F469E /* PBXTargetDependency */,
+			);
+			name = "Tests iOS";
+			productName = "Tests iOS";
+			productReference = F7DD5E1B24A2E2C9006F469E /* Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		F7DD5E2524A2E2C9006F469E /* Tests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7DD5E3E24A2E2C9006F469E /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildPhases = (
+				F7DD5E2224A2E2C9006F469E /* Sources */,
+				F7DD5E2324A2E2C9006F469E /* Frameworks */,
+				F7DD5E2424A2E2C9006F469E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7DD5E2824A2E2C9006F469E /* PBXTargetDependency */,
+			);
+			name = "Tests macOS";
+			productName = "Tests macOS";
+			productReference = F7DD5E2624A2E2C9006F469E /* Tests macOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F76576AC1AA42E00007B2AE5 /* Project object */ = {
+		F7DD5DFF24A2E2C8006F469E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = "Andrew Shepard";
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
 				TargetAttributes = {
-					F76576B31AA42E00007B2AE5 = {
-						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Manual;
-						SystemCapabilities = {
-							com.apple.BackgroundModes = {
-								enabled = 1;
-							};
-							com.apple.Multipath = {
-								enabled = 0;
-							};
-						};
+					F7DD5E0A24A2E2C9006F469E = {
+						CreatedOnToolsVersion = 12.0;
 					};
-					F76576C81AA42E00007B2AE5 = {
-						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Manual;
-						TestTargetID = F76576B31AA42E00007B2AE5;
+					F7DD5E1224A2E2C9006F469E = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					F7DD5E1A24A2E2C9006F469E = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = F7DD5E0A24A2E2C9006F469E;
+					};
+					F7DD5E2524A2E2C9006F469E = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = F7DD5E1224A2E2C9006F469E;
 					};
 				};
 			};
-			buildConfigurationList = F76576AF1AA42E00007B2AE5 /* Build configuration list for PBXProject "Luna" */;
-			compatibilityVersion = "Xcode 8.0";
+			buildConfigurationList = F7DD5E0224A2E2C8006F469E /* Build configuration list for PBXProject "Luna" */;
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F76576AB1AA42E00007B2AE5;
-			productRefGroup = F76576B51AA42E00007B2AE5 /* Products */;
+			mainGroup = F7DD5DFE24A2E2C8006F469E;
+			productRefGroup = F7DD5E0C24A2E2C9006F469E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F76576B31AA42E00007B2AE5 /* Luna */,
-				F76576C81AA42E00007B2AE5 /* LunaTests */,
+				F7DD5E0A24A2E2C9006F469E /* iOS */,
+				F7DD5E1224A2E2C9006F469E /* macOS */,
+				F7DD5E1A24A2E2C9006F469E /* Tests iOS */,
+				F7DD5E2524A2E2C9006F469E /* Tests macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F76576B21AA42E00007B2AE5 /* Resources */ = {
+		F7DD5E0924A2E2C9006F469E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F76576C41AA42E00007B2AE5 /* LaunchScreen.xib in Resources */,
-				F7887B411ADEDA2D00EF9BA3 /* moonphases.json in Resources */,
-				F76576C11AA42E00007B2AE5 /* Images.xcassets in Resources */,
-				F7887B401ADEDA2B00EF9BA3 /* sunmoon.json in Resources */,
+				F7DD5E3124A2E2C9006F469E /* Assets.xcassets in Resources */,
+				F72875D524B3F5D900543960 /* sunmoon.json in Resources */,
+				F72875D724B3F5D900543960 /* moonphases.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F76576C71AA42E00007B2AE5 /* Resources */ = {
+		F7DD5E1124A2E2C9006F469E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F77337081ADC74AE005131B7 /* moonphases.json in Resources */,
-				F77337091ADC74AE005131B7 /* sunmoon.json in Resources */,
+				F7DD5E3224A2E2C9006F469E /* Assets.xcassets in Resources */,
+				F72875D624B3F5D900543960 /* sunmoon.json in Resources */,
+				F72875D824B3F5D900543960 /* moonphases.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7DD5E1924A2E2C9006F469E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7DD5E2424A2E2C9006F469E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F76576B01AA42E00007B2AE5 /* Sources */ = {
+		F7DD5E0724A2E2C9006F469E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7FA43361DADD883008BE9AB /* Requestable.swift in Sources */,
-				F743B18A22B64D0D003A72E8 /* ContentView.swift in Sources */,
-				F7FA434D1DADD8B4008BE9AB /* Dictionary+Query.swift in Sources */,
-				F7FA432A1DADD858008BE9AB /* LunarViewModel.swift in Sources */,
-				F7FA434B1DADD8B4008BE9AB /* Date+Lunar.swift in Sources */,
-				F75FBEBE22B083010049C47A /* URLSession+Combine.swift in Sources */,
-				F7B3466A233241A80000C54E /* ContentProvider.swift in Sources */,
-				F73EDB1C22B306F600260925 /* LunarPhaseView.swift in Sources */,
-				F7B3466D233241B20000C54E /* CLGeocoder+Combine.swift in Sources */,
-				F7FA433C1DADD88B008BE9AB /* Phase.swift in Sources */,
-				F7FA43471DADD8B4008BE9AB /* Double+WeatherIcons.swift in Sources */,
-				F70B5296221B808C007C7340 /* Formatters.swift in Sources */,
-				F7FA43321DADD883008BE9AB /* AerisAPI.swift in Sources */,
-				F7FA432C1DADD858008BE9AB /* PhaseViewModel.swift in Sources */,
-				F7FA433B1DADD88B008BE9AB /* Moon.swift in Sources */,
-				F7EB852B22CD798C00324854 /* CGSize+Geometry.swift in Sources */,
-				F7FA434F1DADD8B4008BE9AB /* String+WeatherIcons.swift in Sources */,
-				F7FA43221DADD823008BE9AB /* LunarInfoView.swift in Sources */,
-				F78D200122B4E6CC00CBFC0D /* LocalURLProtocol.swift in Sources */,
-				F76576BA1AA42E00007B2AE5 /* AppDelegate.swift in Sources */,
-				F7FA43331DADD883008BE9AB /* LocationTracker.swift in Sources */,
-				F7EB852A22CD798C00324854 /* Publisher+Combine.swift in Sources */,
-				F73EDB1E22B3075C00260925 /* PhasesView.swift in Sources */,
-				F7887B3F1ADED9AC00EF9BA3 /* NSURLSessionConfiguration+Protocols.swift in Sources */,
-				F75FBEBA22ADDC350049C47A /* SceneDelegate.swift in Sources */,
-				F7B3466E233241B20000C54E /* CLLocationManager+Combine.swift in Sources */,
+				F72875AF24AE9C4400543960 /* String+WeatherIcons.swift in Sources */,
+				F72875A124AE9C4400543960 /* URLSession+Combine.swift in Sources */,
+				F72875AD24AE9C4400543960 /* Formatters.swift in Sources */,
+				F72875B724AE9C4400543960 /* Requestable.swift in Sources */,
+				F72875C624AE9CD000543960 /* PhasesView.swift in Sources */,
+				F72875CA24AE9CD000543960 /* LunarViewModel.swift in Sources */,
+				F72875A924AE9C4400543960 /* CGSize+Geometry.swift in Sources */,
+				F72875C424AE9CD000543960 /* LunarInfoView.swift in Sources */,
+				F76AE73724AC1302009F38A1 /* ContentProvider.swift in Sources */,
+				F72875A324AE9C4400543960 /* CLGeocoder+Combine.swift in Sources */,
+				F72875B524AE9C4400543960 /* Phase.swift in Sources */,
+				F72875B924AE9C4400543960 /* LocationTracker.swift in Sources */,
+				F72875CF24B3EDD200543960 /* LunarRiseSetTimeView.swift in Sources */,
+				F72875C824AE9CD000543960 /* LunarPhaseView.swift in Sources */,
+				F76AE73A24AC1DE5009F38A1 /* MockLocationTracker.swift in Sources */,
+				F72875CC24AE9CD000543960 /* PhaseViewModel.swift in Sources */,
+				F72875DA24B3F5E500543960 /* Loader.swift in Sources */,
+				F728759F24AE9C4400543960 /* Publisher+Combine.swift in Sources */,
+				F7DD5E2F24A2E2C9006F469E /* ContentView.swift in Sources */,
+				F7DD5E2D24A2E2C9006F469E /* LunaApp.swift in Sources */,
+				F72875A524AE9C4400543960 /* CLLocationManager+Combine.swift in Sources */,
+				F72875A724AE9C4400543960 /* Dictionary+Query.swift in Sources */,
+				F72875BB24AE9C4400543960 /* AerisAPI.swift in Sources */,
+				F72875B124AE9C4400543960 /* Date+Lunar.swift in Sources */,
+				F72875AB24AE9C4400543960 /* Double+WeatherIcons.swift in Sources */,
+				F72875B324AE9C4400543960 /* Moon.swift in Sources */,
+				F76AE74024AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F76576C51AA42E00007B2AE5 /* Sources */ = {
+		F7DD5E0F24A2E2C9006F469E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F78818AD1ADC712D007E2DD8 /* LocalURLProtocol.swift in Sources */,
-				F7A6B6EB1ADD734A00B6F119 /* FailingURLProtocol.swift in Sources */,
-				F7A6B6EF1ADD824500B6F119 /* BadStatusURLProtocol.swift in Sources */,
-				F7A6B6F41ADD91E600B6F119 /* NSURLSessionConfiguration+Protocols.swift in Sources */,
-				F7A6B6ED1ADD7D5300B6F119 /* BadResponseURLProtocol.swift in Sources */,
+				F72875B024AE9C4400543960 /* String+WeatherIcons.swift in Sources */,
+				F72875A224AE9C4400543960 /* URLSession+Combine.swift in Sources */,
+				F72875AE24AE9C4400543960 /* Formatters.swift in Sources */,
+				F72875B824AE9C4400543960 /* Requestable.swift in Sources */,
+				F72875C724AE9CD000543960 /* PhasesView.swift in Sources */,
+				F72875CB24AE9CD000543960 /* LunarViewModel.swift in Sources */,
+				F72875AA24AE9C4400543960 /* CGSize+Geometry.swift in Sources */,
+				F72875C524AE9CD000543960 /* LunarInfoView.swift in Sources */,
+				F76AE73824AC1302009F38A1 /* ContentProvider.swift in Sources */,
+				F72875A424AE9C4400543960 /* CLGeocoder+Combine.swift in Sources */,
+				F72875B624AE9C4400543960 /* Phase.swift in Sources */,
+				F72875BA24AE9C4400543960 /* LocationTracker.swift in Sources */,
+				F72875D024B3EDD200543960 /* LunarRiseSetTimeView.swift in Sources */,
+				F72875C924AE9CD000543960 /* LunarPhaseView.swift in Sources */,
+				F76AE73B24AC1DE5009F38A1 /* MockLocationTracker.swift in Sources */,
+				F72875CD24AE9CD000543960 /* PhaseViewModel.swift in Sources */,
+				F72875DB24B3F5E500543960 /* Loader.swift in Sources */,
+				F72875A024AE9C4400543960 /* Publisher+Combine.swift in Sources */,
+				F7DD5E3024A2E2C9006F469E /* ContentView.swift in Sources */,
+				F7DD5E2E24A2E2C9006F469E /* LunaApp.swift in Sources */,
+				F72875A624AE9C4400543960 /* CLLocationManager+Combine.swift in Sources */,
+				F72875A824AE9C4400543960 /* Dictionary+Query.swift in Sources */,
+				F72875BC24AE9C4400543960 /* AerisAPI.swift in Sources */,
+				F72875B224AE9C4400543960 /* Date+Lunar.swift in Sources */,
+				F72875AC24AE9C4400543960 /* Double+WeatherIcons.swift in Sources */,
+				F72875B424AE9C4400543960 /* Moon.swift in Sources */,
+				F76AE74124AC1F40009F38A1 /* URLSessionConfiguration+Protocols.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7DD5E1724A2E2C9006F469E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7DD5E2024A2E2C9006F469E /* Tests_iOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7DD5E2224A2E2C9006F469E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7DD5E2B24A2E2C9006F469E /* Tests_macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F76576CB1AA42E00007B2AE5 /* PBXTargetDependency */ = {
+		F7DD5E1D24A2E2C9006F469E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F76576B31AA42E00007B2AE5 /* Luna */;
-			targetProxy = F76576CA1AA42E00007B2AE5 /* PBXContainerItemProxy */;
+			target = F7DD5E0A24A2E2C9006F469E /* iOS */;
+			targetProxy = F7DD5E1C24A2E2C9006F469E /* PBXContainerItemProxy */;
+		};
+		F7DD5E2824A2E2C9006F469E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7DD5E1224A2E2C9006F469E /* macOS */;
+			targetProxy = F7DD5E2724A2E2C9006F469E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		F76576C21AA42E00007B2AE5 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F76576C31AA42E00007B2AE5 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		F76576D11AA42E00007B2AE5 /* Debug */ = {
+		F7DD5E3324A2E2C9006F469E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -509,17 +598,18 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -527,40 +617,38 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "";
-				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		F76576D21AA42E00007B2AE5 /* Release */ = {
+		F7DD5E3424A2E2C9006F469E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -569,17 +657,18 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -587,129 +676,234 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "";
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F7DD5E3624A2E2C9006F469E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocoascientist.Luna;
+				PRODUCT_NAME = Luna;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F7DD5E3724A2E2C9006F469E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocoascientist.Luna;
+				PRODUCT_NAME = Luna;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		F76576D41AA42E00007B2AE5 /* Debug */ = {
+		F7DD5E3924A2E2C9006F469E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Luna/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cocoascientist.Luna;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.16;
+				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.Luna;
+				PRODUCT_NAME = Luna;
+				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
-		F76576D51AA42E00007B2AE5 /* Release */ = {
+		F7DD5E3A24A2E2C9006F469E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Luna/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cocoascientist.Luna;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.16;
+				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.Luna;
+				PRODUCT_NAME = Luna;
+				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
-		F76576D71AA42E00007B2AE5 /* Debug */ = {
+		F7DD5E3C24A2E2C9006F469E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = LunaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoascientist.$(PRODUCT_NAME:rfc1034identifier)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOS;
 			};
 			name = Debug;
 		};
-		F76576D81AA42E00007B2AE5 /* Release */ = {
+		F7DD5E3D24A2E2C9006F469E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = LunaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoascientist.$(PRODUCT_NAME:rfc1034identifier)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Luna.app/Luna";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOS;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F7DD5E3F24A2E2C9006F469E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = macOS;
+			};
+			name = Debug;
+		};
+		F7DD5E4024A2E2C9006F469E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = macOS;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F76576AF1AA42E00007B2AE5 /* Build configuration list for PBXProject "Luna" */ = {
+		F7DD5E0224A2E2C8006F469E /* Build configuration list for PBXProject "Luna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F76576D11AA42E00007B2AE5 /* Debug */,
-				F76576D21AA42E00007B2AE5 /* Release */,
+				F7DD5E3324A2E2C9006F469E /* Debug */,
+				F7DD5E3424A2E2C9006F469E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F76576D31AA42E00007B2AE5 /* Build configuration list for PBXNativeTarget "Luna" */ = {
+		F7DD5E3524A2E2C9006F469E /* Build configuration list for PBXNativeTarget "iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F76576D41AA42E00007B2AE5 /* Debug */,
-				F76576D51AA42E00007B2AE5 /* Release */,
+				F7DD5E3624A2E2C9006F469E /* Debug */,
+				F7DD5E3724A2E2C9006F469E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F76576D61AA42E00007B2AE5 /* Build configuration list for PBXNativeTarget "LunaTests" */ = {
+		F7DD5E3824A2E2C9006F469E /* Build configuration list for PBXNativeTarget "macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F76576D71AA42E00007B2AE5 /* Debug */,
-				F76576D81AA42E00007B2AE5 /* Release */,
+				F7DD5E3924A2E2C9006F469E /* Debug */,
+				F7DD5E3A24A2E2C9006F469E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7DD5E3B24A2E2C9006F469E /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7DD5E3C24A2E2C9006F469E /* Debug */,
+				F7DD5E3D24A2E2C9006F469E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7DD5E3E24A2E2C9006F469E /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F7DD5E3F24A2E2C9006F469E /* Debug */,
+				F7DD5E4024A2E2C9006F469E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F76576AC1AA42E00007B2AE5 /* Project object */;
+	rootObject = F7DD5DFF24A2E2C8006F469E /* Project object */;
 }
