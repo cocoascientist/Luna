@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SwiftUI
 
-public struct Moon: Codable, Identifiable {
+public struct Moon: Decodable, Identifiable {
     public var id: UUID = UUID()
     
     public let phase: String
@@ -43,10 +44,6 @@ public struct Moon: Codable, Identifiable {
         case name
         case percent = "phase"
         case illumination = "illum"
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        fatalError("encoding not supported")
     }
     
     public init(from decoder: Decoder) throws {
