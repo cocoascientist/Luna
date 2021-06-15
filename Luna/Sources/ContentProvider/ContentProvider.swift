@@ -20,10 +20,10 @@ public final class ContentProvider: ObservableObject {
     public enum State {
         case loading
         case current(lunarViewModel: LunarViewModel, phaseViewModels: [PhaseViewModel])
-        case error(error: Error)
+        case error(_ error: Swift.Error)
     }
     
-    public enum ContentError: Error {
+    public enum Error: Swift.Error {
         case noData
     }
     
@@ -82,7 +82,7 @@ public final class ContentProvider: ObservableObject {
         )
         .map { (lunarViewModel, phaseViewModels) -> State in
             guard let lunarViewModel = lunarViewModel else {
-                return .error(error: ContentError.noData)
+                return .error(Error.noData)
             }
             return .current(
                 lunarViewModel: lunarViewModel,

@@ -11,28 +11,29 @@ import Combine
 import Publishers
 
 public extension URLSession {
-    internal enum URLSessionError: Error {
-        case badStatusCode(statusCode: Int)
+    
+    indirect enum Error: Swift.Error {
+        case badStatusCode(_ statusCode: Int)
         case badResponse
         case badJSON
         case noData
         case offline
-        case other(Error?)
+        case other(Swift.Error?)
     }
     
-    func data(with request: URLRequest) -> AnyPublisher<Data, Error> {
+    func data(with request: URLRequest) -> AnyPublisher<Data, Swift.Error> {
         return dataTaskPublisher(for: request)
-            .mapError { URLSessionError.other($0) }
-            .flatMap { (data, response) -> AnyPublisher<Data, Error> in
+            .mapError { Error.other($0) }
+            .flatMap { (data, response) -> AnyPublisher<Data, Swift.Error> in
                 guard let response = response as? HTTPURLResponse else {
-                    return .fail(URLSessionError.badResponse)
+                    return .fail(Error.badResponse)
                 }
                 
                 switch response.statusCode {
                 case 200...204:
                     return .just(data)
                 default:
-                    let error = URLSessionError.badStatusCode(statusCode: response.statusCode)
+                    let error = Error.badStatusCode(response.statusCode)
                     return .fail(error)
                 }
             }
@@ -40,7 +41,7 @@ public extension URLSession {
     }
 }
 
-extension URLSession.URLSessionError: LocalizedError {
+extension URLSession.Error: LocalizedError {
     var localizedDescription: String {
         switch self {
         case .badResponse:
