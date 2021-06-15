@@ -10,6 +10,10 @@ import ContentProvider
 import ViewModel
 import View
 
+#if DEBUG
+import Fixtures
+#endif
+
 struct ContentView: View {
     
     var state: ContentProvider.State
@@ -18,19 +22,22 @@ struct ContentView: View {
         StatusView(state: state)
             .background(LinearGradient.lunarGradient)
             .edgesIgnoringSafeArea(.all)
+            .preferredColorScheme(.dark)
     }
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        return Group {
-//            ContentView(state: .loading)
-//            ContentView(state: .current(lunarViewModel: LunarViewModel.makeMockViewModel(), phaseViewModels: PhaseViewModel.makeMockViewModels())
-//            )
-//            ContentView(state: .error(error: MockError.mock))
-//        }
-//    }
-//}
+#if DEBUG
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        return Group {
+            ContentView(state: .loading)
+            ContentView(state: .current(lunarViewModel: LunarViewModel.makeMockViewModel(), phaseViewModels: PhaseViewModel.makeMockViewModels())
+            )
+            ContentView(state: .error(MockError.mock))
+        }
+    }
+}
+#endif
 
 struct StatusView: View {
     var state: ContentProvider.State
@@ -121,17 +128,19 @@ extension LinearGradient {
     }
 }
 
-//fileprivate extension PhaseViewModel {
-//    static func makeMockViewModels() -> [PhaseViewModel] {
-//        Loader.loadPhasesFromJSON()
-//            .map { PhaseViewModel(phase: $0) }
-//    }
-//}
-//
-//fileprivate extension LunarViewModel {
-//    static func makeMockViewModel() -> LunarViewModel {
-//        return LunarViewModel(
-//            moon: Loader.loadMoonFromJSON()
-//        )
-//    }
-//}
+#if DEBUG
+fileprivate extension PhaseViewModel {
+    static func makeMockViewModels() -> [PhaseViewModel] {
+        Loader.loadPhasesFromJSON()
+            .map { PhaseViewModel(phase: $0) }
+    }
+}
+
+fileprivate extension LunarViewModel {
+    static func makeMockViewModel() -> LunarViewModel {
+        return LunarViewModel(
+            moon: Loader.loadMoonFromJSON()
+        )
+    }
+}
+#endif

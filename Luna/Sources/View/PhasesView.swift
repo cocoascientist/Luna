@@ -52,6 +52,7 @@ public struct PhaseView: View {
     }
 }
 
+//#if DEBUG
 //struct PhasesView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        return PhasesView(
@@ -67,4 +68,11 @@ public struct PhaseView: View {
 //        Loader.loadPhasesFromJSON()
 //            .map { PhaseViewModel(phase: $0) }
 //    }
+//    
+//    static private var phases: [Phase] {
+//        return [
+//            Phase(
+//        ]
+//    }
 //}
+//#endif

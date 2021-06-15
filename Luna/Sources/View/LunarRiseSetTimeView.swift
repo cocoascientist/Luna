@@ -50,13 +50,15 @@ fileprivate extension HorizontalAlignment {
     static let leadingOfRiseSetTextValue = HorizontalAlignment(LeadingOfRiseSetTextValue.self)
 }
 
-//struct LunarRiseSetTimeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LunarRiseSetTimeView(
-//            set: "November 24 2015 at 5:39 AM PST",
-//            rise: "November 24 2015 at 4:05 PM PST"
-//        )
-//        .background(Color.black)
-//        .previewLayout(.sizeThatFits)
-//    }
-//}
+#if DEBUG
+struct LunarRiseSetTimeView_Previews: PreviewProvider {
+    static var previews: some View {
+        LunarRiseSetTimeView(
+            set: "November 24 2015 at 5:39 AM PST",
+            rise: "November 24 2015 at 4:05 PM PST"
+        )
+        .background(Color.black)
+        .previewLayout(.sizeThatFits)
+    }
+}
+#endif

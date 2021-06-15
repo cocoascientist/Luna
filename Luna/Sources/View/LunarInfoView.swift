@@ -35,35 +35,35 @@ public struct LunarInfoView: View {
     }
 }
 
-//struct LunarInfoView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            LunarInfoView(
-//                phase: "Full Moon",
-//                age: "28 days old",
-//                illumination: "100% complete"
-//            )
-//            .frame(width: 300, height: 300, alignment: .center)
-//            .background(Color.black)
-//            .previewLayout(.sizeThatFits)
-//            
-//            LunarInfoView(
-//                phase: "First Quarter",
-//                age: "14 days old",
-//                illumination: "100% complete"
-//            )
-//            .frame(width: 300, height: 300, alignment: .center)
-//            .background(Color.black)
-//            .previewLayout(.sizeThatFits)
-//            
-//            LunarInfoView(
-//                phase: "New Moon",
-//                age: "0 days old",
-//                illumination: "0% complete"
-//            )
-//            .frame(width: 300, height: 300, alignment: .center)
-//            .background(Color.black)
-//            .previewLayout(.sizeThatFits)
-//        }
-//    }
-//}
+struct LunarInfoView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            LunarInfoView(
+                phase: "Full Moon",
+                age: "28 days old",
+                illumination: "100% complete"
+            )
+            .frame(width: 300, height: 300, alignment: .center)
+            .background(Color.black)
+            .previewLayout(.sizeThatFits)
+            
+            LunarInfoView(
+                phase: "First Quarter",
+                age: "14 days old",
+                illumination: "100% complete"
+            )
+            .frame(width: 300, height: 300, alignment: .center)
+            .background(Color.black)
+            .previewLayout(.sizeThatFits)
+            
+            LunarInfoView(
+                phase: "New Moon",
+                age: "0 days old",
+                illumination: "0% complete"
+            )
+            .frame(width: 300, height: 300, alignment: .center)
+            .background(Color.black)
+            .previewLayout(.sizeThatFits)
+        }
+    }
+}
