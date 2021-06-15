@@ -15,6 +15,7 @@
 		F72712182672E8F100374205 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72711F42672E8F100374205 /* ContentView.swift */; };
 		F72712192672E8F100374205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F72711F52672E8F100374205 /* Assets.xcassets */; };
 		F727121A2672E8F100374205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F72711F52672E8F100374205 /* Assets.xcassets */; };
+		F73AD4B72678262C001956E6 /* Fixtures in Frameworks */ = {isa = PBXBuildFile; productRef = F73AD4B62678262C001956E6 /* Fixtures */; };
 		F7E7FFE326750015003466C7 /* ContentProvider in Frameworks */ = {isa = PBXBuildFile; productRef = F7E7FFE226750015003466C7 /* ContentProvider */; };
 		F7E7FFE5267501AA003466C7 /* View in Frameworks */ = {isa = PBXBuildFile; productRef = F7E7FFE4267501AA003466C7 /* View */; };
 		F7E7FFE7267501AA003466C7 /* ViewModel in Frameworks */ = {isa = PBXBuildFile; productRef = F7E7FFE6267501AA003466C7 /* ViewModel */; };
@@ -57,6 +58,7 @@
 			files = (
 				F7E7FFE326750015003466C7 /* ContentProvider in Frameworks */,
 				F7E7FFE5267501AA003466C7 /* View in Frameworks */,
+				F73AD4B72678262C001956E6 /* Fixtures in Frameworks */,
 				F7E7FFE7267501AA003466C7 /* ViewModel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +163,7 @@
 				F7E7FFE226750015003466C7 /* ContentProvider */,
 				F7E7FFE4267501AA003466C7 /* View */,
 				F7E7FFE6267501AA003466C7 /* ViewModel */,
+				F73AD4B62678262C001956E6 /* Fixtures */,
 			);
 			productName = "Luna (iOS)";
 			productReference = F72711FA2672E8F100374205 /* Luna.app */;
@@ -730,6 +733,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F73AD4B62678262C001956E6 /* Fixtures */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Fixtures;
+		};
 		F7E7FFE226750015003466C7 /* ContentProvider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ContentProvider;

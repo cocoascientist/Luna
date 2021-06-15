@@ -21,6 +21,7 @@ let package = Package(
         .library(name: "WeatherIcons", targets: ["WeatherIcons"]),
         .library(name: "Formatters", targets: ["Formatters"]),
         .library(name: "Astronomy", targets: ["Astronomy"]),
+        .library(name: "Fixtures", targets: ["Fixtures"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -40,5 +41,6 @@ let package = Package(
         .target(name: "WeatherIcons", dependencies: []),
         .target(name: "Formatters", dependencies: []),
         .target(name: "Astronomy", dependencies: []),
+        .target(name: "Fixtures", dependencies: ["Model"]),
     ]
 )
